@@ -15,9 +15,9 @@ accelerate launch \
     --use_deepspeed \
     --deepspeed_config_file ./open_instruct/ds_configs/stage3_no_offloading_accelerate.conf \
     ./open_instruct/open_instruct/finetune.py \
-    --model_name_or_path /local1/zefan/models/Llama-2-7b/ \
+    --model_name_or_path /local1/zefan/models/Llama-2-7b-hf/ \
     --use_flash_attn \
-    --tokenizer_name /local1/zefan/models/Llama-2-7b/ \
+    --tokenizer_name /local1/zefan/models/Llama-2-7b-hf/ \
     --use_slow_tokenizer \
     --train_file /local1/zefan/data/ace/GENEVA_train_71.json \
     --max_seq_length 256 \
@@ -29,7 +29,7 @@ accelerate launch \
     --warmup_ratio 0.03 \
     --weight_decay 0. \
     --num_train_epochs 45 \
-    --output_dir /local1/zefan/output/Llama_${MODEL_SIZE}/ \
+    --output_dir /local1/zefan/output/Llama-2-${MODEL_SIZE}/ \
     --with_tracking \
     --report_to tensorboard \
     --logging_steps 1
