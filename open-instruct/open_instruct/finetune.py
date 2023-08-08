@@ -12,7 +12,7 @@ from functools import partial
 from accelerate import Accelerator
 from accelerate.logging import get_logger
 from accelerate.utils import set_seed
-from datasets import load_dataset
+from datasets import load_dataset,Features,Value
 from torch.utils.data import DataLoader
 from tqdm.auto import tqdm
 
@@ -303,9 +303,9 @@ def main():
     args = parse_args()
 
     # A hacky way to make llama work with flash attention
-    if args.use_flash_attn:
-        from llama_flash_attn_monkey_patch import replace_llama_attn_with_flash_attn
-        replace_llama_attn_with_flash_attn()
+    # if args.use_flash_attn:
+    #     from llama_flash_attn_monkey_patch import replace_llama_attn_with_flash_attn
+    #     replace_llama_attn_with_flash_attn()
 
     # Initialize the accelerator. We will let the accelerator handle device placement for us in this example.
     # If we're using tracking, we also need to initialize it here and it will by default pick up all supported trackers
@@ -314,7 +314,7 @@ def main():
 
     if args.with_tracking:
         accelerator_log_kwargs["log_with"] = args.report_to
-        accelerator_log_kwargs["logging_dir"] = args.output_dir
+        accelerator_log_kwargs["project_dir"] = args.output_dir
 
     accelerator = Accelerator(gradient_accumulation_steps=args.gradient_accumulation_steps, **accelerator_log_kwargs)
 
@@ -353,6 +353,7 @@ def main():
         dataset_args = {}
         if args.train_file is not None:
             data_files["train"] = args.train_file
+        dataset_args["features"] = Features({'prompt': Value(dtype='string', id=None), 'completion': Value(dtype='string', id=None), 'Event type': Value(dtype='string', id=None), 'Event definition': Value(dtype='string', id=None)})
         raw_datasets = load_dataset(
             "json",
             data_files=data_files,
@@ -456,6 +457,8 @@ def main():
         lm_datasets = lm_datasets.filter(lambda example: (example['labels'] != -100).any())
 
     train_dataset = lm_datasets["train"]
+    print(len(train_dataset))
+    print(train_dataset)
 
     # Log a few random samples from the training set:
     for index in random.sample(range(len(train_dataset)), 3):

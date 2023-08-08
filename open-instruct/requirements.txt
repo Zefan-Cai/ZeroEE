@@ -1,4 +1,4 @@
-torch
+# torch
 sentencepiece
 datasets
 deepspeed==0.9.1
@@ -10,7 +10,7 @@ evaluate==0.4.0
 tokenizers==0.13.3
 protobuf==3.20.0
 transformers>=4.28.1
-openai
+# openai
 tiktoken
 rouge_score
 wandb
@@ -25,6 +25,6 @@ einops
 # auto-gptq
 fire
 # alpaca-farm eval - my fork with some fixes.
-git+https://github.com/hamishivi/alpaca_farm.git
+# git+https://github.com/hamishivi/alpaca_farm.git
 # for human eval web app
 flask
