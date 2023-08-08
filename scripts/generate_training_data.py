@@ -11,7 +11,7 @@ import json
 
 event_type2definition = {}
 
-with open('../GENEVA-main/meta_data/event_ontology.json', 'r') as fp:
+with open('GENEVA-main/meta_data/event_ontology.json', 'r') as fp:
     raw_event_ontology= json.load(fp)
 
 for key in raw_event_ontology.keys():
@@ -24,7 +24,7 @@ with open('../data/GENEVA_event_definition.json', 'w') as fp:
 
 GENEVA_training_data = []
 
-with open('../GENEVA-main/data/train.json', 'r') as fp:
+with open('GENEVA-main/data/train.json', 'r') as fp:
     for line in fp.readlines():
         GENEVA_training_data.append(json.loads(line))
 
@@ -51,7 +51,7 @@ for index in range(len(GENEVA_training_data)):
         positive_train_data.append({
             "Event definition": event_definition,
             "Event type": event_type,       
-            "prompt": "{} \n {} event. \n {} \n".format(GENEVA_training_data[index]["sentence"], event_type, event_definition),
+            "prompt": "{} \n The event is {} event. \n {} \n So what is the trigger?".format(GENEVA_training_data[index]["sentence"], event_type, event_definition),
             "completion": "Event trigger is {}".format(" and ".join(event_type2trigger[event_type]))
             })
     
@@ -63,13 +63,13 @@ for index in range(len(GENEVA_training_data)):
         positive_train_data.append({
             "Event definition": event_definition,
             "Event type": event_type,       
-            "prompt": "{} \n {} event. \n {} \n".format(GENEVA_training_data[index]["sentence"], event_type, event_definition),
+            "prompt": "{} \n The event is {} event. \n {} \n So what is the trigger?".format(GENEVA_training_data[index]["sentence"], event_type, event_definition),
             "completion": "Event trigger is <trigger>"
             })
 
 train_data = positive_train_data + negative_train_data
 
-with open(os.path.join(output_dir, f'GENEVA_train_{str(n_negative)}.json'), 'w') as fp:
+with open(os.path.join(output_dir, 'geneva', f'GENEVA_train_{str(n_negative)}.json'), 'w') as fp:
     for line in train_data:
        json.dump(line, fp)
        fp.write('\n')
@@ -78,17 +78,17 @@ with open(os.path.join(output_dir, f'GENEVA_train_{str(n_negative)}.json'), 'w')
 
 ## ACE Event Definition
 
-with open('../data/ACE_event_definition_DEGREE.json', 'r') as fp:
+with open('../data/ace/ACE_event_definition_DEGREE.json', 'r') as fp:
     event_type2definition = json.load(fp)
 
 ## ACE train data
 
 
-n_negative = 4
+n_negative = 3
 
 ACE_train_data = []
 
-with open('../oneie_ace05_en_event/train.json', 'r') as fp:
+with open('oneie_ace05_en_event/train.json', 'r') as fp:
     for line in fp.readlines():
         ACE_train_data.append(json.loads(line))
 
@@ -111,7 +111,7 @@ for index in range(len(ACE_train_data)):
         positive_train_data.append({
             "Event definition": event_definition,
             "Event type": event_type,       
-            "prompt": "{} \n {} event. \n {} \n".format(ACE_train_data[index]["text"], event_type, event_definition),
+            "prompt": "{} \n The event is  event. \n {} \n So what is the trigger?".format(ACE_train_data[index]["text"], event_type, event_definition),
             "completion": "Event trigger is {}".format(" and ".join(event_type2trigger[event_type]))
             })
     
@@ -123,13 +123,13 @@ for index in range(len(ACE_train_data)):
         positive_train_data.append({
             "Event definition": event_definition,
             "Event type": event_type,       
-            "prompt": "{} \n {} event. \n {} \n".format(ACE_train_data[index]["text"], event_type, event_definition),
+            "prompt": "{} \n The event is {} event. \n {} \n So what is the trigger?".format(ACE_train_data[index]["text"], event_type, event_definition),
             "completion": "Event trigger is <trigger>"
             })
 
 train_data = positive_train_data + negative_train_data
 
-with open(os.path.join(output_dir, f'ACE_train_{str(n_negative)}.json'), 'w') as fp:
+with open(os.path.join(output_dir, 'ace', f'ACE_train_{str(n_negative)}.json'), 'w') as fp:
     for d in train_data:
        json.dump(d, fp)
        fp.write('\n')
@@ -139,7 +139,7 @@ with open(os.path.join(output_dir, f'ACE_train_{str(n_negative)}.json'), 'w') as
 
 ACE_valid_data = []
 
-with open('../oneie_ace05_en_event/val.json', 'r') as fp:
+with open('oneie_ace05_en_event/val.json', 'r') as fp:
     for line in fp.readlines():
         ACE_valid_data.append(json.loads(line))
         
@@ -167,13 +167,13 @@ for index in range(len(ACE_valid_data)):
         sample_data_list.append({
             "Event definition": event_definition,
             "Event type": event_type,       
-            "prompt": "{} \n {} event. \n {} \n".format(ACE_valid_data[index]["text"], event_type, event_definition),
+            "prompt": "{} \n The event is {} event. \n {} \n So what is the trigger?".format(ACE_valid_data[index]["text"], event_type, event_definition),
             "trigger": trigger
             })
     valid_data.append(sample_data_list)
     
 
-with open(os.path.join(output_dir, f'ACE_valid.json'), 'w') as fp:
+with open(os.path.join(output_dir, 'ace', f'ACE_valid.json'), 'w') as fp:
     for d in valid_data:
        json.dump(d, fp)
        fp.write('\n')
@@ -183,7 +183,7 @@ with open(os.path.join(output_dir, f'ACE_valid.json'), 'w') as fp:
 
 ACE_test_data = []
 
-with open('../oneie_ace05_en_event/test.json', 'r') as fp:
+with open('oneie_ace05_en_event/test.json', 'r') as fp:
     for line in fp.readlines():
         ACE_test_data.append(json.loads(line))
 
@@ -212,12 +212,12 @@ for index in range(len(ACE_test_data)):
         sample_data_list.append({
             "Event definition": event_definition,
             "Event type": event_type,       
-            "prompt": "{} \n {} event. \n {} \n".format(ACE_valid_data[index]["text"], event_type, event_definition),
+            "prompt": "{} \n The event is {} event. \n {} \n So what is the trigger?".format(ACE_valid_data[index]["text"], event_type, event_definition),
             "trigger": trigger
             })
     test_data.append(sample_data_list)
     
-with open(os.path.join(output_dir, f'ACE_test.json'), 'w') as fp:
+with open(os.path.join(output_dir, 'ace', f'ACE_test.json'), 'w') as fp:
     for d in test_data:
        json.dump(d, fp)
        fp.write('\n')
