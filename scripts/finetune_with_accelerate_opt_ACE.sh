@@ -5,7 +5,7 @@ NUM_GPUS=2
 BATCH_SIZE_PER_GPU=64
 TOTAL_BATCH_SIZE=128
 GRADIENT_ACC_STEPS=$(($TOTAL_BATCH_SIZE/$NUM_GPUS/$BATCH_SIZE_PER_GPU))
-echo "Training Llama-2 model ${MODEL_SIZE} using $NUM_GPUS GPUs, $BATCH_SIZE_PER_GPU batch size per GPU, $GRADIENT_ACC_STEPS gradient accumulation steps"
+echo "Training opt model ${MODEL_SIZE} using $NUM_GPUS GPUs, $BATCH_SIZE_PER_GPU batch size per GPU, $GRADIENT_ACC_STEPS gradient accumulation steps"
 
 accelerate launch \
     --main_process_port 29005 \
@@ -19,7 +19,7 @@ accelerate launch \
     --use_flash_attn \
     --tokenizer_name /home/caizf/models/opt-350m/ \
     --use_slow_tokenizer \
-    --train_file /home/caizf/projects/ZeroEE/data/geneva/ACE_train_3.json \
+    --train_file /home/caizf/projects/ZeroEE/data/ace/ACE_train_3.json \
     --max_seq_length 256 \
     --preprocessing_num_workers 16 \
     --per_device_train_batch_size $BATCH_SIZE_PER_GPU \
