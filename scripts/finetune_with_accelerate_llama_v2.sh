@@ -19,7 +19,7 @@ accelerate launch \
     --use_flash_attn \
     --tokenizer_name /local1/zefan/models/Llama-2-7b-hf/ \
     --use_slow_tokenizer \
-    --train_file /local1/zefan/data/ace/GENEVA_train_71.json \
+    --train_file /local1/zefan/data/ace/GENEVA_train_35.json \
     --max_seq_length 256 \
     --preprocessing_num_workers 16 \
     --per_device_train_batch_size $BATCH_SIZE_PER_GPU \
