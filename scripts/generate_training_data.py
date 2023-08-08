@@ -29,7 +29,7 @@ with open('GENEVA-main/data/train.json', 'r') as fp:
         GENEVA_training_data.append(json.loads(line))
 
 
-negative_ratio = 0.4
+negative_ratio = 0.2
 n_negative = int(negative_ratio * len(event_type2definition))
 
 positive_train_data = []
