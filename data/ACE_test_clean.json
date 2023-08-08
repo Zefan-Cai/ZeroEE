@@ -1,0 +1,15 @@
+{
+    "Event definition": "",
+    "input": "Retired General Electric Co . Chairman Jack Welch is seeking work - related documents of his estranged wife in his high - stakes divorce case .",
+    "output": "end position: Retired"
+},
+{
+    "Event definition": "",
+    "input": "Retired General Electric Co . Chairman Jack Welch is seeking work - related documents of his estranged wife in his high - stakes divorce case .",
+    "output": "divorce: divorce"
+},
+{
+    "Event definition": "",
+    "input": "The Welches disclosed their plans to divorce a year ago , shortly after Suzy Wetlaufer _ then editor of the Harvard Business Review _ revealed she had become romantically involved with Welch while working on a story about him .",
+    "output": "divorce: divorce"
+}

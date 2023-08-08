@@ -1,0 +1,278 @@
+{
+    "text": "Welch specifically is seeking performance evaluations , correspondence between his estranged wife and partners while she worked at the law firm ' s office in London , and documents related to her prospects of becoming a partner .",
+    "tokens": [
+        "Welch",
+        "specifically",
+        "is",
+        "seeking",
+        "performance",
+        "evaluations",
+        ",",
+        "correspondence",
+        "between",
+        "his",
+        "estranged",
+        "wife",
+        "and",
+        "partners",
+        "while",
+        "she",
+        "worked",
+        "at",
+        "the",
+        "law",
+        "firm",
+        "'",
+        "s",
+        "office",
+        "in",
+        "London",
+        ",",
+        "and",
+        "documents",
+        "related",
+        "to",
+        "her",
+        "prospects",
+        "of",
+        "becoming",
+        "a",
+        "partner",
+        "."
+    ],
+    "record": "<extra_id_0> <extra_id_0> phone write <extra_id_5> correspondence <extra_id_0> entity <extra_id_5> wife <extra_id_1> <extra_id_0> entity <extra_id_5> partners <extra_id_1> <extra_id_0> place <extra_id_5> office <extra_id_1> <extra_id_1> <extra_id_0> start position <extra_id_5> becoming <extra_id_0> entity <extra_id_5> firm <extra_id_1> <extra_id_0> person <extra_id_5> her <extra_id_1> <extra_id_1> <extra_id_1>",
+    "entity": [],
+    "relation": [],
+    "event": [
+        {
+            "type": "phone write",
+            "offset": [
+                7
+            ],
+            "text": "correspondence",
+            "args": [
+                {
+                    "type": "place",
+                    "offset": [
+                        23
+                    ],
+                    "text": "office"
+                },
+                {
+                    "type": "entity",
+                    "offset": [
+                        11
+                    ],
+                    "text": "wife"
+                },
+                {
+                    "type": "entity",
+                    "offset": [
+                        13
+                    ],
+                    "text": "partners"
+                }
+            ]
+        },
+        {
+            "type": "start position",
+            "offset": [
+                34
+            ],
+            "text": "becoming",
+            "args": [
+                {
+                    "type": "person",
+                    "offset": [
+                        31
+                    ],
+                    "text": "her"
+                },
+                {
+                    "type": "entity",
+                    "offset": [
+                        20
+                    ],
+                    "text": "firm"
+                }
+            ]
+        }
+    ],
+    "spot": [
+        "phone write",
+        "start position"
+    ],
+    "asoc": [
+        "entity",
+        "place",
+        "person"
+    ],
+    "spot_asoc": [
+        {
+            "span": "correspondence",
+            "label": "phone write",
+            "asoc": [
+                [
+                    "entity",
+                    "wife"
+                ],
+                [
+                    "entity",
+                    "partners"
+                ],
+                [
+                    "place",
+                    "office"
+                ]
+            ]
+        },
+        {
+            "span": "becoming",
+            "label": "start position",
+            "asoc": [
+                [
+                    "entity",
+                    "firm"
+                ],
+                [
+                    "person",
+                    "her"
+                ]
+            ]
+        }
+    ]
+},
+{
+    "text": "Kelly , the US assistant secretary for East Asia and Pacific Affairs , arrived in Seoul from Beijing Friday to brief Yoon , the foreign minister .",
+    "tokens": [
+        "Kelly",
+        ",",
+        "the",
+        "US",
+        "assistant",
+        "secretary",
+        "for",
+        "East",
+        "Asia",
+        "and",
+        "Pacific",
+        "Affairs",
+        ",",
+        "arrived",
+        "in",
+        "Seoul",
+        "from",
+        "Beijing",
+        "Friday",
+        "to",
+        "brief",
+        "Yoon",
+        ",",
+        "the",
+        "foreign",
+        "minister",
+        "."
+    ],
+    "record": "<extra_id_0> <extra_id_0> transport <extra_id_5> arrived <extra_id_0> artifact <extra_id_5> Kelly <extra_id_1> <extra_id_0> destination <extra_id_5> Seoul <extra_id_1> <extra_id_0> origin <extra_id_5> Beijing <extra_id_1> <extra_id_1> <extra_id_0> meet <extra_id_5> brief <extra_id_0> entity <extra_id_5> Kelly <extra_id_1> <extra_id_0> entity <extra_id_5> Yoon <extra_id_1> <extra_id_1> <extra_id_1>",
+    "entity": [],
+    "relation": [],
+    "event": [
+        {
+            "type": "transport",
+            "offset": [
+                13
+            ],
+            "text": "arrived",
+            "args": [
+                {
+                    "type": "destination",
+                    "offset": [
+                        15
+                    ],
+                    "text": "Seoul"
+                },
+                {
+                    "type": "origin",
+                    "offset": [
+                        17
+                    ],
+                    "text": "Beijing"
+                },
+                {
+                    "type": "artifact",
+                    "offset": [
+                        0
+                    ],
+                    "text": "Kelly"
+                }
+            ]
+        },
+        {
+            "type": "meet",
+            "offset": [
+                20
+            ],
+            "text": "brief",
+            "args": [
+                {
+                    "type": "entity",
+                    "offset": [
+                        0
+                    ],
+                    "text": "Kelly"
+                },
+                {
+                    "type": "entity",
+                    "offset": [
+                        21
+                    ],
+                    "text": "Yoon"
+                }
+            ]
+        }
+    ],
+    "spot": [
+        "transport",
+        "meet"
+    ],
+    "asoc": [
+        "destination",
+        "entity",
+        "artifact",
+        "origin"
+    ],
+    "spot_asoc": [
+        {
+            "span": "arrived",
+            "label": "transport",
+            "asoc": [
+                [
+                    "artifact",
+                    "Kelly"
+                ],
+                [
+                    "destination",
+                    "Seoul"
+                ],
+                [
+                    "origin",
+                    "Beijing"
+                ]
+            ]
+        },
+        {
+            "span": "brief",
+            "label": "meet",
+            "asoc": [
+                [
+                    "entity",
+                    "Kelly"
+                ],
+                [
+                    "entity",
+                    "Yoon"
+                ]
+            ]
+        }
+    ]
+}
