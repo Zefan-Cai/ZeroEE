@@ -17,7 +17,7 @@ with open('GENEVA-main/meta_data/event_ontology.json', 'r') as fp:
 for key in raw_event_ontology.keys():
     event_type2definition[key] = raw_event_ontology[key]['description']
 
-with open('../data/GENEVA_event_definition.json', 'w') as fp:
+with open('./data/GENEVA_event_definition.json', 'w') as fp:
     json.dump(event_type2definition, fp)
 
 ## Geneva Train data
