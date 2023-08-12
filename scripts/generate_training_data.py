@@ -1,5 +1,5 @@
 
-output_dir = "/lcal1/zefan/data"
+output_dir = "/local1/zefan/data"
 
 import os
 import random
