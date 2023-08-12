@@ -78,7 +78,7 @@ with open(os.path.join(output_dir, 'geneva', f'GENEVA_train_{str(n_negative)}.js
 
 ## ACE Event Definition
 
-with open('../data/ace/ACE_event_definition_DEGREE.json', 'r') as fp:
+with open('./data/ace/ACE_event_definition_DEGREE.json', 'r') as fp:
     event_type2definition = json.load(fp)
 
 ## ACE train data
