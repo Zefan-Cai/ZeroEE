@@ -8,5 +8,5 @@ python -m open_instruct.eval.ace.run_eval \
     --save_dir /local1/zefan/results/ace_ace_bart-large/ \
     --model /local1/zefan/output/ace_13_bart-large/ \
     --tokenizer /local1/zefan/models/bart-large/ \
-    --eval_batch_size 256
+    --eval_batch_size 32
 
