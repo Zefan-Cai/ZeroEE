@@ -1,5 +1,5 @@
 
-output_dir = "/home/caizf/projects/ZeroEE/data"
+output_dir = "/lcaol1/zefan/data"
 
 import os
 import random
