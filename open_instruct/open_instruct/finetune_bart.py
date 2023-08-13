@@ -227,7 +227,7 @@ def encode_with_prompt_completion_format(example, tokenizer, max_seq_length):
     #     example_text = example['prompt'] + example['completion']
     example_text = example['prompt'] 
     
-    tokenized_example = tokenizer(example_text, return_tensors='pt', max_length=max_seq_length, truncation=True)
+    tokenized_example = tokenizer(example_text, return_tensors='pt', padding=True, max_length=max_seq_length, truncation=True)
     enc_idxs = tokenized_example.input_ids
     enc_attn = tokenized_example.attention_mask
     
