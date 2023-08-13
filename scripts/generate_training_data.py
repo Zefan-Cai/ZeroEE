@@ -84,7 +84,7 @@ with open('./data/ACE_event_definition_DEGREE.json', 'r') as fp:
 ## ACE train data
 
 
-n_negative = 13
+n_negative = 3
 
 ACE_train_data = []
 
@@ -120,7 +120,7 @@ for index in range(len(ACE_train_data)):
     
     for event_type in selected_event_type:
         event_definition = event_type2definition[event_type]
-        positive_train_data.append({
+        negative_train_data.append({
             "Event definition": event_definition,
             "Event type": event_type,       
             "prompt": "{} \n The event is {} event. \n {} \n So what is the trigger?".format(ACE_train_data[index]["text"], event_type, event_definition),
