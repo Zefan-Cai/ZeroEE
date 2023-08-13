@@ -231,7 +231,7 @@ def encode_with_prompt_completion_format(example, tokenizer, max_seq_length):
     enc_idxs = tokenized_example.input_ids.flatten()
     enc_attn = tokenized_example.attention_mask.flatten()
 
-    enc_idxs = torch.cat((enc_idxs, torch.tensor([-100] * (max_seq_length - enc_idxs.size(dim=0)))), dim=0)
+    enc_idxs = torch.cat((enc_idxs, torch.tensor([0] * (max_seq_length - enc_idxs.size(dim=0)))), dim=0)
     enc_attn = torch.cat((enc_attn, torch.tensor([0] * (max_seq_length - enc_attn.size(dim=0)))), dim=0)
 
     targets = tokenizer(example['completion'], return_tensors='pt', padding=True, max_length=256, truncation=True)
@@ -240,14 +240,14 @@ def encode_with_prompt_completion_format(example, tokenizer, max_seq_length):
     dec_idxs[0] = tokenizer.eos_token_id
     dec_attn = targets['attention_mask'].flatten()
 
-    dec_idxs = torch.cat((dec_idxs, torch.tensor([-100] * (256 - dec_idxs.size(dim=0)))), dim=0)
+    dec_idxs = torch.cat((dec_idxs, torch.tensor([0] * (256 - dec_idxs.size(dim=0)))), dim=0)
     dec_attn = torch.cat((dec_attn, torch.tensor([0] * (256 - dec_attn.size(dim=0)))), dim=0)
 
     padding = torch.ones((1), dtype=torch.long)
     padding[:] = tokenizer.pad_token_id
     raw_lbl_idxs = torch.cat((dec_idxs[1:], padding), dim=0)
     lbl_attn = torch.cat((dec_attn[1:], torch.zeros((1), dtype=torch.long)), dim=0)
-    lbl_idxs = raw_lbl_idxs.masked_fill(lbl_attn==0, -100) # ignore padding
+    lbl_idxs = raw_lbl_idxs.masked_fill(lbl_attn==0, 0) # ignore padding
 
     print("debug")
     print('enc_idxs', enc_idxs.size())
