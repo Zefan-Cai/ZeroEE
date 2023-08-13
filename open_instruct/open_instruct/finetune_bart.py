@@ -249,12 +249,12 @@ def encode_with_prompt_completion_format(example, tokenizer, max_seq_length):
     lbl_attn = torch.cat((dec_attn[1:], torch.zeros((1), dtype=torch.long)), dim=0)
     lbl_idxs = raw_lbl_idxs.masked_fill(lbl_attn==0, 0) # ignore padding
 
-    print("debug")
-    print('enc_idxs', enc_idxs.size())
-    print('enc_attn', enc_attn.size())
-    print('dec_idxs', dec_idxs.size())
-    print('dec_attn', dec_attn.size())
-    print('lbl_idxs', lbl_idxs.size())
+    # print("debug")
+    # print('enc_idxs', enc_idxs.size())
+    # print('enc_attn', enc_attn.size())
+    # print('dec_idxs', dec_idxs.size())
+    # print('dec_attn', dec_attn.size())
+    # print('lbl_idxs', lbl_idxs.size())
 
     return {
         'input_ids': enc_idxs.flatten(),
