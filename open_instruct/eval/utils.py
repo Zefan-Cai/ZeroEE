@@ -374,7 +374,7 @@ def query_openai_model(engine, instances, output_path=None, batch_size=10, retry
  
  
  
- def load_hf_lm_and_tokenizer(
+def load_hf_lm_and_tokenizer(
         model_name_or_path, 
         tokenizer_name_or_path=None, 
         device_map="auto", 
