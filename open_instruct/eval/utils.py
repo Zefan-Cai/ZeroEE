@@ -468,6 +468,7 @@ def generate_completions_bart(model, tokenizer, prompts, batch_size=1, stop_id_s
             # space is important for some tasks (e.g., code completion).
             batch_outputs = tokenizer.batch_decode(batch_outputs, skip_special_tokens=True)
             batch_prompts = tokenizer.batch_decode(batch_input_ids, skip_special_tokens=True)
+            print(f"debug: {batch_outputs}")
             # duplicate the prompts to match the number of return sequences
             batch_prompts = [prompt for prompt in batch_prompts for _ in range(num_return_sequences)]
             batch_generations = [
