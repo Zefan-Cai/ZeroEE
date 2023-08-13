@@ -111,7 +111,7 @@ for index in range(len(ACE_train_data)):
         positive_train_data.append({
             "Event definition": event_definition,
             "Event type": event_type,       
-            "prompt": "{} \n The event is  event. \n {} \n So what is the trigger?".format(ACE_train_data[index]["text"], event_type, event_definition),
+            "prompt": "{} \n {} \n So what is the trigger?".format(ACE_train_data[index]["text"], event_definition),
             "completion": "Event trigger is {}".format(" and ".join(event_type2trigger[event_type]))
             })
     
@@ -123,7 +123,7 @@ for index in range(len(ACE_train_data)):
         negative_train_data.append({
             "Event definition": event_definition,
             "Event type": event_type,       
-            "prompt": "{} \n The event is {} event. \n {} \n So what is the trigger?".format(ACE_train_data[index]["text"], event_type, event_definition),
+            "prompt": "{} \n {} \n So what is the trigger?".format(ACE_train_data[index]["text"], event_definition),
             "completion": "Event trigger is <trigger>"
             })
 
@@ -167,7 +167,7 @@ for index in range(len(ACE_valid_data)):
         sample_data_list.append({
             "Event definition": event_definition,
             "Event type": event_type,       
-            "prompt": "{} \n The event is {} event. \n {} \n So what is the trigger?".format(ACE_valid_data[index]["text"], event_type, event_definition),
+            "prompt": "{} \n {} \n So what is the trigger?".format(ACE_valid_data[index]["text"], event_definition),
             "trigger": trigger
             })
     valid_data.append(sample_data_list)
@@ -212,7 +212,7 @@ for index in range(len(ACE_test_data)):
         sample_data_list.append({
             "Event definition": event_definition,
             "Event type": event_type,       
-            "prompt": "{} \n The event is {} event. \n {} \n So what is the trigger?".format(ACE_valid_data[index]["text"], event_type, event_definition),
+            "prompt": "{} \n {} \n So what is the trigger?".format(ACE_valid_data[index]["text"], event_definition),
             "trigger": trigger
             })
     test_data.append(sample_data_list)
