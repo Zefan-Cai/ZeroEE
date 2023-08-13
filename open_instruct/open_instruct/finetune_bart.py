@@ -237,16 +237,16 @@ def encode_with_prompt_completion_format(example, tokenizer, max_seq_length):
     targets = tokenizer(example['completion'], return_tensors='pt', padding=True, max_length=256, truncation=True)
     dec_idxs = targets['input_ids'].flatten()
     batch_size = dec_idxs.size(0)
-    dec_idxs[:, 0] = tokenizer.eos_token_id
+    dec_idxs[0] = tokenizer.eos_token_id
     dec_attn = targets['attention_mask'].flatten()
 
     dec_idxs = torch.cat((dec_idxs, torch.tensor([-100] * (256 - dec_idxs.size(dim=0)))), dim=0)
     dec_attn = torch.cat((dec_attn, torch.tensor([0] * (256 - dec_attn.size(dim=0)))), dim=0)
 
-    padding = torch.ones((batch_size, 1), dtype=torch.long)
-    padding[:] = tokenizer.pad_token_id
-    raw_lbl_idxs = torch.cat((dec_idxs[:, 1:], padding), dim=1)
-    lbl_attn = torch.cat((dec_attn[:, 1:], torch.zeros((batch_size, 1), dtype=torch.long)), dim=1)
+    padding = torch.ones((1), dtype=torch.long)
+    padding = tokenizer.pad_token_id
+    raw_lbl_idxs = torch.cat((dec_idxs[1:], padding), dim=1)
+    lbl_attn = torch.cat((dec_attn[1:], torch.zeros((1), dtype=torch.long)), dim=1)
     lbl_idxs = raw_lbl_idxs.masked_fill(lbl_attn==0, -100) # ignore padding
 
     
