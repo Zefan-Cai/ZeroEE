@@ -2,8 +2,8 @@ export CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7
 
 MODEL_SIZE=large
 NUM_GPUS=8
-BATCH_SIZE_PER_GPU=128
-TOTAL_BATCH_SIZE=1024
+BATCH_SIZE_PER_GPU=64
+TOTAL_BATCH_SIZE=512
 GRADIENT_ACC_STEPS=$(($TOTAL_BATCH_SIZE/$NUM_GPUS/$BATCH_SIZE_PER_GPU))
 echo "Training gt model ${MODEL_SIZE} using $NUM_GPUS GPUs, $BATCH_SIZE_PER_GPU batch size per GPU, $GRADIENT_ACC_STEPS gradient accumulation steps"
 
@@ -32,4 +32,5 @@ accelerate launch \
     --output_dir /local1/zefan/output/bart-${MODEL_SIZE}-ACE-13/ \
     --with_tracking \
     --report_to tensorboard \
-    --logging_steps 1
+    --logging_steps 1 \
+    --checkpointing_steps epoch
