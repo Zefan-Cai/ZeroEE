@@ -228,20 +228,20 @@ def encode_with_prompt_completion_format(example, tokenizer, max_seq_length):
     example_text = example['prompt'] 
     
     tokenized_example = tokenizer(example_text, return_tensors='pt', padding=True, max_length=max_seq_length, truncation=True)
-    enc_idxs = tokenized_example.input_ids
-    enc_attn = tokenized_example.attention_mask
+    enc_idxs = tokenized_example.input_ids.flatten()
+    enc_attn = tokenized_example.attention_mask.flatten()
 
-    enc_idxs = enc_idxs + [-100] * (max_seq_length - len(enc_idxs))
-    enc_attn = enc_attn + [0] * (max_seq_length - len(enc_attn))
+    enc_idxs = torch.cat((enc_idxs, torch.tensor([-100] * (max_seq_length - enc_idxs.size(dim=0)))), dim=0)
+    enc_attn = torch.cat((enc_attn, torch.tensor([0] * (max_seq_length - enc_attn.size(dim=0)))), dim=0)
 
     targets = tokenizer(example['completion'], return_tensors='pt', padding=True, max_length=256, truncation=True)
-    dec_idxs = targets['input_ids']
+    dec_idxs = targets['input_ids'].flatten()
     batch_size = dec_idxs.size(0)
     dec_idxs[:, 0] = tokenizer.eos_token_id
-    dec_attn = targets['attention_mask']
+    dec_attn = targets['attention_mask'].flatten()
 
-    dec_idxs = dec_idxs + [-100] * (256 - len(enc_idxs))
-    dec_attn = dec_attn + [0] * (256 - len(enc_attn))
+    dec_idxs = torch.cat((dec_idxs, torch.tensor([-100] * (256 - dec_idxs.size(dim=0)))), dim=0)
+    dec_attn = torch.cat((dec_attn, torch.tensor([0] * (256 - dec_attn.size(dim=0)))), dim=0)
 
     padding = torch.ones((batch_size, 1), dtype=torch.long)
     padding[:] = tokenizer.pad_token_id
