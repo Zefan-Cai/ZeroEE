@@ -455,12 +455,12 @@ def generate_completions_bart(model, tokenizer, prompts, batch_size=1, stop_id_s
             print(f"debug: {batch_outputs}")
             # the stopping criteria is applied at batch level, so if other examples are not stopped, the entire batch will continue to generate.
             # so some outputs still have the stop sequence, which we need to remove.
-            if stop_id_sequences:
-                for output_idx in range(batch_outputs.shape[0]):
-                    for token_idx in range(batch_input_ids.shape[1], batch_outputs.shape[1]):
-                        if any(batch_outputs[output_idx, token_idx: token_idx+len(stop_sequence)].tolist() == stop_sequence for stop_sequence in stop_id_sequences):
-                            batch_outputs[output_idx, token_idx:] = tokenizer.pad_token_id
-                            break
+            # if stop_id_sequences:
+            #     for output_idx in range(batch_outputs.shape[0]):
+            #         for token_idx in range(batch_input_ids.shape[1], batch_outputs.shape[1]):
+            #             if any(batch_outputs[output_idx, token_idx: token_idx+len(stop_sequence)].tolist() == stop_sequence for stop_sequence in stop_id_sequences):
+            #                 batch_outputs[output_idx, token_idx:] = tokenizer.pad_token_id
+            #                 break
 
             # remove the prompt from the output
             # we need to re-encode the prompt because we need to make sure the special tokens are treated the same way as in the outputs.
