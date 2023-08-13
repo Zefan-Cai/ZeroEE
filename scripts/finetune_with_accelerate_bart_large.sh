@@ -14,7 +14,7 @@ accelerate launch \
     --num_processes $NUM_GPUS \
     --use_deepspeed \
     --deepspeed_config_file ./open_instruct/ds_configs/stage3_no_offloading_accelerate.conf \
-    ./open_instruct/open_instruct/finetune.py \
+    ./open_instruct/open_instruct/finetune_bart.py \
     --model_name_or_path /local1/zefan/models/bart-large/ \
     --use_flash_attn \
     --tokenizer_name /local1/zefan/models/bart-large/ \
