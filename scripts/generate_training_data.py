@@ -84,7 +84,7 @@ with open('./data/ACE_event_definition_DEGREE.json', 'r') as fp:
 ## ACE train data
 
 
-n_negative = 3
+n_negative = 15
 
 ACE_train_data = []
 
