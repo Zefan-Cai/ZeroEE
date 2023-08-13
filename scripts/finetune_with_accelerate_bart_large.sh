@@ -20,7 +20,7 @@ accelerate launch \
     --tokenizer_name /local1/zefan/models/bart-large/ \
     --use_slow_tokenizer \
     --train_file /local1/zefan/data/ace/ACE_train_13.json \
-    --max_seq_length 128 \
+    --max_seq_length 256 \
     --preprocessing_num_workers 16 \
     --per_device_train_batch_size $BATCH_SIZE_PER_GPU \
     --gradient_accumulation_steps $GRADIENT_ACC_STEPS \
