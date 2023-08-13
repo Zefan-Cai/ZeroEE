@@ -131,8 +131,8 @@ for n_negative in [8, 15]:
 
     with open(os.path.join(output_dir, 'ace', f'ACE_train_{str(n_negative)}.json'), 'w') as fp:
         for d in train_data:
-        json.dump(d, fp)
-        fp.write('\n')
+            json.dump(d, fp)
+            fp.write('\n')
 
 
 ## ACE valid data
