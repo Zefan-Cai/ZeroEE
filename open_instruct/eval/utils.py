@@ -66,6 +66,7 @@ def generate_completions(model, tokenizer, prompts, batch_size=1, stop_id_sequen
             # we changed our previous way of truncating the output token ids dicrectly because some tokenizer (e.g., llama) won't add space token before the first token.
             # space is important for some tasks (e.g., code completion).
             batch_outputs = tokenizer.batch_decode(batch_outputs, skip_special_tokens=True)
+            print(f"debug: {batch_outputs}")
             batch_prompts = tokenizer.batch_decode(batch_input_ids, skip_special_tokens=True)
             # duplicate the prompts to match the number of return sequences
             batch_prompts = [prompt for prompt in batch_prompts for _ in range(num_return_sequences)]
@@ -81,7 +82,6 @@ def generate_completions(model, tokenizer, prompts, batch_size=1, stop_id_sequen
             batch_generations = [""] * len(batch_prompts) * num_return_sequences
 
         generations += batch_generations
-        print(f"debug: {generations}")
         # for prompt, generation in zip(batch_prompts, batch_generations):
         #     print("========")
         #     print(prompt)
