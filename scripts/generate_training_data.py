@@ -98,35 +98,37 @@ for n_negative in [8, 15]:
     train_data = []
 
     for index in range(len(ACE_train_data)):
-        event_type2trigger = {}
-        for event_index in range(len(ACE_train_data[index]["event"])):
-            event_type = ACE_train_data[index]["event"][event_index]["type"]
-            trigger = ACE_train_data[index]["event"][event_index]["text"]
-            
-            if event_type not in event_type2trigger.keys():
-                event_type2trigger[event_type] = []
-            event_type2trigger[event_type].append(trigger)
+        if len(ACE_train_data[index]["event"]) == 0: pass
+        else:
+            event_type2trigger = {}
+            for event_index in range(len(ACE_train_data[index]["event"])):
+                event_type = ACE_train_data[index]["event"][event_index]["type"]
+                trigger = ACE_train_data[index]["event"][event_index]["text"]
+                
+                if event_type not in event_type2trigger.keys():
+                    event_type2trigger[event_type] = []
+                event_type2trigger[event_type].append(trigger)
 
-        for event_type in event_type2trigger.keys():
-            event_definition = event_type2definition[event_type]
-            positive_train_data.append({
-                "Event definition": event_definition,
-                "Event type": event_type,       
-                "prompt": "{} \n {} \n So what is the trigger?".format(ACE_train_data[index]["text"], event_definition),
-                "completion": "Event trigger is {}".format(" and ".join(event_type2trigger[event_type]))
-                })
-        
-        available_evet_types = list(set(event_type2definition.keys()) - set(event_type2trigger.keys()))
-        selected_event_type = random.sample(available_evet_types, n_negative)
-        
-        for event_type in selected_event_type:
-            event_definition = event_type2definition[event_type]
-            negative_train_data.append({
-                "Event definition": event_definition,
-                "Event type": event_type,       
-                "prompt": "{} \n {} \n So what is the trigger?".format(ACE_train_data[index]["text"], event_definition),
-                "completion": "Event trigger is <trigger>"
-                })
+            for event_type in event_type2trigger.keys():
+                event_definition = event_type2definition[event_type]
+                positive_train_data.append({
+                    "Event definition": event_definition,
+                    "Event type": event_type,       
+                    "prompt": "{} \n {} \n So what is the trigger?".format(ACE_train_data[index]["text"], event_definition),
+                    "completion": "Event trigger is {}".format(" and ".join(event_type2trigger[event_type]))
+                    })
+            
+            available_evet_types = list(set(event_type2definition.keys()) - set(event_type2trigger.keys()))
+            selected_event_type = random.sample(available_evet_types, n_negative)
+            
+            for event_type in selected_event_type:
+                event_definition = event_type2definition[event_type]
+                negative_train_data.append({
+                    "Event definition": event_definition,
+                    "Event type": event_type,       
+                    "prompt": "{} \n {} \n So what is the trigger?".format(ACE_train_data[index]["text"], event_definition),
+                    "completion": "Event trigger is <trigger>"
+                    })
 
     train_data = positive_train_data + negative_train_data
 
