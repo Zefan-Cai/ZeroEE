@@ -7,7 +7,7 @@ import glob
 import torch
 import random
 import evaluate
-from open_instruct.eval.utils import load_hf_lm_and_tokenizer, generate_completions, load_hf_lm_and_tokenizer_bart
+from open_instruct.eval.utils import load_hf_lm_and_tokenizer, generate_completions, load_hf_lm_and_tokenizer_bart, generate_completions_bart
 # query_openai_chat_model
 
 def safe_div(num, denom):
@@ -122,7 +122,7 @@ def eval_hf_model(args, model, tokenizer, examples, task_prompt, save_path=None)
     #     # instead, we'll do some post-processing to extract the answer.
     #     stop_sequnce = None
     
-    outputs = generate_completions(
+    outputs = generate_completions_bart(
         model=model,
         tokenizer=tokenizer,
         prompts=prompts,
