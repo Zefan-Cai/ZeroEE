@@ -449,7 +449,7 @@ def generate_completions_bart(model, tokenizer, prompts, batch_size=1, stop_id_s
             batch_outputs = model.generate(
                 input_ids=batch_input_ids,
                 attention_mask=attention_mask,
-                stopping_criteria=[KeyWordsCriteria(stop_id_sequences)] if stop_id_sequences else None,
+                # stopping_criteria=[KeyWordsCriteria(stop_id_sequences)] if stop_id_sequences else None,
                 **generation_kwargs
             )
             print(f"debug: {batch_outputs}")
