@@ -231,7 +231,7 @@ def encode_with_prompt_completion_format(example, tokenizer, max_seq_length):
     enc_idxs = tokenized_example.input_ids
     enc_attn = tokenized_example.attention_mask
     
-    targets = tokenizer(example['completion'], return_tensors='pt', padding=True, max_length=256)
+    targets = tokenizer(example['completion'], return_tensors='pt', padding=True, max_length=256, truncation=True)
     dec_idxs = targets['input_ids']
     batch_size = dec_idxs.size(0)
     dec_idxs[:, 0] = tokenizer.eos_token_id
