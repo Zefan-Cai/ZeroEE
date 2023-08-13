@@ -32,47 +32,48 @@ with open('GENEVA-main/data/train.json', 'r') as fp:
 negative_ratio = 0.2
 n_negative = int(negative_ratio * len(event_type2definition))
 
-positive_train_data = []
-negative_train_data = []
-train_data = []
+for n_negative in [30, 15]:
+    positive_train_data = []
+    negative_train_data = []
+    train_data = []
 
-for index in range(len(GENEVA_training_data)):
-    event_type2trigger = {}
-    for event_index in range(len(GENEVA_training_data[index]["event_mentions"])):
-        event_type = GENEVA_training_data[index]["event_mentions"][event_index]["event_type"]
-        trigger = GENEVA_training_data[index]["event_mentions"][event_index]["trigger"]["text"]
+    for index in range(len(GENEVA_training_data)):
+        event_type2trigger = {}
+        for event_index in range(len(GENEVA_training_data[index]["event_mentions"])):
+            event_type = GENEVA_training_data[index]["event_mentions"][event_index]["event_type"]
+            trigger = GENEVA_training_data[index]["event_mentions"][event_index]["trigger"]["text"]
+            
+            if event_type not in event_type2trigger.keys():
+                event_type2trigger[event_type] = []
+            event_type2trigger[event_type].append(trigger)
+
+        for event_type in event_type2trigger.keys():
+            event_definition = event_type2definition[event_type]
+            positive_train_data.append({
+                "Event definition": event_definition,
+                "Event type": event_type,       
+                "prompt": "{} \n The event is {} event. \n {} \n So what is the trigger?".format(GENEVA_training_data[index]["sentence"], event_type, event_definition),
+                "completion": "Event trigger is {}".format(" and ".join(event_type2trigger[event_type]))
+                })
         
-        if event_type not in event_type2trigger.keys():
-            event_type2trigger[event_type] = []
-        event_type2trigger[event_type].append(trigger)
+        available_evet_types = list(set(event_type2definition.keys()) - set(event_type2trigger.keys()))
+        selected_event_type = random.sample(available_evet_types, n_negative)
+        
+        for event_type in selected_event_type:
+            event_definition = event_type2definition[event_type]
+            positive_train_data.append({
+                "Event definition": event_definition,
+                "Event type": event_type,       
+                "prompt": "{} \n The event is {} event. \n {} \n So what is the trigger?".format(GENEVA_training_data[index]["sentence"], event_type, event_definition),
+                "completion": "Event trigger is <trigger>"
+                })
 
-    for event_type in event_type2trigger.keys():
-        event_definition = event_type2definition[event_type]
-        positive_train_data.append({
-            "Event definition": event_definition,
-            "Event type": event_type,       
-            "prompt": "{} \n The event is {} event. \n {} \n So what is the trigger?".format(GENEVA_training_data[index]["sentence"], event_type, event_definition),
-            "completion": "Event trigger is {}".format(" and ".join(event_type2trigger[event_type]))
-            })
-    
-    available_evet_types = list(set(event_type2definition.keys()) - set(event_type2trigger.keys()))
-    selected_event_type = random.sample(available_evet_types, n_negative)
-    
-    for event_type in selected_event_type:
-        event_definition = event_type2definition[event_type]
-        positive_train_data.append({
-            "Event definition": event_definition,
-            "Event type": event_type,       
-            "prompt": "{} \n The event is {} event. \n {} \n So what is the trigger?".format(GENEVA_training_data[index]["sentence"], event_type, event_definition),
-            "completion": "Event trigger is <trigger>"
-            })
+    train_data = positive_train_data + negative_train_data
 
-train_data = positive_train_data + negative_train_data
-
-with open(os.path.join(output_dir, 'geneva', f'GENEVA_train_{str(n_negative)}.json'), 'w') as fp:
-    for line in train_data:
-       json.dump(line, fp)
-       fp.write('\n')
+    with open(os.path.join(output_dir, 'geneva', f'GENEVA_train_{str(n_negative)}.json'), 'w') as fp:
+        for line in train_data:
+            json.dump(line, fp)
+            fp.write('\n')
 
 # ACE
 
