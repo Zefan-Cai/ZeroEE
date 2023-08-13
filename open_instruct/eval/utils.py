@@ -81,7 +81,7 @@ def generate_completions(model, tokenizer, prompts, batch_size=1, stop_id_sequen
             batch_generations = [""] * len(batch_prompts) * num_return_sequences
 
         generations += batch_generations
-
+        print(f"debug: {generations}")
         # for prompt, generation in zip(batch_prompts, batch_generations):
         #     print("========")
         #     print(prompt)
