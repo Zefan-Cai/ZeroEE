@@ -19,7 +19,7 @@ accelerate launch \
     --use_flash_attn \
     --tokenizer_name /local1/zefan/models/bart-large/ \
     --use_slow_tokenizer \
-    --train_file /local1/zefan/data/ace/ACE_train_13.json \
+    --train_file /local1/zefan/data/ace/ACE_train_15.json \
     --max_seq_length 256 \
     --preprocessing_num_workers 16 \
     --per_device_train_batch_size $BATCH_SIZE_PER_GPU \
@@ -29,7 +29,7 @@ accelerate launch \
     --warmup_ratio 0.03 \
     --weight_decay 0. \
     --num_train_epochs 45 \
-    --output_dir /local1/zefan/output/bart-${MODEL_SIZE}-ACE-13/ \
+    --output_dir /local1/zefan/output/bart-${MODEL_SIZE}-ACE-15/ \
     --with_tracking \
     --report_to tensorboard \
     --logging_steps 1 \
