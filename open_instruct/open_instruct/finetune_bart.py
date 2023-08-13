@@ -651,7 +651,7 @@ def main():
             if args.output_dir is not None:
                 accelerator.wait_for_everyone()
                 if accelerator.is_main_process:
-                    tokenizer.save_pretrained(args.output_dir)
+                    tokenizer.save_pretrained(output_dir)
                 unwrapped_model = accelerator.unwrap_model(model)
                 # When doing multi-gpu training, we need to use accelerator.get_state_dict(model) to get the state_dict.
                 # Otherwise, sometimes the model will be saved with only part of the parameters.
@@ -662,10 +662,10 @@ def main():
                     # and has its own save_pretrained function for only saving lora modules.
                     # We have to mannually specify the is_main_process outside the save_pretrained function.
                     if accelerator.is_main_process:
-                        unwrapped_model.save_pretrained(args.output_dir, state_dict=state_dict)
+                        unwrapped_model.save_pretrained(output_dir, state_dict=state_dict)
                 else:
                     unwrapped_model.save_pretrained(
-                        args.output_dir, is_main_process=accelerator.is_main_process, save_function=accelerator.save, state_dict=state_dict
+                        output_dir, is_main_process=accelerator.is_main_process, save_function=accelerator.save, state_dict=state_dict
                     )
         
 
