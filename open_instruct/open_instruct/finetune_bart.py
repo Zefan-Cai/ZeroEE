@@ -231,8 +231,8 @@ def encode_with_prompt_completion_format(example, tokenizer, max_seq_length):
     enc_idxs = tokenized_example.input_ids
     enc_attn = tokenized_example.attention_mask
 
-    enc_idxs = enc_idxs + [-100] * [max_seq_length - len(enc_idxs)]
-    enc_attn = enc_attn + [0] * [max_seq_length - len(enc_attn)]
+    enc_idxs = enc_idxs + [-100] * (max_seq_length - len(enc_idxs))
+    enc_attn = enc_attn + [0] * (max_seq_length - len(enc_attn))
 
     targets = tokenizer(example['completion'], return_tensors='pt', padding=True, max_length=256, truncation=True)
     dec_idxs = targets['input_ids']
@@ -240,8 +240,8 @@ def encode_with_prompt_completion_format(example, tokenizer, max_seq_length):
     dec_idxs[:, 0] = tokenizer.eos_token_id
     dec_attn = targets['attention_mask']
 
-    dec_idxs = dec_idxs + [-100] * [256 - len(enc_idxs)]
-    dec_attn = dec_attn + [0] * [256 - len(enc_attn)]
+    dec_idxs = dec_idxs + [-100] * (256 - len(enc_idxs))
+    dec_attn = dec_attn + [0] * (256 - len(enc_attn))
 
     padding = torch.ones((batch_size, 1), dtype=torch.long)
     padding[:] = tokenizer.pad_token_id
