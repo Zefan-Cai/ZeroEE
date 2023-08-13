@@ -244,7 +244,7 @@ def encode_with_prompt_completion_format(example, tokenizer, max_seq_length):
     dec_attn = torch.cat((dec_attn, torch.tensor([0] * (256 - dec_attn.size(dim=0)))), dim=0)
 
     padding = torch.ones((1), dtype=torch.long)
-    padding = tokenizer.pad_token_id
+    padding[:] = tokenizer.pad_token_id
     raw_lbl_idxs = torch.cat((dec_idxs[1:], padding), dim=1)
     lbl_attn = torch.cat((dec_attn[1:], torch.zeros((1), dtype=torch.long)), dim=1)
     lbl_idxs = raw_lbl_idxs.masked_fill(lbl_attn==0, -100) # ignore padding
