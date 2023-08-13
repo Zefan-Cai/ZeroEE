@@ -221,22 +221,34 @@ def encode_with_prompt_completion_format(example, tokenizer, max_seq_length):
     and it doesn't make sense to follow directly with the completion.
     '''
     # if prompt doesn't end with space and completion doesn't start with space, add space
-    if not example['prompt'].endswith((' ', '\n', '\t')) and not example['completion'].startswith((' ', '\n', '\t')):
-        example_text = example['prompt'] + ' ' + example['completion']
-    else:
-        example_text = example['prompt'] + example['completion']
-    example_text = example_text + tokenizer.eos_token
+    # if not example['prompt'].endswith((' ', '\n', '\t')) and not example['completion'].startswith((' ', '\n', '\t')):
+    #     example_text = example['prompt'] + ' ' + example['completion']
+    # else:
+    #     example_text = example['prompt'] + example['completion']
+    example_text = example['prompt'] 
+    
     tokenized_example = tokenizer(example_text, return_tensors='pt', max_length=max_seq_length, truncation=True)
-    input_ids = tokenized_example.input_ids
-    labels = input_ids.clone()
-    tokenized_prompt = tokenizer(example['prompt'], return_tensors='pt', max_length=max_seq_length, truncation=True)
-    # mask the prompt part for avoiding loss
-    labels[:, :tokenized_prompt.input_ids.shape[1]] = -100
-    attention_mask = torch.ones_like(input_ids)
+    enc_idxs = tokenized_example.input_ids
+    enc_attn = tokenized_example.attention_mask
+    
+    targets = tokenizer(example['completion'], return_tensors='pt', padding=True, max_length=256)
+    dec_idxs = targets['input_ids']
+    batch_size = dec_idxs.size(0)
+    dec_idxs[:, 0] = tokenizer.eos_token_id
+    dec_attn = targets['attention_mask']
+    
+    padding = torch.ones((batch_size, 1), dtype=torch.long)
+    padding[:] = tokenizer.pad_token_id
+    raw_lbl_idxs = torch.cat((dec_idxs[:, 1:], padding), dim=1)
+    lbl_attn = torch.cat((dec_attn[:, 1:], torch.zeros((batch_size, 1), dtype=torch.long)), dim=1)
+    lbl_idxs = raw_lbl_idxs.masked_fill(lbl_attn==0, -100) # ignore padding
+    
     return {
-        'input_ids': input_ids.flatten(),
-        'labels': labels.flatten(),
-        'attention_mask': attention_mask.flatten(),
+        'input_ids': enc_idxs.flatten(),
+        'attention_mask': enc_attn.flatten(),
+        'decoder_input_ids': dec_idxs.flatten(),
+        'decoder_attention_mask': dec_attn.flatten(),
+        'labels': lbl_idxs.flatten()
     }
 
 
