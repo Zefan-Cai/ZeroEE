@@ -29,7 +29,7 @@ accelerate launch \
     --warmup_ratio 0.03 \
     --weight_decay 0. \
     --num_train_epochs 45 \
-    --output_dir /local1/zefan/output/bart-${MODEL_SIZE}/ \
+    --output_dir /local1/zefan/output/bart-${MODEL_SIZE}-ACE-13/ \
     --with_tracking \
     --report_to tensorboard \
     --logging_steps 1
