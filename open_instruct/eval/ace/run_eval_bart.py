@@ -7,7 +7,7 @@ import glob
 import torch
 import random
 import evaluate
-from open_instruct.eval.utils import load_hf_lm_and_tokenizer, generate_completions
+from open_instruct.eval.utils import load_hf_lm_and_tokenizer, generate_completions, load_hf_lm_and_tokenizer_bart
 # query_openai_chat_model
 
 def safe_div(num, denom):
@@ -276,7 +276,7 @@ def main(args):
 
     if args.model_name_or_path:
         print("Loading model and tokenizer...")
-        model, tokenizer = load_hf_lm_and_tokenizer(
+        model, tokenizer = load_hf_lm_and_tokenizer_bart(
             model_name_or_path=args.model_name_or_path, 
             tokenizer_name_or_path=args.tokenizer_name_or_path, 
             load_in_8bit=args.load_in_8bit, 

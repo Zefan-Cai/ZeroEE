@@ -27,7 +27,8 @@ from transformers import (
     get_scheduler,
     GPTNeoXTokenizerFast,
     GPT2Tokenizer,
-    OPTForCausalLM
+    OPTForCausalLM,
+    AutoModelForPreTraining
 )
 from peft import LoraConfig, TaskType, get_peft_model
 
@@ -387,6 +388,10 @@ def main():
             config=config,
             low_cpu_mem_usage=args.low_cpu_mem_usage,
         )
+        if 'bart' in args.model_name_or_path:
+            model = AutoModelForPreTraining.from_pretrained(args.model_name_or_path)
+            if torch.cuda.is_available():
+                model = model.cuda()
     else:
         logger.info("Training new model from scratch")
         model = AutoModelForCausalLM.from_config(config)
