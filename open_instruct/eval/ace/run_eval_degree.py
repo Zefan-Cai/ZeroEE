@@ -80,7 +80,7 @@ def get_trigger(examples):
                     pred_object.append((t, event_type, {'tri counter': t_cnt})) # (text, type, kwargs)
         except:
             pass
-        # example["trigger"] = pred_object
+        example["pred_trigger"] = pred_object
         all_outputs.append(pred_object)
             
         pred_trigger_object = []
@@ -106,13 +106,12 @@ def eval_hf_model(args, model, tokenizer, examples, task_prompt, save_path=None)
 
     prompts = []
     for example in examples:
-        for sub_example in example:
-            if args.use_chat_format:
-                prompt = "<|user|>\n" + task_prompt.strip() + "\n\nQ: " + example["input"] + "\n<|assistant|>\nA:"
-            else:
-                prompt = sub_example["prompt"].strip()
-                # prompt = task_prompt.strip() + "\n\nQ: " + example["prompt"] + "\nA:"
-            prompts.append(prompt)
+        if args.use_chat_format:
+            prompt = "<|user|>\n" + task_prompt.strip() + "\n\nQ: " + example["input"] + "\n<|assistant|>\nA:"
+        else:
+            prompt = example["prompt"].strip()
+            # prompt = task_prompt.strip() + "\n\nQ: " + example["prompt"] + "\nA:"
+        prompts.append(prompt)
 
     # if args.no_cot:
     #     stop_sequnce = tokenizer.encode("\n\n", add_special_tokens=False)[-2:] # get the last token because the tokenizer may add space tokens at the start.
@@ -136,10 +135,9 @@ def eval_hf_model(args, model, tokenizer, examples, task_prompt, save_path=None)
     predictions = []
     for example in examples:
         sub_prediction = []
-        for sub_example in example:
-            prediction = outputs.pop(0)
-            sub_example["prediction"] = prediction
-            sub_prediction.append(prediction)
+        prediction = outputs.pop(0)
+        example["prediction"] = prediction
+        sub_prediction.append(prediction)
         predictions.append(sub_prediction)
         if save_path:
             fout.write(json.dumps(example) + "\n")
