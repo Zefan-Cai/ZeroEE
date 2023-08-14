@@ -166,7 +166,13 @@ def parse_args():
         type=str,
         default=None,
         help="Whether the various states should be saved at the end of every n steps, or 'epoch' for each epoch.",
-    )
+    ) # save_epochs
+    parser.add_argument(
+        "--save_epochs",
+        type=int,
+        default=1,
+        help="",
+    ) # save_epochs
     parser.add_argument(
         "--logging_steps",
         type=int,
@@ -634,7 +640,7 @@ def main():
                 if completed_steps >= args.max_train_steps:
                     break
 
-        if args.checkpointing_steps == "epoch":
+        if args.checkpointing_steps == "epoch" and epoch % args.save_epochs == 0:
             output_dir = f"epoch_{epoch}"
             if args.output_dir is not None:
                 output_dir = os.path.join(args.output_dir, output_dir)
