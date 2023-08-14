@@ -284,6 +284,10 @@ def main(args):
             gptq_model=args.gptq
         )
 
+    special_tokens = ['<trigger>', '<sep>']
+    tokenizer.add_tokens(special_tokens)
+
+
     performance = {}
     for task_name in tqdm.tqdm(all_tasks.keys(), desc="Evaluating"):
         task_examples = all_tasks[task_name]
