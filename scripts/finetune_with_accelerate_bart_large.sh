@@ -1,9 +1,9 @@
-export CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7
+export CUDA_VISIBLE_DEVICES=4,5,6,7
 
 MODEL_SIZE=large
-NUM_GPUS=8
+NUM_GPUS=4
 BATCH_SIZE_PER_GPU=64
-TOTAL_BATCH_SIZE=512
+TOTAL_BATCH_SIZE=256
 GRADIENT_ACC_STEPS=$(($TOTAL_BATCH_SIZE/$NUM_GPUS/$BATCH_SIZE_PER_GPU))
 echo "Training gt model ${MODEL_SIZE} using $NUM_GPUS GPUs, $BATCH_SIZE_PER_GPU batch size per GPU, $GRADIENT_ACC_STEPS gradient accumulation steps"
 
@@ -19,7 +19,7 @@ accelerate launch \
     --use_flash_attn \
     --tokenizer_name /local1/zefan/models/bart-large/ \
     --use_slow_tokenizer \
-    --train_file /local1/zefan/data/ace/ACE_train_15.json \
+    --train_file /local1/zefan/data/degree_ed_ace05e_defi/train.json \
     --max_seq_length 256 \
     --preprocessing_num_workers 16 \
     --per_device_train_batch_size $BATCH_SIZE_PER_GPU \
@@ -29,7 +29,7 @@ accelerate launch \
     --warmup_ratio 0.03 \
     --weight_decay 0. \
     --num_train_epochs 45 \
-    --output_dir /local1/zefan/output/bart-${MODEL_SIZE}-ACE-15/ \
+    --output_dir /local1/zefan/output/bart-${MODEL_SIZE}-degree/ \
     --with_tracking \
     --report_to tensorboard \
     --logging_steps 1 \
