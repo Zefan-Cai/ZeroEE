@@ -65,7 +65,7 @@ def get_trigger(examples):
         gt_event_object = []
         
         for sub_example in example:
-            event_type = sub_example["event_type"][0]
+            event_type = sub_example["Eventtype"][0]
             trigger = sub_example["trigger"]
             raw_output = sub_example["prediction"]
             
