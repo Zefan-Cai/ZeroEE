@@ -65,7 +65,7 @@ def get_trigger(examples):
                 triggers = raw_output.split('Event trigger is ', 1)[1]
                 triggers = triggers.split(' and ')
                 for t_cnt, t in enumerate(triggers):
-                    if t != '<Trigger>':
+                    if t != '<trigger>':
                         pred_object.append((t, event_type, {'tri counter': t_cnt})) # (text, type, kwargs)
             except:
                 pass
