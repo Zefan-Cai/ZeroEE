@@ -1,7 +1,7 @@
 export CUDA_VISIBLE_DEVICES=0
 
 # cot
-python -m open_instruct.eval.ace.run_eval \
+python -m open_instruct.eval.ace.run_eval_degree \
     --data_dir /local1/zefan/data/degree_ed_ace05e_defi \
     --valid_file dev.json \
     --test_file test.json \
