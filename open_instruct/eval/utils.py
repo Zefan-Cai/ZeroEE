@@ -452,7 +452,7 @@ def generate_completions_bart(model, tokenizer, prompts, batch_size=1, stop_id_s
             # stopping_criteria=[KeyWordsCriteria(stop_id_sequences)] if stop_id_sequences else None,
             **generation_kwargs
         )
-        print(f"debug: {batch_outputs}")
+        # print(f"debug: {batch_outputs}")
         # the stopping criteria is applied at batch level, so if other examples are not stopped, the entire batch will continue to generate.
         # so some outputs still have the stop sequence, which we need to remove.
         # if stop_id_sequences:
@@ -468,7 +468,7 @@ def generate_completions_bart(model, tokenizer, prompts, batch_size=1, stop_id_s
         # space is important for some tasks (e.g., code completion).
         batch_outputs = tokenizer.batch_decode(batch_outputs, skip_special_tokens=True)
         batch_prompts = tokenizer.batch_decode(batch_input_ids, skip_special_tokens=True)
-        print(f"debug: {batch_outputs}")
+        # print(f"debug: {batch_outputs}")
         # duplicate the prompts to match the number of return sequences
         batch_prompts = [prompt for prompt in batch_prompts for _ in range(num_return_sequences)]
         batch_generations = [
