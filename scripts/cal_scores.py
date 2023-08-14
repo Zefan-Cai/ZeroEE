@@ -58,7 +58,7 @@ def get_trigger(examples):
             raw_output = sub_example["prediction"]
             
             if trigger != '<trigger>':
-                gt_trigger_object.extend(trigger[0])
+                gt_trigger_object.extend(trigger)
                 gt_event_object.append(event_type)
             
             try:
