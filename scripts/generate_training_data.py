@@ -47,7 +47,7 @@ for num_event in [60, 100, 140, 179]:
 
     for index in range(len(GENEVA_training_data)):
         
-        GENEVA_training_data[index]["sentence"] = GENEVA_training_data[index]["sentence"].replace("''", "")
+        GENEVA_training_data[index]["sentence"] = GENEVA_training_data[index]["sentence"].replace("\'\'", "")
         
         event_type2trigger = {}
         for event_index in range(len(GENEVA_training_data[index]["event_mentions"])):
