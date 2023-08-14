@@ -379,7 +379,7 @@ def main():
         dataset_args = {}
         if args.train_file is not None:
             data_files["train"] = args.train_file
-        dataset_args["features"] = Features({'prompt': Value(dtype='string', id=None), 'completion': Value(dtype='string', id=None), 'Event type': Value(dtype='string', id=None), 'Event definition': Value(dtype='string', id=None)})
+        dataset_args["features"] = Features({'prompt': Value(dtype='string', id=None), 'completion': Value(dtype='string', id=None), 'event_type': Value(dtype='string', id=None), 'trigger': Value(dtype='string', id=None)})
         raw_datasets = load_dataset(
             "json",
             data_files=data_files,
