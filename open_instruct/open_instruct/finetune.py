@@ -384,7 +384,7 @@ def main():
         
         
         
-    special_tokens = ['<trigger>', '<sep>']
+    special_tokens = ['<trigger>', '<sep>', '<Trigger>']
     tokenizer.add_tokens(special_tokens)
     
     

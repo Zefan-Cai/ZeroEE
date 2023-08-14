@@ -440,7 +440,7 @@ def main():
     elif isinstance(tokenizer, GPT2Tokenizer) and isinstance(model, OPTForCausalLM):
         num_added_tokens = tokenizer.add_special_tokens({'unk_token': '<unk>'})
 
-    special_tokens = ['<trigger>', '<sep>']
+    special_tokens = ['<trigger>', '<sep>', '<Trigger>']
     tokenizer.add_tokens(special_tokens)
 
     # We resize the embeddings only when necessary to avoid index errors. If you are creating a model from scratch

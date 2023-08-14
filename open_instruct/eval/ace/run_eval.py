@@ -283,7 +283,7 @@ def main(args):
             gptq_model=args.gptq
         )
 
-    special_tokens = ['<trigger>', '<sep>']
+    special_tokens = ['<trigger>', '<sep>', '<Trigger>']
     tokenizer.add_tokens(special_tokens)
 
 
