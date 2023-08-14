@@ -86,7 +86,7 @@ with open('./data/ACE_event_definition_DEGREE.json', 'r') as fp:
 
 
 n_negative = 15
-for n_negative in [8, 15]:
+for n_negative in [0, 8, 15]:
     ACE_train_data = []
 
     with open('oneie_ace05_en_event/train.json', 'r') as fp:
