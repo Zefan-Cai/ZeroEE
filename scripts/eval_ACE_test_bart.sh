@@ -1,4 +1,4 @@
-export CUDA_VISIBLE_DEVICES=0
+export CUDA_VISIBLE_DEVICES=4
 
 # cot
 python -m open_instruct.eval.ace.run_eval_bart \
@@ -8,5 +8,5 @@ python -m open_instruct.eval.ace.run_eval_bart \
     --save_dir /local1/zefan/results/test_ace_bart_large_epoch44/ \
     --model /local1/zefan/output/bart-large-ACE-15/epoch_44/ \
     --tokenizer /local1/zefan/models/bart-large/ \
-    --eval_batch_size 4
+    --eval_batch_size 128
 
