@@ -57,7 +57,7 @@ for num_event in [60, 100, 140, 179]:
             
             event_type = GENEVA_training_data[index]["event_mentions"][event_index]["event_type"]
 
-            if event_type in available_events and not in overlap_events:
+            if event_type in available_events and event_type not in overlap_events:
                 trigger = GENEVA_training_data[index]["event_mentions"][event_index]["trigger"]["text"]
                 
                 if event_type not in event_type2trigger.keys():
