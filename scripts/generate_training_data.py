@@ -45,6 +45,9 @@ for num_event in [60, 100, 140, 179]:
     negative_train_data = []
     train_data = []
 
+    overlap_events = ['Telling', 'Arrest', 'Social_event', 'Come_together', 'Supply', 'Getting', 'Commerce_sell', 'Giving', 'Commerce_buy', 'Earnings_and_losses', 'Receiving', 'Exchange', 'Commerce_pay', 'Death', 'Bodily_harm', 'Protest', 'Communication', 'Traveling', 'Attack']
+
+
     for index in range(len(GENEVA_training_data)):
         
         GENEVA_training_data[index]["sentence"] = GENEVA_training_data[index]["sentence"].replace("\'\'", "")
@@ -54,7 +57,7 @@ for num_event in [60, 100, 140, 179]:
             
             event_type = GENEVA_training_data[index]["event_mentions"][event_index]["event_type"]
 
-            if event_type in available_events:
+            if event_type in available_events and not in overlap_events:
                 trigger = GENEVA_training_data[index]["event_mentions"][event_index]["trigger"]["text"]
                 
                 if event_type not in event_type2trigger.keys():
