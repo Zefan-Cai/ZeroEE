@@ -1,8 +1,8 @@
-export CUDA_VISIBLE_DEVICES=0,1,2,3
+export CUDA_VISIBLE_DEVICES=4,5,6,7
 
 MODEL_SIZE=7b
 NUM_GPUS=4
-BATCH_SIZE_PER_GPU=8
+BATCH_SIZE_PER_GPU=16
 TOTAL_BATCH_SIZE=64
 GRADIENT_ACC_STEPS=$(($TOTAL_BATCH_SIZE/$NUM_GPUS/$BATCH_SIZE_PER_GPU))
 echo "Training gt model ${MODEL_SIZE} using $NUM_GPUS GPUs, $BATCH_SIZE_PER_GPU batch size per GPU, $GRADIENT_ACC_STEPS gradient accumulation steps"
@@ -20,7 +20,7 @@ accelerate launch \
     --tokenizer_name /local1/zefan/models/Llama-2-7b-hf/ \
     --use_slow_tokenizer \
     --train_file /local1/zefan/data_event_number/geneva/GENEVA_train_negatives20_samples2000_events96.json \
-    --max_seq_length 128 \
+    --max_seq_length 256 \
     --preprocessing_num_workers 16 \
     --per_device_train_batch_size $BATCH_SIZE_PER_GPU \
     --gradient_accumulation_steps $GRADIENT_ACC_STEPS \
