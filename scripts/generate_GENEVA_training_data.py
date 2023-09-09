@@ -24,9 +24,14 @@ with open('./data/times2events.json', 'r') as fp:
 
 # event_list = list(event_type2definition.keys())
 
-for num_event in [5, 10, 20, 40, 80]:
+for num_sample in [0, 1, 5, 10, 20, 40, 80]:
     
-    event_list = times2events[num_event]
+    event_list = times2events[num_sample]
+    
+    if num_sample == 0: num_sample = 2000
+    if num_sample == 1: num_sample = 5
+    
+    number_of_events = len(event_list)
     
     available_events = event_list
     avalibale_event_type2definition = {}
@@ -68,7 +73,7 @@ for num_event in [5, 10, 20, 40, 80]:
                 if event_type not in event2times.keys():
                     event2times[event_type] = 0
                 
-                if event2times[event_type] < 5:
+                if event2times[event_type] < num_sample:
                     if event_type not in event_type2trigger.keys():
                         event_type2trigger[event_type] = []
                     event_type2trigger[event_type].append(trigger)
@@ -99,7 +104,7 @@ for num_event in [5, 10, 20, 40, 80]:
 
     train_data = positive_train_data + negative_train_data
 
-    with open(os.path.join(output_dir, 'geneva', f'GENEVA_train_{str(n_negative)}_{str(num_event)}.json'), 'w') as fp:
+    with open(os.path.join(output_dir, 'geneva', f'GENEVA_train_negatives{str(n_negative)}_samples{str(num_sample)}_events{str(number_of_events)}.json'), 'w') as fp:
         for line in train_data:
             json.dump(line, fp)
             fp.write('\n')
