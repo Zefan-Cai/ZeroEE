@@ -1,5 +1,5 @@
 
-output_dir = "/local1/zefan/data"
+output_dir = "/local1/zefan/data_enevt_number"
 
 import os
 import random
@@ -19,12 +19,16 @@ for key in raw_event_ontology.keys():
 with open('./data/GENEVA_event_definition.json', 'w') as fp:
     json.dump(event_type2definition, fp)
 
+with open('./ZeroEE/data/times2events.json', 'r') as fp:
+    times2events = json.load(fp)
 
-event_list = list(event_type2definition.keys())
+# event_list = list(event_type2definition.keys())
 
-for num_event in [60, 100, 140, 179]:
+for num_event in [5, 10, 20, 40, 80]:
     
-    available_events = event_list[:num_event]
+    event_list = times2events[num_event]
+    
+    available_events = event_list
     avalibale_event_type2definition = {}
     for key, item in event_type2definition.items():
         if key in available_events:
