@@ -49,7 +49,7 @@ for num_sample in [0, 1, 5, 10, 20, 40, 80]:
         for line in fp.readlines():
             GENEVA_training_data.append(json.loads(line))
 
-    for n_negative in [4, 10, 15, 20]:
+    for n_negative in [5, 10, 15, 20]:
         
         if n_negative > number_of_events: continue
 
@@ -92,7 +92,10 @@ for num_sample in [0, 1, 5, 10, 20, 40, 80]:
             if event_type2trigger != {}:
                 
                 available_evet_types = list(set(available_events) - set(event_type2trigger.keys()))
-                selected_event_type = random.sample(available_evet_types, n_negative)
+                if len(available_evet_types) > n_negative:
+                    selected_event_type = random.sample(available_evet_types, n_negative)
+                else:
+                    selected_event_type = random.sample(available_evet_types, len(available_evet_types))
                 
                 for event_type in selected_event_type:
                     event_definition = avalibale_event_type2definition[event_type]
