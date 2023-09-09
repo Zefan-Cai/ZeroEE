@@ -19,7 +19,7 @@ for key in raw_event_ontology.keys():
 with open('./data/GENEVA_event_definition.json', 'w') as fp:
     json.dump(event_type2definition, fp)
 
-with open('./ZeroEE/data/times2events.json', 'r') as fp:
+with open('./data/times2events.json', 'r') as fp:
     times2events = json.load(fp)
 
 # event_list = list(event_type2definition.keys())
