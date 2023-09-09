@@ -19,7 +19,7 @@ accelerate launch \
     --use_flash_attn \
     --tokenizer_name /local1/zefan/models/Llama-2-7b-hf/ \
     --use_slow_tokenizer \
-    --train_file /local1/zefan/data/geneva/GENEVA_train_15_179.json \
+    --train_file /local1/zefan/data_enevt_number/GENEVA_train_negatives15_samples{str(num_sample)}_events{str(number_of_events)}.json \
     --max_seq_length 256 \
     --preprocessing_num_workers 16 \
     --per_device_train_batch_size $BATCH_SIZE_PER_GPU \
@@ -28,7 +28,7 @@ accelerate launch \
     --lr_scheduler_type linear \
     --warmup_ratio 0.03 \
     --weight_decay 0. \
-    --num_train_epochs 45 \
+    --num_train_epochs 30 \
     --output_dir /local1/zefan/output/Llama-2-${MODEL_SIZE}-geneva-15-179/ \
     --with_tracking \
     --report_to tensorboard \

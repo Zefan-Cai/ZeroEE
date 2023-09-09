@@ -1,7 +1,7 @@
-export CUDA_VISIBLE_DEVICES=0,1,2,3
+export CUDA_VISIBLE_DEVICES=0,1
 
 MODEL_SIZE=7b
-NUM_GPUS=4
+NUM_GPUS=2
 BATCH_SIZE_PER_GPU=8
 TOTAL_BATCH_SIZE=64
 GRADIENT_ACC_STEPS=$(($TOTAL_BATCH_SIZE/$NUM_GPUS/$BATCH_SIZE_PER_GPU))
@@ -29,7 +29,7 @@ accelerate launch \
     --warmup_ratio 0.03 \
     --weight_decay 0. \
     --num_train_epochs 45 \
-    --output_dir /local1/zefan/output/Llama-2-${MODEL_SIZE}-geneva-15-97-NoOverlap/ \
+    --output_dir /local1/zefan/output/Llama-2-${MODEL_SIZE}-geneva-15-179/ \
     --with_tracking \
     --report_to tensorboard \
     --logging_steps 1 \
