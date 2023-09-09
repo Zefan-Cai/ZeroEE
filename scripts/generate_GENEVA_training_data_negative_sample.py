@@ -28,7 +28,7 @@ overlap_events = ['Telling', 'Arrest', 'Social_event', 'Come_together', 'Supply'
 
 for num_sample in [0, 1, 5, 10, 20, 40, 80]:
     
-    event_list = times2events[num_sample]
+    event_list = times2events[str(num_sample)]
     
     if num_sample == 0: num_sample = 2000
     if num_sample == 1: num_sample = 5
