@@ -20,7 +20,7 @@ accelerate launch \
     --tokenizer_name /local1/zefan/models/Llama-2-7b-hf/ \
     --use_slow_tokenizer \
     --train_file /local1/zefan/data_event_number/geneva/GENEVA_train_negatives20_samples2000_events96.json \
-    --max_seq_length 200 \
+    --max_seq_length 128 \
     --preprocessing_num_workers 16 \
     --per_device_train_batch_size $BATCH_SIZE_PER_GPU \
     --gradient_accumulation_steps $GRADIENT_ACC_STEPS \
