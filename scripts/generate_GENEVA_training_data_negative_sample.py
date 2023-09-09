@@ -49,7 +49,7 @@ for num_sample in [0, 1, 5, 10, 20, 40, 80]:
         for line in fp.readlines():
             GENEVA_training_data.append(json.loads(line))
 
-    for n_negative in [5, 10,15,20]:
+    for n_negative in [4, 10, 15, 20]:
         
         if n_negative > number_of_events: continue
 
