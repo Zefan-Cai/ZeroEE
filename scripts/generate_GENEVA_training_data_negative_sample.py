@@ -1,5 +1,6 @@
 
 output_dir = "/local1/zefan/data_event_number"
+# output_dir = "/home/caizf/projects/ZeroEE/data_event_number"
 
 import os
 import random
