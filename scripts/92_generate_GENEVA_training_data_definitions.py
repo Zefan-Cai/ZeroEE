@@ -5,6 +5,7 @@ output_dir = "/home/caizf/projects/ZeroEE/data_definition"
 
 
 
+
 import os
 import random
 import json
@@ -86,15 +87,17 @@ for definition_num in [3,6]:
                     if event_type not in event2times.keys():
                         event2times[event_type] = 0
                     
-                    if event2times[event_type] < num_sample:
+                    if event2times[event_type] <= num_sample:
                         if event_type not in event_type2trigger.keys():
                             event_type2trigger[event_type] = []
                         event_type2trigger[event_type].append(trigger)
+                        event2times[event_type] += 1
 
 
             for event_type in event_type2trigger.keys():
                 event_definition = avalibale_event_type2definition[event_type]
                 for definition in event_definition[:definition_num]:
+                # event_definition = event_definition[0]
                     positive_train_data.append({
                         "Event definition": event_definition,
                         "Event type": event_type,       
@@ -113,6 +116,7 @@ for definition_num in [3,6]:
                 for event_type in selected_event_type:
                     event_definition = avalibale_event_type2definition[event_type]
                     for definition in event_definition[:definition_num]:
+                    # event_definition = event_definition[0]
                         negative_train_data.append({
                             "Event definition": event_definition,
                             "Event type": event_type,       
@@ -122,7 +126,7 @@ for definition_num in [3,6]:
 
         train_data = positive_train_data + negative_train_data
 
-        with open(os.path.join(output_dir, f'GENEVA_train_negatives{str(n_negative)}_samples{str(num_sample)}_events{str(number_of_events)}_definition{str(definition_num)}.json'), 'w') as fp:
+        with open(os.path.join(output_dir, f'GENEVA_train_negatives{str(n_negative)}_samples{str(num_sample)}_events{str(number_of_events)}.json'), 'w') as fp:
             for line in train_data:
                 json.dump(line, fp)
                 fp.write('\n')

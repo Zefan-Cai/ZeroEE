@@ -31,6 +31,6 @@ accelerate launch \
     --num_train_epochs 30 \
     --output_dir /home/caizf/projects/ZeroEE/output/Llama-2-${MODEL_SIZE}-geneva-15-40-10/ \
     --with_tracking \
-    --report_to tensorboard \
+    --report_to wandb \
     --logging_steps 1 \
     --checkpointing_steps epoch

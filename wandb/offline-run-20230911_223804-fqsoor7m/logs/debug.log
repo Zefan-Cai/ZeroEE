@@ -1,0 +1,68 @@
+2023-09-11 22:38:04,903 INFO    MainThread:858475 [wandb_setup.py:_flush():76] Current SDK version is 0.15.10
+2023-09-11 22:38:04,903 INFO    MainThread:858475 [wandb_setup.py:_flush():76] Configure stats pid to 858475
+2023-09-11 22:38:04,903 INFO    MainThread:858475 [wandb_setup.py:_flush():76] Loading settings from /home/caizf/.config/wandb/settings
+2023-09-11 22:38:04,903 INFO    MainThread:858475 [wandb_setup.py:_flush():76] Loading settings from /home/caizf/projects/ZeroEE/ZeroEE/wandb/settings
+2023-09-11 22:38:04,903 INFO    MainThread:858475 [wandb_setup.py:_flush():76] Loading settings from environment variables: {}
+2023-09-11 22:38:04,903 INFO    MainThread:858475 [wandb_setup.py:_flush():76] Applying setup settings: {'_disable_service': False}
+2023-09-11 22:38:04,903 INFO    MainThread:858475 [wandb_setup.py:_flush():76] Inferring run settings from compute environment: {'program_relpath': 'open_instruct/open_instruct/finetune.py', 'program': './open_instruct/open_instruct/finetune.py'}
+2023-09-11 22:38:04,903 INFO    MainThread:858475 [wandb_setup.py:_flush():76] Applying login settings: {'mode': 'offline'}
+2023-09-11 22:38:04,903 INFO    MainThread:858475 [wandb_init.py:_log_setup():524] Logging user logs to /home/caizf/projects/ZeroEE/ZeroEE/wandb/offline-run-20230911_223804-fqsoor7m/logs/debug.log
+2023-09-11 22:38:04,903 INFO    MainThread:858475 [wandb_init.py:_log_setup():525] Logging internal logs to /home/caizf/projects/ZeroEE/ZeroEE/wandb/offline-run-20230911_223804-fqsoor7m/logs/debug-internal.log
+2023-09-11 22:38:04,903 INFO    MainThread:858475 [wandb_init.py:init():564] calling init triggers
+2023-09-11 22:38:04,903 INFO    MainThread:858475 [wandb_init.py:init():571] wandb.init called with sweep_config: {}
+config: {}
+2023-09-11 22:38:04,903 INFO    MainThread:858475 [wandb_init.py:init():614] starting backend
+2023-09-11 22:38:04,903 INFO    MainThread:858475 [wandb_init.py:init():618] setting up manager
+2023-09-11 22:38:04,905 INFO    MainThread:858475 [backend.py:_multiprocessing_setup():105] multiprocessing start_methods=fork,spawn,forkserver, using: spawn
+2023-09-11 22:38:04,937 INFO    MainThread:858475 [wandb_init.py:init():624] backend started and connected
+2023-09-11 22:38:04,942 INFO    MainThread:858475 [wandb_init.py:init():715] updated telemetry
+2023-09-11 22:38:05,003 INFO    MainThread:858475 [wandb_init.py:init():748] communicating run to backend with 90.0 second timeout
+2023-09-11 22:38:05,012 INFO    MainThread:858475 [wandb_init.py:init():799] starting run threads in backend
+2023-09-11 22:38:08,324 WARNING MainThread:858475 [wandb_init.py:init():1187] interrupted
+Traceback (most recent call last):
+  File "/home/caizf/miniconda3/envs/tulu/lib/python3.8/site-packages/wandb/sdk/wandb_init.py", line 1165, in init
+    run = wi.init()
+  File "/home/caizf/miniconda3/envs/tulu/lib/python3.8/site-packages/wandb/sdk/wandb_init.py", line 810, in init
+    run_start_result = run_start_handle.wait(timeout=30)
+  File "/home/caizf/miniconda3/envs/tulu/lib/python3.8/site-packages/wandb/sdk/lib/mailbox.py", line 283, in wait
+    found, abandoned = self._slot._get_and_clear(timeout=wait_timeout)
+  File "/home/caizf/miniconda3/envs/tulu/lib/python3.8/site-packages/wandb/sdk/lib/mailbox.py", line 130, in _get_and_clear
+    if self._wait(timeout=timeout):
+  File "/home/caizf/miniconda3/envs/tulu/lib/python3.8/site-packages/wandb/sdk/lib/mailbox.py", line 126, in _wait
+    return self._event.wait(timeout=timeout)
+  File "/home/caizf/miniconda3/envs/tulu/lib/python3.8/threading.py", line 558, in wait
+    signaled = self._cond.wait(timeout)
+  File "/home/caizf/miniconda3/envs/tulu/lib/python3.8/threading.py", line 306, in wait
+    gotit = waiter.acquire(True, timeout)
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/caizf/miniconda3/envs/tulu/lib/python3.8/site-packages/wandb/sdk/wandb_init.py", line 1173, in init
+    getcaller()
+  File "/home/caizf/miniconda3/envs/tulu/lib/python3.8/site-packages/wandb/sdk/wandb_init.py", line 847, in getcaller
+    src, line, func, stack = logger.findCaller(stack_info=True)
+  File "/home/caizf/miniconda3/envs/tulu/lib/python3.8/logging/__init__.py", line 1541, in findCaller
+    traceback.print_stack(f, file=sio)
+  File "/home/caizf/miniconda3/envs/tulu/lib/python3.8/traceback.py", line 190, in print_stack
+    print_list(extract_stack(f, limit=limit), file=file)
+  File "/home/caizf/miniconda3/envs/tulu/lib/python3.8/traceback.py", line 211, in extract_stack
+    stack = StackSummary.extract(walk_stack(f), limit=limit)
+  File "/home/caizf/miniconda3/envs/tulu/lib/python3.8/traceback.py", line 366, in extract
+    f.line
+  File "/home/caizf/miniconda3/envs/tulu/lib/python3.8/traceback.py", line 288, in line
+    self._line = linecache.getline(self.filename, self.lineno).strip()
+  File "/home/caizf/miniconda3/envs/tulu/lib/python3.8/linecache.py", line 16, in getline
+    lines = getlines(filename, module_globals)
+  File "/home/caizf/miniconda3/envs/tulu/lib/python3.8/linecache.py", line 47, in getlines
+    return updatecache(filename, module_globals)
+  File "/home/caizf/miniconda3/envs/tulu/lib/python3.8/linecache.py", line 136, in updatecache
+    with tokenize.open(fullname) as fp:
+  File "/home/caizf/miniconda3/envs/tulu/lib/python3.8/tokenize.py", line 394, in open
+    encoding, lines = detect_encoding(buffer.readline)
+  File "/home/caizf/miniconda3/envs/tulu/lib/python3.8/tokenize.py", line 363, in detect_encoding
+    first = read_or_stop()
+  File "/home/caizf/miniconda3/envs/tulu/lib/python3.8/tokenize.py", line 321, in read_or_stop
+    return readline()
+KeyboardInterrupt

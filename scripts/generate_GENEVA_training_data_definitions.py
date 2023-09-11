@@ -90,6 +90,7 @@ for definition_num in [3,6]:
                         if event_type not in event_type2trigger.keys():
                             event_type2trigger[event_type] = []
                         event_type2trigger[event_type].append(trigger)
+                        event2times[event_type] += 1
 
 
             for event_type in event_type2trigger.keys():

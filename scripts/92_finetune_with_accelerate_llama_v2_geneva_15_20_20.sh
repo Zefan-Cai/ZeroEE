@@ -1,4 +1,4 @@
-export CUDA_VISIBLE_DEVICES=2,3,5,6
+export CUDA_VISIBLE_DEVICES=2,3,6,7
 
 MODEL_SIZE=7b
 NUM_GPUS=4
@@ -29,8 +29,8 @@ accelerate launch \
     --warmup_ratio 0.03 \
     --weight_decay 0. \
     --num_train_epochs 30 \
-    --output_dir /home/caizf/ZeroEE/output/Llama-2-${MODEL_SIZE}-geneva-15-20-20/ \
+    --output_dir /home/caizf/projects/ZeroEE/output/Llama-2-${MODEL_SIZE}-geneva-15-20-20/ \
     --with_tracking \
-    --report_to tensorboard \
+    --report_to wandb \
     --logging_steps 1 \
     --checkpointing_steps epoch

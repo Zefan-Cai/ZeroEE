@@ -7,6 +7,8 @@ import os
 import random
 import json
 
+if not os.path.exists(output_dir):
+    os.makedirs(output_dir)
 # GENEVA
 
 event_type2definition = {}
