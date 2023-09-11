@@ -31,6 +31,6 @@ accelerate launch \
     --num_train_epochs 20 \
     --output_dir /local1/zefan/output/Llama-2-${MODEL_SIZE}-geneva-15-5-77/ \
     --with_tracking \
-    --report_to wandb \
+    --report_to tensorboard \
     --logging_steps 1 \
     --checkpointing_steps epoch
