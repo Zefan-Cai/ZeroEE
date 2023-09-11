@@ -99,7 +99,7 @@ for definition_num in [3,6]:
                 for definition in event_definition[:definition_num]:
                 # event_definition = event_definition[0]
                     positive_train_data.append({
-                        "Event definition": event_definition,
+                        "Event definition": definition,
                         "Event type": event_type,       
                         "prompt": "{} \n {} \n So what is the trigger?".format(GENEVA_training_data[index]["sentence"], event_definition),
                         "completion": "Event trigger is {}".format(" and ".join(event_type2trigger[event_type]))
@@ -118,7 +118,7 @@ for definition_num in [3,6]:
                     for definition in event_definition[:definition_num]:
                     # event_definition = event_definition[0]
                         negative_train_data.append({
-                            "Event definition": event_definition,
+                            "Event definition": definition,
                             "Event type": event_type,       
                             "prompt": "{} \n {} \n So what is the trigger?".format(GENEVA_training_data[index]["sentence"], event_definition),
                             "completion": "Event trigger is <trigger>"
