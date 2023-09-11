@@ -2,6 +2,7 @@
 # output_dir = "/local1/zefan/data_event_number"
 output_dir = "/home/caizf/projects/ZeroEE/data_event_number"
 
+
 import os
 import random
 import json
@@ -75,10 +76,11 @@ for num_sample in [0, 1, 5, 10, 20, 40, 80]:
                     if event_type not in event2times.keys():
                         event2times[event_type] = 0
                     
-                    if event2times[event_type] < num_sample:
+                    if event2times[event_type] <= num_sample:
                         if event_type not in event_type2trigger.keys():
                             event_type2trigger[event_type] = []
                         event_type2trigger[event_type].append(trigger)
+                        event2times[event_type] += 1
 
 
             for event_type in event_type2trigger.keys():
