@@ -39,7 +39,7 @@ overlap_events = ['Telling', 'Arrest', 'Social_event', 'Come_together', 'Supply'
 
 for definition_num in [3,6]:
     
-    num_sample = 20
+    num_sample = 5
     
     event_list = times2events[str(num_sample)]
     
@@ -126,7 +126,7 @@ for definition_num in [3,6]:
 
         train_data = positive_train_data + negative_train_data
 
-        with open(os.path.join(output_dir, f'GENEVA_train_negatives{str(n_negative)}_samples{str(num_sample)}_events{str(number_of_events)}.json'), 'w') as fp:
+        with open(os.path.join(output_dir, f'GENEVA_train_negatives{str(n_negative)}_samples{str(num_sample)}_events{str(number_of_events)}_definition{str(definition_num)}.json'), 'w') as fp:
             for line in train_data:
                 json.dump(line, fp)
                 fp.write('\n')
