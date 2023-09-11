@@ -29,7 +29,7 @@ accelerate launch \
     --warmup_ratio 0.03 \
     --weight_decay 0. \
     --num_train_epochs 20 \
-    --output_dir /home/caizf/ZeroEE/output/Llama-2-${MODEL_SIZE}-geneva-20-40-10/ \
+    --output_dir /home/caizf/projects/ZeroEE/output/Llama-2-${MODEL_SIZE}-geneva-20-40-10/ \
     --with_tracking \
     --report_to tensorboard \
     --logging_steps 1 \
