@@ -28,7 +28,7 @@ accelerate launch \
     --lr_scheduler_type linear \
     --warmup_ratio 0.03 \
     --weight_decay 0. \
-    --num_train_epochs 20 \
+    --num_train_epochs 30 \
     --output_dir /local1/zefan/output/Llama-2-${MODEL_SIZE}-geneva-15-5-77/ \
     --with_tracking \
     --report_to tensorboard \
