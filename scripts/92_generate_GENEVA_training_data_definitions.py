@@ -1,6 +1,6 @@
 
 
-output_dir = "/local1/zefan/data_event_number_definition"
+output_dir = "/home/caizf/projects/ZeroEE/data_definition"
 # output_dir = "/home/caizf/projects/ZeroEE/data_event_number"
 
 
@@ -112,16 +112,17 @@ for definition_num in [3,6]:
                 
                 for event_type in selected_event_type:
                     event_definition = avalibale_event_type2definition[event_type]
-                    negative_train_data.append({
-                        "Event definition": event_definition,
-                        "Event type": event_type,       
-                        "prompt": "{} \n {} \n So what is the trigger?".format(GENEVA_training_data[index]["sentence"], event_definition),
-                        "completion": "Event trigger is <trigger>"
-                        })
+                    for definition in event_definition[:definition_num]:
+                        negative_train_data.append({
+                            "Event definition": event_definition,
+                            "Event type": event_type,       
+                            "prompt": "{} \n {} \n So what is the trigger?".format(GENEVA_training_data[index]["sentence"], event_definition),
+                            "completion": "Event trigger is <trigger>"
+                            })
 
         train_data = positive_train_data + negative_train_data
 
-        with open(os.path.join(output_dir, 'geneva', f'GENEVA_train_negatives{str(n_negative)}_samples{str(num_sample)}_events{str(number_of_events)}.json'), 'w') as fp:
+        with open(os.path.join(output_dir, f'GENEVA_train_negatives{str(n_negative)}_samples{str(num_sample)}_events{str(number_of_events)}_definition{str(definition_num)}.json'), 'w') as fp:
             for line in train_data:
                 json.dump(line, fp)
                 fp.write('\n')
