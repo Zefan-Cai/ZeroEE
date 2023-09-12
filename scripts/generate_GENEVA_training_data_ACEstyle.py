@@ -21,7 +21,7 @@ event_type2definition = {}
 # for key in raw_event_ontology.keys():
 #     event_type2definition[key] = raw_event_ontology[key]['description']
 
-with open('./data/Geneva_ToAce_event_def.json', 'w') as fp:
+with open('./data/Geneva_ToAce_event_definition.json', 'r') as fp:
     event_type2definition = json.load(fp)
 
 with open('./data/times2events.json', 'r') as fp:
