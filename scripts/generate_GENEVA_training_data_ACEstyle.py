@@ -1,12 +1,14 @@
 
+import os
+import random
+import json
+
 output_dir = "/local1/zefan/data_ACE_style"
 
 if not os.path.exists(output_dir):
     os.makedirs(output_dir)
 
-import os
-import random
-import json
+
 
 # GENEVA
 
