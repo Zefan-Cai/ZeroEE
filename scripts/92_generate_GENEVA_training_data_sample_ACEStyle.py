@@ -1,9 +1,13 @@
-
-import os
 import random
 import json
+import os
 
-output_dir = "/local1/zefan/data_ACE_style"
+
+
+# output_dir = "/local1/zefan/data_event_number"
+output_dir = "/home/caizf/projects/ZeroEE/data_ACE_style"
+
+# GENEVA
 
 
 if not os.path.exists(output_dir):
