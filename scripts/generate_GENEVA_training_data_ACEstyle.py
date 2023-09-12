@@ -109,7 +109,7 @@ for num_sample in [0, 1, 5, 10, 20, 40, 80]:
 
     train_data = positive_train_data + negative_train_data
 
-    with open(os.path.join(output_dir, 'geneva', f'GENEVA_train_negatives{str(n_negative)}_samples{str(num_sample)}_events{str(number_of_events)}.json'), 'w') as fp:
+    with open(os.path.join(output_dir, f'GENEVA_train_negatives{str(n_negative)}_samples{str(num_sample)}_events{str(number_of_events)}.json'), 'w') as fp:
         for line in train_data:
             json.dump(line, fp)
             fp.write('\n')
