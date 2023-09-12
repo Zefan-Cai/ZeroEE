@@ -33,4 +33,5 @@ accelerate launch \
     --with_tracking \
     --report_to tensorboard \
     --logging_steps 1 \
-    --checkpointing_steps epoch
+    --checkpointing_steps epoch \
+    --save_epochs 5

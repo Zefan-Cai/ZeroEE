@@ -31,7 +31,7 @@ overlap_events = ['Telling', 'Arrest', 'Social_event', 'Come_together', 'Supply'
 
 # event_list = list(event_type2definition.keys())
 
-for num_sample in [10]:
+for num_sample in [10, 20]:
     
     event_list = times2events[str(5)]
     
