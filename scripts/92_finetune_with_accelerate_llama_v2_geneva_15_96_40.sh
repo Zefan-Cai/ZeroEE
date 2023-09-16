@@ -19,7 +19,7 @@ accelerate launch \
     --use_flash_attn \
     --tokenizer_name /home/models/Llama-2-7b-hf/ \
     --use_slow_tokenizer \
-    --train_file /home/caizf/projects/ZeroEE/data_sample/GENEVA_train_negatives15_samples40_events96.json \
+    --train_file /home/caizf/projects/ZeroEE/data_sample_96/GENEVA_train_negatives15_samples40_events96.json \
     --max_seq_length 256 \
     --preprocessing_num_workers 16 \
     --per_device_train_batch_size $BATCH_SIZE_PER_GPU \
