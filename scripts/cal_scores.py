@@ -18,6 +18,10 @@ def cal_scores(gold_triggers, pred_triggers, gold_events, pred_events):
     assert len(gold_events) == len(pred_events)  
     # tri_id
     gold_tri_id_num, pred_tri_id_num, match_tri_id_num = 0, 0, 0
+    
+    print(f"debug: {gold_triggers}")
+    print(f"debug: {pred_triggers}")
+    
     for gold_trigger, pred_trigger in zip(gold_triggers, pred_triggers):
         gold_set = set(gold_trigger)
         pred_set = set(pred_trigger)
@@ -90,7 +94,7 @@ def get_trigger(examples):
 
 
 examples = []
-with open('/local1/zefan/results/test_Llama-2-7b-geneva-20-96-5-epoch15/predictions/ACE_valid.jsonl', 'r', encoding='utf-8') as f:
+with open('/local1/zefan/results/test-Llama-2-7b-geneva-15-77-5-6-epoch5/predictions/ACE_valid.jsonl', 'r', encoding='utf-8') as f:
     for line in f.readlines():
         examples.append(json.loads(line))
 

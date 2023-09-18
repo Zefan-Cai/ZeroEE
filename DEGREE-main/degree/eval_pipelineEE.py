@@ -119,8 +119,12 @@ def get_span_idx_tri(pieces, token_start_idxs, span, tokenizer, trigger_span=Non
             return sorted(candidates, key=lambda x: np.abs(trigger_span[0]-x[0]))
 
 def cal_scores(gold_triggers, pred_triggers, gold_roles, pred_roles):
+    
     assert len(gold_triggers) == len(pred_triggers)
     assert len(gold_roles) == len(pred_roles)  
+    
+    
+    
     # tri_id
     gold_tri_id_num, pred_tri_id_num, match_tri_id_num = 0, 0, 0
     for gold_trigger, pred_trigger in zip(gold_triggers, pred_triggers):

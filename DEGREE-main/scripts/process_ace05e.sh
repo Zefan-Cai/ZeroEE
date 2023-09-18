@@ -1,4 +1,4 @@
-export DYGIEFORMAT_PATH="./processed_data/ace05e_dygieppformat"
+export DYGIEFORMAT_PATH="../ace05e_dygieppformat"
 export OUTPUT_PATH="./processed_data/ace05e_bart"
 
 mkdir $OUTPUT_PATH
