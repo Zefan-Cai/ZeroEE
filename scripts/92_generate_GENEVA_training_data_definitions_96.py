@@ -39,7 +39,7 @@ overlap_events = ['Telling', 'Arrest', 'Social_event', 'Come_together', 'Supply'
 
 for definition_num in [3,6]:
     
-    num_sample = 5
+    num_sample = 20
     
     event_list = times2events['0']
     
