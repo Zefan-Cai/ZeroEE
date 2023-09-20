@@ -147,7 +147,7 @@ def get_trigger(examples):
 
 examples = []
 
-path = '/home/caizf/projects/ZeroEE/results/test-Llama-2-7b-geneva-15-77-40-epoch10/predictions/ACE_valid.jsonl'
+path = '/home/caizf/projects/ZeroEE/results/test-Llama-2-7b-geneva-15-77-5-3-epoch10/predictions/ACE_valid.jsonl'
 
 print(path)
 
