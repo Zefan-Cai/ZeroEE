@@ -143,7 +143,7 @@ def get_trigger(examples):
     return test_gold_object, test_pred_object
     # return test_gold_object, test_pred_object, test_gold_events, test_pred_events
  
-base_path = '/local1/zefan/results/test_Llama-2-7b-geneva-15-77-5-epoch'
+base_path = '/local1/zefan/results/test_Llama-2-7b-geneva-15-96-20-epoch'
 
 for epoch in [5,10,15,20,25,29]:
     
