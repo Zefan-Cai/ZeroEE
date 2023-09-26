@@ -145,7 +145,7 @@ def get_trigger(examples):
  
 
 examples = []
-with open('/local1/zefan/results/test_Llama-2-7b-geneva-15-77-5-epoch5/predictions/ACE_valid.jsonl', 'r', encoding='utf-8') as f:
+with open('/local1/zefan/results/test_Llama-2-7b-geneva-15-77-5-epoch15/predictions/ACE_valid.jsonl', 'r', encoding='utf-8') as f:
     for line in f.readlines():
         examples.append(json.loads(line))
 
