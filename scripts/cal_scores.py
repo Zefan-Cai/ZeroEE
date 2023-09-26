@@ -145,7 +145,7 @@ def get_trigger(examples):
  
 base_path = '/local1/zefan/results/test_Llama-2-7b-geneva-15-96-20-epoch'
 
-for epoch in [5,10,15,20,25,29]:
+for epoch in [10,15,19]:
     
     path = base_path + str(epoch) + '/predictions/ACE_valid.jsonl'
 
