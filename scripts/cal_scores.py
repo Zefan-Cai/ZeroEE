@@ -143,9 +143,9 @@ def get_trigger(examples):
     return test_gold_object, test_pred_object
     # return test_gold_object, test_pred_object, test_gold_events, test_pred_events
  
-base_path = '/local1/zefan/results/test_Llama-2-7b-geneva-20-96-2000-epoch'
+base_path = '/local1/zefan/results/test_Llama-2-7b-geneva-15-77-5-epoch'
 
-for epoch in [10]:
+for epoch in [5]:
     
     path = base_path + str(epoch) + '/predictions/ACE_valid.jsonl'
 
