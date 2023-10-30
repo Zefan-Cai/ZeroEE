@@ -354,7 +354,7 @@ def main():
         dataset_args = {}
         if args.train_file is not None:
             data_files["train"] = args.train_file
-        dataset_args["features"] = Features({'Event definition': Value(dtype='string', id=None), 'Event type': Value(dtype='string', id=None), 'Event name': Value(dtype='string', id=None), 'Event triggers': Value(dtype='list', id=None), 'trigger': Value(dtype='string', id=None), 'selected_trigger': Value(dtype='string', id=None), 'sentence': Value(dtype='string', id=None), 'parent': Value(dtype='string', id=None), 'events': Value(dtype='list', id=None), 'sons': Value(dtype='list', id=None), 'prompt': Value(dtype='string', id=None), 'completion': Value(dtype='string', id=None)})
+        dataset_args["features"] = Features({'prompt': Value(dtype='string', id=None), 'completion': Value(dtype='string', id=None)})
         raw_datasets = load_dataset(
             "json",
             data_files=data_files,
