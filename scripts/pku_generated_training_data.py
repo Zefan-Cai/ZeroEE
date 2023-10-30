@@ -3,7 +3,6 @@ import json
 import copy
 import random
 
-output_dir = "/local1/zefan/data"
 output_dir = "/home/caizf/projects/ZeroEE/data"
 
 with open('../data/generated_data.json', 'r') as fp:

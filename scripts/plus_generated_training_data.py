@@ -54,35 +54,35 @@ for parent_event in data.keys():
                     "completion": f"Event trigger is {trigger}."
                     })
                 
-        for negative_event in negative_events:
-            if "name" in data[parent_event]["data"][negative_event].keys():
+            for negative_event in negative_events:
                 
-                negative_event_name = data[parent_event]["data"][negative_event]["name"]
-                negative_event_definition = data[parent_event]["data"][negative_event]["definition"]
-                negative_triggers = data[parent_event]["data"][negative_event]["triggers"]
-                negative_samples = data[parent_event]["data"][negative_event]["samples"]
-                
-                for negative_sample in negative_samples:
+                if "name" in data[parent_event]["data"][negative_event].keys():
+                    negative_event_name = data[parent_event]["data"][negative_event]["name"]
+                    negative_event_definition = data[parent_event]["data"][negative_event]["definition"]
+                    negative_triggers = data[parent_event]["data"][negative_event]["triggers"]
+                    negative_samples = data[parent_event]["data"][negative_event]["samples"]
                     
-                    negative_sentence = negative_sample["sentence"]
-                    negative_trigger = negative_sample["trigger"]
+                    for negative_sample in negative_samples:
+                        
+                        negative_sentence = negative_sample["sentence"]
+                        negative_trigger = negative_sample["trigger"]
+                        
+                        negative_selected_trigger = random.choice(negative_triggers)
                     
-                    negative_selected_trigger = random.choice(negative_triggers)
-                
-                    negative_train_data.append({
-                        "Event definition": event_definition,
-                        "Event type": event,
-                        "Event name": event_name,    
-                        "Event triggers": triggers,
-                        "trigger": "<trigger>",
-                        "selected_trigger": selected_trigger,
-                        "sentence": negative_sentence,
-                        "parent": parent_event,
-                        "events": events,
-                        "sons": sons,
-                        "prompt": f"{negative_sentence} \n The event is: {event_name}. \n The event definition is: {event_definition} \n Possibile triggers include: {selected_trigger}. \n So what is the trigger?",
-                        "completion": f"Event trigger is <trigger>."
-                        })
+                        negative_train_data.append({
+                            "Event definition": event_definition,
+                            "Event type": event,
+                            "Event name": event_name,    
+                            "Event triggers": triggers,
+                            "trigger": "<trigger>",
+                            "selected_trigger": selected_trigger,
+                            "sentence": negative_sentence,
+                            "parent": parent_event,
+                            "events": events,
+                            "sons": sons,
+                            "prompt": f"{negative_sentence} \n The event is: {event_name}. \n The event definition is: {event_definition} \n Possibile triggers include: {selected_trigger}. \n So what is the trigger?",
+                            "completion": f"Event trigger is <trigger>."
+                            })
         else:
             error_num += 1
 
