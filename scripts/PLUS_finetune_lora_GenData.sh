@@ -14,7 +14,7 @@ accelerate launch \
     --num_processes $NUM_GPUS \
     --use_deepspeed \
     --deepspeed_config_file ./open_instruct/ds_configs/stage3_no_offloading_accelerate.conf \
-    ./open_instruct/open_instruct/finetune_degree.py \
+    ./open_instruct/open_instruct/finetune_GenData.py \
     --model_name_or_path /local1/zefan/models/Llama-2-7b-hf/ \
     --use_flash_attn \
     --use_lora \
