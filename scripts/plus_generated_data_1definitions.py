@@ -20,7 +20,7 @@ for parent_event in data.keys():
     events = data[parent_event]["events"]
     
 
-    
+    text_sons = ", ".join(sons)
 
     for event in events:
         
@@ -57,7 +57,7 @@ for parent_event in data.keys():
                     "parent": parent_event,
                     "events": events,
                     "sons": sons,
-                    "prompt": f"{sentence} \n The event is: {event_name}. \n The event definition is: {event_definition} \n Possibile triggers include: {selected_trigger}. \n So what is the trigger?",
+                    "prompt": f"{sentence} \n The event is: {event_name}. \n The event definition is: {event_definition} \n The parent event is {parent_event}, son events include {text_sons}. \n Possibile triggers include: {selected_trigger}. \n So what is the trigger?",
                     "completion": f"Event trigger is {trigger}."
                     })
 
@@ -87,7 +87,7 @@ for parent_event in data.keys():
                             "parent": parent_event,
                             "events": events,
                             "sons": sons,
-                            "prompt": f"{negative_sentence} \n The event is: {event_name}. \n The event definition is: {event_definition} \n Possibile triggers include: {selected_trigger}. \n So what is the trigger?",
+                            "prompt": f"{negative_sentence} \n The event is: {event_name}. \n The event definition is: {event_definition} \n The parent event is {parent_event}, son events include {text_sons}. \n Possibile triggers include: {selected_trigger}. \n So what is the trigger?",
                             "completion": f"Event trigger is <trigger>."
                             })
         else:
