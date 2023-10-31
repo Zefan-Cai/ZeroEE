@@ -1,9 +1,9 @@
-export CUDA_VISIBLE_DEVICES=1,2,3,4,5,6,7
+export CUDA_VISIBLE_DEVICES=6,7
 
 MODEL_SIZE=7B
-NUM_GPUS=7
+NUM_GPUS=2
 BATCH_SIZE_PER_GPU=16
-TOTAL_BATCH_SIZE=112
+TOTAL_BATCH_SIZE=128
 GRADIENT_ACC_STEPS=$(($TOTAL_BATCH_SIZE/$NUM_GPUS/$BATCH_SIZE_PER_GPU))
 echo "Training llama model ${MODEL_SIZE} using $NUM_GPUS GPUs, $BATCH_SIZE_PER_GPU batch size per GPU, $GRADIENT_ACC_STEPS gradient accumulation steps"
 
@@ -15,15 +15,15 @@ accelerate launch \
     --use_deepspeed \
     --deepspeed_config_file ./open_instruct/ds_configs/stage3_no_offloading_accelerate.conf \
     ./open_instruct/open_instruct/finetune_GenData.py \
-    --model_name_or_path /home/models/Llama-2-7b-hf/ \
+    --model_name_or_path /local1/zefan/models/Llama-2-7b-hf/ \
     --use_flash_attn \
     --use_lora \
     --lora_rank 256 \
     --lora_alpha 256 \
     --lora_dropout 0.05 \
-    --tokenizer_name /home/models/Llama-2-7b-hf/ \
+    --tokenizer_name /local1/zefan/models/Llama-2-7b-hf/ \
     --use_slow_tokenizer \
-    --train_file /home/caizf/projects/ZeroEE/data/generated_data/train_5definitions.json \
+    --train_file /local1/zefan/data/generated_data/train_5definitions.json \
     --max_seq_length 256 \
     --preprocessing_num_workers 16 \
     --per_device_train_batch_size $BATCH_SIZE_PER_GPU \
@@ -33,12 +33,12 @@ accelerate launch \
     --warmup_ratio 0.03 \
     --weight_decay 0. \
     --num_train_epochs 1 \
-    --output_dir /home/caizf/projects/ZeroEE/output/Llama-2-7b-GenData-5definitions/ \
+    --output_dir /local1/zefan/output/Llama-2-7b-GenData-5definitions/ \
     --save_merged_lora_model \
     --with_tracking \
     --report_to tensorboard \
     --logging_steps 1 &&
 
 python open_instruct/merge_lora.py \
-    --base_model_name_or_path /home/models/Llama-2-7b-hf/ \
-    --lora_model_name_or_path  /home/caizf/projects/ZeroEE/output/Llama-2-7b-GenData-5definitions/
+    --base_model_name_or_path /local1/zefan/models/Llama-2-7b-hf/ \
+    --lora_model_name_or_path  /local1/zefan/output/Llama-2-7b-GenData-5definitions/

@@ -23,7 +23,7 @@ accelerate launch \
     --lora_dropout 0.05 \
     --tokenizer_name /local1/zefan/models/Llama-2-7b-hf/ \
     --use_slow_tokenizer \
-    --train_file /local1/zefan/data/generated_data/train.json \
+    --train_file /local1/zefan/data/generated_data/train_1definitions.json \
     --max_seq_length 256 \
     --preprocessing_num_workers 16 \
     --per_device_train_batch_size $BATCH_SIZE_PER_GPU \
@@ -33,12 +33,12 @@ accelerate launch \
     --warmup_ratio 0.03 \
     --weight_decay 0. \
     --num_train_epochs 1 \
-    --output_dir /local1/zefan/output/Llama-2-7b-GenData/ \
+    --output_dir /local1/zefan/output/Llama-2-7b-GenData-1definitions/ \
     --save_merged_lora_model \
     --with_tracking \
     --report_to tensorboard \
     --logging_steps 1 &&
 
 python open_instruct/merge_lora.py \
-    --base_model_name_or_path /local1/zefan/output/Llama-2-7b-GenData/ \
-    --lora_model_name_or_path  /local1/zefan/output/Llama-2-7b-GenData/
+    --base_model_name_or_path /local1/zefan/models/Llama-2-7b-hf/ \
+    --lora_model_name_or_path  /local1/zefan/output/Llama-2-7b-GenData-1definitions/
