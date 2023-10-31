@@ -2,8 +2,8 @@ export CUDA_VISIBLE_DEVICES=1,2,3,4,5,6,7
 
 MODEL_SIZE=7b
 NUM_GPUS=7
-BATCH_SIZE_PER_GPU=4
-TOTAL_BATCH_SIZE=140
+BATCH_SIZE_PER_GPU=8
+TOTAL_BATCH_SIZE=112
 GRADIENT_ACC_STEPS=$(($TOTAL_BATCH_SIZE/$NUM_GPUS/$BATCH_SIZE_PER_GPU))
 echo "Training gt model ${MODEL_SIZE} using $NUM_GPUS GPUs, $BATCH_SIZE_PER_GPU batch size per GPU, $GRADIENT_ACC_STEPS gradient accumulation steps"
 
@@ -28,7 +28,7 @@ accelerate launch \
     --lr_scheduler_type linear \
     --warmup_ratio 0.03 \
     --weight_decay 0. \
-    --num_train_epochs 1 \
+    --num_train_epochs 2 \
     --output_dir /home/caizf/projects/ZeroEE/output/Llama-2-7b-GenData/ \
     --with_tracking \
     --report_to tensorboard \
