@@ -1,9 +1,9 @@
 export CUDA_VISIBLE_DEVICES=6,7
 
 MODEL_SIZE=7B
-NUM_GPUS=2
+NUM_GPUS=7
 BATCH_SIZE_PER_GPU=16
-TOTAL_BATCH_SIZE=32
+TOTAL_BATCH_SIZE=112
 GRADIENT_ACC_STEPS=$(($TOTAL_BATCH_SIZE/$NUM_GPUS/$BATCH_SIZE_PER_GPU))
 echo "Training llama model ${MODEL_SIZE} using $NUM_GPUS GPUs, $BATCH_SIZE_PER_GPU batch size per GPU, $GRADIENT_ACC_STEPS gradient accumulation steps"
 
@@ -32,7 +32,7 @@ accelerate launch \
     --lr_scheduler_type linear \
     --warmup_ratio 0.03 \
     --weight_decay 0. \
-    --num_train_epochs 2 \
+    --num_train_epochs 1 \
     --output_dir /home/caizf/projects/ZeroEE/output/Llama-2-7b-GenData/ \
     --save_merged_lora_model \
     --with_tracking \
