@@ -19,7 +19,7 @@ for parent_event in data.keys():
     sons = data[parent_event]["sons"]
     events = data[parent_event]["events"]
     
-
+    text_sons = ", ".join(sons)
     
 
     for event in events:
@@ -46,6 +46,8 @@ for parent_event in data.keys():
                 
                 selected_trigger = random.choice(triggers)
             
+                
+            
                 positive_train_data.append({
                     "Event definition": event_definition,
                     "Event type": event,
@@ -57,7 +59,7 @@ for parent_event in data.keys():
                     "parent": parent_event,
                     "events": events,
                     "sons": sons,
-                    "prompt": f"{sentence} \n The event is: {event_name}. \n The event definition is: {event_definition} \n The parent event is {parent_event}, son events include {", ".join(sons)}. \n Possibile triggers include: {selected_trigger}. \n So what is the trigger?",
+                    "prompt": f"{sentence} \n The event is: {event_name}. \n The event definition is: {event_definition} \n The parent event is {parent_event}, son events include {text_sons}. \n Possibile triggers include: {selected_trigger}. \n So what is the trigger?",
                     "completion": f"Event trigger is {trigger}."
                     })
 
@@ -68,6 +70,7 @@ for parent_event in data.keys():
                     negative_event_definition = data[parent_event]["data"][negative_event]["definition"]
                     negative_triggers = data[parent_event]["data"][negative_event]["triggers"]
                     negative_samples = data[parent_event]["data"][negative_event]["samples"]
+                    
                     
                     for negative_sample in negative_samples:
                         
@@ -87,7 +90,7 @@ for parent_event in data.keys():
                             "parent": parent_event,
                             "events": events,
                             "sons": sons,
-                            "prompt": f"{negative_sentence} \n The event is: {event_name}. \n The event definition is: {event_definition} \n The parent event is {parent_event}, son events include {", ".join(sons)}. \n Possibile triggers include: {selected_trigger}. \n So what is the trigger?",
+                            "prompt": f"{negative_sentence} \n The event is: {event_name}. \n The event definition is: {event_definition} \n The parent event is {parent_event}, son events include {text_sons}. \n Possibile triggers include: {selected_trigger}. \n So what is the trigger?",
                             "completion": f"Event trigger is <trigger>."
                             })
         else:
