@@ -23,7 +23,7 @@ accelerate launch \
     --lora_dropout 0.05 \
     --tokenizer_name /home/models/Llama-2-7b-hf/ \
     --use_slow_tokenizer \
-    --train_file /home/caizf/projects/ZeroEE/data/generated_data/train.json \
+    --train_file /home/caizf/projects/ZeroEE/data/generated_data/train_5definitions.json \
     --max_seq_length 256 \
     --preprocessing_num_workers 16 \
     --per_device_train_batch_size $BATCH_SIZE_PER_GPU \
@@ -41,4 +41,4 @@ accelerate launch \
 
 python open_instruct/merge_lora.py \
     --base_model_name_or_path /home/models/Llama-2-7b-hf/ \
-    --lora_model_name_or_path  /home/caizf/projects/ZeroEE/output/Llama-2-7b-GenData/
+    --lora_model_name_or_path  /home/caizf/projects/ZeroEE/output/Llama-2-7b-GenData-5definitions/
