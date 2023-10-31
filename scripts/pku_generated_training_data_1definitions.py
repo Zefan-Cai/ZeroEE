@@ -31,10 +31,10 @@ for parent_event in data.keys():
             event_definition = data[parent_event]["data"][event]["definition"]
             triggers = data[parent_event]["data"][event]["triggers"]
             samples = data[parent_event]["data"][event]["samples"]
-            
-            # diverse_definitions = copy.deepcopy(data[parent_event]["data"][event]["rewrite_definitions"])
-            # diverse_definitions = diverse_definitions[:4]
-            # diverse_definitions.append(event_definition)
+
+            diverse_definitions = copy.deepcopy(data[parent_event]["data"][event]["rewrite_definitions"])
+            diverse_definitions = diverse_definitions[:4]
+            diverse_definitions.append(event_definition)
             
             
             # for definition in diverse_definitions:
@@ -46,16 +46,16 @@ for parent_event in data.keys():
                 selected_trigger = random.choice(triggers)
             
                 positive_train_data.append({
-                    "Event definition": event_definition,
-                    "Event type": event,
-                    "Event name": event_name,    
-                    "Event triggers": triggers,
-                    "trigger": trigger,
-                    "selected_trigger": selected_trigger,
-                    "sentence": sentence,
-                    "parent": parent_event,
-                    "events": events,
-                    "sons": sons,
+                    # "Event definition": definition,
+                    # "Event type": event,
+                    # "Event name": event_name,    
+                    # "Event triggers": triggers,
+                    # "trigger": trigger,
+                    # "selected_trigger": selected_trigger,
+                    # "sentence": sentence,
+                    # "parent": parent_event,
+                    # "events": events,
+                    # "sons": sons,
                     "prompt": f"{sentence} \n The event is: {event_name}. \n The event definition is: {event_definition} \n Possibile triggers include: {selected_trigger}. \n So what is the trigger?",
                     "completion": f"Event trigger is {trigger}."
                     })
@@ -76,16 +76,16 @@ for parent_event in data.keys():
                         negative_selected_trigger = random.choice(negative_triggers)
                     
                         negative_train_data.append({
-                            "Event definition": event_definition,
-                            "Event type": event,
-                            "Event name": event_name,    
-                            "Event triggers": triggers,
-                            "trigger": "<trigger>",
-                            "selected_trigger": selected_trigger,
-                            "sentence": negative_sentence,
-                            "parent": parent_event,
-                            "events": events,
-                            "sons": sons,
+                            # "Event definition": definition,
+                            # "Event type": event,
+                            # "Event name": event_name,    
+                            # "Event triggers": triggers,
+                            # "trigger": "<trigger>",
+                            # "selected_trigger": selected_trigger,
+                            # "sentence": negative_sentence,
+                            # "parent": parent_event,
+                            # "events": events,
+                            # "sons": sons,
                             "prompt": f"{negative_sentence} \n The event is: {event_name}. \n The event definition is: {event_definition} \n Possibile triggers include: {selected_trigger}. \n So what is the trigger?",
                             "completion": f"Event trigger is <trigger>."
                             })

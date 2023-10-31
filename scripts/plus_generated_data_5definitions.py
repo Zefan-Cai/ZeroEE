@@ -98,7 +98,7 @@ print(f"debug error_num {str(error_num)}")
 
 train_data =  positive_train_data + negative_train_data
 
-with open(os.path.join(output_dir, 'generated_data', 'train.json'), 'w') as fp:
+with open(os.path.join(output_dir, 'generated_data', 'train_5definitions.json'), 'w') as fp:
     for line in train_data:
         json.dump(line, fp)
         fp.write('\n')
