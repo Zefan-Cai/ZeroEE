@@ -28,9 +28,9 @@ accelerate launch \
     --lr_scheduler_type linear \
     --warmup_ratio 0.03 \
     --weight_decay 0. \
-    --num_train_epochs 2 \
+    --num_train_epochs 1 \
     --output_dir /local1/zefan/output/Llama-2-7b-GenData/ \
     --with_tracking \
     --report_to tensorboard \
-    --logging_steps 1\
+    --logging_steps 1 \
     --checkpointing_steps epoch

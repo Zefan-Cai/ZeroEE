@@ -2,6 +2,7 @@ import os
 import json
 import copy
 import random
+from tqdm import tqdm
 
 output_dir = "/home/caizf/projects/ZeroEE/data"
 
@@ -99,7 +100,7 @@ print(f"debug error_num {str(error_num)}")
 train_data =  positive_train_data + negative_train_data
 
 with open(os.path.join(output_dir, 'generated_data', 'train_5definitions.json'), 'w') as fp:
-    for line in train_data:
+    for line in tqdm(train_data):
         json.dump(line, fp)
         fp.write('\n')
 
