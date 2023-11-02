@@ -146,7 +146,7 @@ def get_trigger(examples):
  
 base_path = '/local1/zefan/results/Llama-2-7b-GenData-5definitions/'
 
-path = base_path + '/predictions/ACE_valid-clean.jsonl'
+path = base_path + '/predictions/ACE_valid.jsonl'
 
 
 examples = []
