@@ -145,24 +145,23 @@ def get_trigger(examples):
  
 base_path = '/local1/zefan/results/Llama-2-7b-GenData-5definitions/'
 
-for epoch in [5]:
-    
-    path = base_path + str(epoch) + '/predictions/ACE_valid.jsonl'
+path = base_path + '/predictions/ACE_valid.jsonl'
 
-    examples = []
-    with open(path, 'r', encoding='utf-8') as f:
-        for line in f.readlines():
-            examples.append(json.loads(line))
 
-    print(path)
+examples = []
+with open(path, 'r', encoding='utf-8') as f:
+    for line in f.readlines():
+        examples.append(json.loads(line))
 
-    test_gold_triggers, test_pred_triggers = get_trigger(examples)
-    test_scores = cal_scores(test_gold_triggers, test_pred_triggers)
+print(path)
 
-    print("---------------------------------------------------------------------")
-    print('Trigger I  - P: {:6.2f} ({:4d}/{:4d}), R: {:6.2f} ({:4d}/{:4d}), F: {:6.2f}'.format(
-        test_scores['tri_id'][3] * 100.0, test_scores['tri_id'][2], test_scores['tri_id'][1], 
-        test_scores['tri_id'][4] * 100.0, test_scores['tri_id'][2], test_scores['tri_id'][0], test_scores['tri_id'][5] * 100.0))
-    print('Trigger C  - P: {:6.2f} ({:4d}/{:4d}), R: {:6.2f} ({:4d}/{:4d}), F: {:6.2f}'.format(
-        test_scores['tri_cls'][3] * 100.0, test_scores['tri_cls'][2], test_scores['tri_cls'][1], 
-        test_scores['tri_cls'][4] * 100.0, test_scores['tri_cls'][2], test_scores['tri_cls'][0], test_scores['tri_cls'][5] * 100.0))
+test_gold_triggers, test_pred_triggers = get_trigger(examples)
+test_scores = cal_scores(test_gold_triggers, test_pred_triggers)
+
+print("---------------------------------------------------------------------")
+print('Trigger I  - P: {:6.2f} ({:4d}/{:4d}), R: {:6.2f} ({:4d}/{:4d}), F: {:6.2f}'.format(
+    test_scores['tri_id'][3] * 100.0, test_scores['tri_id'][2], test_scores['tri_id'][1], 
+    test_scores['tri_id'][4] * 100.0, test_scores['tri_id'][2], test_scores['tri_id'][0], test_scores['tri_id'][5] * 100.0))
+print('Trigger C  - P: {:6.2f} ({:4d}/{:4d}), R: {:6.2f} ({:4d}/{:4d}), F: {:6.2f}'.format(
+    test_scores['tri_cls'][3] * 100.0, test_scores['tri_cls'][2], test_scores['tri_cls'][1], 
+    test_scores['tri_cls'][4] * 100.0, test_scores['tri_cls'][2], test_scores['tri_cls'][0], test_scores['tri_cls'][5] * 100.0))
