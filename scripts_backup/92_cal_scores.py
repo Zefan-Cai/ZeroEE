@@ -146,9 +146,9 @@ def get_trigger(examples):
 
 
 
-base_path = '/home/caizf/projects/ZeroEE/results/test-Llama-2-7b-geneva-15-77-10-epoch'
+base_path = '/home/caizf/projects/ZeroEE/results/test-Llama-2-7b-geneva-15-96-5-3-epoch'
 
-for epoch in [5, 10, 15, 20, 25, 29]:
+for epoch in [10,20,29]:
     
     path = base_path + str(epoch) + '/predictions/ACE_valid.jsonl'
 
