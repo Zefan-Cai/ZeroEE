@@ -58,7 +58,7 @@ for parent_event in data.keys():
                         "parent": parent_event,
                         "events": events,
                         "sons": sons,
-                        "prompt": f"{sentence} \n The event is: {event_name}. \n The event definition is: {definition} \n The parent event is {parent_event}, son events include {text_sons}. \n Possibile triggers include: {selected_trigger}. \n So what is the trigger?",
+                        "prompt": f"SENTENCE: {sentence} \n EVENT TYPE: {event_name}. \n DEFINITION: {definition} \n PARENT: {parent_event}, SON: {text_sons}. \n So what is the trigger?",
                         "completion": f"Event trigger is {trigger}."
                         })
 
