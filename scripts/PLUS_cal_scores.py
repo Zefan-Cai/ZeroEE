@@ -96,6 +96,7 @@ def get_trigger(examples):
             
             try:
                 triggers = raw_output.split('Event trigger is ', 1)[1]
+                triggers = triggers.split('.')[0]
                 triggers = triggers.split(' and ')
                 for t_cnt, t in enumerate(triggers):
                     if t != '<trigger>':
