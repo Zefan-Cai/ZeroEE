@@ -59,58 +59,58 @@ for parent_event in train_parent_list:
             diverse_definitions.append(event_definition)
             
             
-            # for definition in diverse_definitions:
-            for sample in samples:
+            for definition in diverse_definitions:
+                for sample in samples:
+                    
+                    sentence = sample["sentence"]
+                    trigger = sample["trigger"]
+                    
+                    selected_trigger = random.choice(triggers)
                 
-                sentence = sample["sentence"]
-                trigger = sample["trigger"]
-                
-                selected_trigger = random.choice(triggers)
-            
-                positive_train_data.append({
-                    # "Event definition": definition,
-                    # "Event type": event,
-                    # "Event name": event_name,    
-                    # "Event triggers": triggers,
-                    # "trigger": trigger,
-                    # "selected_trigger": selected_trigger,
-                    # "sentence": sentence,
-                    # "parent": parent_event,
-                    # "events": events,
-                    # "sons": sons,
-                    "prompt": f"SENTENCE: {sentence} \n EVENT TYPE: {event_name}. \n DEFINITION: {event_definition} \n PARENT: {parent_event}, SON: {text_sons}. \n So what is the trigger?",
-                    "completion": f"Event trigger is {trigger}."
-                    })
+                    positive_train_data.append({
+                        # "Event definition": definition,
+                        # "Event type": event,
+                        # "Event name": event_name,    
+                        # "Event triggers": triggers,
+                        # "trigger": trigger,
+                        # "selected_trigger": selected_trigger,
+                        # "sentence": sentence,
+                        # "parent": parent_event,
+                        # "events": events,
+                        # "sons": sons,
+                        "prompt": f"SENTENCE: {sentence} \n EVENT TYPE: {event_name}. \n DEFINITION: {event_definition} \n PARENT: {parent_event}, SON: {text_sons}. \n So what is the trigger?",
+                        "completion": f"Event trigger is {trigger}."
+                        })
 
-            for negative_event in negative_events:
-                
-                if "name" in data[parent_event]["data"][negative_event].keys():
-                    negative_event_name = data[parent_event]["data"][negative_event]["name"]
-                    negative_event_definition = data[parent_event]["data"][negative_event]["definition"]
-                    negative_triggers = data[parent_event]["data"][negative_event]["triggers"]
-                    negative_samples = data[parent_event]["data"][negative_event]["samples"]
+                for negative_event in negative_events:
                     
-                    for negative_sample in negative_samples:
+                    if "name" in data[parent_event]["data"][negative_event].keys():
+                        negative_event_name = data[parent_event]["data"][negative_event]["name"]
+                        negative_event_definition = data[parent_event]["data"][negative_event]["definition"]
+                        negative_triggers = data[parent_event]["data"][negative_event]["triggers"]
+                        negative_samples = data[parent_event]["data"][negative_event]["samples"]
                         
-                        negative_sentence = negative_sample["sentence"]
-                        negative_trigger = negative_sample["trigger"]
+                        for negative_sample in negative_samples:
+                            
+                            negative_sentence = negative_sample["sentence"]
+                            negative_trigger = negative_sample["trigger"]
+                            
+                            negative_selected_trigger = random.choice(negative_triggers)
                         
-                        negative_selected_trigger = random.choice(negative_triggers)
-                    
-                        negative_train_data.append({
-                            # "Event definition": definition,
-                            # "Event type": event,
-                            # "Event name": event_name,    
-                            # "Event triggers": triggers,
-                            # "trigger": "<trigger>",
-                            # "selected_trigger": selected_trigger,
-                            # "sentence": negative_sentence,
-                            # "parent": parent_event,
-                            # "events": events,
-                            # "sons": sons,
-                            "prompt": f"SENTENCE: {sentence} \n EVENT TYPE: {event_name}. \n DEFINITION: {event_definition} \n PARENT: {parent_event}, SON: {text_sons}. \n So what is the trigger?",
-                            "completion": f"Event trigger is <trigger>."
-                            })
+                            negative_train_data.append({
+                                # "Event definition": definition,
+                                # "Event type": event,
+                                # "Event name": event_name,    
+                                # "Event triggers": triggers,
+                                # "trigger": "<trigger>",
+                                # "selected_trigger": selected_trigger,
+                                # "sentence": negative_sentence,
+                                # "parent": parent_event,
+                                # "events": events,
+                                # "sons": sons,
+                                "prompt": f"SENTENCE: {sentence} \n EVENT TYPE: {event_name}. \n DEFINITION: {event_definition} \n PARENT: {parent_event}, SON: {text_sons}. \n So what is the trigger?",
+                                "completion": f"Event trigger is <trigger>."
+                                })
         else:
             error_num += 1
 
@@ -120,7 +120,7 @@ print(f"debug error_num {str(error_num)}")
 
 train_data =  positive_train_data + negative_train_data
 
-with open(os.path.join(output_dir, 'generated_data', 'train_1definitions.json'), 'w') as fp:
+with open(os.path.join(output_dir, 'generated_data', 'train_5definitions.json'), 'w') as fp:
     for line in tqdm(train_data):
         json.dump(line, fp)
         fp.write('\n')
