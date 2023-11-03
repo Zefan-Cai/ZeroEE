@@ -6,7 +6,7 @@ from tqdm import tqdm
 
 output_dir = "/local1/zefan/data"
 
-with open('../data/generated_data.json', 'r') as fp:
+with open('/local1/zefan/ZeroEE/data/generated_data.json', 'r') as fp:
     data = json.load(fp)
 
 positive_train_data = []
@@ -57,7 +57,7 @@ for parent_event in data.keys():
                     # "parent": parent_event,
                     # "events": events,
                     # "sons": sons,
-                    "prompt": f"{sentence} \n The event is: {event_name}. \n The event definition is: {event_definition} \n The parent event is {parent_event}, son events include {text_sons}. \n Possibile triggers include: {selected_trigger}. \n So what is the trigger?",
+                    "prompt": f"SENTENCE: {sentence} \n EVENT TYPE: {event_name}. \n DEFINITION: {event_definition} \n PARENT: {parent_event}, SON: {text_sons}. \n So what is the trigger?",
                     "completion": f"Event trigger is {trigger}."
                     })
 
@@ -87,7 +87,7 @@ for parent_event in data.keys():
                             # "parent": parent_event,
                             # "events": events,
                             # "sons": sons,
-                            "prompt": f"{negative_sentence} \n The event is: {event_name}. \n The event definition is: {event_definition} \n The parent event is {parent_event}, son events include {text_sons}. \n Possibile triggers include: {selected_trigger}. \n So what is the trigger?",
+                            "prompt": f"SENTENCE: {sentence} \n EVENT TYPE: {event_name}. \n DEFINITION: {event_definition} \n PARENT: {parent_event}, SON: {text_sons}. \n So what is the trigger?",
                             "completion": f"Event trigger is <trigger>."
                             })
         else:
