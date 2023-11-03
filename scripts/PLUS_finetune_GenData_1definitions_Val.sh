@@ -39,12 +39,11 @@ accelerate launch \
     --lr_scheduler_type linear \
     --warmup_ratio 0.03 \
     --weight_decay 0. \
-    --num_train_epochs 2 \
+    --num_train_epochs 20 \
     --output_dir /local1/zefan/output/${OUTPUT_NAME} \
     --with_tracking \
     --report_to wandb \
     --report_name $OUTPUT_NAME \
     --report_tags $REPORT_TAGS \
-    --eval_steps 2 \
     --checkpointing_steps epoch \
     --logging_steps 1
