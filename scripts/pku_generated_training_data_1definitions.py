@@ -12,7 +12,7 @@ from tqdm import tqdm
 
 output_dir = "/home/caizf/projects/ZeroEE/data"
 
-with open('../data/generated_data.json', 'r') as fp:
+with open('/home/caizf/projects/ZeroEE/data/generated_data.json', 'r') as fp:
     data = json.load(fp)
 
 positive_train_data = []
