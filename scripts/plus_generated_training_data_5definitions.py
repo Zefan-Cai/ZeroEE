@@ -153,7 +153,8 @@ with open(os.path.join(output_dir, 'generated_data', 'train_5definitions.json'),
 
 
 
-
+positive_train_data = []
+negative_train_data = []
 
 
 for parent_event in train_parent_list_100:
@@ -264,7 +265,8 @@ with open(os.path.join(output_dir, 'generated_data', 'train_5definitions_100.jso
 
 
 
-
+positive_train_data = []
+negative_train_data = []
 
 
 for parent_event in train_parent_list_200:
