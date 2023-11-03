@@ -1,7 +1,7 @@
 import os
 import json
 
-output_dir = "/home/caizf/projects/ZeroEE/data/ace"
+output_dir = "/home/caizf/projects/ZeroEE/data/ace_v2"
 
 with open('./data/ACE_ontology.json', 'r') as fp:
     ACE_ontology = json.load(fp)
