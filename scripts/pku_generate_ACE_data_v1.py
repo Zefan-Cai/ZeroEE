@@ -59,7 +59,7 @@ for index in range(len(ACE_valid_data)):
         sample_data_list.append({
             "Event definition": event_definition,
             "Event type": event_type,
-            "prompt": f"SENTENCE: {sample} \n EVENT TYPE: {event_type}. \n DEFINITION: {event_definition} \n PARENT: {parent_event}, SON: {text_sons}. \n So what is the trigger?",
+            "prompt": f"{sample} \n The event is: {event_type}. \n The event definition is: {event_definition} \n The parent event is {parent_event}, son events include {text_sons}. \n So what is the trigger?",
             "trigger": trigger
             })
     valid_data.append(sample_data_list)
@@ -76,12 +76,6 @@ with open(os.path.join(output_dir, f'ACE_valid_GenerationStyle.json'), 'w') as f
 
 
 
-selected_valid_data = random.choices(valid_data, k=3)
-       
-with open(os.path.join(output_dir, f'ACE_valid_GenerationStyle_clean.json'), 'w') as fp:
-    for d in selected_valid_data:
-       json.dump(d, fp)
-       fp.write('\n')
 
 
 
@@ -136,8 +130,7 @@ for index in range(len(ACE_valid_data)):
         sample_data_list.append({
             "Event definition": event_definition,
             "Event type": event_type,
-            "prompt": f"SENTENCE: {sample} \n EVENT TYPE: {event_type}. \n DEFINITION: {event_definition} \n PARENT: {parent_event}, SON: {text_sons}. \n So what is the trigger?",
-            "completion": f"Event trigger is ",
+            "prompt": f"{sample} \n The event is: {event_type}. \n The event definition is: {event_definition} \n The parent event is {parent_event}, son events include {text_sons}. \n So what is the trigger?",
             "trigger": trigger
             })
     valid_data.append(sample_data_list)
@@ -171,6 +164,12 @@ with open(os.path.join(output_dir, f'ACE_valid_GenerationStyle.json'), 'w') as f
 
 
 
+selected_valid_data = random.choices(valid_data, k=3)
+       
+with open(os.path.join(output_dir, f'ACE_valid_GenerationStyle_clean.json'), 'w') as fp:
+    for d in selected_valid_data:
+       json.dump(d, fp)
+       fp.write('\n')
 
 
 
@@ -234,7 +233,7 @@ for index in range(len(ACE_test_data)):
             sample_data_list.append({
                 "Event definition": event_definition,
                 "Event type": event_type,       
-                "prompt": f"SENTENCE: {sample} \n EVENT TYPE: {event_type}. \n DEFINITION: {event_definition} \n PARENT: {parent_event}, SON: {text_sons}. \n So what is the trigger?",
+                "prompt": f"{sample} \n The event is: {event_type}. \n The event definition is: {event_definition} \n The parent event is {parent_event}, son events include {text_sons}. \n So what is the trigger?",
                 "trigger": trigger
                 })
         test_data.append(sample_data_list)
