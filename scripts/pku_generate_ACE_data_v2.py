@@ -145,7 +145,7 @@ for index in range(len(ACE_valid_data)):
 
 with open(os.path.join(output_dir, f'ACE_valid_GenerationStyle_trigger.json'), 'w') as fp:
     for d in valid_data:
-       json.dump(d, fp)
+       json.dump(d[0], fp)
        fp.write('\n')
 
 
