@@ -4,7 +4,7 @@ MODEL_PATH="/home/models/Llama-2-7b-hf/"
 OUTPUT_NAME=Llama2_GenData_1definitions_v2/
 TRAIN_FILE="/home/caizf/projects/ZeroEE/data/generated_data/train_1definitions.json"
 VAL_FILE="/home/caizf/projects/ZeroEE/data/generated_data/val_1definitions.json"
-TEST_FILE="/home/caizf/projects/ZeroEE/data/ace_v2/ACE_valid_GenerationStyle_trigger.jsonl"
+TEST_FILE="/home/caizf/projects/ZeroEE/data/ace_v2/ACE_valid_GenerationStyle_trigger.json"
 REPORT_TAGS="CtrlGen"
 
 # ceildiv(){ echo $((($1+$2-1)/$2)); }
