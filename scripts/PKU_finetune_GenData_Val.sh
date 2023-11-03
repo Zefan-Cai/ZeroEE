@@ -29,7 +29,7 @@ accelerate launch \
     --use_slow_tokenizer \
     --train_file $TRAIN_FILE \
     --val_file $VAL_FILE \
-    --val_file $TEST_FILE \
+    --test_file $TEST_FILE \
     --max_seq_length 256 \
     --preprocessing_num_workers 16 \
     --per_device_train_batch_size $BATCH_SIZE_PER_GPU \
