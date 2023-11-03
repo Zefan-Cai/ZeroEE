@@ -1,7 +1,7 @@
 import os
 import json
 
-output_dir = "/local1/zefan/data/ace"
+output_dir = "/local1/zefan/data/ace_v2"
 
 with open('./data/ACE_ontology.json', 'r') as fp:
     ACE_ontology = json.load(fp)
