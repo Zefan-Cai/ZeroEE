@@ -134,8 +134,8 @@ for index in range(len(ACE_valid_data)):
         
             
         sample_data_list.append({
-            "Event definition": event_definition,
-            "Event type": event_type,
+            # "Event definition": event_definition,
+            # "Event type": event_type,
             "prompt": f"SENTENCE: {sample} \n EVENT TYPE: {event_type}. \n DEFINITION: {event_definition} \n PARENT: {parent_event}, SON: {text_sons}. \n So what is the trigger?",
             "completion": f"Event trigger is ",
             "trigger": trigger
