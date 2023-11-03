@@ -16,8 +16,8 @@ error_num = 0
 
 val_parent_list = list(data.keys())[:10]
 train_parent_list = list(data.keys())[10:]
-train_parent_list_100 = list(data.keys())[10:110]
-train_parent_list_200 = list(data.keys())[10:210]
+train_parent_list_20 = list(data.keys())[10:30]
+train_parent_list_50 = list(data.keys())[10:60]
 
 
 
@@ -137,7 +137,7 @@ with open(os.path.join(output_dir, 'generated_data', 'train_1definitions.json'),
 
 
 
-for parent_event in train_parent_list_100:
+for parent_event in train_parent_list_20:
     
     sons = data[parent_event]["sons"]
     events = data[parent_event]["events"]
@@ -222,7 +222,7 @@ print(f"debug error_num {str(error_num)}")
 
 train_data =  positive_train_data + negative_train_data
 
-with open(os.path.join(output_dir, 'generated_data', 'train_1definitions_100.json'), 'w') as fp:
+with open(os.path.join(output_dir, 'generated_data', 'train_1definitions_20.json'), 'w') as fp:
     for line in tqdm(train_data):
         json.dump(line, fp)
         fp.write('\n')
@@ -248,7 +248,7 @@ with open(os.path.join(output_dir, 'generated_data', 'train_1definitions_100.jso
 
 
 
-for parent_event in train_parent_list_200:
+for parent_event in train_parent_list_50:
     
     sons = data[parent_event]["sons"]
     events = data[parent_event]["events"]
@@ -333,7 +333,7 @@ print(f"debug error_num {str(error_num)}")
 
 train_data =  positive_train_data + negative_train_data
 
-with open(os.path.join(output_dir, 'generated_data', 'train_1definitions_200.json'), 'w') as fp:
+with open(os.path.join(output_dir, 'generated_data', 'train_1definitions_50.json'), 'w') as fp:
     for line in tqdm(train_data):
         json.dump(line, fp)
         fp.write('\n')
