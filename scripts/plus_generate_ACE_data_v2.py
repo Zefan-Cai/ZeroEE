@@ -4,160 +4,111 @@ import random
 
 output_dir = "/local1/zefan/data/ace_v2"
 
-with open('./data/ACE_ontology.json', 'r') as fp:
-    ACE_ontology = json.load(fp)
+with open('../data/generated_data.json', 'r') as fp:
+    data = json.load(fp)
 
-# ACE
+positive_train_data = []
+negative_train_data = []
 
-## ACE Event Definition
+error_num = 0
 
-with open('./data/ACE_event_definition.json', 'r') as fp:
-    event_type2definition = json.load(fp)
-
-## ACE val data
-
-ACE_valid_data = []
-
-with open('oneie_ace05_en_event/val.json', 'r') as fp:
-    for line in fp.readlines():
-        ACE_valid_data.append(json.loads(line))
-        
-valid_data = []
-
-for index in range(len(ACE_valid_data)):
+for parent_event in data.keys():
     
-    event_type2trigger = {}
-    sample_data_list = []
+    sons = data[parent_event]["sons"]
+    events = data[parent_event]["events"]
     
-    for event_index in range(len(ACE_valid_data[index]["event"])):
-        event_type = ACE_valid_data[index]["event"][event_index]["type"]
-        trigger = ACE_valid_data[index]["event"][event_index]["text"]
-        
-        
-        if event_type not in event_type2trigger.keys():
-            event_type2trigger[event_type] = []
-        event_type2trigger[event_type].append(trigger)
+    text_sons = ", ".join(sons)
+    
 
-    for event_type in event_type2definition.keys():
-        event_definition = event_type2definition[event_type]
+    for event in events:
         
-        for parent_event in ACE_ontology.keys():
-            if event_type == parent_event: break
-            if event_type in ACE_ontology[parent_event]:break
+        negative_events = copy.deepcopy(events)
+        negative_events.remove(event)
         
-        sons = ACE_ontology[parent_event]
-        text_sons = ", ".join(sons)
-        
-        if event_type in event_type2trigger.keys():
-            trigger = event_type2trigger[event_type]
+        if "name" in data[parent_event]["data"][event].keys():
+            event_name = data[parent_event]["data"][event]["name"]
+            event_definition = data[parent_event]["data"][event]["definition"]
+            triggers = data[parent_event]["data"][event]["triggers"]
+            samples = data[parent_event]["data"][event]["samples"]
+            
+            # diverse_definitions = copy.deepcopy(data[parent_event]["data"][event]["rewrite_definitions"])
+            # diverse_definitions = diverse_definitions[:4]
+            # diverse_definitions.append(event_definition)
+            
+            
+            # for definition in diverse_definitions:
+            for sample in samples:
+                
+                sentence = sample["sentence"]
+                trigger = sample["trigger"]
+                
+                selected_trigger = random.choice(triggers)
+            
+                
+            
+                positive_train_data.append({
+                    "Event definition": event_definition,
+                    "Event type": event,
+                    "Event name": event_name,    
+                    "Event triggers": triggers,
+                    "trigger": trigger,
+                    "selected_trigger": selected_trigger,
+                    "sentence": sentence,
+                    "parent": parent_event,
+                    "events": events,
+                    "sons": sons,
+                    "prompt": f"{sentence} \n The event is: {event_name}. \n The event definition is: {event_definition} \n The parent event is {parent_event}, son events include {text_sons}. \n Possibile triggers include: {selected_trigger}. \n So what is the trigger?",
+                    "completion": f"Event trigger is {trigger}."
+                    })
+
+            for negative_event in negative_events:
+                
+                if "name" in data[parent_event]["data"][negative_event].keys():
+                    negative_event_name = data[parent_event]["data"][negative_event]["name"]
+                    negative_event_definition = data[parent_event]["data"][negative_event]["definition"]
+                    negative_triggers = data[parent_event]["data"][negative_event]["triggers"]
+                    negative_samples = data[parent_event]["data"][negative_event]["samples"]
+                    
+                    
+                    for negative_sample in negative_samples:
+                        
+                        negative_sentence = negative_sample["sentence"]
+                        negative_trigger = negative_sample["trigger"]
+                        
+                        negative_selected_trigger = random.choice(negative_triggers)
+                    
+                        negative_train_data.append({
+                            "Event definition": event_definition,
+                            "Event type": event,
+                            "Event name": event_name,    
+                            "Event triggers": triggers,
+                            "trigger": "<trigger>",
+                            "selected_trigger": selected_trigger,
+                            "sentence": negative_sentence,
+                            "parent": parent_event,
+                            "events": events,
+                            "sons": sons,
+                            "prompt": f"{negative_sentence} \n The event is: {event_name}. \n The event definition is: {event_definition} \n The parent event is {parent_event}, son events include {text_sons}. \n Possibile triggers include: {selected_trigger}. \n So what is the trigger?",
+                            "completion": f"Event trigger is <trigger>."
+                            })
         else:
-            trigger = "<trigger>"
-        
-        sample = ACE_valid_data[index]["text"]
-        
-            
-        sample_data_list.append({
-            "Event definition": event_definition,
-            "Event type": event_type,
-            "prompt": f"SENTENCE: {sample} \n EVENT TYPE: {event_type}. \n DEFINITION: {event_definition} \n PARENT: {parent_event}, SON: {text_sons}. \n So what is the trigger?",
-            "trigger": trigger
-            })
-    valid_data.append(sample_data_list)
-    
+            error_num += 1
 
-with open(os.path.join(output_dir, f'ACE_valid_GenerationStyle.json'), 'w') as fp:
-    for d in valid_data:
-       json.dump(d, fp)
-       fp.write('\n')
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-selected_valid_data = random.choices(valid_data, k=3)
-       
-with open(os.path.join(output_dir, f'ACE_valid_GenerationStyle_clean.json'), 'w') as fp:
-    for d in selected_valid_data:
-       json.dump(d, fp)
-       fp.write('\n')
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-## ACE test data
+print(f"debug len positive_train_data {str(len(positive_train_data))}")
+print(f"debug len negative_train_data {str(len(negative_train_data))}")
+print(f"debug error_num {str(error_num)}")
 
-ACE_test_data = []
+train_data =  positive_train_data + negative_train_data
 
-with open('oneie_ace05_en_event/test.json', 'r') as fp:
-    for line in fp.readlines():
-        ACE_test_data.append(json.loads(line))
+with open(os.path.join(output_dir, 'generated_data', 'data_1definitions.json'), 'w') as fp:
+    for line in tqdm(train_data):
+        json.dump(line, fp)
+        fp.write('\n')
 
 
-test_data = []
 
-for index in range(len(ACE_test_data)):
 
-    if ACE_test_data[index]["event"] == []: pass
-    else:
-        event_type2trigger = {}
-        sample_data_list = []
-        
-        for event_index in range(len(ACE_test_data[index]["event"])):
-            event_type = ACE_test_data[index]["event"][event_index]["type"]
-            trigger = ACE_test_data[index]["event"][event_index]["text"]
-            
-            if event_type not in event_type2trigger.keys():
-                event_type2trigger[event_type] = []
-            event_type2trigger[event_type].append(trigger)
 
-        for parent_event in ACE_ontology.keys():
-            if event_type == parent_event: break
-            if event_type in ACE_ontology[parent_event]:break
-        
-        sons = ACE_ontology[parent_event]
-        text_sons = ", ".join(sons)
 
-        for event_type in event_type2definition.keys():
-            event_definition = event_type2definition[event_type]
-            if event_type in event_type2trigger.keys():
-                trigger = event_type2trigger[event_type]
-            else:
-                trigger = "<trigger>"
-            
-            sample = ACE_valid_data[index]["text"]
-            
-            sample_data_list.append({
-                "Event definition": event_definition,
-                "Event type": event_type,       
-                "prompt": f"SENTENCE: {sample} \n EVENT TYPE: {event_type}. \n DEFINITION: {event_definition} \n PARENT: {parent_event}, SON: {text_sons}. \n So what is the trigger?",
-                "trigger": trigger
-                })
-        test_data.append(sample_data_list)
-    
-with open(os.path.join(output_dir, f'ACE_test_GenerationStyle.json'), 'w') as fp:
-    for d in test_data:
-       json.dump(d, fp)
-       fp.write('\n')
+
+
