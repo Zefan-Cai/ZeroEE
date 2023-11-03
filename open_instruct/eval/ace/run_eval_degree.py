@@ -106,10 +106,10 @@ def eval_hf_model(args, model, tokenizer, examples, task_prompt, save_path=None)
 
     prompts = []
     for example in examples:
-        if args.use_chat_format:
-            prompt = "<|user|>\n" + task_prompt.strip() + "\n\nQ: " + example["input"] + "\n<|assistant|>\nA:"
-        else:
-            prompt = example["prompt"].strip()
+        # if args.use_chat_format:
+        #     prompt = "<|user|>\n" + task_prompt.strip() + "\n\nQ: " + example["input"] + "\n<|assistant|>\nA:"
+        # else:
+        prompt = example["prompt"].strip()
             # prompt = task_prompt.strip() + "\n\nQ: " + example["prompt"] + "\nA:"
         prompts.append(prompt)
 
