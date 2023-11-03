@@ -14,7 +14,10 @@ negative_train_data = []
 
 error_num = 0
 
-for parent_event in data.keys():
+val_parent_list = list(data.keys())[:10]
+train_parent_list = list(data.keys())[10:]
+
+for parent_event in train_parent_list:
     
     sons = data[parent_event]["sons"]
     events = data[parent_event]["events"]
@@ -103,6 +106,35 @@ with open(os.path.join(output_dir, 'generated_data', 'data_1definitions.json'), 
     for line in tqdm(train_data):
         json.dump(line, fp)
         fp.write('\n')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
