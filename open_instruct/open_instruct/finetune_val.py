@@ -15,6 +15,7 @@ from accelerate.logging import get_logger
 from accelerate.utils import set_seed
 from datasets import load_dataset
 from torch.utils.data import DataLoader
+from datasets import load_dataset,Features,Value
 from tqdm.auto import tqdm
 import json
 
@@ -339,9 +340,9 @@ def main():
     args = parse_args()
 
     # A hacky way to make llama work with flash attention
-    if args.use_flash_attn:
-        from llama_flash_attn_monkey_patch import replace_llama_attn_with_flash_attn
-        replace_llama_attn_with_flash_attn()
+    # if args.use_flash_attn:
+    #     from llama_flash_attn_monkey_patch import replace_llama_attn_with_flash_attn
+    #     replace_llama_attn_with_flash_attn()
 
     # Initialize the accelerator. We will let the accelerator handle device placement for us in this example.
     # If we're using tracking, we also need to initialize it here and it will by default pick up all supported trackers
@@ -399,6 +400,7 @@ def main():
             else:
                 # We will add the fake val file here even if it's not specified
                 data_files["test"] = args.train_file
+        dataset_args["features"] = Features({'prompt': Value(dtype='string', id=None), 'completion': Value(dtype='string', id=None), 'trigger': Value(dtype='string', id=None)})
         raw_datasets = load_dataset(
             "json",
             data_files=data_files,
@@ -480,12 +482,12 @@ def main():
             tokenizer=tokenizer,
             max_seq_length=args.max_seq_length,
         )
-    elif "messages" in raw_datasets["train"].column_names:
-        encode_function = partial(
-            encode_with_messages_format,
-            tokenizer=tokenizer,
-            max_seq_length=args.max_seq_length,
-        )
+    # elif "messages" in raw_datasets["train"].column_names:
+    #     encode_function = partial(
+    #         encode_with_messages_format,
+    #         tokenizer=tokenizer,
+    #         max_seq_length=args.max_seq_length,
+    #     )
     else:
         raise ValueError("You need to have either 'prompt'&'completion' or 'messages' in your column names.")
     
