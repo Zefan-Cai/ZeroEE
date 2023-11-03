@@ -138,7 +138,8 @@ with open(os.path.join(output_dir, 'generated_data', 'train_1definitions.json'),
 
 
 
-
+positive_val_data = []
+negative_val_data = []
 
 
 
@@ -174,7 +175,7 @@ for parent_event in val_parent_list:
                 
                 selected_trigger = random.choice(triggers)
             
-                positive_train_data.append({
+                positive_val_data.append({
                     # "Event definition": definition,
                     # "Event type": event,
                     # "Event name": event_name,    
@@ -205,7 +206,7 @@ for parent_event in val_parent_list:
                         
                         negative_selected_trigger = random.choice(negative_triggers)
                     
-                        negative_train_data.append({
+                        negative_val_data.append({
                             # "Event definition": definition,
                             # "Event type": event,
                             # "Event name": event_name,    
@@ -223,13 +224,13 @@ for parent_event in val_parent_list:
         else:
             error_num += 1
 
-print(f"debug len positive_train_data {str(len(positive_train_data))}")
-print(f"debug len negative_train_data {str(len(negative_train_data))}")
+print(f"debug len positive_train_data {str(len(positive_val_data))}")
+print(f"debug len negative_train_data {str(len(negative_val_data))}")
 print(f"debug error_num {str(error_num)}")
 
-train_data =  positive_train_data + negative_train_data
+val_data =  positive_val_data + negative_val_data
 
-with open(os.path.join(output_dir, 'generated_data', 'train_1definitions.json'), 'w') as fp:
-    for line in tqdm(train_data):
+with open(os.path.join(output_dir, 'generated_data', 'val_1definitions.json'), 'w') as fp:
+    for line in tqdm(val_data):
         json.dump(line, fp)
         fp.write('\n')
