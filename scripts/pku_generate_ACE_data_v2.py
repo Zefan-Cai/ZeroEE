@@ -1,5 +1,6 @@
 import os
 import json
+import random
 
 output_dir = "/home/caizf/projects/ZeroEE/data/ace_v2"
 
@@ -68,6 +69,49 @@ with open(os.path.join(output_dir, f'ACE_valid_GenerationStyle.json'), 'w') as f
     for d in valid_data:
        json.dump(d, fp)
        fp.write('\n')
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+selected_valid_data = random.choices(valid_data, k=3)
+       
+with open(os.path.join(output_dir, f'ACE_valid_GenerationStyle_clean.json'), 'w') as fp:
+    for d in selected_valid_data:
+       json.dump(d, fp)
+       fp.write('\n')
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
        
        
 ## ACE test data

@@ -1,5 +1,6 @@
 import os
 import json
+import random
 
 output_dir = "/local1/zefan/data/ace_v1"
 
@@ -12,6 +13,46 @@ with open('./data/ACE_ontology.json', 'r') as fp:
 
 with open('./data/ACE_event_definition.json', 'r') as fp:
     event_type2definition = json.load(fp)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ## ACE val data
 
@@ -68,6 +109,43 @@ with open(os.path.join(output_dir, f'ACE_valid_GenerationStyle.json'), 'w') as f
     for d in valid_data:
        json.dump(d, fp)
        fp.write('\n')
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+selected_valid_data = random.choices(valid_data, k=3)
+       
+with open(os.path.join(output_dir, f'ACE_valid_GenerationStyle_clean.json'), 'w') as fp:
+    for d in selected_valid_data:
+       json.dump(d, fp)
+       fp.write('\n')
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
        
        
 ## ACE test data
