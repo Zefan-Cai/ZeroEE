@@ -2,7 +2,7 @@ import os
 import json
 import random
 
-output_dir = "/home/caizf/projects/ZeroEE/data/ace_v1"
+output_dir = "/home/caizf/projects/ZeroEE/data/ace_v2"
 
 with open('./data/ACE_ontology.json', 'r') as fp:
     ACE_ontology = json.load(fp)
