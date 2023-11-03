@@ -36,7 +36,7 @@ error_num = 0
 val_parent_list = list(data.keys())[:10]
 train_parent_list = list(data.keys())[10:]
 train_parent_list_20 = list(data.keys())[10:30]
-train_parent_list_40 = list(data.keys())[10:60]
+train_parent_list_50 = list(data.keys())[10:60]
 
 
 
