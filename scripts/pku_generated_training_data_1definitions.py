@@ -218,7 +218,7 @@ for parent_event in val_parent_list:
                             # "events": events,
                             # "sons": sons,
                             "prompt": f"SENTENCE: {sentence} \n EVENT TYPE: {event_name}. \n DEFINITION: {event_definition} \n PARENT: {parent_event}, SON: {text_sons}. \n So what is the trigger?",
-                            "completion": f"Event trigger is",
+                            "completion": f"Event trigger is ",
                             "trigger":  "<trigger>"
                             })
         else:
