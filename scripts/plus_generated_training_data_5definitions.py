@@ -36,7 +36,7 @@ error_num = 0
 val_parent_list = list(data.keys())[:10]
 train_parent_list = list(data.keys())[10:]
 train_parent_list_20 = list(data.keys())[10:30]
-train_parent_list_40 = list(data.keys())[10:50]
+train_parent_list_40 = list(data.keys())[10:60]
 
 
 
@@ -269,7 +269,7 @@ positive_train_data = []
 negative_train_data = []
 
 
-for parent_event in train_parent_list_40:
+for parent_event in train_parent_list_50:
     
     sons = data[parent_event]["sons"]
     events = data[parent_event]["events"]
