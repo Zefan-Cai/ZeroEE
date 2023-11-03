@@ -143,7 +143,7 @@ for index in range(len(ACE_valid_data)):
     valid_data.append(sample_data_list)
     
 
-with open(os.path.join(output_dir, f'ACE_valid_GenerationStyle.json'), 'w') as fp:
+with open(os.path.join(output_dir, f'ACE_valid_GenerationStyle_trigger.json'), 'w') as fp:
     for d in valid_data:
        json.dump(d, fp)
        fp.write('\n')
