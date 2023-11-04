@@ -1,4 +1,4 @@
-export CUDA_VISIBLE_DEVICES="4,5,6,7"
+export CUDA_VISIBLE_DEVICES="0,1,2,3,4,5,6,7"
 
 MODEL_PATH="/home/models/Llama-2-7b-hf/"
 OUTPUT_NAME=Llama2_GenData_1definitions_v2/

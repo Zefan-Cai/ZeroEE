@@ -684,6 +684,23 @@ def main():
 
     def compute_metric(prediction, ground_truth, split = "val"):
         # TODO: Add F1 ground truth here, currently using Accuracy
+        
+        
+        # negative_class =
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         Correct = 0
         for pred, gt in zip(prediction, ground_truth):
             print(f"Pred: {pred}, GT: {gt}")

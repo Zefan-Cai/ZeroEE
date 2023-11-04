@@ -4,21 +4,21 @@ import random
 
 output_dir = "/home/caizf/projects/ZeroEE/data/ace_v1"
 
-with open('./data/ACE_ontology.json', 'r') as fp:
+with open('/home/caizf/projects/ZeroEE/ZeroEE/data/ACE_ontology.json', 'r') as fp:
     ACE_ontology = json.load(fp)
 
 # ACE
 
 ## ACE Event Definition
 
-with open('./data/ACE_event_definition.json', 'r') as fp:
+with open('/home/caizf/projects/ZeroEE/ZeroEE/data/ACE_event_definition.json', 'r') as fp:
     event_type2definition = json.load(fp)
 
 ## ACE val data
 
 ACE_valid_data = []
 
-with open('oneie_ace05_en_event/val.json', 'r') as fp:
+with open('/home/caizf/projects/ZeroEE/ZeroEE/oneie_ace05_en_event/val.json', 'r') as fp:
     for line in fp.readlines():
         ACE_valid_data.append(json.loads(line))
         
@@ -89,7 +89,7 @@ with open(os.path.join(output_dir, f'ACE_valid_GenerationStyle.json'), 'w') as f
 
 ACE_valid_data = []
 
-with open('oneie_ace05_en_event/val.json', 'r') as fp:
+with open('/home/caizf/projects/ZeroEE/ZeroEE/oneie_ace05_en_event/val.json', 'r') as fp:
     for line in fp.readlines():
         ACE_valid_data.append(json.loads(line))
         
