@@ -19,6 +19,11 @@ from datasets import load_dataset,Features,Value
 from tqdm.auto import tqdm
 import json
 
+from sklearn.metrics import (
+    classification_report
+)
+
+
 import transformers
 from transformers import (
     AutoConfig,
@@ -688,25 +693,37 @@ def main():
         
         # negative_class =
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
         Correct = 0
         for pred, gt in zip(prediction, ground_truth):
             print(f"Pred: {pred}, GT: {gt}")
             print(f"Pred: {tokenizer.decode(pred)}, GT: {tokenizer.decode(gt)}")
             if pred == gt:
                 Correct += 1
+        
+        
+        total_labels = []
+        total_prelabels = []
+        
+        Correct = 0
+        for pred, gt in zip(prediction, ground_truth):
+            print(f"Pred: {pred}, GT: {gt}")
+            print(f"Pred: {tokenizer.decode(pred)}, GT: {tokenizer.decode(gt)}")
+            
+            if pred == gt:
+                Correct += 1
+                
+        classifi_report = classification_report(
+            total_labels, total_prelabels, target_names=[0, 1], output_dict=True
+        )
+        # test_results["positive_precision"] = classifi_report[1]["precision"]
+        # test_results["positive_recall"] = classifi_report[1]["recall"]
+        # test_results["positive_f1_score"] = classifi_report[1]["f1-score"]
+        # test_results["negative_precision"] = classifi_report[0]["precision"]
+        # test_results["negative_recall"] = classifi_report[0]["recall"]
+        # test_results["negative_f1"] = classifi_report[0]["f1-score"]
+
+                
+                
         return {f"{split}_Accuracy": Correct/len(prediction)}
                 
     
