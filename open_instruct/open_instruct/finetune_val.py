@@ -686,8 +686,8 @@ def main():
         # TODO: Add F1 ground truth here, currently using Accuracy
         Correct = 0
         for pred, gt in zip(prediction, ground_truth):
-            print(f"Pred: {pred}, GT: {gt}")
-            print(f"Pred: {tokenizer.decode(pred)}, GT: {tokenizer.decode(gt)}")
+            #print(f"Pred: {pred}, GT: {gt}")
+            #print(f"Pred: {tokenizer.decode(pred)}, GT: {tokenizer.decode(gt)}")
             if pred == gt:
                 Correct += 1
         return {f"{split}_Accuracy": Correct/len(prediction)}

@@ -1,0 +1,37 @@
+11/03/2023 12:20:42 - INFO - __main__ - ***** Running training *****
+11/03/2023 12:20:42 - INFO - __main__ -   Num examples = 345548
+11/03/2023 12:20:42 - INFO - __main__ -   Num Epochs = 20
+11/03/2023 12:20:42 - INFO - __main__ -   Instantaneous batch size per device = 24
+11/03/2023 12:20:42 - INFO - __main__ -   Total train batch size (w. parallel, distributed & accumulation) = 144
+11/03/2023 12:20:42 - INFO - __main__ -   Gradient Accumulation steps = 1
+11/03/2023 12:20:42 - INFO - __main__ -   Total optimization steps = 48000
+  0%|                                                                                                                                                                         | 0/48000 [00:00<?, ?it/s]Traceback (most recent call last):
+  File "./open_instruct/open_instruct/finetune_val.py", line 834, in <module>
+    main()
+  File "./open_instruct/open_instruct/finetune_val.py", line 712, in main
+    outputs = model(**batch, use_cache=False)
+  File "/home/ponienkung/miniconda3/envs/tulu/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1501, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/ponienkung/miniconda3/envs/tulu/lib/python3.8/site-packages/deepspeed/utils/nvtx.py", line 15, in wrapped_fn
+    ret_val = func(*args, **kwargs)
+  File "/home/ponienkung/miniconda3/envs/tulu/lib/python3.8/site-packages/deepspeed/runtime/engine.py", line 1769, in forward
+    loss = self.module(*inputs, **kwargs)
+  File "/home/ponienkung/miniconda3/envs/tulu/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1538, in _call_impl
+    result = forward_call(*args, **kwargs)
+  File "/home/ponienkung/miniconda3/envs/tulu/lib/python3.8/site-packages/transformers/models/llama/modeling_llama.py", line 806, in forward
+    outputs = self.model(
+  File "/home/ponienkung/miniconda3/envs/tulu/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1538, in _call_impl
+    result = forward_call(*args, **kwargs)
+  File "/home/ponienkung/miniconda3/envs/tulu/lib/python3.8/site-packages/transformers/models/llama/modeling_llama.py", line 693, in forward
+    layer_outputs = decoder_layer(
+  File "/home/ponienkung/miniconda3/envs/tulu/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1538, in _call_impl
+    result = forward_call(*args, **kwargs)
+  File "/home/ponienkung/miniconda3/envs/tulu/lib/python3.8/site-packages/transformers/models/llama/modeling_llama.py", line 408, in forward
+    hidden_states, self_attn_weights, present_key_value = self.self_attn(
+  File "/home/ponienkung/miniconda3/envs/tulu/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1538, in _call_impl
+    result = forward_call(*args, **kwargs)
+  File "/home/ponienkung/miniconda3/envs/tulu/lib/python3.8/site-packages/transformers/models/llama/modeling_llama.py", line 317, in forward
+    query_states, key_states = apply_rotary_pos_emb(query_states, key_states, cos, sin, position_ids)
+  File "/home/ponienkung/miniconda3/envs/tulu/lib/python3.8/site-packages/transformers/models/llama/modeling_llama.py", line 186, in apply_rotary_pos_emb
+    q_embed = (q * cos) + (rotate_half(q) * sin)
+KeyboardInterrupt
