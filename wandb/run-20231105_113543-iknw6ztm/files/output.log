@@ -1,0 +1,69 @@
+11/05/2023 11:35:45 - INFO - __main__ - ***** Running training *****
+11/05/2023 11:35:45 - INFO - __main__ -   Num examples = 151736
+11/05/2023 11:35:45 - INFO - __main__ -   Num Epochs = 20
+11/05/2023 11:35:45 - INFO - __main__ -   Instantaneous batch size per device = 24
+11/05/2023 11:35:45 - INFO - __main__ -   Total train batch size (w. parallel, distributed & accumulation) = 144
+11/05/2023 11:35:45 - INFO - __main__ -   Gradient Accumulation steps = 1
+11/05/2023 11:35:45 - INFO - __main__ -   Total optimization steps = 21080
+  0%|                                                                                                                                                              | 1/21080 [00:05<32:56:00,  5.62s/it]11/05/2023 11:35:51 - INFO - __main__ -   Step: 1, LR: 3.163722646981282e-08, Loss: 4.825888633728027
+11/05/2023 11:35:51 - INFO - __main__ - args.eval_steps is None. Set to do eval after each epoch, which is 1054
+[2023-11-05 11:35:51,100] [WARNING] [stage3.py:1898:step] 1 pytorch allocator cache flushes since last step. this happens when there is high memory pressure and is detrimental to performance. if this is happening frequently consider adjusting settings to reduce memory consumption. If you are unable to make the cache flushes go away consider adding get_accelerator().empty_cache() calls in your training loop to ensure that all ranks flush their caches at the same time
+[2023-11-05 11:35:56,202] [WARNING] [stage3.py:1898:step] 1 pytorch allocator cache flushes since last step. this happens when there is high memory pressure and is detrimental to performance. if this is happening frequently consider adjusting settings to reduce memory consumption. If you are unable to make the cache flushes go away consider adding get_accelerator().empty_cache() calls in your training loop to ensure that all ranks flush their caches at the same time
+  0%|                                                                                                                                                              | 2/21080 [00:10<31:07:53,  5.32s/it]11/05/2023 11:35:56 - INFO - __main__ -   Step: 2, LR: 6.327445293962564e-08, Loss: 4.887956142425537
+[2023-11-05 11:36:00,608] [WARNING] [stage3.py:1898:step] 1 pytorch allocator cache flushes since last step. this happens when there is high memory pressure and is detrimental to performance. if this is happening frequently consider adjusting settings to reduce memory consumption. If you are unable to make the cache flushes go away consider adding get_accelerator().empty_cache() calls in your training loop to ensure that all ranks flush their caches at the same time
+  0%|                                                                                                                                                              | 3/21080 [00:15<28:41:46,  4.90s/it]11/05/2023 11:36:00 - INFO - __main__ -   Step: 3, LR: 9.491167940943844e-08, Loss: 4.866090774536133
+  0%|                                                                                                                                                              | 4/21080 [00:21<33:09:13,  5.66s/it]11/05/2023 11:36:07 - INFO - __main__ -   Step: 4, LR: 1.2654890587925128e-07, Loss: 4.82122802734375
+[2023-11-05 11:36:07,439] [WARNING] [stage3.py:1898:step] 2 pytorch allocator cache flushes since last step. this happens when there is high memory pressure and is detrimental to performance. if this is happening frequently consider adjusting settings to reduce memory consumption. If you are unable to make the cache flushes go away consider adding get_accelerator().empty_cache() calls in your training loop to ensure that all ranks flush their caches at the same time
+[2023-11-05 11:36:12,630] [WARNING] [stage3.py:1898:step] 1 pytorch allocator cache flushes since last step. this happens when there is high memory pressure and is detrimental to performance. if this is happening frequently consider adjusting settings to reduce memory consumption. If you are unable to make the cache flushes go away consider adding get_accelerator().empty_cache() calls in your training loop to ensure that all ranks flush their caches at the same time
+  0%|                                                                                                                                                              | 5/21080 [00:27<32:09:21,  5.49s/it]11/05/2023 11:36:12 - INFO - __main__ -   Step: 5, LR: 1.5818613234906406e-07, Loss: 4.836822509765625
+  0%|                                                                                                                                                              | 6/21080 [00:33<33:33:13,  5.73s/it]11/05/2023 11:36:18 - INFO - __main__ -   Step: 6, LR: 1.8982335881887688e-07, Loss: 4.783947944641113
+[2023-11-05 11:36:24,061] [WARNING] [stage3.py:1898:step] 2 pytorch allocator cache flushes since last step. this happens when there is high memory pressure and is detrimental to performance. if this is happening frequently consider adjusting settings to reduce memory consumption. If you are unable to make the cache flushes go away consider adding get_accelerator().empty_cache() calls in your training loop to ensure that all ranks flush their caches at the same time
+  0%|                                                                                                                                                              | 7/21080 [00:38<32:36:04,  5.57s/it]11/05/2023 11:36:24 - INFO - __main__ -   Step: 7, LR: 2.2146058528868972e-07, Loss: 4.876763343811035
+  0%|                                                                                                                                                              | 8/21080 [00:44<32:23:09,  5.53s/it]11/05/2023 11:36:29 - INFO - __main__ -   Step: 8, LR: 2.5309781175850256e-07, Loss: 4.771488189697266
+[2023-11-05 11:36:29,516] [WARNING] [stage3.py:1898:step] 1 pytorch allocator cache flushes since last step. this happens when there is high memory pressure and is detrimental to performance. if this is happening frequently consider adjusting settings to reduce memory consumption. If you are unable to make the cache flushes go away consider adding get_accelerator().empty_cache() calls in your training loop to ensure that all ranks flush their caches at the same time
+Traceback (most recent call last):
+  File "./open_instruct/open_instruct/finetune_val.py", line 868, in <module>
+    main()
+  File "./open_instruct/open_instruct/finetune_val.py", line 746, in main
+    outputs = model(**batch, use_cache=False)
+  File "/local1/ponienkung/miniconda3/envs/tulu/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1501, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/local1/ponienkung/miniconda3/envs/tulu/lib/python3.8/site-packages/deepspeed/utils/nvtx.py", line 15, in wrapped_fn
+    ret_val = func(*args, **kwargs)
+  File "/local1/ponienkung/miniconda3/envs/tulu/lib/python3.8/site-packages/deepspeed/runtime/engine.py", line 1769, in forward
+    loss = self.module(*inputs, **kwargs)
+  File "/local1/ponienkung/miniconda3/envs/tulu/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1538, in _call_impl
+    result = forward_call(*args, **kwargs)
+  File "/local1/ponienkung/miniconda3/envs/tulu/lib/python3.8/site-packages/transformers/models/llama/modeling_llama.py", line 806, in forward
+    outputs = self.model(
+  File "/local1/ponienkung/miniconda3/envs/tulu/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1538, in _call_impl
+    result = forward_call(*args, **kwargs)
+  File "/local1/ponienkung/miniconda3/envs/tulu/lib/python3.8/site-packages/transformers/models/llama/modeling_llama.py", line 693, in forward
+    layer_outputs = decoder_layer(
+  File "/local1/ponienkung/miniconda3/envs/tulu/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1538, in _call_impl
+    result = forward_call(*args, **kwargs)
+  File "/local1/ponienkung/miniconda3/envs/tulu/lib/python3.8/site-packages/transformers/models/llama/modeling_llama.py", line 408, in forward
+    hidden_states, self_attn_weights, present_key_value = self.self_attn(
+  File "/local1/ponienkung/miniconda3/envs/tulu/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1538, in _call_impl
+    result = forward_call(*args, **kwargs)
+  File "/local1/ponienkung/miniconda3/envs/tulu/lib/python3.8/site-packages/transformers/models/llama/modeling_llama.py", line 307, in forward
+    value_states = self.v_proj(hidden_states)
+  File "/local1/ponienkung/miniconda3/envs/tulu/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    result = hook(self, args)
+  File "/local1/ponienkung/miniconda3/envs/tulu/lib/python3.8/site-packages/deepspeed/utils/nvtx.py", line 15, in wrapped_fn
+    ret_val = func(*args, **kwargs)
+  File "/local1/ponienkung/miniconda3/envs/tulu/lib/python3.8/site-packages/deepspeed/runtime/zero/parameter_offload.py", line 382, in _pre_forward_module_hook
+    self.pre_sub_module_forward_function(module)
+  File "/local1/ponienkung/miniconda3/envs/tulu/lib/python3.8/site-packages/torch/utils/_contextlib.py", line 115, in decorate_context
+    return func(*args, **kwargs)
+  File "/local1/ponienkung/miniconda3/envs/tulu/lib/python3.8/site-packages/deepspeed/runtime/zero/parameter_offload.py", line 494, in pre_sub_module_forward_function
+    param_coordinator.fetch_sub_module(sub_module, forward=True)
+  File "/local1/ponienkung/miniconda3/envs/tulu/lib/python3.8/site-packages/deepspeed/utils/nvtx.py", line 15, in wrapped_fn
+    ret_val = func(*args, **kwargs)
+  File "/local1/ponienkung/miniconda3/envs/tulu/lib/python3.8/site-packages/torch/utils/_contextlib.py", line 115, in decorate_context
+    return func(*args, **kwargs)
+  File "/local1/ponienkung/miniconda3/envs/tulu/lib/python3.8/site-packages/deepspeed/runtime/zero/partitioned_param_coordinator.py", line 295, in fetch_sub_module
+    self.__ongoing_fetch_events.popleft().synchronize()
+  File "/local1/ponienkung/miniconda3/envs/tulu/lib/python3.8/site-packages/torch/cuda/streams.py", line 219, in synchronize
+    super().synchronize()
+KeyboardInterrupt

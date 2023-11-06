@@ -1,0 +1,1 @@
+{"learning_rate": 1.4430349475514975e-05, "train_loss": 0.000276626436971128, "_timestamp": 1699271201.116368, "_runtime": 35.709941148757935, "_step": 9488, "val_Accuracy": 0.0, "val_Positive_Precision": 0.0, "val_Positive_Recall": 0.0, "val_Positive_F1": 0.0, "val_Negative_Precision": 0.0, "val_Negative_Recall": 0.0, "val_Negative_F1": 0.0, "_wandb": {"runtime": 111}}

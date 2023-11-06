@@ -1,0 +1,12 @@
+11/06/2023 07:23:17 - INFO - __main__ - ***** Running training *****
+11/06/2023 07:23:17 - INFO - __main__ -   Num examples = 151736
+11/06/2023 07:23:17 - INFO - __main__ -   Num Epochs = 20
+11/06/2023 07:23:17 - INFO - __main__ -   Instantaneous batch size per device = 16
+11/06/2023 07:23:17 - INFO - __main__ -   Total train batch size (w. parallel, distributed & accumulation) = 96
+11/06/2023 07:23:17 - INFO - __main__ -   Gradient Accumulation steps = 1
+11/06/2023 07:23:17 - INFO - __main__ -   Total optimization steps = 31620
+  0%|                                                                                                                                                              | 1/31620 [00:04<38:31:33,  4.39s/it]11/06/2023 07:23:22 - INFO - __main__ -   Step: 1, LR: 2.1089630931458703e-08, Loss: 4.954648494720459
+11/06/2023 07:23:22 - INFO - __main__ - args.eval_steps is None. Set to do eval after each epoch, which is 1581
+  0%|                                                                                                                                                              | 2/31620 [00:08<36:29:24,  4.15s/it]11/06/2023 07:23:26 - INFO - __main__ -   Step: 2, LR: 4.2179261862917406e-08, Loss: 5.0056681632995605
+  0%|                                                                                                                                                              | 3/31620 [00:12<35:51:10,  4.08s/it]11/06/2023 07:23:30 - INFO - __main__ -   Step: 3, LR: 6.32688927943761e-08, Loss: 5.0260162353515625
+  0%|                                                                                                                                                              | 4/31620 [00:16<35:34:19,  4.05s/it]11/06/2023 07:23:34 - INFO - __main__ -   Step: 4, LR: 8.435852372583481e-08, Loss: 4.994729995727539

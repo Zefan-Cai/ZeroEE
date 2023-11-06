@@ -1,0 +1,87 @@
+2023-11-06 07:23:15,382 INFO    StreamThr :4117907 [internal.py:wandb_internal():86] W&B internal server running at pid: 4117907, started at: 2023-11-06 07:23:15.381269
+2023-11-06 07:23:15,383 DEBUG   HandlerThread:4117907 [handler.py:handle_request():144] handle_request: status
+2023-11-06 07:23:15,385 INFO    WriterThread:4117907 [datastore.py:open_for_write():85] open: /local1/zefan/ZeroEE/wandb/run-20231106_072315-za5lzxrd/run-za5lzxrd.wandb
+2023-11-06 07:23:15,386 DEBUG   SenderThread:4117907 [sender.py:send():379] send: header
+2023-11-06 07:23:15,420 DEBUG   SenderThread:4117907 [sender.py:send():379] send: run
+2023-11-06 07:23:15,686 INFO    SenderThread:4117907 [dir_watcher.py:__init__():211] watching files in: /local1/zefan/ZeroEE/wandb/run-20231106_072315-za5lzxrd/files
+2023-11-06 07:23:15,686 INFO    SenderThread:4117907 [sender.py:_start_run_threads():1121] run started: za5lzxrd with start time 1699284195.380989
+2023-11-06 07:23:15,687 DEBUG   SenderThread:4117907 [sender.py:send_request():406] send_request: summary_record
+2023-11-06 07:23:15,687 INFO    SenderThread:4117907 [sender.py:_save_file():1375] saving file wandb-summary.json with policy end
+2023-11-06 07:23:15,702 DEBUG   HandlerThread:4117907 [handler.py:handle_request():144] handle_request: check_version
+2023-11-06 07:23:15,703 DEBUG   SenderThread:4117907 [sender.py:send_request():406] send_request: check_version
+2023-11-06 07:23:15,756 DEBUG   HandlerThread:4117907 [handler.py:handle_request():144] handle_request: run_start
+2023-11-06 07:23:15,765 DEBUG   HandlerThread:4117907 [system_info.py:__init__():31] System info init
+2023-11-06 07:23:15,765 DEBUG   HandlerThread:4117907 [system_info.py:__init__():46] System info init done
+2023-11-06 07:23:15,765 INFO    HandlerThread:4117907 [system_monitor.py:start():181] Starting system monitor
+2023-11-06 07:23:15,765 INFO    SystemMonitor:4117907 [system_monitor.py:_start():145] Starting system asset monitoring threads
+2023-11-06 07:23:15,766 INFO    HandlerThread:4117907 [system_monitor.py:probe():201] Collecting system info
+2023-11-06 07:23:15,767 INFO    SystemMonitor:4117907 [interfaces.py:start():190] Started cpu monitoring
+2023-11-06 07:23:15,768 INFO    SystemMonitor:4117907 [interfaces.py:start():190] Started disk monitoring
+2023-11-06 07:23:15,768 INFO    SystemMonitor:4117907 [interfaces.py:start():190] Started gpu monitoring
+2023-11-06 07:23:15,769 INFO    SystemMonitor:4117907 [interfaces.py:start():190] Started memory monitoring
+2023-11-06 07:23:15,770 INFO    SystemMonitor:4117907 [interfaces.py:start():190] Started network monitoring
+2023-11-06 07:23:15,834 DEBUG   HandlerThread:4117907 [system_info.py:probe():195] Probing system
+2023-11-06 07:23:15,841 DEBUG   HandlerThread:4117907 [system_info.py:_probe_git():180] Probing git
+2023-11-06 07:23:15,854 DEBUG   HandlerThread:4117907 [system_info.py:_probe_git():188] Probing git done
+2023-11-06 07:23:15,854 DEBUG   HandlerThread:4117907 [system_info.py:probe():240] Probing system done
+2023-11-06 07:23:15,854 DEBUG   HandlerThread:4117907 [system_monitor.py:probe():210] {'os': 'Linux-5.15.0-73-generic-x86_64-with-glibc2.17', 'python': '3.8.17', 'heartbeatAt': '2023-11-06T15:23:15.834622', 'startedAt': '2023-11-06T15:23:15.375159', 'docker': None, 'cuda': None, 'args': ('--model_name_or_path', '/local1/zefan/models/Llama-2-7b-hf/', '--use_flash_attn', '--tokenizer_name', '/local1/zefan/models/Llama-2-7b-hf/', '--use_slow_tokenizer', '--train_file', '/local1/zefan/data/generated_data/train_1definitions_200.json', '--val_file', '/local1/zefan/data/generated_data/val_1definitions.json', '--test_file', '/local1/zefan/data/ace_v2/ACE_valid_GenerationStyle_trigger.json', '--max_seq_length', '256', '--preprocessing_num_workers', '16', '--per_device_train_batch_size', '16', '--per_device_eval_batch_size', '32', '--gradient_accumulation_steps', '1', '--learning_rate', '2e-5', '--lr_scheduler_type', 'linear', '--warmup_ratio', '0.03', '--weight_decay', '0.', '--num_train_epochs', '20', '--output_dir', '/local1/zefan/output/Llama2_GenData_1definitions_top200/', '--with_tracking', '--report_to', 'wandb', '--report_name', 'Llama2_GenData_1definitions_top200/', '--report_tags', 'CtrlGen', '--checkpointing_steps', 'epoch', '--logging_steps', '1'), 'state': 'running', 'program': './open_instruct/open_instruct/finetune_val.py', 'codePath': 'open_instruct/open_instruct/finetune_val.py', 'git': {'remote': 'https://github.com/Zefan-Cai/ZeroEE', 'commit': 'a8d9410f24c8b3811f18fd637b017ecc8d8b9350'}, 'email': 'billkunghappy.happy@gmail.com', 'root': '/local1/zefan/ZeroEE', 'host': 'pluslab01-a100.cs.ucla.edu', 'username': 'ponienkung', 'executable': '/local1/ponienkung/miniconda3/envs/tulu/bin/python', 'cpu_count': 32, 'cpu_count_logical': 64, 'cpu_freq': {'current': 1846.5607812500004, 'min': 1500.0, 'max': 3000.0}, 'cpu_freq_per_core': [{'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 3699.993, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 3000.0, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 2114.236, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 3697.877, 'min': 1500.0, 'max': 3000.0}, {'current': 3000.0, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 3000.0, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 3699.993, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 3000.0, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 3000.0, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 3699.994, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 3699.994, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 3699.994, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}], 'disk': {'total': 19.990234375, 'used': 13.985939025878906}, 'gpu': 'NVIDIA A100 80GB PCIe', 'gpu_count': 8, 'gpu_devices': [{'name': 'NVIDIA A100 80GB PCIe', 'memory_total': 85899345920}, {'name': 'NVIDIA A100 80GB PCIe', 'memory_total': 85899345920}, {'name': 'NVIDIA A100 80GB PCIe', 'memory_total': 85899345920}, {'name': 'NVIDIA A100 80GB PCIe', 'memory_total': 85899345920}, {'name': 'NVIDIA A100 80GB PCIe', 'memory_total': 85899345920}, {'name': 'NVIDIA A100 80GB PCIe', 'memory_total': 85899345920}, {'name': 'NVIDIA A100 80GB PCIe', 'memory_total': 85899345920}, {'name': 'NVIDIA A100 80GB PCIe', 'memory_total': 85899345920}], 'memory': {'total': 755.5313758850098}}
+2023-11-06 07:23:15,854 INFO    HandlerThread:4117907 [system_monitor.py:probe():211] Finished collecting system info
+2023-11-06 07:23:15,854 INFO    HandlerThread:4117907 [system_monitor.py:probe():214] Publishing system info
+2023-11-06 07:23:15,854 DEBUG   HandlerThread:4117907 [system_info.py:_save_pip():51] Saving list of pip packages installed into the current environment
+2023-11-06 07:23:15,854 DEBUG   HandlerThread:4117907 [system_info.py:_save_pip():67] Saving pip packages done
+2023-11-06 07:23:15,854 DEBUG   HandlerThread:4117907 [system_info.py:_save_conda():74] Saving list of conda packages installed into the current environment
+2023-11-06 07:23:16,688 INFO    Thread-12 :4117907 [dir_watcher.py:_on_file_created():271] file/dir created: /local1/zefan/ZeroEE/wandb/run-20231106_072315-za5lzxrd/files/conda-environment.yaml
+2023-11-06 07:23:16,689 INFO    Thread-12 :4117907 [dir_watcher.py:_on_file_created():271] file/dir created: /local1/zefan/ZeroEE/wandb/run-20231106_072315-za5lzxrd/files/requirements.txt
+2023-11-06 07:23:16,690 INFO    Thread-12 :4117907 [dir_watcher.py:_on_file_created():271] file/dir created: /local1/zefan/ZeroEE/wandb/run-20231106_072315-za5lzxrd/files/wandb-summary.json
+2023-11-06 07:23:17,687 INFO    Thread-12 :4117907 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20231106_072315-za5lzxrd/files/conda-environment.yaml
+2023-11-06 07:23:17,734 DEBUG   HandlerThread:4117907 [system_info.py:_save_conda():86] Saving conda packages done
+2023-11-06 07:23:17,735 INFO    HandlerThread:4117907 [system_monitor.py:probe():216] Finished publishing system info
+2023-11-06 07:23:17,740 DEBUG   SenderThread:4117907 [sender.py:send():379] send: files
+2023-11-06 07:23:17,740 INFO    SenderThread:4117907 [sender.py:_save_file():1375] saving file wandb-metadata.json with policy now
+2023-11-06 07:23:17,746 DEBUG   HandlerThread:4117907 [handler.py:handle_request():144] handle_request: stop_status
+2023-11-06 07:23:17,747 DEBUG   SenderThread:4117907 [sender.py:send_request():406] send_request: stop_status
+2023-11-06 07:23:17,962 DEBUG   SenderThread:4117907 [sender.py:send():379] send: telemetry
+2023-11-06 07:23:17,963 DEBUG   SenderThread:4117907 [sender.py:send():379] send: config
+2023-11-06 07:23:18,124 INFO    wandb-upload_0:4117907 [upload_job.py:push():131] Uploaded file /tmp/tmpde_p1uw1wandb/ahjqnp35-wandb-metadata.json
+2023-11-06 07:23:18,688 INFO    Thread-12 :4117907 [dir_watcher.py:_on_file_created():271] file/dir created: /local1/zefan/ZeroEE/wandb/run-20231106_072315-za5lzxrd/files/wandb-metadata.json
+2023-11-06 07:23:18,688 INFO    Thread-12 :4117907 [dir_watcher.py:_on_file_created():271] file/dir created: /local1/zefan/ZeroEE/wandb/run-20231106_072315-za5lzxrd/files/output.log
+2023-11-06 07:23:20,689 INFO    Thread-12 :4117907 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20231106_072315-za5lzxrd/files/output.log
+2023-11-06 07:23:20,965 DEBUG   HandlerThread:4117907 [handler.py:handle_request():144] handle_request: status_report
+2023-11-06 07:23:22,143 DEBUG   HandlerThread:4117907 [handler.py:handle_request():144] handle_request: partial_history
+2023-11-06 07:23:24,690 INFO    Thread-12 :4117907 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20231106_072315-za5lzxrd/files/output.log
+2023-11-06 07:23:26,136 DEBUG   HandlerThread:4117907 [handler.py:handle_request():144] handle_request: status_report
+2023-11-06 07:23:26,136 DEBUG   HandlerThread:4117907 [handler.py:handle_request():144] handle_request: partial_history
+2023-11-06 07:23:26,137 DEBUG   SenderThread:4117907 [sender.py:send():379] send: history
+2023-11-06 07:23:26,138 DEBUG   SenderThread:4117907 [sender.py:send_request():406] send_request: summary_record
+2023-11-06 07:23:26,140 INFO    SenderThread:4117907 [sender.py:_save_file():1375] saving file wandb-summary.json with policy end
+2023-11-06 07:23:26,691 INFO    Thread-12 :4117907 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20231106_072315-za5lzxrd/files/wandb-summary.json
+2023-11-06 07:23:28,692 INFO    Thread-12 :4117907 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20231106_072315-za5lzxrd/files/output.log
+2023-11-06 07:23:30,132 DEBUG   HandlerThread:4117907 [handler.py:handle_request():144] handle_request: partial_history
+2023-11-06 07:23:30,133 DEBUG   SenderThread:4117907 [sender.py:send():379] send: history
+2023-11-06 07:23:30,133 DEBUG   SenderThread:4117907 [sender.py:send_request():406] send_request: summary_record
+2023-11-06 07:23:30,134 INFO    SenderThread:4117907 [sender.py:_save_file():1375] saving file wandb-summary.json with policy end
+2023-11-06 07:23:30,693 INFO    Thread-12 :4117907 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20231106_072315-za5lzxrd/files/wandb-summary.json
+2023-11-06 07:23:32,134 DEBUG   HandlerThread:4117907 [handler.py:handle_request():144] handle_request: status_report
+2023-11-06 07:23:32,694 INFO    Thread-12 :4117907 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20231106_072315-za5lzxrd/files/output.log
+2023-11-06 07:23:32,746 DEBUG   HandlerThread:4117907 [handler.py:handle_request():144] handle_request: stop_status
+2023-11-06 07:23:32,747 DEBUG   SenderThread:4117907 [sender.py:send_request():406] send_request: stop_status
+2023-11-06 07:23:34,134 DEBUG   HandlerThread:4117907 [handler.py:handle_request():144] handle_request: partial_history
+2023-11-06 07:23:34,135 DEBUG   SenderThread:4117907 [sender.py:send():379] send: history
+2023-11-06 07:23:34,135 DEBUG   SenderThread:4117907 [sender.py:send_request():406] send_request: summary_record
+2023-11-06 07:23:34,137 INFO    SenderThread:4117907 [sender.py:_save_file():1375] saving file wandb-summary.json with policy end
+2023-11-06 07:23:34,695 INFO    Thread-12 :4117907 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20231106_072315-za5lzxrd/files/wandb-summary.json
+2023-11-06 07:23:36,696 INFO    Thread-12 :4117907 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20231106_072315-za5lzxrd/files/output.log
+2023-11-06 07:23:37,138 DEBUG   HandlerThread:4117907 [handler.py:handle_request():144] handle_request: status_report
+2023-11-06 07:23:38,138 DEBUG   HandlerThread:4117907 [handler.py:handle_request():144] handle_request: partial_history
+2023-11-06 07:23:38,139 DEBUG   SenderThread:4117907 [sender.py:send():379] send: history
+2023-11-06 07:23:38,139 DEBUG   SenderThread:4117907 [sender.py:send_request():406] send_request: summary_record
+2023-11-06 07:23:38,140 INFO    SenderThread:4117907 [sender.py:_save_file():1375] saving file wandb-summary.json with policy end
+2023-11-06 07:23:38,697 INFO    Thread-12 :4117907 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20231106_072315-za5lzxrd/files/wandb-summary.json
+2023-11-06 07:23:40,699 INFO    Thread-12 :4117907 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20231106_072315-za5lzxrd/files/output.log
+2023-11-06 07:23:41,778 INFO    memory    :4117907 [interfaces.py:monitor():140] Process proc.memory.rssMB has exited.
+2023-11-06 07:23:41,778 DEBUG   SystemMonitor:4117907 [system_monitor.py:_start():159] Starting system metrics aggregation loop
+2023-11-06 07:23:41,779 DEBUG   SystemMonitor:4117907 [system_monitor.py:_start():166] Finished system metrics aggregation loop
+2023-11-06 07:23:41,779 DEBUG   SystemMonitor:4117907 [system_monitor.py:_start():170] Publishing last batch of metrics
+2023-11-06 07:23:41,781 DEBUG   SenderThread:4117907 [sender.py:send():379] send: stats
+2023-11-06 07:23:42,761 INFO    MainThread:4117907 [internal.py:handle_exit():76] Internal process exited
+2023-11-06 07:23:42,783 DEBUG   HandlerThread:4117907 [handler.py:handle_request():144] handle_request: status_report

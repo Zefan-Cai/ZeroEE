@@ -1,0 +1,26 @@
+11/06/2023 00:32:49 - INFO - __main__ - ***** Running training *****
+11/06/2023 00:32:49 - INFO - __main__ -   Num examples = 151736
+11/06/2023 00:32:49 - INFO - __main__ -   Num Epochs = 20
+11/06/2023 00:32:49 - INFO - __main__ -   Instantaneous batch size per device = 16
+11/06/2023 00:32:49 - INFO - __main__ -   Total train batch size (w. parallel, distributed & accumulation) = 32
+11/06/2023 00:32:49 - INFO - __main__ -   Gradient Accumulation steps = 1
+11/06/2023 00:32:49 - INFO - __main__ -   Total optimization steps = 94840
+  0%|                                                                                                                                                                         | 0/94840 [00:00<?, ?it/s]11/06/2023 00:32:49 - INFO - accelerate.accelerator - Loading states from /local1/zefan/output/Llama2_GenData_1definitions_top200/epoch_5/
+11/06/2023 00:32:49 - INFO - accelerate.accelerator - Loading DeepSpeed Model and Optimizer
+Traceback (most recent call last):
+  File "./open_instruct/open_instruct/finetune_val.py", line 882, in <module>
+    main()
+  File "./open_instruct/open_instruct/finetune_val.py", line 670, in main
+    accelerator.load_state(checkpoint_path)
+  File "/local1/ponienkung/miniconda3/envs/tulu/lib/python3.8/site-packages/accelerate/accelerator.py", line 2663, in load_state
+    model.load_checkpoint(input_dir, ckpt_id, **load_model_func_kwargs)
+  File "/local1/ponienkung/miniconda3/envs/tulu/lib/python3.8/site-packages/deepspeed/runtime/engine.py", line 2655, in load_checkpoint
+    success = self._load_zero_checkpoint(load_dir, tag, load_optimizer_states=load_optimizer_states)
+  File "/local1/ponienkung/miniconda3/envs/tulu/lib/python3.8/site-packages/deepspeed/runtime/engine.py", line 2797, in _load_zero_checkpoint
+    raise ZeRORuntimeException("The checkpoint being loaded used a DP " \
+deepspeed.runtime.zero.utils.ZeRORuntimeException: The checkpoint being loaded used a DP world size of 6 but the current world size is 2. Automatic adjustment of ZeRO's optimizer state partitioning with a new world size is not currently supported.
+Resumed from checkpoint: /local1/zefan/output/Llama2_GenData_1definitions_top200/epoch_5/
+[2023-11-06 00:32:49,277] [INFO] [torch_checkpoint_engine.py:27:load] [Torch] Loading checkpoint from /local1/zefan/output/Llama2_GenData_1definitions_top200/epoch_5/pytorch_model/zero_pp_rank_0_mp_rank_00_model_states.pt...
+[2023-11-06 00:32:49,289] [INFO] [torch_checkpoint_engine.py:29:load] [Torch] Loaded checkpoint from /local1/zefan/output/Llama2_GenData_1definitions_top200/epoch_5/pytorch_model/zero_pp_rank_0_mp_rank_00_model_states.pt.
+[2023-11-06 00:32:49,290] [INFO] [torch_checkpoint_engine.py:27:load] [Torch] Loading checkpoint from /local1/zefan/output/Llama2_GenData_1definitions_top200/epoch_5/pytorch_model/zero_pp_rank_0_mp_rank_00_model_states.pt...
+[2023-11-06 00:32:49,301] [INFO] [torch_checkpoint_engine.py:29:load] [Torch] Loaded checkpoint from /local1/zefan/output/Llama2_GenData_1definitions_top200/epoch_5/pytorch_model/zero_pp_rank_0_mp_rank_00_model_states.pt.

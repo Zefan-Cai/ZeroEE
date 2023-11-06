@@ -1,0 +1,36 @@
+11/06/2023 06:32:33 - INFO - __main__ - ***** Running training *****
+11/06/2023 06:32:33 - INFO - __main__ -   Num examples = 151736
+11/06/2023 06:32:33 - INFO - __main__ -   Num Epochs = 20
+11/06/2023 06:32:33 - INFO - __main__ -   Instantaneous batch size per device = 16
+11/06/2023 06:32:33 - INFO - __main__ -   Total train batch size (w. parallel, distributed & accumulation) = 96
+11/06/2023 06:32:33 - INFO - __main__ -   Gradient Accumulation steps = 1
+11/06/2023 06:32:33 - INFO - __main__ -   Total optimization steps = 31620
+  0%|                                                                                                                                                                         | 0/31620 [00:00<?, ?it/s]11/06/2023 06:32:33 - INFO - accelerate.accelerator - Loading states from /local1/zefan/output/Llama2_GenData_1definitions_top200/epoch_5
+11/06/2023 06:32:33 - INFO - accelerate.accelerator - Loading DeepSpeed Model and Optimizer
+Resumed from checkpoint: /local1/zefan/output/Llama2_GenData_1definitions_top200/epoch_5
+[2023-11-06 06:32:33,484] [INFO] [torch_checkpoint_engine.py:27:load] [Torch] Loading checkpoint from /local1/zefan/output/Llama2_GenData_1definitions_top200/epoch_5/pytorch_model/zero_pp_rank_0_mp_rank_00_model_states.pt...
+[2023-11-06 06:32:33,497] [INFO] [torch_checkpoint_engine.py:29:load] [Torch] Loaded checkpoint from /local1/zefan/output/Llama2_GenData_1definitions_top200/epoch_5/pytorch_model/zero_pp_rank_0_mp_rank_00_model_states.pt.
+[2023-11-06 06:32:33,497] [INFO] [torch_checkpoint_engine.py:27:load] [Torch] Loading checkpoint from /local1/zefan/output/Llama2_GenData_1definitions_top200/epoch_5/pytorch_model/zero_pp_rank_0_mp_rank_00_model_states.pt...
+[2023-11-06 06:32:33,508] [INFO] [torch_checkpoint_engine.py:29:load] [Torch] Loaded checkpoint from /local1/zefan/output/Llama2_GenData_1definitions_top200/epoch_5/pytorch_model/zero_pp_rank_0_mp_rank_00_model_states.pt.
+[2023-11-06 06:32:33,518] [INFO] [torch_checkpoint_engine.py:27:load] [Torch] Loading checkpoint from /local1/zefan/output/Llama2_GenData_1definitions_top200/epoch_5/pytorch_model/bf16_zero_pp_rank_0_mp_rank_00_optim_states.pt...
+[2023-11-06 06:32:37,347] [INFO] [torch_checkpoint_engine.py:29:load] [Torch] Loaded checkpoint from /local1/zefan/output/Llama2_GenData_1definitions_top200/epoch_5/pytorch_model/bf16_zero_pp_rank_0_mp_rank_00_optim_states.pt.
+[2023-11-06 06:32:37,347] [INFO] [engine.py:2865:_get_all_zero_checkpoint_state_dicts] successfully read 6 ZeRO state_dicts for rank 0
+11/06/2023 06:32:40 - INFO - accelerate.accelerator - DeepSpeed Model and Optimizer loaded from input dir /local1/zefan/output/Llama2_GenData_1definitions_top200/epoch_5/pytorch_model
+11/06/2023 06:32:40 - INFO - accelerate.checkpointing - All model weights loaded successfully
+11/06/2023 06:32:40 - INFO - accelerate.checkpointing - All optimizer states loaded successfully
+11/06/2023 06:32:40 - INFO - accelerate.checkpointing - All scheduler states loaded successfully
+11/06/2023 06:32:40 - INFO - accelerate.checkpointing - All random states loaded successfully
+11/06/2023 06:32:40 - INFO - accelerate.accelerator - Loading in 0 custom states
+ 30%|██████████████████████████████████████████████▊                                                                                                             | 9486/31620 [00:07<00:16, 1309.68it/s]
+
+ 30%|██████████████████████████████████████████████▊                                                                                                             | 9486/31620 [00:07<00:16, 1309.68it/s]11/06/2023 06:32:45 - INFO - __main__ -   Step: 9487, LR: 1.4431001684874179e-05, Loss: 0.004177939146757126
+11/06/2023 06:32:49 - INFO - __main__ -   Step: 9488, LR: 1.4430349475514975e-05, Loss: 0.000276626436971128
+11/06/2023 06:32:49 - INFO - __main__ - Start doing evaluation at step: 9488
+Traceback (most recent call last):                                                                                                                                                | 0/4 [00:00<?, ?it/s]
+  File "./open_instruct/open_instruct/finetune_val.py", line 906, in <module>
+    main()
+  File "./open_instruct/open_instruct/finetune_val.py", line 833, in main
+    scores_metric.add_batch(predictions=predictions, references=val_ground_truth)
+  File "/local1/ponienkung/miniconda3/envs/tulu/lib/python3.8/site-packages/datasets/metric.py", line 519, in add_batch
+    raise ValueError(error_msg) from None
+ValueError: Mismatch in the number of predictions (256) and references (5089)
