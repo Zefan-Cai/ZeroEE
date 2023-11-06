@@ -1,0 +1,135 @@
+11/06/2023 08:47:20 - INFO - __main__ - ***** Running training *****
+11/06/2023 08:47:20 - INFO - __main__ -   Num examples = 151736
+11/06/2023 08:47:20 - INFO - __main__ -   Num Epochs = 20
+11/06/2023 08:47:20 - INFO - __main__ -   Instantaneous batch size per device = 16
+11/06/2023 08:47:20 - INFO - __main__ -   Total train batch size (w. parallel, distributed & accumulation) = 96
+11/06/2023 08:47:20 - INFO - __main__ -   Gradient Accumulation steps = 1
+11/06/2023 08:47:20 - INFO - __main__ -   Total optimization steps = 31620
+
+  0%|                                                                                                                                                              | 1/31620 [00:04<39:26:10,  4.49s/it]11/06/2023 08:47:25 - INFO - __main__ -   Step: 1, LR: 2.1089630931458703e-08, Loss: 5.159417152404785
+  0%|                                                                                                                                                              | 2/31620 [00:08<36:50:12,  4.19s/it]11/06/2023 08:47:29 - INFO - __main__ -   Step: 2, LR: 4.2179261862917406e-08, Loss: 5.215230941772461
+  0%|                                                                                                                                                              | 3/31620 [00:12<35:59:11,  4.10s/it]11/06/2023 08:47:33 - INFO - __main__ -   Step: 3, LR: 6.32688927943761e-08, Loss: 5.253842830657959
+  0%|                                                                                                                                                              | 4/31620 [00:16<35:36:42,  4.05s/it]11/06/2023 08:47:37 - INFO - __main__ -   Step: 4, LR: 8.435852372583481e-08, Loss: 5.241166114807129
+  0%|                                                                                                                                                              | 5/31620 [00:20<35:23:49,  4.03s/it]11/06/2023 08:47:41 - INFO - __main__ -   Step: 5, LR: 1.0544815465729351e-07, Loss: 5.1369218826293945
+  0%|                                                                                                                                                              | 6/31620 [00:24<35:15:09,  4.01s/it]11/06/2023 08:47:45 - INFO - __main__ -   Step: 6, LR: 1.265377855887522e-07, Loss: 5.216905117034912
+  0%|                                                                                                                                                              | 7/31620 [00:28<35:10:42,  4.01s/it]11/06/2023 08:47:49 - INFO - __main__ -   Step: 7, LR: 1.476274165202109e-07, Loss: 5.157536506652832
+  0%|                                                                                                                                                              | 8/31620 [00:32<35:07:37,  4.00s/it]11/06/2023 08:47:53 - INFO - __main__ -   Step: 8, LR: 1.6871704745166963e-07, Loss: 5.170233726501465
+  0%|                                                                                                                                                              | 9/31620 [00:36<35:07:08,  4.00s/it]11/06/2023 08:47:57 - INFO - __main__ -   Step: 9, LR: 1.898066783831283e-07, Loss: 5.102843284606934
+  0%|                                                                                                                                                             | 10/31620 [00:40<35:05:43,  4.00s/it]11/06/2023 08:48:01 - INFO - __main__ -   Step: 10, LR: 2.1089630931458702e-07, Loss: 5.170587539672852
+11/06/2023 08:48:01 - INFO - __main__ - Start doing evaluation at step: 10
+
+
+
+11/06/2023 08:48:19 - INFO - __main__ -  [Validation] Step: 10, Scores: {"accuracy": 0.0, "Positive_Precision": 0.0, "Positive_Recall": 0.0, "Positive_F1": 0.0, "Negative_Precision": 0.0, "Negative_Recall": 0.0, "Negative_F1": 0.0}
+11/06/2023 08:48:19 - INFO - __main__ - Start doing evaluation at step: 10
+  0%|                                                                                                                                                                            | 0/20 [00:00<?, ?it/s]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+11/06/2023 08:50:24 - INFO - __main__ -  [Test] Step: 10, Scores: {"accuracy": 0.0, "Positive_Precision": 0.0, "Positive_Recall": 0.0, "Positive_F1": 0.0, "Negative_Precision": 0.0, "Negative_Recall": 0.0, "Negative_F1": 0.0}
+[2023-11-06 08:50:29,176] [WARNING] [stage3.py:1898:step] 1 pytorch allocator cache flushes since last step. this happens when there is high memory pressure and is detrimental to performance. if this is happening frequently consider adjusting settings to reduce memory consumption. If you are unable to make the cache flushes go away consider adding get_accelerator().empty_cache() calls in your training loop to ensure that all ranks flush their caches at the same time
+  0%|                                                                                                                                                            | 11/31620 [03:08<422:27:25, 48.11s/it]11/06/2023 08:50:29 - INFO - __main__ -   Step: 11, LR: 2.319859402460457e-07, Loss: 5.124236106872559
+  0%|                                                                                                                                                            | 12/31620 [03:12<304:34:39, 34.69s/it]11/06/2023 08:50:33 - INFO - __main__ -   Step: 12, LR: 2.530755711775044e-07, Loss: 4.930319309234619
+  0%|                                                                                                                                                            | 13/31620 [03:16<222:55:16, 25.39s/it]11/06/2023 08:50:37 - INFO - __main__ -   Step: 13, LR: 2.7416520210896315e-07, Loss: 4.946343421936035
+  0%|                                                                                                                                                            | 14/31620 [03:20<166:09:50, 18.93s/it]11/06/2023 08:50:41 - INFO - __main__ -   Step: 14, LR: 2.952548330404218e-07, Loss: 4.895387649536133
+  0%|                                                                                                                                                            | 15/31620 [03:24<126:37:36, 14.42s/it]11/06/2023 08:50:45 - INFO - __main__ -   Step: 15, LR: 3.1634446397188055e-07, Loss: 4.903898239135742
+  0%|                                                                                                                                                             | 16/31620 [03:28<99:01:56, 11.28s/it]11/06/2023 08:50:49 - INFO - __main__ -   Step: 16, LR: 3.3743409490333925e-07, Loss: 4.602872371673584
+  0%|                                                                                                                                                             | 17/31620 [03:32<79:45:18,  9.09s/it]11/06/2023 08:50:53 - INFO - __main__ -   Step: 17, LR: 3.585237258347979e-07, Loss: 4.5378265380859375
+  0%|                                                                                                                                                             | 18/31620 [03:36<66:18:13,  7.55s/it]11/06/2023 08:50:57 - INFO - __main__ -   Step: 18, LR: 3.796133567662566e-07, Loss: 4.500992774963379
+  0%|                                                                                                                                                             | 19/31620 [03:40<56:54:07,  6.48s/it]11/06/2023 08:51:01 - INFO - __main__ -   Step: 19, LR: 4.007029876977153e-07, Loss: 4.455623149871826
+  0%|                                                                                                                                                             | 20/31620 [03:44<50:19:37,  5.73s/it]11/06/2023 08:51:05 - INFO - __main__ -   Step: 20, LR: 4.2179261862917405e-07, Loss: 4.4963603019714355
+11/06/2023 08:51:05 - INFO - __main__ - Start doing evaluation at step: 20
+
+
+
+ 75%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▊                                         | 3/4 [00:14<00:04,  4.62s/it]
+11/06/2023 08:51:23 - INFO - __main__ -  [Validation] Step: 20, Scores: {"accuracy": 0.0, "Positive_Precision": 0.0, "Positive_Recall": 0.0, "Positive_F1": 0.0, "Negative_Precision": 0.0, "Negative_Recall": 0.0, "Negative_F1": 0.0}
+11/06/2023 08:51:23 - INFO - __main__ - Start doing evaluation at step: 20
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+11/06/2023 08:53:28 - INFO - __main__ -  [Test] Step: 20, Scores: {"accuracy": 0.0, "Positive_Precision": 0.0, "Positive_Recall": 0.0, "Positive_F1": 0.0, "Negative_Precision": 0.0, "Negative_Recall": 0.0, "Negative_F1": 0.0}
+[2023-11-06 08:53:33,573] [WARNING] [stage3.py:1898:step] 1 pytorch allocator cache flushes since last step. this happens when there is high memory pressure and is detrimental to performance. if this is happening frequently consider adjusting settings to reduce memory consumption. If you are unable to make the cache flushes go away consider adding get_accelerator().empty_cache() calls in your training loop to ensure that all ranks flush their caches at the same time
+  0%|                                                                                                                                                            | 21/31620 [06:12<426:31:17, 48.59s/it]11/06/2023 08:53:33 - INFO - __main__ -   Step: 21, LR: 4.4288224956063275e-07, Loss: 3.9086966514587402
+  0%|                                                                                                                                                            | 22/31620 [06:16<309:01:39, 35.21s/it]11/06/2023 08:53:37 - INFO - __main__ -   Step: 22, LR: 4.639718804920914e-07, Loss: 3.9248008728027344
+  0%|                                                                                                                                                            | 23/31620 [06:20<226:47:46, 25.84s/it]11/06/2023 08:53:41 - INFO - __main__ -   Step: 23, LR: 4.850615114235501e-07, Loss: 3.892996311187744
+Traceback (most recent call last):
+  File "./open_instruct/open_instruct/finetune_val.py", line 923, in <module>
+    main()
+  File "./open_instruct/open_instruct/finetune_val.py", line 782, in main
+    outputs = model(**batch, use_cache=False)
+  File "/local1/ponienkung/miniconda3/envs/tulu/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1501, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/local1/ponienkung/miniconda3/envs/tulu/lib/python3.8/site-packages/deepspeed/utils/nvtx.py", line 15, in wrapped_fn
+    ret_val = func(*args, **kwargs)
+  File "/local1/ponienkung/miniconda3/envs/tulu/lib/python3.8/site-packages/deepspeed/runtime/engine.py", line 1769, in forward
+    loss = self.module(*inputs, **kwargs)
+  File "/local1/ponienkung/miniconda3/envs/tulu/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1538, in _call_impl
+    result = forward_call(*args, **kwargs)
+  File "/local1/ponienkung/miniconda3/envs/tulu/lib/python3.8/site-packages/transformers/models/llama/modeling_llama.py", line 806, in forward
+    outputs = self.model(
+  File "/local1/ponienkung/miniconda3/envs/tulu/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1538, in _call_impl
+    result = forward_call(*args, **kwargs)
+  File "/local1/ponienkung/miniconda3/envs/tulu/lib/python3.8/site-packages/transformers/models/llama/modeling_llama.py", line 693, in forward
+    layer_outputs = decoder_layer(
+  File "/local1/ponienkung/miniconda3/envs/tulu/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1538, in _call_impl
+    result = forward_call(*args, **kwargs)
+  File "/local1/ponienkung/miniconda3/envs/tulu/lib/python3.8/site-packages/transformers/models/llama/modeling_llama.py", line 408, in forward
+    hidden_states, self_attn_weights, present_key_value = self.self_attn(
+  File "/local1/ponienkung/miniconda3/envs/tulu/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1538, in _call_impl
+    result = forward_call(*args, **kwargs)
+  File "/local1/ponienkung/miniconda3/envs/tulu/lib/python3.8/site-packages/transformers/models/llama/modeling_llama.py", line 307, in forward
+    value_states = self.v_proj(hidden_states)
+  File "/local1/ponienkung/miniconda3/envs/tulu/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    result = hook(self, args)
+  File "/local1/ponienkung/miniconda3/envs/tulu/lib/python3.8/site-packages/deepspeed/utils/nvtx.py", line 15, in wrapped_fn
+    ret_val = func(*args, **kwargs)
+  File "/local1/ponienkung/miniconda3/envs/tulu/lib/python3.8/site-packages/deepspeed/runtime/zero/parameter_offload.py", line 382, in _pre_forward_module_hook
+    self.pre_sub_module_forward_function(module)
+  File "/local1/ponienkung/miniconda3/envs/tulu/lib/python3.8/site-packages/torch/utils/_contextlib.py", line 115, in decorate_context
+    return func(*args, **kwargs)
+  File "/local1/ponienkung/miniconda3/envs/tulu/lib/python3.8/site-packages/deepspeed/runtime/zero/parameter_offload.py", line 494, in pre_sub_module_forward_function
+    param_coordinator.fetch_sub_module(sub_module, forward=True)
+  File "/local1/ponienkung/miniconda3/envs/tulu/lib/python3.8/site-packages/deepspeed/utils/nvtx.py", line 15, in wrapped_fn
+    ret_val = func(*args, **kwargs)
+  File "/local1/ponienkung/miniconda3/envs/tulu/lib/python3.8/site-packages/torch/utils/_contextlib.py", line 115, in decorate_context
+    return func(*args, **kwargs)
+  File "/local1/ponienkung/miniconda3/envs/tulu/lib/python3.8/site-packages/deepspeed/runtime/zero/partitioned_param_coordinator.py", line 295, in fetch_sub_module
+    self.__ongoing_fetch_events.popleft().synchronize()
+  File "/local1/ponienkung/miniconda3/envs/tulu/lib/python3.8/site-packages/torch/cuda/streams.py", line 219, in synchronize
+    super().synchronize()
+KeyboardInterrupt
