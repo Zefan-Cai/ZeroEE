@@ -294,13 +294,7 @@ def encode_with_prompt_completion_format_val(example, tokenizer, max_seq_length)
     else:
         example_text = example['prompt'] + example['completion']
         
-    print(f"debug trigger {example['trigger']}")    
     trigger = tokenizer(example['trigger'], return_tensors='pt', max_length=2, truncation=True).input_ids
-    print(f"debug trigger idx {trigger}")
-    
-    # print(f"debug labels {labels}")
-        
-    # print(f"debug trigger {trigger}")
         
     example_text = example_text + tokenizer.eos_token
     tokenized_example = tokenizer(example_text, return_tensors='pt', max_length=max_seq_length, truncation=True)
@@ -311,7 +305,6 @@ def encode_with_prompt_completion_format_val(example, tokenizer, max_seq_length)
     labels[:, :tokenized_prompt.input_ids.shape[1]] = -100
     attention_mask = torch.ones_like(input_ids)
     
-    # print(f"debug input_ids {input_ids}")
     
     return {
         'input_ids': input_ids.flatten(),
@@ -530,9 +523,6 @@ def main():
             desc="Tokenizing and reformatting instruction data",
         )
         lm_datasets_val.set_format(type="pt")
-    
-    test_data = lm_datasets_val["val"][1]
-    print(f"debug lm_datasets_val val {test_data}")
     
     
     val_dataset = lm_datasets_val["val"]
