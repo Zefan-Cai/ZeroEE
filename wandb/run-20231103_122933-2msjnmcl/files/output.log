@@ -1,7 +1,0 @@
-11/03/2023 12:29:37 - INFO - __main__ - ***** Running training *****
-11/03/2023 12:29:37 - INFO - __main__ -   Num examples = 345548
-11/03/2023 12:29:37 - INFO - __main__ -   Num Epochs = 20
-11/03/2023 12:29:37 - INFO - __main__ -   Instantaneous batch size per device = 16
-11/03/2023 12:29:37 - INFO - __main__ -   Total train batch size (w. parallel, distributed & accumulation) = 960
-11/03/2023 12:29:37 - INFO - __main__ -   Gradient Accumulation steps = 10
-11/03/2023 12:29:37 - INFO - __main__ -   Total optimization steps = 7200
