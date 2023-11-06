@@ -1,8 +1,8 @@
 export CUDA_VISIBLE_DEVICES="0,1,2,3,4,5"
 
 MODEL_PATH="/local1/zefan/models/Llama-2-7b-hf/"
-OUTPUT_NAME=Llama2_GenData_1definitions_200/
-TRAIN_FILE="/local1/zefan/data/generated_data/train_1definitions_200.json"
+OUTPUT_NAME=Llama2_GenData_1definitions_400/
+TRAIN_FILE="/local1/zefan/data/generated_data/train_1definitions_400.json"
 VAL_FILE="/local1/zefan/data/generated_data/val_1definitions.json"
 TEST_FILE="/local1/zefan/data/ace_v2/ACE_valid_GenerationStyle_trigger.json"
 REPORT_TAGS="CtrlGen"
