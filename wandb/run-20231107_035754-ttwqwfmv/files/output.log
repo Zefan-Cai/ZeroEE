@@ -1,0 +1,29 @@
+11/07/2023 03:57:56 - INFO - __main__ - ***** Running training *****
+11/07/2023 03:57:56 - INFO - __main__ -   Num examples = 151736
+11/07/2023 03:57:56 - INFO - __main__ -   Num Epochs = 20
+11/07/2023 03:57:56 - INFO - __main__ -   Instantaneous batch size per device = 16
+11/07/2023 03:57:56 - INFO - __main__ -   Total train batch size (w. parallel, distributed & accumulation) = 96
+11/07/2023 03:57:56 - INFO - __main__ -   Gradient Accumulation steps = 1
+11/07/2023 03:57:56 - INFO - __main__ -   Total optimization steps = 31620
+
+  0%|                                                                                                                                                              | 1/31620 [00:05<45:51:13,  5.22s/it]11/07/2023 03:58:01 - INFO - __main__ -   Step: 1, LR: 2.1089630931458703e-08, Loss: 5.133994102478027
+  0%|                                                                                                                                                              | 2/31620 [00:09<39:28:26,  4.49s/it]11/07/2023 03:58:05 - INFO - __main__ -   Step: 2, LR: 4.2179261862917406e-08, Loss: 5.210137367248535
+  0%|                                                                                                                                                              | 3/31620 [00:13<37:25:14,  4.26s/it]11/07/2023 03:58:09 - INFO - __main__ -   Step: 3, LR: 6.32688927943761e-08, Loss: 5.106597423553467
+  0%|                                                                                                                                                              | 4/31620 [00:17<36:29:44,  4.16s/it]11/07/2023 03:58:13 - INFO - __main__ -   Step: 4, LR: 8.435852372583481e-08, Loss: 5.220107078552246
+11/07/2023 03:58:14 - INFO - __main__ - Start doing evaluation at step: 4
+
+
+
+Traceback (most recent call last):████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 4/4 [00:18<00:00,  4.34s/it]
+  File "./open_instruct/open_instruct/finetune_val.py", line 923, in <module>
+    main()
+  File "./open_instruct/open_instruct/finetune_val.py", line 836, in main
+    scores = scores_metric.compute()
+  File "/local1/ponienkung/miniconda3/envs/tulu/lib/python3.8/site-packages/datasets/metric.py", line 453, in compute
+    output = self._compute(**inputs, **compute_kwargs)
+  File "/home/ponienkung/.cache/huggingface/modules/datasets_modules/metrics/compute_score/b5ecece48c0ddad349f6bc3df931a7fa9a94d6b73f711a136b04180c62a14e4c/compute_score.py", line 30, in _compute
+    scores = self._scores(predictions, references)
+  File "/home/ponienkung/.cache/huggingface/modules/datasets_modules/metrics/compute_score/b5ecece48c0ddad349f6bc3df931a7fa9a94d6b73f711a136b04180c62a14e4c/compute_score.py", line 86, in _scores
+    gold_set = set(gold_trigger)
+TypeError: 'int' object is not iterable
+finish inference

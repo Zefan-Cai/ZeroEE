@@ -1,0 +1,16 @@
+11/06/2023 18:45:17 - INFO - __main__ - ***** Running training *****
+11/06/2023 18:45:17 - INFO - __main__ -   Num examples = 151736
+11/06/2023 18:45:17 - INFO - __main__ -   Num Epochs = 20
+11/06/2023 18:45:17 - INFO - __main__ -   Instantaneous batch size per device = 16
+11/06/2023 18:45:17 - INFO - __main__ -   Total train batch size (w. parallel, distributed & accumulation) = 96
+11/06/2023 18:45:17 - INFO - __main__ -   Gradient Accumulation steps = 1
+11/06/2023 18:45:17 - INFO - __main__ -   Total optimization steps = 31620
+  0%|                                                                                                                | 0/31620 [00:00<?, ?it/s]Traceback (most recent call last):
+  File "./open_instruct/open_instruct/finetune_val.py", line 913, in <module>
+    main()
+  File "./open_instruct/open_instruct/finetune_val.py", line 678, in main
+    accelerator.load_state(checkpoint_path)
+  File "/local1/ponienkung/miniconda3/envs/tulu/lib/python3.8/site-packages/accelerate/accelerator.py", line 2650, in load_state
+    raise ValueError(f"Tried to find {input_dir} but folder does not exist")
+ValueError: Tried to find /local1/zefan/ZeroEE/output/Llama-2-7b-geneva-20-96-2000/epoch_29 but folder does not exist
+Resumed from checkpoint: /local1/zefan/ZeroEE/output/Llama-2-7b-geneva-20-96-2000/epoch_29

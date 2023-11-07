@@ -1,1 +1,1 @@
-{"learning_rate": 1.5827654429544956e-07, "train_loss": 5.145843505859375, "_timestamp": 1699290751.58733, "_runtime": 74.74235320091248, "_step": 18}
+{"learning_rate": 1.8317912040845466e-05, "train_loss": 0.0005664575728587806, "_timestamp": 1699324756.9533565, "_runtime": 34080.10837960243, "_step": 8460, "accuracy": 0.0607421875, "Positive_Precision": 0.0, "Positive_Recall": 0.0, "Positive_F1": 0.0, "Negative_Precision": 0.7775, "Negative_Recall": 0.06181673623534089, "Negative_F1": 0.11452771128705579, "_wandb": {"runtime": 34080}}

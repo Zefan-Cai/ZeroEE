@@ -1,0 +1,67 @@
+11/07/2023 03:50:55 - INFO - __main__ - ***** Running training *****
+11/07/2023 03:50:55 - INFO - __main__ -   Num examples = 151736
+11/07/2023 03:50:55 - INFO - __main__ -   Num Epochs = 20
+11/07/2023 03:50:55 - INFO - __main__ -   Instantaneous batch size per device = 16
+11/07/2023 03:50:55 - INFO - __main__ -   Total train batch size (w. parallel, distributed & accumulation) = 96
+11/07/2023 03:50:55 - INFO - __main__ -   Gradient Accumulation steps = 1
+11/07/2023 03:50:55 - INFO - __main__ -   Total optimization steps = 31620
+  0%|                                                                                                                                                              | 1/31620 [00:05<45:49:32,  5.22s/it]11/07/2023 03:51:00 - INFO - __main__ -   Step: 1, LR: 2.1089630931458703e-08, Loss: 5.133994102478027
+11/07/2023 03:51:00 - INFO - __main__ - args.eval_steps is None. Set to do eval after each epoch, which is 1581
+  0%|                                                                                                                                                              | 2/31620 [00:09<39:27:17,  4.49s/it]11/07/2023 03:51:04 - INFO - __main__ -   Step: 2, LR: 4.2179261862917406e-08, Loss: 5.210137367248535
+  0%|                                                                                                                                                              | 3/31620 [00:13<37:24:59,  4.26s/it]11/07/2023 03:51:08 - INFO - __main__ -   Step: 3, LR: 6.32688927943761e-08, Loss: 5.106597423553467
+  0%|                                                                                                                                                              | 4/31620 [00:17<36:30:25,  4.16s/it]11/07/2023 03:51:12 - INFO - __main__ -   Step: 4, LR: 8.435852372583481e-08, Loss: 5.220107078552246
+  0%|                                                                                                                                                              | 5/31620 [00:21<35:57:56,  4.10s/it]11/07/2023 03:51:16 - INFO - __main__ -   Step: 5, LR: 1.0544815465729351e-07, Loss: 5.122631072998047
+  0%|                                                                                                                                                              | 6/31620 [00:25<35:40:17,  4.06s/it]11/07/2023 03:51:20 - INFO - __main__ -   Step: 6, LR: 1.265377855887522e-07, Loss: 5.320531845092773
+  0%|                                                                                                                                                              | 7/31620 [00:29<35:26:10,  4.04s/it]11/07/2023 03:51:24 - INFO - __main__ -   Step: 7, LR: 1.476274165202109e-07, Loss: 5.357615947723389
+Error in sys.excepthook:
+Traceback (most recent call last):
+  File "/local1/ponienkung/miniconda3/envs/tulu/lib/python3.8/site-packages/wandb/sdk/lib/exit_hooks.py", line 41, in exc_handler
+    def exc_handler(
+KeyboardInterrupt
+Original exception was:
+Traceback (most recent call last):
+  File "./open_instruct/open_instruct/finetune_val.py", line 923, in <module>
+    main()
+  File "./open_instruct/open_instruct/finetune_val.py", line 772, in main
+    outputs = model(**batch, use_cache=False)
+  File "/local1/ponienkung/miniconda3/envs/tulu/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1501, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/local1/ponienkung/miniconda3/envs/tulu/lib/python3.8/site-packages/deepspeed/utils/nvtx.py", line 15, in wrapped_fn
+    ret_val = func(*args, **kwargs)
+  File "/local1/ponienkung/miniconda3/envs/tulu/lib/python3.8/site-packages/deepspeed/runtime/engine.py", line 1769, in forward
+    loss = self.module(*inputs, **kwargs)
+  File "/local1/ponienkung/miniconda3/envs/tulu/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1538, in _call_impl
+    result = forward_call(*args, **kwargs)
+  File "/local1/ponienkung/miniconda3/envs/tulu/lib/python3.8/site-packages/transformers/models/llama/modeling_llama.py", line 806, in forward
+    outputs = self.model(
+  File "/local1/ponienkung/miniconda3/envs/tulu/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1538, in _call_impl
+    result = forward_call(*args, **kwargs)
+  File "/local1/ponienkung/miniconda3/envs/tulu/lib/python3.8/site-packages/transformers/models/llama/modeling_llama.py", line 693, in forward
+    layer_outputs = decoder_layer(
+  File "/local1/ponienkung/miniconda3/envs/tulu/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1538, in _call_impl
+    result = forward_call(*args, **kwargs)
+  File "/local1/ponienkung/miniconda3/envs/tulu/lib/python3.8/site-packages/transformers/models/llama/modeling_llama.py", line 421, in forward
+    hidden_states = self.mlp(hidden_states)
+  File "/local1/ponienkung/miniconda3/envs/tulu/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1538, in _call_impl
+    result = forward_call(*args, **kwargs)
+  File "/local1/ponienkung/miniconda3/envs/tulu/lib/python3.8/site-packages/transformers/models/llama/modeling_llama.py", line 216, in forward
+    down_proj = self.down_proj(self.act_fn(self.gate_proj(x)) * self.up_proj(x))
+  File "/local1/ponienkung/miniconda3/envs/tulu/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    result = hook(self, args)
+  File "/local1/ponienkung/miniconda3/envs/tulu/lib/python3.8/site-packages/deepspeed/utils/nvtx.py", line 15, in wrapped_fn
+    ret_val = func(*args, **kwargs)
+  File "/local1/ponienkung/miniconda3/envs/tulu/lib/python3.8/site-packages/deepspeed/runtime/zero/parameter_offload.py", line 382, in _pre_forward_module_hook
+    self.pre_sub_module_forward_function(module)
+  File "/local1/ponienkung/miniconda3/envs/tulu/lib/python3.8/site-packages/torch/utils/_contextlib.py", line 115, in decorate_context
+    return func(*args, **kwargs)
+  File "/local1/ponienkung/miniconda3/envs/tulu/lib/python3.8/site-packages/deepspeed/runtime/zero/parameter_offload.py", line 494, in pre_sub_module_forward_function
+    param_coordinator.fetch_sub_module(sub_module, forward=True)
+  File "/local1/ponienkung/miniconda3/envs/tulu/lib/python3.8/site-packages/deepspeed/utils/nvtx.py", line 15, in wrapped_fn
+    ret_val = func(*args, **kwargs)
+  File "/local1/ponienkung/miniconda3/envs/tulu/lib/python3.8/site-packages/torch/utils/_contextlib.py", line 115, in decorate_context
+    return func(*args, **kwargs)
+  File "/local1/ponienkung/miniconda3/envs/tulu/lib/python3.8/site-packages/deepspeed/runtime/zero/partitioned_param_coordinator.py", line 295, in fetch_sub_module
+    self.__ongoing_fetch_events.popleft().synchronize()
+  File "/local1/ponienkung/miniconda3/envs/tulu/lib/python3.8/site-packages/torch/cuda/streams.py", line 219, in synchronize
+    super().synchronize()
+KeyboardInterrupt

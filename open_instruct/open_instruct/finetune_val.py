@@ -834,10 +834,15 @@ def main():
                                 scores_metric.add_batch(predictions=batch_predict, references=val_gt)
                             print(f"finish inference")
                             scores = scores_metric.compute()
-                            logger.info(f" [Validation] Step: {completed_steps}, Scores: {json.dumps(scores)}")
+                            
+                            report_scores = {}
+                            for key in scores:
+                                report_scores[f"val_{key}"] = scores[key]
+                            
+                            logger.info(f" [Validation] Step: {completed_steps}, Scores: {json.dumps(report_scores)}")
                             if args.with_tracking:
                                 accelerator.log(
-                                    scores,
+                                    report_scores,
                                     step=completed_steps,
                                 )
                         model.train()
@@ -867,10 +872,15 @@ def main():
                             # scores = compute_metric(predictions, test_ground_truth, split = "test")
                                 scores_metric.add_batch(predictions=batch_predict, references=test_gt)
                             scores = scores_metric.compute()
-                            logger.info(f" [Test] Step: {completed_steps}, Scores: {json.dumps(scores)}")
+                            
+                            report_scores = {}
+                            for key in scores:
+                                report_scores[f"test_{key}"] = scores[key]
+                            
+                            logger.info(f" [Test] Step: {completed_steps}, Scores: {json.dumps(report_scores)}")
                             if args.with_tracking:
                                 accelerator.log(
-                                    scores,
+                                    report_scores,
                                     step=completed_steps,
                                 )
                         model.train()

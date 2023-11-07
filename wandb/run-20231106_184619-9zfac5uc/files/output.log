@@ -1,0 +1,31 @@
+
+Resumed from checkpoint: /local1/zefan/output/Llama-2-7b-geneva-20-96-2000/epoch_29
+11/06/2023 18:46:22 - INFO - __main__ - ***** Running training *****
+11/06/2023 18:46:22 - INFO - __main__ -   Num examples = 151736
+11/06/2023 18:46:22 - INFO - __main__ -   Num Epochs = 20
+11/06/2023 18:46:22 - INFO - __main__ -   Instantaneous batch size per device = 16
+11/06/2023 18:46:22 - INFO - __main__ -   Total train batch size (w. parallel, distributed & accumulation) = 96
+11/06/2023 18:46:22 - INFO - __main__ -   Gradient Accumulation steps = 1
+11/06/2023 18:46:22 - INFO - __main__ -   Total optimization steps = 31620
+  0%|                                                                                                                | 0/31620 [00:00<?, ?it/s]11/06/2023 18:46:22 - INFO - accelerate.accelerator - Loading states from /local1/zefan/output/Llama-2-7b-geneva-20-96-2000/epoch_29
+11/06/2023 18:46:22 - INFO - accelerate.accelerator - Loading DeepSpeed Model and Optimizer
+Traceback (most recent call last):
+  File "./open_instruct/open_instruct/finetune_val.py", line 913, in <module>
+    main()
+  File "./open_instruct/open_instruct/finetune_val.py", line 678, in main
+    accelerator.load_state(checkpoint_path)
+  File "/local1/ponienkung/miniconda3/envs/tulu/lib/python3.8/site-packages/accelerate/accelerator.py", line 2663, in load_state
+    model.load_checkpoint(input_dir, ckpt_id, **load_model_func_kwargs)
+  File "/local1/ponienkung/miniconda3/envs/tulu/lib/python3.8/site-packages/deepspeed/runtime/engine.py", line 2645, in load_checkpoint
+    load_path, client_states = self._load_checkpoint(load_dir,
+  File "/local1/ponienkung/miniconda3/envs/tulu/lib/python3.8/site-packages/deepspeed/runtime/engine.py", line 2676, in _load_checkpoint
+    sd_loader = SDLoaderFactory.get_sd_loader(ckpt_list, checkpoint_engine=self.checkpoint_engine)
+  File "/local1/ponienkung/miniconda3/envs/tulu/lib/python3.8/site-packages/deepspeed/runtime/state_dict_factory.py", line 43, in get_sd_loader
+    return MegatronSDLoader(ckpt_list, version, checkpoint_engine)
+  File "/local1/ponienkung/miniconda3/envs/tulu/lib/python3.8/site-packages/deepspeed/runtime/state_dict_factory.py", line 193, in __init__
+    super().__init__(ckpt_list, version, checkpoint_engine)
+  File "/local1/ponienkung/miniconda3/envs/tulu/lib/python3.8/site-packages/deepspeed/runtime/state_dict_factory.py", line 55, in __init__
+    self.check_ckpt_list()
+  File "/local1/ponienkung/miniconda3/envs/tulu/lib/python3.8/site-packages/deepspeed/runtime/state_dict_factory.py", line 168, in check_ckpt_list
+    assert len(self.ckpt_list) > 0
+AssertionError
