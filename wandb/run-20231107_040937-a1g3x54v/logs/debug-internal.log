@@ -846,3 +846,32 @@
 2023-11-07 04:16:57,400 INFO    Thread-12 :4163968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20231107_040937-a1g3x54v/files/wandb-summary.json
 2023-11-07 04:16:57,401 INFO    Thread-12 :4163968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20231107_040937-a1g3x54v/files/output.log
 2023-11-07 04:16:59,440 DEBUG   HandlerThread:4163968 [handler.py:handle_request():144] handle_request: status_report
+2023-11-07 04:17:00,421 DEBUG   HandlerThread:4163968 [handler.py:handle_request():144] handle_request: partial_history
+2023-11-07 04:17:00,423 DEBUG   SenderThread:4163968 [sender.py:send():379] send: history
+2023-11-07 04:17:00,423 DEBUG   SenderThread:4163968 [sender.py:send_request():406] send_request: summary_record
+2023-11-07 04:17:00,423 INFO    SenderThread:4163968 [sender.py:_save_file():1375] saving file wandb-summary.json with policy end
+2023-11-07 04:17:01,402 INFO    Thread-12 :4163968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20231107_040937-a1g3x54v/files/wandb-summary.json
+2023-11-07 04:17:01,402 INFO    Thread-12 :4163968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20231107_040937-a1g3x54v/files/output.log
+2023-11-07 04:17:04,480 DEBUG   HandlerThread:4163968 [handler.py:handle_request():144] handle_request: status_report
+2023-11-07 04:17:04,480 DEBUG   HandlerThread:4163968 [handler.py:handle_request():144] handle_request: partial_history
+2023-11-07 04:17:04,481 DEBUG   SenderThread:4163968 [sender.py:send():379] send: history
+2023-11-07 04:17:04,481 DEBUG   SenderThread:4163968 [sender.py:send_request():406] send_request: summary_record
+2023-11-07 04:17:04,482 INFO    SenderThread:4163968 [sender.py:_save_file():1375] saving file wandb-summary.json with policy end
+2023-11-07 04:17:05,404 INFO    Thread-12 :4163968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20231107_040937-a1g3x54v/files/wandb-summary.json
+2023-11-07 04:17:05,404 INFO    Thread-12 :4163968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20231107_040937-a1g3x54v/files/output.log
+2023-11-07 04:17:08,303 DEBUG   SenderThread:4163968 [sender.py:send():379] send: stats
+2023-11-07 04:17:08,471 DEBUG   HandlerThread:4163968 [handler.py:handle_request():144] handle_request: partial_history
+2023-11-07 04:17:08,473 DEBUG   SenderThread:4163968 [sender.py:send():379] send: history
+2023-11-07 04:17:08,473 DEBUG   SenderThread:4163968 [sender.py:send_request():406] send_request: summary_record
+2023-11-07 04:17:08,473 INFO    SenderThread:4163968 [sender.py:_save_file():1375] saving file wandb-summary.json with policy end
+2023-11-07 04:17:09,406 INFO    Thread-12 :4163968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20231107_040937-a1g3x54v/files/wandb-summary.json
+2023-11-07 04:17:09,407 INFO    Thread-12 :4163968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20231107_040937-a1g3x54v/files/output.log
+2023-11-07 04:17:10,256 DEBUG   HandlerThread:4163968 [handler.py:handle_request():144] handle_request: stop_status
+2023-11-07 04:17:10,258 DEBUG   SenderThread:4163968 [sender.py:send_request():406] send_request: stop_status
+2023-11-07 04:17:10,433 DEBUG   HandlerThread:4163968 [handler.py:handle_request():144] handle_request: status_report
+2023-11-07 04:17:12,465 DEBUG   HandlerThread:4163968 [handler.py:handle_request():144] handle_request: partial_history
+2023-11-07 04:17:12,467 DEBUG   SenderThread:4163968 [sender.py:send():379] send: history
+2023-11-07 04:17:12,467 DEBUG   SenderThread:4163968 [sender.py:send_request():406] send_request: summary_record
+2023-11-07 04:17:12,468 INFO    SenderThread:4163968 [sender.py:_save_file():1375] saving file wandb-summary.json with policy end
+2023-11-07 04:17:13,408 INFO    Thread-12 :4163968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20231107_040937-a1g3x54v/files/wandb-summary.json
+2023-11-07 04:17:13,408 INFO    Thread-12 :4163968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20231107_040937-a1g3x54v/files/output.log
