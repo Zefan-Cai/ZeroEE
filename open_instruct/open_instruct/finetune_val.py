@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # coding=utf-8
 
+import copy
 import argparse
 import logging
 import math
@@ -18,6 +19,10 @@ from torch.utils.data import DataLoader
 from datasets import load_dataset,Features,Value
 from tqdm.auto import tqdm
 import json
+from datasets import load_metric
+
+
+import numpy as np
 
 from sklearn.metrics import (
     classification_report
@@ -266,6 +271,8 @@ def encode_with_prompt_completion_format(example, tokenizer, max_seq_length):
         example_text = example['prompt'] + ' ' + example['completion']
     else:
         example_text = example['prompt'] + example['completion']
+        
+        
     example_text = example_text + tokenizer.eos_token
     tokenized_example = tokenizer(example_text, return_tensors='pt', max_length=max_seq_length, truncation=True)
     input_ids = tokenized_example.input_ids
@@ -280,65 +287,34 @@ def encode_with_prompt_completion_format(example, tokenizer, max_seq_length):
         'attention_mask': attention_mask.flatten(),
     }
 
-
-# def encode_with_messages_format(example, tokenizer, max_seq_length):
-#     '''
-#     Here we assume each example has a 'messages' field Each message is a dict with 'role' and 'content' fields.
-#     We concatenate all messages with the roles as delimiters and tokenize them together.
-#     '''
-#     messages = example['messages']
-#     if len(messages) == 0:
-#         raise ValueError('messages field is empty.')
-    
-#     def _concat_messages(messages):
-#         message_text = ""
-#         for message in messages:
-#             if message["role"] == "system":
-#                 message_text += "<|system|>\n" + message["content"].strip() + "\n"
-#             elif message["role"] == "user":
-#                 message_text += "<|user|>\n" + message["content"].strip() + "\n"
-#             elif message["role"] == "assistant":
-#                 message_text += "<|assistant|>\n" + message["content"].strip() + tokenizer.eos_token + "\n"
-#             else:
-#                 raise ValueError("Invalid role: {}".format(message["role"]))
-#         return message_text
+def encode_with_prompt_completion_format_val(example, tokenizer, max_seq_length):
+    # if prompt doesn't end with space and completion doesn't start with space, add space
+    if not example['prompt'].endswith((' ', '\n', '\t')) and not example['completion'].startswith((' ', '\n', '\t')):
+        example_text = example['prompt'] + ' ' + example['completion']
+    else:
+        example_text = example['prompt'] + example['completion']
         
-#     example_text = _concat_messages(messages).strip()
-#     tokenized_example = tokenizer(example_text, return_tensors='pt', max_length=max_seq_length, truncation=True)
-#     input_ids = tokenized_example.input_ids
-#     labels = input_ids.clone()
+    trigger = tokenizer(example['trigger'], return_tensors='pt', max_length=2, truncation=True).input_ids
+        
+    example_text = example_text + tokenizer.eos_token
+    tokenized_example = tokenizer(example_text, return_tensors='pt', max_length=max_seq_length, truncation=True)
+    input_ids = tokenized_example.input_ids
+    labels = input_ids.clone()
+    tokenized_prompt = tokenizer(example['prompt'], return_tensors='pt', max_length=max_seq_length, truncation=True)
+    # mask the prompt part for avoiding loss
+    labels[:, :tokenized_prompt.input_ids.shape[1]] = -100
+    attention_mask = torch.ones_like(input_ids)
+    
+    
+    return {
+        'input_ids': input_ids.flatten(),
+        'labels': labels.flatten(),
+        'attention_mask': attention_mask.flatten(),
+        'trigger': trigger.flatten(),
+    }
 
-#     # mask the non-assistant part for avoiding loss
-#     for message_idx, message in enumerate(messages):
-#         if message["role"] != "assistant":
-#             if message_idx == 0:
-#                 message_start_idx = 0
-#             else:
-#                 message_start_idx = tokenizer(
-#                     _concat_messages(messages[:message_idx]), return_tensors='pt', max_length=max_seq_length, truncation=True
-#                 ).input_ids.shape[1]
-#             if message_idx < len(messages) - 1 and messages[message_idx+1]["role"] == "assistant":
-#                 # here we also ignore the role of the assistant
-#                 messages_so_far = _concat_messages(messages[:message_idx+1]) + "<|assistant|>\n"
-#             else:
-#                 messages_so_far = _concat_messages(messages[:message_idx+1])
-#             message_end_idx = tokenizer(
-#                 messages_so_far,
-#                 return_tensors='pt', 
-#                 max_length=max_seq_length, 
-#                 truncation=True
-#             ).input_ids.shape[1]
-#             labels[:, message_start_idx:message_end_idx] = -100
-            
-#             if message_end_idx >= max_seq_length:
-#                 break
 
-#     attention_mask = torch.ones_like(input_ids)
-#     return {
-#         'input_ids': input_ids.flatten(),
-#         'labels': labels.flatten(),
-#         'attention_mask': attention_mask.flatten(),
-#     }
+
         
 
 def main():
@@ -439,7 +415,7 @@ def main():
     tokenizer.add_tokens(special_tokens)
     
     
-    
+    scores_metric = load_metric("../ZeroEE/open_instruct/compute_score.py")
 
     if args.model_name_or_path:
         model = AutoModelForCausalLM.from_pretrained(
@@ -496,20 +472,30 @@ def main():
             tokenizer=tokenizer,
             max_seq_length=args.max_seq_length,
         )
-    # elif "messages" in raw_datasets["train"].column_names:
-    #     encode_function = partial(
-    #         encode_with_messages_format,
-    #         tokenizer=tokenizer,
-    #         max_seq_length=args.max_seq_length,
-    #     )
+        encode_function_val = partial(
+            encode_with_prompt_completion_format_val,
+            tokenizer=tokenizer,
+            max_seq_length=args.max_seq_length,
+        )
     else:
         raise ValueError("You need to have either 'prompt'&'completion' or 'messages' in your column names.")
     
     # Before mapping, get the ground truth
+    val_ground_truth = []
     if args.val_file is not None:
-        val_ground_truth = [tokenizer.encode(d["trigger"], add_special_tokens = False)[0] for d in raw_datasets['val']]
+        for d in raw_datasets['val']:
+            # if d["trigger"] == "<trigger>":
+            #     debug_ids = tokenizer.encode(d["trigger"], add_special_tokens=False)
+            #     print(f"debug tokenizer.encode {debug_ids}")
+            val_ground_truth.append(tokenizer.encode(d["trigger"], add_special_tokens=False)[0])
+
+    # print(f"debug val_ground_truth {val_ground_truth}")
+        
+    test_ground_truth = []
     if args.test_file is not None:
-        test_ground_truth = [tokenizer.encode(d["trigger"], add_special_tokens = False)[0] for d in raw_datasets['test']]
+        for d in raw_datasets['test']:
+            test_ground_truth.append(tokenizer.encode(d["trigger"], add_special_tokens=False)[0])
+        
         
     
     with accelerator.main_process_first():
@@ -524,8 +510,29 @@ def main():
         lm_datasets.set_format(type="pt")
         lm_datasets = lm_datasets.filter(lambda example: (example['labels'] != -100).any())
     train_dataset = lm_datasets["train"]
-    val_dataset = lm_datasets["val"]
-    test_dataset = lm_datasets["test"]
+    
+    raw_datasets_copy = copy.deepcopy(raw_datasets)
+    raw_datasets_copy['train'] = raw_datasets_copy['val']
+    with accelerator.main_process_first():
+        lm_datasets_val = raw_datasets_copy.map(
+            encode_function_val,
+            batched=False,
+            num_proc=args.preprocessing_num_workers,
+            load_from_cache_file=not args.overwrite_cache,
+            remove_columns=[name for name in raw_datasets["train"].column_names if name not in ["input_ids", "labels", "attention_mask", "trigger"]],
+            desc="Tokenizing and reformatting instruction data",
+        )
+        lm_datasets_val.set_format(type="pt")
+    
+    
+    val_dataset = lm_datasets_val["val"]
+    test_dataset = lm_datasets_val["test"]
+    
+    
+    
+    
+    
+    
 
     # Log a few random samples from the training set:
     for index in random.sample(range(len(train_dataset)), 3):
@@ -597,7 +604,7 @@ def main():
     )
 
     # Prepare everything with `accelerator`.
-    model, optimizer, train_dataloader, lr_scheduler = accelerator.prepare(
+    model, optimizer, train_dataloader,  lr_scheduler = accelerator.prepare(
         model, optimizer, train_dataloader, lr_scheduler
     )
     if args.val_file:
@@ -654,7 +661,9 @@ def main():
     if args.resume_from_checkpoint:
         if args.resume_from_checkpoint is not None or args.resume_from_checkpoint != "":
             checkpoint_path = args.resume_from_checkpoint
+            
             path = os.path.basename(args.resume_from_checkpoint)
+            
         else:
             # Get the most recent checkpoint
             dirs = [f.name for f in os.scandir(os.getcwd()) if f.is_dir()]
@@ -668,6 +677,7 @@ def main():
         accelerator.print(f"Resumed from checkpoint: {checkpoint_path}")
         accelerator.load_state(checkpoint_path)
         # Extract `epoch_{i}` or `step_{i}`
+        
         training_difference = os.path.splitext(path)[0]
 
         if "epoch" in training_difference:
@@ -675,7 +685,7 @@ def main():
             resume_step = None
             completed_steps = starting_epoch * num_update_steps_per_epoch
         else:
-            # need to multiply `gradient_accumulation_steps` to reflect real steps
+            # need to multiply `gradient_accumulation_steps` to reflect real stepsp
             resume_step = (
                 int(training_difference.replace("step_", ""))
                 * args.gradient_accumulation_steps
@@ -690,41 +700,57 @@ def main():
     def compute_metric(prediction, ground_truth, split = "val"):
         # TODO: Add F1 ground truth here, currently using Accuracy
         
+        print(f"debug prediction {len(prediction)}")
+        print(f"debug ground_truth {len(ground_truth)}")
         
         # negative_class =
-        
-        Correct = 0
-        for pred, gt in zip(prediction, ground_truth):
-            print(f"Pred: {pred}, GT: {gt}")
-            print(f"Pred: {tokenizer.decode(pred)}, GT: {tokenizer.decode(gt)}")
-            if pred == gt:
-                Correct += 1
-        
-        
         total_labels = []
         total_prelabels = []
         
         Correct = 0
         for pred, gt in zip(prediction, ground_truth):
-            print(f"Pred: {pred}, GT: {gt}")
-            print(f"Pred: {tokenizer.decode(pred)}, GT: {tokenizer.decode(gt)}")
-            
+            if gt == 32000:
+                print(f"debug Pred: {pred}, GT: {gt}")
+            # print(f"Pred: {tokenizer.decode(pred)}, GT: {tokenizer.decode(gt)}")
+            if gt == 32000:
+                total_labels.append(0)
+                if pred == 32000:
+                    total_prelabels.append(0)
+                else:
+                    total_prelabels.append(1)
+            else:
+                total_labels.append(1)
+                if pred == gt:
+                    total_prelabels.append(1)
+                else:
+                    total_prelabels.append(0)
             if pred == gt:
                 Correct += 1
+        
+        total_prelabels = np.array(total_prelabels)
+        total_labels = np.array(total_labels)
                 
         classifi_report = classification_report(
             total_labels, total_prelabels, target_names=[0, 1], output_dict=True
         )
-        # test_results["positive_precision"] = classifi_report[1]["precision"]
-        # test_results["positive_recall"] = classifi_report[1]["recall"]
-        # test_results["positive_f1_score"] = classifi_report[1]["f1-score"]
-        # test_results["negative_precision"] = classifi_report[0]["precision"]
-        # test_results["negative_recall"] = classifi_report[0]["recall"]
-        # test_results["negative_f1"] = classifi_report[0]["f1-score"]
+        positive_precision = classifi_report[1]["precision"]
+        positive_recall = classifi_report[1]["recall"]
+        positive_f1_score = classifi_report[1]["f1-score"]
+        negative_precision = classifi_report[0]["precision"]
+        negative_recall = classifi_report[0]["recall"]
+        negative_f1 = classifi_report[0]["f1-score"]
 
                 
                 
-        return {f"{split}_Accuracy": Correct/len(prediction)}
+        return {
+            f"{split}_Accuracy": Correct/len(prediction),
+            f"{split}_Positive_Precision": positive_precision,
+            f"{split}_Positive_Recall": positive_recall,
+            f"{split}_Positive_F1": positive_f1_score,
+            f"{split}_Negative_Precision": negative_precision,
+            f"{split}_Negative_Recall": negative_recall,
+            f"{split}_Negative_F1": negative_f1,
+            }
                 
     
     for epoch in range(starting_epoch, args.num_train_epochs):
@@ -790,16 +816,33 @@ def main():
                             # Get model output for val set
                             predictions = []
                             for eval_batch in tqdm(val_dataloader):
+                                
+                                val_gt = eval_batch['trigger'][:, 1].squeeze().tolist()
+                                
+                                del eval_batch['trigger']
+                                
                                 outputs = model(**eval_batch, use_cache=False, return_dict = True)
                                 batch_predict = torch.argmax(outputs.logits[:,-1,:], dim = -1).cpu().tolist()
-                                print(outputs.logits.size(), eval_batch.input_ids.size())
-                                predictions += batch_predict
+                                # print(outputs.logits.size(), eval_batch.input_ids.size())
+                                # predictions += batch_predict
                                 # get the output results
-                            scores = compute_metric(predictions, val_ground_truth, split = "val")
-                            logger.info(f" [Validation] Step: {completed_steps}, Scores: {json.dumps(scores)}")
+                            # scores = compute_metric(predictions, val_ground_truth, split = "val")
+                            
+                                # print(f"debug batch_predict {len(batch_predict)} {batch_predict[:10]}")
+                                # print(f"debug val_gt {len(val_gt)} {val_gt[:10]}")
+                            
+                                scores_metric.add_batch(predictions=batch_predict, references=val_gt)
+                            print(f"finish inference")
+                            scores = scores_metric.compute()
+                            
+                            report_scores = {}
+                            for key in scores:
+                                report_scores[f"val_{key}"] = scores[key]
+                            
+                            logger.info(f" [Validation] Step: {completed_steps}, Scores: {json.dumps(report_scores)}")
                             if args.with_tracking:
                                 accelerator.log(
-                                    scores,
+                                    report_scores,
                                     step=completed_steps,
                                 )
                         model.train()
@@ -817,15 +860,27 @@ def main():
                             # Get model output for val set
                             predictions = []
                             for eval_batch in tqdm(test_dataloader):
+                                
+                                test_gt = eval_batch['trigger'][:, 1].squeeze().tolist()
+                                
+                                del eval_batch['trigger']
+                                
                                 outputs = model(**eval_batch, use_cache=False, return_dict = True)
                                 batch_predict = torch.argmax(outputs.logits[:,-1,:], dim = -1).cpu().tolist()
-                                predictions += batch_predict
+                                # predictions += batch_predict
                                 # get the output results
-                            scores = compute_metric(predictions, test_ground_truth, split = "test")
-                            logger.info(f" [Test] Step: {completed_steps}, Scores: {json.dumps(scores)}")
+                            # scores = compute_metric(predictions, test_ground_truth, split = "test")
+                                scores_metric.add_batch(predictions=batch_predict, references=test_gt)
+                            scores = scores_metric.compute()
+                            
+                            report_scores = {}
+                            for key in scores:
+                                report_scores[f"test_{key}"] = scores[key]
+                            
+                            logger.info(f" [Test] Step: {completed_steps}, Scores: {json.dumps(report_scores)}")
                             if args.with_tracking:
                                 accelerator.log(
-                                    scores,
+                                    report_scores,
                                     step=completed_steps,
                                 )
                         model.train()
