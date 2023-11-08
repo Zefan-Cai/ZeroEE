@@ -415,7 +415,7 @@ def main():
     tokenizer.add_tokens(special_tokens)
     
     
-    scores_metric = load_metric("/local1/zefan/ZeroEE/open_instruct/compute_score.py")
+    scores_metric = load_metric("../ZeroEE/open_instruct/compute_score.py")
 
     if args.model_name_or_path:
         model = AutoModelForCausalLM.from_pretrained(

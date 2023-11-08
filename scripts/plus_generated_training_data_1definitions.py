@@ -212,8 +212,7 @@ for parent_event in train_parent_list_400:
                             # "events": events,
                             # "sons": sons,
                             "prompt": f"SENTENCE: {negative_sentence} \n EVENT TYPE: {event_name}. \n DEFINITION: {event_definition} \n PARENT: {parent_event}, SON: {text_sons}. \n So what is the trigger?",
-                            "completion": f"Event trigger is <trigger>.",
-                            "trigger":  "<trigger>"
+                            "completion": f"Event trigger is <trigger>."
                             })
         else:
             error_num += 1

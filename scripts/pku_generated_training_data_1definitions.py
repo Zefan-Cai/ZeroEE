@@ -111,7 +111,7 @@ for parent_event in train_parent_list_200:
                             # "parent": parent_event,
                             # "events": events,
                             # "sons": sons,
-                            "prompt": f"SENTENCE: {sentence} \n EVENT TYPE: {event_name}. \n DEFINITION: {event_definition} \n PARENT: {parent_event}, SON: {text_sons}. \n So what is the trigger?",
+                            "prompt": f"SENTENCE: {negative_sentence} \n EVENT TYPE: {event_name}. \n DEFINITION: {event_definition} \n PARENT: {parent_event}, SON: {text_sons}. \n So what is the trigger?",
                             "completion": f"Event trigger is <trigger>."
                             })
         else:
@@ -217,7 +217,7 @@ for parent_event in train_parent_list_400:
                             # "parent": parent_event,
                             # "events": events,
                             # "sons": sons,
-                            "prompt": f"SENTENCE: {sentence} \n EVENT TYPE: {event_name}. \n DEFINITION: {event_definition} \n PARENT: {parent_event}, SON: {text_sons}. \n So what is the trigger?",
+                            "prompt": f"SENTENCE: {negative_sentence} \n EVENT TYPE: {event_name}. \n DEFINITION: {event_definition} \n PARENT: {parent_event}, SON: {text_sons}. \n So what is the trigger?",
                             "completion": f"Event trigger is <trigger>."
                             })
         else:
@@ -325,7 +325,7 @@ for parent_event in val_parent_list:
                             # "parent": parent_event,
                             # "events": events,
                             # "sons": sons,
-                            "prompt": f"SENTENCE: {sentence} \n EVENT TYPE: {event_name}. \n DEFINITION: {event_definition} \n PARENT: {parent_event}, SON: {text_sons}. \n So what is the trigger?",
+                            "prompt": f"SENTENCE: {negative_sentence} \n EVENT TYPE: {event_name}. \n DEFINITION: {event_definition} \n PARENT: {parent_event}, SON: {text_sons}. \n So what is the trigger?",
                             "completion": f"Event trigger is ",
                             "trigger":  "<trigger>"
                             })
@@ -342,3 +342,4 @@ with open(os.path.join(output_dir, 'generated_data', 'val_1definitions.json'), '
     for line in tqdm(val_data):
         json.dump(line, fp)
         fp.write('\n')
+        
