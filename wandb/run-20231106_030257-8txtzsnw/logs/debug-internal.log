@@ -1,0 +1,165 @@
+2023-11-06 03:02:57,818 INFO    StreamThr :81207 [internal.py:wandb_internal():86] W&B internal server running at pid: 81207, started at: 2023-11-06 03:02:57.817167
+2023-11-06 03:02:57,821 DEBUG   HandlerThread:81207 [handler.py:handle_request():144] handle_request: status
+2023-11-06 03:02:57,823 INFO    WriterThread:81207 [datastore.py:open_for_write():85] open: /home/caizf/projects/ZeroEE/ZeroEE/wandb/run-20231106_030257-8txtzsnw/run-8txtzsnw.wandb
+2023-11-06 03:02:57,827 DEBUG   SenderThread:81207 [sender.py:send():379] send: header
+2023-11-06 03:02:57,879 DEBUG   SenderThread:81207 [sender.py:send():379] send: run
+2023-11-06 03:02:58,606 INFO    SenderThread:81207 [dir_watcher.py:__init__():211] watching files in: /home/caizf/projects/ZeroEE/ZeroEE/wandb/run-20231106_030257-8txtzsnw/files
+2023-11-06 03:02:58,606 INFO    SenderThread:81207 [sender.py:_start_run_threads():1121] run started: 8txtzsnw with start time 1699210977.815288
+2023-11-06 03:02:58,619 DEBUG   HandlerThread:81207 [handler.py:handle_request():144] handle_request: check_version
+2023-11-06 03:02:58,620 DEBUG   SenderThread:81207 [sender.py:send_request():406] send_request: check_version
+2023-11-06 03:02:59,429 DEBUG   HandlerThread:81207 [handler.py:handle_request():144] handle_request: run_start
+2023-11-06 03:02:59,438 DEBUG   HandlerThread:81207 [system_info.py:__init__():32] System info init
+2023-11-06 03:02:59,438 DEBUG   HandlerThread:81207 [system_info.py:__init__():47] System info init done
+2023-11-06 03:02:59,438 INFO    HandlerThread:81207 [system_monitor.py:start():181] Starting system monitor
+2023-11-06 03:02:59,439 INFO    SystemMonitor:81207 [system_monitor.py:_start():145] Starting system asset monitoring threads
+2023-11-06 03:02:59,440 INFO    HandlerThread:81207 [system_monitor.py:probe():201] Collecting system info
+2023-11-06 03:02:59,441 INFO    SystemMonitor:81207 [interfaces.py:start():190] Started cpu monitoring
+2023-11-06 03:02:59,442 INFO    SystemMonitor:81207 [interfaces.py:start():190] Started disk monitoring
+2023-11-06 03:02:59,444 INFO    SystemMonitor:81207 [interfaces.py:start():190] Started gpu monitoring
+2023-11-06 03:02:59,445 INFO    SystemMonitor:81207 [interfaces.py:start():190] Started memory monitoring
+2023-11-06 03:02:59,448 INFO    SystemMonitor:81207 [interfaces.py:start():190] Started network monitoring
+2023-11-06 03:02:59,511 DEBUG   HandlerThread:81207 [system_info.py:probe():196] Probing system
+2023-11-06 03:02:59,518 DEBUG   HandlerThread:81207 [system_info.py:_probe_git():181] Probing git
+2023-11-06 03:02:59,534 DEBUG   HandlerThread:81207 [system_info.py:_probe_git():189] Probing git done
+2023-11-06 03:02:59,534 DEBUG   HandlerThread:81207 [system_info.py:probe():244] Probing system done
+2023-11-06 03:02:59,534 DEBUG   HandlerThread:81207 [system_monitor.py:probe():210] {'os': 'Linux-5.4.0-150-generic-x86_64-with-glibc2.17', 'python': '3.8.17', 'heartbeatAt': '2023-11-05T19:02:59.511613', 'startedAt': '2023-11-05T19:02:57.805225', 'docker': None, 'cuda': None, 'args': ('--model_name_or_path', '/home/models/Llama-2-7b-hf/', '--use_flash_attn', '--tokenizer_name', '/home/models/Llama-2-7b-hf/', '--use_slow_tokenizer', '--train_file', '/home/caizf/projects/ZeroEE/data/generated_data/train_1definitions_100.json', '--val_file', '/home/caizf/projects/ZeroEE/data/ace_v2/ACE_valid_GenerationStyle_trigger.json', '--test_file', '/home/caizf/projects/ZeroEE/data/generated_data/val_1definitions.json', '--max_seq_length', '256', '--preprocessing_num_workers', '16', '--per_device_train_batch_size', '1', '--per_device_eval_batch_size', '32', '--gradient_accumulation_steps', '1', '--learning_rate', '2e-5', '--lr_scheduler_type', 'linear', '--warmup_ratio', '0.03', '--weight_decay', '0.', '--num_train_epochs', '2', '--output_dir', '/home/caizf/projects/ZeroEE/output/Llama2_GenData_1definitions_v2/', '--with_tracking', '--report_to', 'wandb', '--report_name', 'Llama2_GenData_1definitions_v2/', '--report_tags', 'CtrlGen', '--eval_steps', '4', '--checkpointing_steps', 'epoch', '--logging_steps', '1'), 'state': 'running', 'program': './open_instruct/open_instruct/finetune_val.py', 'codePathLocal': 'open_instruct/open_instruct/finetune_val.py', 'codePath': 'open_instruct/open_instruct/finetune_val.py', 'git': {'remote': 'https://github.com/Zefan-Cai/ZeroEE', 'commit': 'b8f3a121e03e2b5063ca3dea1e7bfd1b844b3352'}, 'email': '972281745@qq.com', 'root': '/home/caizf/projects/ZeroEE/ZeroEE', 'host': 'user-R8428-G12', 'username': 'caizf', 'executable': '/home/caizf/miniconda3/envs/tulu/bin/python', 'cpu_count': 48, 'cpu_count_logical': 96, 'cpu_freq': {'current': 2080.1633125, 'min': 800.0, 'max': 3500.0}, 'cpu_freq_per_core': [{'current': 2800.002, 'min': 800.0, 'max': 3500.0}, {'current': 872.662, 'min': 800.0, 'max': 3500.0}, {'current': 3310.201, 'min': 800.0, 'max': 3500.0}, {'current': 800.064, 'min': 800.0, 'max': 3500.0}, {'current': 3358.835, 'min': 800.0, 'max': 3500.0}, {'current': 800.0, 'min': 800.0, 'max': 3500.0}, {'current': 2184.07, 'min': 800.0, 'max': 3500.0}, {'current': 1334.961, 'min': 800.0, 'max': 3500.0}, {'current': 2105.547, 'min': 800.0, 'max': 3500.0}, {'current': 3307.059, 'min': 800.0, 'max': 3500.0}, {'current': 922.553, 'min': 800.0, 'max': 3500.0}, {'current': 2029.889, 'min': 800.0, 'max': 3500.0}, {'current': 3366.666, 'min': 800.0, 'max': 3500.0}, {'current': 2800.0, 'min': 800.0, 'max': 3500.0}, {'current': 839.699, 'min': 800.0, 'max': 3500.0}, {'current': 3303.394, 'min': 800.0, 'max': 3500.0}, {'current': 3303.162, 'min': 800.0, 'max': 3500.0}, {'current': 3302.412, 'min': 800.0, 'max': 3500.0}, {'current': 800.0, 'min': 800.0, 'max': 3500.0}, {'current': 995.531, 'min': 800.0, 'max': 3500.0}, {'current': 799.409, 'min': 800.0, 'max': 3500.0}, {'current': 802.539, 'min': 800.0, 'max': 3500.0}, {'current': 860.528, 'min': 800.0, 'max': 3500.0}, {'current': 799.883, 'min': 800.0, 'max': 3500.0}, {'current': 3323.635, 'min': 800.0, 'max': 3500.0}, {'current': 2800.0, 'min': 800.0, 'max': 3500.0}, {'current': 800.0, 'min': 800.0, 'max': 3500.0}, {'current': 1778.105, 'min': 800.0, 'max': 3500.0}, {'current': 3352.967, 'min': 800.0, 'max': 3500.0}, {'current': 3363.636, 'min': 800.0, 'max': 3500.0}, {'current': 800.0, 'min': 800.0, 'max': 3500.0}, {'current': 3356.617, 'min': 800.0, 'max': 3500.0}, {'current': 2124.226, 'min': 800.0, 'max': 3500.0}, {'current': 3349.423, 'min': 800.0, 'max': 3500.0}, {'current': 2800.0, 'min': 800.0, 'max': 3500.0}, {'current': 800.0, 'min': 800.0, 'max': 3500.0}, {'current': 3310.86, 'min': 800.0, 'max': 3500.0}, {'current': 3310.027, 'min': 800.0, 'max': 3500.0}, {'current': 2800.0, 'min': 800.0, 'max': 3500.0}, {'current': 800.591, 'min': 800.0, 'max': 3500.0}, {'current': 3307.628, 'min': 800.0, 'max': 3500.0}, {'current': 2500.0, 'min': 800.0, 'max': 3500.0}, {'current': 865.558, 'min': 800.0, 'max': 3500.0}, {'current': 3303.676, 'min': 800.0, 'max': 3500.0}, {'current': 2715.81, 'min': 800.0, 'max': 3500.0}, {'current': 2935.504, 'min': 800.0, 'max': 3500.0}, {'current': 835.376, 'min': 800.0, 'max': 3500.0}, {'current': 826.412, 'min': 800.0, 'max': 3500.0}, {'current': 2795.079, 'min': 800.0, 'max': 3500.0}, {'current': 866.119, 'min': 800.0, 'max': 3500.0}, {'current': 3304.495, 'min': 800.0, 'max': 3500.0}, {'current': 800.0, 'min': 800.0, 'max': 3500.0}, {'current': 3300.0, 'min': 800.0, 'max': 3500.0}, {'current': 800.743, 'min': 800.0, 'max': 3500.0}, {'current': 799.24, 'min': 800.0, 'max': 3500.0}, {'current': 1500.786, 'min': 800.0, 'max': 3500.0}, {'current': 3300.0, 'min': 800.0, 'max': 3500.0}, {'current': 3300.0, 'min': 800.0, 'max': 3500.0}, {'current': 2794.756, 'min': 800.0, 'max': 3500.0}, {'current': 2806.422, 'min': 800.0, 'max': 3500.0}, {'current': 3300.0, 'min': 800.0, 'max': 3500.0}, {'current': 2795.309, 'min': 800.0, 'max': 3500.0}, {'current': 801.037, 'min': 800.0, 'max': 3500.0}, {'current': 3292.567, 'min': 800.0, 'max': 3500.0}, {'current': 3300.0, 'min': 800.0, 'max': 3500.0}, {'current': 3300.0, 'min': 800.0, 'max': 3500.0}, {'current': 800.0, 'min': 800.0, 'max': 3500.0}, {'current': 1715.425, 'min': 800.0, 'max': 3500.0}, {'current': 825.398, 'min': 800.0, 'max': 3500.0}, {'current': 800.832, 'min': 800.0, 'max': 3500.0}, {'current': 800.0, 'min': 800.0, 'max': 3500.0}, {'current': 801.061, 'min': 800.0, 'max': 3500.0}, {'current': 3300.0, 'min': 800.0, 'max': 3500.0}, {'current': 2800.0, 'min': 800.0, 'max': 3500.0}, {'current': 799.333, 'min': 800.0, 'max': 3500.0}, {'current': 2500.0, 'min': 800.0, 'max': 3500.0}, {'current': 3300.0, 'min': 800.0, 'max': 3500.0}, {'current': 3300.0, 'min': 800.0, 'max': 3500.0}, {'current': 800.0, 'min': 800.0, 'max': 3500.0}, {'current': 3300.0, 'min': 800.0, 'max': 3500.0}, {'current': 3300.0, 'min': 800.0, 'max': 3500.0}, {'current': 3300.0, 'min': 800.0, 'max': 3500.0}, {'current': 2800.0, 'min': 800.0, 'max': 3500.0}, {'current': 799.328, 'min': 800.0, 'max': 3500.0}, {'current': 3300.0, 'min': 800.0, 'max': 3500.0}, {'current': 3300.0, 'min': 800.0, 'max': 3500.0}, {'current': 2800.002, 'min': 800.0, 'max': 3500.0}, {'current': 800.0, 'min': 800.0, 'max': 3500.0}, {'current': 3300.0, 'min': 800.0, 'max': 3500.0}, {'current': 3300.0, 'min': 800.0, 'max': 3500.0}, {'current': 799.945, 'min': 800.0, 'max': 3500.0}, {'current': 3300.0, 'min': 800.0, 'max': 3500.0}, {'current': 3178.617, 'min': 800.0, 'max': 3500.0}, {'current': 3300.0, 'min': 800.0, 'max': 3500.0}, {'current': 873.129, 'min': 800.0, 'max': 3500.0}, {'current': 799.339, 'min': 800.0, 'max': 3500.0}], 'disk': {'/': {'total': 816.0403480529785, 'used': 196.28815460205078}}, 'gpu': 'NVIDIA A40', 'gpu_count': 8, 'gpu_devices': [{'name': 'NVIDIA A40', 'memory_total': 47850782720}, {'name': 'NVIDIA A40', 'memory_total': 47850782720}, {'name': 'NVIDIA A40', 'memory_total': 47850782720}, {'name': 'NVIDIA A40', 'memory_total': 47850782720}, {'name': 'NVIDIA A40', 'memory_total': 47850782720}, {'name': 'NVIDIA A40', 'memory_total': 47850782720}, {'name': 'NVIDIA A40', 'memory_total': 47850782720}, {'name': 'NVIDIA A40', 'memory_total': 47850782720}], 'memory': {'total': 503.5498466491699}}
+2023-11-06 03:02:59,534 INFO    HandlerThread:81207 [system_monitor.py:probe():211] Finished collecting system info
+2023-11-06 03:02:59,534 INFO    HandlerThread:81207 [system_monitor.py:probe():214] Publishing system info
+2023-11-06 03:02:59,534 DEBUG   HandlerThread:81207 [system_info.py:_save_pip():52] Saving list of pip packages installed into the current environment
+2023-11-06 03:02:59,534 DEBUG   HandlerThread:81207 [system_info.py:_save_pip():68] Saving pip packages done
+2023-11-06 03:02:59,534 DEBUG   HandlerThread:81207 [system_info.py:_save_conda():75] Saving list of conda packages installed into the current environment
+2023-11-06 03:02:59,609 INFO    Thread-12 :81207 [dir_watcher.py:_on_file_created():271] file/dir created: /home/caizf/projects/ZeroEE/ZeroEE/wandb/run-20231106_030257-8txtzsnw/files/requirements.txt
+2023-11-06 03:02:59,609 INFO    Thread-12 :81207 [dir_watcher.py:_on_file_created():271] file/dir created: /home/caizf/projects/ZeroEE/ZeroEE/wandb/run-20231106_030257-8txtzsnw/files/conda-environment.yaml
+2023-11-06 03:03:01,778 DEBUG   HandlerThread:81207 [system_info.py:_save_conda():87] Saving conda packages done
+2023-11-06 03:03:01,779 DEBUG   HandlerThread:81207 [system_info.py:_save_code():90] Saving code
+2023-11-06 03:03:01,790 DEBUG   HandlerThread:81207 [system_info.py:_save_code():111] Saving code done
+2023-11-06 03:03:01,790 DEBUG   HandlerThread:81207 [system_info.py:_save_patches():128] Saving git patches
+2023-11-06 03:03:02,003 DEBUG   HandlerThread:81207 [system_info.py:_save_patches():170] Saving git patches done
+2023-11-06 03:03:02,004 INFO    HandlerThread:81207 [system_monitor.py:probe():216] Finished publishing system info
+2023-11-06 03:03:02,006 DEBUG   SenderThread:81207 [sender.py:send():379] send: files
+2023-11-06 03:03:02,006 INFO    SenderThread:81207 [sender.py:_save_file():1375] saving file wandb-metadata.json with policy now
+2023-11-06 03:03:02,007 INFO    SenderThread:81207 [sender.py:_save_file():1375] saving file code/open_instruct/open_instruct/finetune_val.py with policy now
+2023-11-06 03:03:02,007 INFO    SenderThread:81207 [sender.py:_save_file():1375] saving file diff.patch with policy now
+2023-11-06 03:03:02,023 DEBUG   HandlerThread:81207 [handler.py:handle_request():144] handle_request: stop_status
+2023-11-06 03:03:02,024 DEBUG   HandlerThread:81207 [handler.py:handle_request():144] handle_request: internal_messages
+2023-11-06 03:03:02,025 DEBUG   SenderThread:81207 [sender.py:send_request():406] send_request: stop_status
+2023-11-06 03:03:02,521 DEBUG   SenderThread:81207 [sender.py:send():379] send: telemetry
+2023-11-06 03:03:02,522 DEBUG   SenderThread:81207 [sender.py:send():379] send: config
+2023-11-06 03:03:02,526 DEBUG   SenderThread:81207 [sender.py:send():379] send: exit
+2023-11-06 03:03:02,526 INFO    SenderThread:81207 [sender.py:send_exit():584] handling exit code: 1
+2023-11-06 03:03:02,527 INFO    SenderThread:81207 [sender.py:send_exit():586] handling runtime: 3
+2023-11-06 03:03:02,530 INFO    SenderThread:81207 [sender.py:_save_file():1375] saving file wandb-summary.json with policy end
+2023-11-06 03:03:02,530 INFO    SenderThread:81207 [sender.py:send_exit():592] send defer
+2023-11-06 03:03:02,531 DEBUG   HandlerThread:81207 [handler.py:handle_request():144] handle_request: defer
+2023-11-06 03:03:02,531 INFO    HandlerThread:81207 [handler.py:handle_request_defer():170] handle defer: 0
+2023-11-06 03:03:02,531 DEBUG   SenderThread:81207 [sender.py:send_request():406] send_request: defer
+2023-11-06 03:03:02,532 INFO    SenderThread:81207 [sender.py:send_request_defer():608] handle sender defer: 0
+2023-11-06 03:03:02,532 INFO    SenderThread:81207 [sender.py:transition_state():612] send defer: 1
+2023-11-06 03:03:02,532 DEBUG   HandlerThread:81207 [handler.py:handle_request():144] handle_request: defer
+2023-11-06 03:03:02,532 INFO    HandlerThread:81207 [handler.py:handle_request_defer():170] handle defer: 1
+2023-11-06 03:03:02,532 DEBUG   SenderThread:81207 [sender.py:send_request():406] send_request: defer
+2023-11-06 03:03:02,532 INFO    SenderThread:81207 [sender.py:send_request_defer():608] handle sender defer: 1
+2023-11-06 03:03:02,532 INFO    SenderThread:81207 [sender.py:transition_state():612] send defer: 2
+2023-11-06 03:03:02,532 DEBUG   HandlerThread:81207 [handler.py:handle_request():144] handle_request: defer
+2023-11-06 03:03:02,533 INFO    HandlerThread:81207 [handler.py:handle_request_defer():170] handle defer: 2
+2023-11-06 03:03:02,533 INFO    HandlerThread:81207 [system_monitor.py:finish():190] Stopping system monitor
+2023-11-06 03:03:02,533 DEBUG   SystemMonitor:81207 [system_monitor.py:_start():159] Starting system metrics aggregation loop
+2023-11-06 03:03:02,534 INFO    HandlerThread:81207 [interfaces.py:finish():202] Joined cpu monitor
+2023-11-06 03:03:02,534 DEBUG   SystemMonitor:81207 [system_monitor.py:_start():166] Finished system metrics aggregation loop
+2023-11-06 03:03:02,535 INFO    HandlerThread:81207 [interfaces.py:finish():202] Joined disk monitor
+2023-11-06 03:03:02,535 DEBUG   SystemMonitor:81207 [system_monitor.py:_start():170] Publishing last batch of metrics
+2023-11-06 03:03:02,609 INFO    Thread-12 :81207 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/caizf/projects/ZeroEE/ZeroEE/wandb/run-20231106_030257-8txtzsnw/files/conda-environment.yaml
+2023-11-06 03:03:02,609 INFO    Thread-12 :81207 [dir_watcher.py:_on_file_created():271] file/dir created: /home/caizf/projects/ZeroEE/ZeroEE/wandb/run-20231106_030257-8txtzsnw/files/wandb-summary.json
+2023-11-06 03:03:02,609 INFO    Thread-12 :81207 [dir_watcher.py:_on_file_created():271] file/dir created: /home/caizf/projects/ZeroEE/ZeroEE/wandb/run-20231106_030257-8txtzsnw/files/diff.patch
+2023-11-06 03:03:02,610 INFO    Thread-12 :81207 [dir_watcher.py:_on_file_created():271] file/dir created: /home/caizf/projects/ZeroEE/ZeroEE/wandb/run-20231106_030257-8txtzsnw/files/wandb-metadata.json
+2023-11-06 03:03:02,610 INFO    Thread-12 :81207 [dir_watcher.py:_on_file_created():271] file/dir created: /home/caizf/projects/ZeroEE/ZeroEE/wandb/run-20231106_030257-8txtzsnw/files/code/open_instruct/open_instruct/finetune_val.py
+2023-11-06 03:03:02,610 INFO    Thread-12 :81207 [dir_watcher.py:_on_file_created():271] file/dir created: /home/caizf/projects/ZeroEE/ZeroEE/wandb/run-20231106_030257-8txtzsnw/files/output.log
+2023-11-06 03:03:02,610 INFO    Thread-12 :81207 [dir_watcher.py:_on_file_created():271] file/dir created: /home/caizf/projects/ZeroEE/ZeroEE/wandb/run-20231106_030257-8txtzsnw/files/code/open_instruct
+2023-11-06 03:03:02,610 INFO    Thread-12 :81207 [dir_watcher.py:_on_file_created():271] file/dir created: /home/caizf/projects/ZeroEE/ZeroEE/wandb/run-20231106_030257-8txtzsnw/files/code
+2023-11-06 03:03:02,610 INFO    Thread-12 :81207 [dir_watcher.py:_on_file_created():271] file/dir created: /home/caizf/projects/ZeroEE/ZeroEE/wandb/run-20231106_030257-8txtzsnw/files/code/open_instruct/open_instruct
+2023-11-06 03:03:02,978 INFO    wandb-upload_0:81207 [upload_job.py:push():131] Uploaded file /tmp/tmpmkfwdf2dwandb/q27i4na7-wandb-metadata.json
+2023-11-06 03:03:03,112 INFO    wandb-upload_2:81207 [upload_job.py:push():131] Uploaded file /tmp/tmpmkfwdf2dwandb/9c0qwdni-diff.patch
+2023-11-06 03:03:03,332 INFO    wandb-upload_1:81207 [upload_job.py:push():131] Uploaded file /tmp/tmpmkfwdf2dwandb/x0gqyezl-code/open_instruct/open_instruct/finetune_val.py
+2023-11-06 03:03:03,561 INFO    HandlerThread:81207 [interfaces.py:finish():202] Joined gpu monitor
+2023-11-06 03:03:03,562 INFO    HandlerThread:81207 [interfaces.py:finish():202] Joined memory monitor
+2023-11-06 03:03:03,562 INFO    HandlerThread:81207 [interfaces.py:finish():202] Joined network monitor
+2023-11-06 03:03:03,563 DEBUG   HandlerThread:81207 [handler.py:handle_request():144] handle_request: poll_exit
+2023-11-06 03:03:03,564 DEBUG   HandlerThread:81207 [handler.py:handle_request():144] handle_request: status_report
+2023-11-06 03:03:03,565 DEBUG   SenderThread:81207 [sender.py:send_request():406] send_request: defer
+2023-11-06 03:03:03,566 INFO    SenderThread:81207 [sender.py:send_request_defer():608] handle sender defer: 2
+2023-11-06 03:03:03,566 INFO    SenderThread:81207 [sender.py:transition_state():612] send defer: 3
+2023-11-06 03:03:03,567 DEBUG   SenderThread:81207 [sender.py:send():379] send: stats
+2023-11-06 03:03:03,567 DEBUG   HandlerThread:81207 [handler.py:handle_request():144] handle_request: defer
+2023-11-06 03:03:03,571 DEBUG   SenderThread:81207 [sender.py:send_request():406] send_request: poll_exit
+2023-11-06 03:03:03,571 INFO    HandlerThread:81207 [handler.py:handle_request_defer():170] handle defer: 3
+2023-11-06 03:03:03,573 DEBUG   SenderThread:81207 [sender.py:send_request():406] send_request: defer
+2023-11-06 03:03:03,574 INFO    SenderThread:81207 [sender.py:send_request_defer():608] handle sender defer: 3
+2023-11-06 03:03:03,574 INFO    SenderThread:81207 [sender.py:transition_state():612] send defer: 4
+2023-11-06 03:03:03,574 DEBUG   HandlerThread:81207 [handler.py:handle_request():144] handle_request: defer
+2023-11-06 03:03:03,574 INFO    HandlerThread:81207 [handler.py:handle_request_defer():170] handle defer: 4
+2023-11-06 03:03:03,574 DEBUG   SenderThread:81207 [sender.py:send_request():406] send_request: defer
+2023-11-06 03:03:03,574 INFO    SenderThread:81207 [sender.py:send_request_defer():608] handle sender defer: 4
+2023-11-06 03:03:03,575 INFO    SenderThread:81207 [sender.py:transition_state():612] send defer: 5
+2023-11-06 03:03:03,575 DEBUG   HandlerThread:81207 [handler.py:handle_request():144] handle_request: defer
+2023-11-06 03:03:03,575 INFO    HandlerThread:81207 [handler.py:handle_request_defer():170] handle defer: 5
+2023-11-06 03:03:03,575 DEBUG   SenderThread:81207 [sender.py:send():379] send: summary
+2023-11-06 03:03:03,576 INFO    SenderThread:81207 [sender.py:_save_file():1375] saving file wandb-summary.json with policy end
+2023-11-06 03:03:03,577 DEBUG   SenderThread:81207 [sender.py:send_request():406] send_request: defer
+2023-11-06 03:03:03,577 INFO    SenderThread:81207 [sender.py:send_request_defer():608] handle sender defer: 5
+2023-11-06 03:03:03,577 INFO    SenderThread:81207 [sender.py:transition_state():612] send defer: 6
+2023-11-06 03:03:03,577 DEBUG   HandlerThread:81207 [handler.py:handle_request():144] handle_request: defer
+2023-11-06 03:03:03,577 INFO    HandlerThread:81207 [handler.py:handle_request_defer():170] handle defer: 6
+2023-11-06 03:03:03,577 DEBUG   SenderThread:81207 [sender.py:send_request():406] send_request: defer
+2023-11-06 03:03:03,577 INFO    SenderThread:81207 [sender.py:send_request_defer():608] handle sender defer: 6
+2023-11-06 03:03:03,583 DEBUG   HandlerThread:81207 [handler.py:handle_request():144] handle_request: status_report
+2023-11-06 03:03:03,610 INFO    Thread-12 :81207 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/caizf/projects/ZeroEE/ZeroEE/wandb/run-20231106_030257-8txtzsnw/files/wandb-summary.json
+2023-11-06 03:03:03,846 INFO    SenderThread:81207 [sender.py:transition_state():612] send defer: 7
+2023-11-06 03:03:03,846 DEBUG   HandlerThread:81207 [handler.py:handle_request():144] handle_request: defer
+2023-11-06 03:03:03,846 INFO    HandlerThread:81207 [handler.py:handle_request_defer():170] handle defer: 7
+2023-11-06 03:03:03,847 DEBUG   SenderThread:81207 [sender.py:send_request():406] send_request: defer
+2023-11-06 03:03:03,847 INFO    SenderThread:81207 [sender.py:send_request_defer():608] handle sender defer: 7
+2023-11-06 03:03:04,468 DEBUG   HandlerThread:81207 [handler.py:handle_request():144] handle_request: poll_exit
+2023-11-06 03:03:04,537 INFO    SenderThread:81207 [sender.py:transition_state():612] send defer: 8
+2023-11-06 03:03:04,538 DEBUG   SenderThread:81207 [sender.py:send_request():406] send_request: poll_exit
+2023-11-06 03:03:04,538 DEBUG   HandlerThread:81207 [handler.py:handle_request():144] handle_request: defer
+2023-11-06 03:03:04,539 INFO    HandlerThread:81207 [handler.py:handle_request_defer():170] handle defer: 8
+2023-11-06 03:03:04,539 DEBUG   SenderThread:81207 [sender.py:send_request():406] send_request: defer
+2023-11-06 03:03:04,539 INFO    SenderThread:81207 [sender.py:send_request_defer():608] handle sender defer: 8
+2023-11-06 03:03:04,540 INFO    SenderThread:81207 [job_builder.py:build():281] Attempting to build job artifact
+2023-11-06 03:03:04,541 INFO    SenderThread:81207 [job_builder.py:_get_source_type():393] is repo sourced job
+2023-11-06 03:03:04,543 INFO    SenderThread:81207 [job_builder.py:build():369] adding wandb-job metadata file
+2023-11-06 03:03:04,547 INFO    SenderThread:81207 [sender.py:transition_state():612] send defer: 9
+2023-11-06 03:03:04,548 DEBUG   HandlerThread:81207 [handler.py:handle_request():144] handle_request: defer
+2023-11-06 03:03:04,548 DEBUG   SenderThread:81207 [sender.py:send():379] send: artifact
+2023-11-06 03:03:04,548 INFO    HandlerThread:81207 [handler.py:handle_request_defer():170] handle defer: 9
+2023-11-06 03:03:04,610 INFO    Thread-12 :81207 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/caizf/projects/ZeroEE/ZeroEE/wandb/run-20231106_030257-8txtzsnw/files/output.log
+2023-11-06 03:03:04,610 INFO    Thread-12 :81207 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/caizf/projects/ZeroEE/ZeroEE/wandb/run-20231106_030257-8txtzsnw/files/config.yaml
+2023-11-06 03:03:05,470 DEBUG   HandlerThread:81207 [handler.py:handle_request():144] handle_request: poll_exit
+2023-11-06 03:03:06,117 INFO    wandb-upload_2:81207 [upload_job.py:push():86] Skipped uploading /home/caizf/.local/share/wandb/artifacts/staging/tmprqzh9xci
+2023-11-06 03:03:06,632 INFO    wandb-upload_0:81207 [upload_job.py:push():89] Uploaded file /home/caizf/.local/share/wandb/artifacts/staging/tmpnf1uqtnp
+2023-11-06 03:03:06,833 WARNING StreamThr :81207 [internal.py:is_dead():414] Internal process exiting, parent pid 80479 disappeared
+2023-11-06 03:03:06,833 ERROR   StreamThr :81207 [internal.py:wandb_internal():152] Internal process shutdown.
+2023-11-06 03:03:07,277 INFO    wandb-upload_1:81207 [upload_job.py:push():89] Uploaded file /home/caizf/.local/share/wandb/artifacts/staging/tmp0iw69n9f
+2023-11-06 03:03:07,471 INFO    HandlerThread:81207 [handler.py:finish():840] shutting down handler
+2023-11-06 03:03:07,471 INFO    WriterThread:81207 [datastore.py:close():294] close: /home/caizf/projects/ZeroEE/ZeroEE/wandb/run-20231106_030257-8txtzsnw/run-8txtzsnw.wandb
+2023-11-06 03:03:09,484 INFO    SenderThread:81207 [sender.py:send_artifact():1453] sent artifact job-https___github.com_Zefan-Cai_ZeroEE_open_instruct_open_instruct_finetune_val.py - {'id': 'QXJ0aWZhY3Q6NjI5MTM4OTY2', 'state': 'PENDING', 'artifactSequence': {'id': 'QXJ0aWZhY3RDb2xsZWN0aW9uOjExMjUyMTk0OA==', 'latestArtifact': {'id': 'QXJ0aWZhY3Q6NjI5MTMzNTgw', 'versionIndex': 3}}}
+2023-11-06 03:03:09,484 INFO    SenderThread:81207 [sender.py:finish():1531] shutting down sender
+2023-11-06 03:03:09,484 INFO    SenderThread:81207 [dir_watcher.py:finish():358] shutting down directory watcher
+2023-11-06 03:03:09,612 INFO    SenderThread:81207 [dir_watcher.py:finish():388] scan: /home/caizf/projects/ZeroEE/ZeroEE/wandb/run-20231106_030257-8txtzsnw/files
+2023-11-06 03:03:09,612 INFO    SenderThread:81207 [dir_watcher.py:finish():402] scan save: /home/caizf/projects/ZeroEE/ZeroEE/wandb/run-20231106_030257-8txtzsnw/files/wandb-metadata.json wandb-metadata.json
+2023-11-06 03:03:09,612 INFO    SenderThread:81207 [dir_watcher.py:finish():402] scan save: /home/caizf/projects/ZeroEE/ZeroEE/wandb/run-20231106_030257-8txtzsnw/files/requirements.txt requirements.txt
+2023-11-06 03:03:09,613 INFO    SenderThread:81207 [dir_watcher.py:finish():402] scan save: /home/caizf/projects/ZeroEE/ZeroEE/wandb/run-20231106_030257-8txtzsnw/files/diff.patch diff.patch
+2023-11-06 03:03:09,613 INFO    SenderThread:81207 [dir_watcher.py:finish():402] scan save: /home/caizf/projects/ZeroEE/ZeroEE/wandb/run-20231106_030257-8txtzsnw/files/wandb-summary.json wandb-summary.json
+2023-11-06 03:03:09,619 INFO    SenderThread:81207 [dir_watcher.py:finish():402] scan save: /home/caizf/projects/ZeroEE/ZeroEE/wandb/run-20231106_030257-8txtzsnw/files/output.log output.log
+2023-11-06 03:03:09,620 INFO    SenderThread:81207 [dir_watcher.py:finish():402] scan save: /home/caizf/projects/ZeroEE/ZeroEE/wandb/run-20231106_030257-8txtzsnw/files/config.yaml config.yaml
+2023-11-06 03:03:09,621 INFO    SenderThread:81207 [dir_watcher.py:finish():402] scan save: /home/caizf/projects/ZeroEE/ZeroEE/wandb/run-20231106_030257-8txtzsnw/files/conda-environment.yaml conda-environment.yaml
+2023-11-06 03:03:09,643 INFO    SenderThread:81207 [dir_watcher.py:finish():402] scan save: /home/caizf/projects/ZeroEE/ZeroEE/wandb/run-20231106_030257-8txtzsnw/files/code/open_instruct/open_instruct/finetune_val.py code/open_instruct/open_instruct/finetune_val.py
+2023-11-06 03:03:09,644 INFO    SenderThread:81207 [file_pusher.py:finish():175] shutting down file pusher
+2023-11-06 03:03:09,644 INFO    SenderThread:81207 [file_pusher.py:join():181] waiting for file pusher
+2023-11-06 03:03:10,141 INFO    wandb-upload_2:81207 [upload_job.py:push():131] Uploaded file /home/caizf/projects/ZeroEE/ZeroEE/wandb/run-20231106_030257-8txtzsnw/files/requirements.txt
+2023-11-06 03:03:10,189 INFO    wandb-upload_4:81207 [upload_job.py:push():131] Uploaded file /home/caizf/projects/ZeroEE/ZeroEE/wandb/run-20231106_030257-8txtzsnw/files/conda-environment.yaml
+2023-11-06 03:03:10,525 INFO    wandb-upload_3:81207 [upload_job.py:push():131] Uploaded file /home/caizf/projects/ZeroEE/ZeroEE/wandb/run-20231106_030257-8txtzsnw/files/config.yaml
+2023-11-06 03:03:10,786 INFO    wandb-upload_1:81207 [upload_job.py:push():131] Uploaded file /home/caizf/projects/ZeroEE/ZeroEE/wandb/run-20231106_030257-8txtzsnw/files/wandb-summary.json
+2023-11-06 03:03:10,935 INFO    wandb-upload_0:81207 [upload_job.py:push():131] Uploaded file /home/caizf/projects/ZeroEE/ZeroEE/wandb/run-20231106_030257-8txtzsnw/files/output.log
+2023-11-06 03:03:11,146 INFO    SenderThread:81207 [file_stream.py:finish():594] file stream finish called
+2023-11-06 03:03:11,390 INFO    SenderThread:81207 [file_stream.py:finish():598] file stream finish is done

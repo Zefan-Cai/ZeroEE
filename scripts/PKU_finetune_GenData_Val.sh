@@ -1,17 +1,17 @@
-export CUDA_VISIBLE_DEVICES=4,5
+export CUDA_VISIBLE_DEVICES=4,5,6,7
 
 MODEL_PATH="/home/models/Llama-2-7b-hf/"
 OUTPUT_NAME=Llama2_GenData_1definitions_v2/
-TRAIN_FILE="/home/caizf/projects/ZeroEE/data/generated_data/train_1definitions.json"
+TRAIN_FILE="/home/caizf/projects/ZeroEE/data/generated_data/train_1definitions_100.json"
 VAL_FILE="/home/caizf/projects/ZeroEE/data/generated_data/val_1definitions.json"
 TEST_FILE="/home/caizf/projects/ZeroEE/data/ace_v2/ACE_valid_GenerationStyle_trigger.json"
 REPORT_TAGS="CtrlGen"
 
 # ceildiv(){ echo $((($1+$2-1)/$2)); }
 # NUM_GPUS=$(ceildiv ${#CUDA_VISIBLE_DEVICES} 2)
-NUM_GPUS=2
+NUM_GPUS=4
 BATCH_SIZE_PER_GPU=1
-TOTAL_BATCH_SIZE=2
+TOTAL_BATCH_SIZE=4
 GRADIENT_ACC_STEPS=$(($TOTAL_BATCH_SIZE/$NUM_GPUS/$BATCH_SIZE_PER_GPU))
 echo "Training model ${MODEL_PATH} using $NUM_GPUS GPUs, $BATCH_SIZE_PER_GPU batch size per GPU, $GRADIENT_ACC_STEPS gradient accumulation steps"
 
@@ -28,8 +28,8 @@ accelerate launch \
     --tokenizer_name $MODEL_PATH \
     --use_slow_tokenizer \
     --train_file $TRAIN_FILE \
-    --val_file $VAL_FILE \
-    --test_file $TEST_FILE \
+    --val_file $TEST_FILE \
+    --test_file $VAL_FILE \
     --max_seq_length 256 \
     --preprocessing_num_workers 16 \
     --per_device_train_batch_size $BATCH_SIZE_PER_GPU \
@@ -45,6 +45,6 @@ accelerate launch \
     --report_to wandb \
     --report_name $OUTPUT_NAME \
     --report_tags $REPORT_TAGS \
-    --eval_steps 400 \
+    --eval_steps 4 \
     --checkpointing_steps epoch \
     --logging_steps 1

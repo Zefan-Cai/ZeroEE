@@ -23,7 +23,7 @@ error_num = 0
 print(f"debug number of parents: {len(list(data.keys()))}")
 
 val_parent_list = list(data.keys())[:100]
-train_parent_list = list(data.keys())[100:]
+train_parent_list = list(data.keys())[100:200]
 
 
 
@@ -110,7 +110,7 @@ for parent_event in train_parent_list:
                             # "parent": parent_event,
                             # "events": events,
                             # "sons": sons,
-                            "prompt": f"SENTENCE: {sentence} \n EVENT TYPE: {event_name}. \n DEFINITION: {event_definition} \n PARENT: {parent_event}, SON: {text_sons}. \n So what is the trigger?",
+                            "prompt": f"SENTENCE: {negative_sample} \n EVENT TYPE: {event_name}. \n DEFINITION: {event_definition} \n PARENT: {parent_event}, SON: {text_sons}. \n So what is the trigger?",
                             "completion": f"Event trigger is <trigger>."
                             })
         else:
@@ -122,7 +122,7 @@ print(f"debug error_num {str(error_num)}")
 
 train_data =  positive_train_data + negative_train_data
 
-with open(os.path.join(output_dir, 'generated_data', 'train_1definitions.json'), 'w') as fp:
+with open(os.path.join(output_dir, 'generated_data', 'train_1definitions_100.json'), 'w') as fp:
     for line in tqdm(train_data):
         json.dump(line, fp)
         fp.write('\n')
@@ -219,7 +219,7 @@ for parent_event in val_parent_list:
                             # "parent": parent_event,
                             # "events": events,
                             # "sons": sons,
-                            "prompt": f"SENTENCE: {sentence} \n EVENT TYPE: {event_name}. \n DEFINITION: {event_definition} \n PARENT: {parent_event}, SON: {text_sons}. \n So what is the trigger?",
+                            "prompt": f"SENTENCE: {negative_sample} \n EVENT TYPE: {event_name}. \n DEFINITION: {event_definition} \n PARENT: {parent_event}, SON: {text_sons}. \n So what is the trigger?",
                             "completion": f"Event trigger is ",
                             "trigger":  "<trigger>"
                             })

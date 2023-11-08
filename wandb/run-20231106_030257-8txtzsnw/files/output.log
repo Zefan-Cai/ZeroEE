@@ -1,0 +1,47 @@
+11/06/2023 03:03:02 - INFO - __main__ - ***** Running training *****
+11/06/2023 03:03:02 - INFO - __main__ -   Num examples = 18513
+11/06/2023 03:03:02 - INFO - __main__ -   Num Epochs = 2
+11/06/2023 03:03:02 - INFO - __main__ -   Instantaneous batch size per device = 1
+11/06/2023 03:03:02 - INFO - __main__ -   Total train batch size (w. parallel, distributed & accumulation) = 4
+11/06/2023 03:03:02 - INFO - __main__ -   Gradient Accumulation steps = 1
+11/06/2023 03:03:02 - INFO - __main__ -   Total optimization steps = 9258
+  0%|                                                                                                                                                                          | 0/9258 [00:00<?, ?it/s]Traceback (most recent call last):
+  File "./open_instruct/open_instruct/finetune_val.py", line 868, in <module>
+    main()
+  File "./open_instruct/open_instruct/finetune_val.py", line 746, in main
+    outputs = model(**batch, use_cache=False)
+  File "/home/caizf/miniconda3/envs/tulu/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1501, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/caizf/miniconda3/envs/tulu/lib/python3.8/site-packages/deepspeed/utils/nvtx.py", line 15, in wrapped_fn
+    ret_val = func(*args, **kwargs)
+  File "/home/caizf/miniconda3/envs/tulu/lib/python3.8/site-packages/deepspeed/runtime/engine.py", line 1801, in forward
+    loss = self.module(*inputs, **kwargs)
+  File "/home/caizf/miniconda3/envs/tulu/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1538, in _call_impl
+    result = forward_call(*args, **kwargs)
+  File "/home/caizf/miniconda3/envs/tulu/lib/python3.8/site-packages/transformers/models/llama/modeling_llama.py", line 806, in forward
+    outputs = self.model(
+  File "/home/caizf/miniconda3/envs/tulu/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1538, in _call_impl
+    result = forward_call(*args, **kwargs)
+  File "/home/caizf/miniconda3/envs/tulu/lib/python3.8/site-packages/transformers/models/llama/modeling_llama.py", line 693, in forward
+    layer_outputs = decoder_layer(
+  File "/home/caizf/miniconda3/envs/tulu/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1538, in _call_impl
+    result = forward_call(*args, **kwargs)
+  File "/home/caizf/miniconda3/envs/tulu/lib/python3.8/site-packages/transformers/models/llama/modeling_llama.py", line 408, in forward
+    hidden_states, self_attn_weights, present_key_value = self.self_attn(
+  File "/home/caizf/miniconda3/envs/tulu/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1538, in _call_impl
+    result = forward_call(*args, **kwargs)
+  File "/home/caizf/miniconda3/envs/tulu/lib/python3.8/site-packages/transformers/models/llama/modeling_llama.py", line 305, in forward
+    query_states = self.q_proj(hidden_states)
+  File "/home/caizf/miniconda3/envs/tulu/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1538, in _call_impl
+    result = forward_call(*args, **kwargs)
+  File "/home/caizf/miniconda3/envs/tulu/lib/python3.8/site-packages/torch/nn/modules/linear.py", line 114, in forward
+    return F.linear(input, self.weight, self.bias)
+  File "/home/caizf/miniconda3/envs/tulu/lib/python3.8/site-packages/deepspeed/runtime/zero/linear.py", line 106, in zero3_linear_wrap
+    return LinearFunctionForZeroStage3.apply(input, weight)
+  File "/home/caizf/miniconda3/envs/tulu/lib/python3.8/site-packages/torch/autograd/function.py", line 506, in apply
+    return super().apply(*args, **kwargs)  # type: ignore[misc]
+  File "/home/caizf/miniconda3/envs/tulu/lib/python3.8/site-packages/torch/cuda/amp/autocast_mode.py", line 98, in decorate_fwd
+    return fwd(*args, **kwargs)
+  File "/home/caizf/miniconda3/envs/tulu/lib/python3.8/site-packages/deepspeed/runtime/zero/linear.py", line 57, in forward
+    output = input.matmul(weight.t())
+RuntimeError: CUDA error: CUBLAS_STATUS_NOT_INITIALIZED when calling `cublasCreate(handle)`
