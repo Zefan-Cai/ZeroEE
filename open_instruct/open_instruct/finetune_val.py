@@ -839,7 +839,7 @@ def main():
                             for key in scores:
                                 report_scores[f"val_{key}"] = scores[key]
                             
-                            logger.info(f" [Validation] Step: {completed_steps}, Scores: {json.dumps(report_scores)}")
+                            logger.info(f" [Validation] Step: {completed_steps}, Epoch: {epoch}, Scores: {json.dumps(report_scores)}")
                             if args.with_tracking:
                                 accelerator.log(
                                     report_scores,
@@ -877,7 +877,7 @@ def main():
                             for key in scores:
                                 report_scores[f"test_{key}"] = scores[key]
                             
-                            logger.info(f" [Test] Step: {completed_steps}, Scores: {json.dumps(report_scores)}")
+                            logger.info(f" [Test] Step: {completed_steps}, Epoch: {epoch}, Scores: {json.dumps(report_scores)}")
                             if args.with_tracking:
                                 accelerator.log(
                                     report_scores,
@@ -892,7 +892,25 @@ def main():
             output_dir = f"epoch_{epoch}"
             if args.output_dir is not None:
                 output_dir = os.path.join(args.output_dir, output_dir)
-            accelerator.save_state(output_dir)
+            if args.output_dir is not None:
+                accelerator.wait_for_everyone()
+                if accelerator.is_main_process:
+                    tokenizer.save_pretrained(output_dir)
+                unwrapped_model = accelerator.unwrap_model(model)
+                # When doing multi-gpu training, we need to use accelerator.get_state_dict(model) to get the state_dict.
+                # Otherwise, sometimes the model will be saved with only part of the parameters.
+                # Also, accelerator needs to use the wrapped model to get the state_dict.
+                state_dict = accelerator.get_state_dict(model)
+                if args.use_lora:
+                    # When using lora, the unwrapped model is a PeftModel, which doesn't support the is_main_process 
+                    # and has its own save_pretrained function for only saving lora modules.
+                    # We have to mannually specify the is_main_process outside the save_pretrained function.
+                    if accelerator.is_main_process:
+                        unwrapped_model.save_pretrained(output_dir, state_dict=state_dict)
+                else:
+                    unwrapped_model.save_pretrained(
+                        output_dir, is_main_process=accelerator.is_main_process, save_function=accelerator.save, state_dict=state_dict
+                    )
 
     if args.with_tracking:
         accelerator.end_training()
