@@ -24,8 +24,8 @@ accelerate launch \
     --num_machines 1 \
     --num_processes $NUM_GPUS \
     --use_deepspeed \
-    --deepspeed_config_file ./open_instruct/ds_configs/stage3_no_offloading_accelerate.conf \
-    ./open_instruct/open_instruct/finetune_val.py \
+    --deepspeed_config_file /local1/zefan/ZeroEE/open_instruct/ds_configs/stage3_no_offloading_accelerate.conf \
+    /local1/zefan/ZeroEE/open_instruct/open_instruct/finetune_val.py \
     --model_name_or_path $FINETUNED_MODEL_PATH \
     --use_flash_attn \
     --tokenizer_name $MODEL_PATH \
