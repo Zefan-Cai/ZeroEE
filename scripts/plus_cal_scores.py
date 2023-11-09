@@ -144,9 +144,9 @@ def get_trigger(examples):
     return test_gold_object, test_pred_object
     # return test_gold_object, test_pred_object, test_gold_events, test_pred_events
  
-base_path = '/local1/zefan/results/Llama2_Geneva_20_96_2000_GenData200_ACE_v2/'
+base_path = '/local1/zefan/results/Llama2_Geneva_20_96_2000_GenData200_epoch5_ACE_v2/'
 
-path = base_path + '/predictions/ACE_test_GenerationStyle.jsonl'
+path = base_path + 'predictions/ACE_valid_GenerationStyle.jsonl'
 
 
 examples = []

@@ -23,21 +23,47 @@ def compute_f1(predicted, gold, matched):
     return precision, recall, f1
 
 
-def cal_scores(gold_triggers, pred_triggers, gold_events, pred_events):
+
+# def cal_scores(gold_triggers, pred_triggers, gold_events, pred_events):
+def cal_scores(gold_triggers, pred_triggers):
     assert len(gold_triggers) == len(pred_triggers)
-    assert len(gold_events) == len(pred_events)  
+    # assert len(gold_events) == len(pred_events)  
+    
+    
     # tri_id
     gold_tri_id_num, pred_tri_id_num, match_tri_id_num = 0, 0, 0
+    
+    # print(f"debug: {gold_triggers[2]}")
+    # print(f"debug: {pred_triggers[2]}")
+    
+    # for gold_trigger, pred_trigger in zip(gold_triggers, pred_triggers):
     for gold_trigger, pred_trigger in zip(gold_triggers, pred_triggers):
-        gold_set = set(gold_trigger)
-        pred_set = set(pred_trigger)
+        if gold_trigger != [] and pred_trigger != []:
+            # print([t[0][0] for t in gold_trigger])
+            gold_set = set(tuple([t[0] for t in gold_trigger]))
+            pred_set = set(tuple([t[0] for t in pred_trigger]))
+            # print(gold_trigger)
+            # print(pred_trigger)
+            # print(gold_set)
+            # print(pred_set)
+            # print(gold_set & pred_set)
+        else:
+            gold_set = set(gold_trigger)
+            pred_set = set(pred_trigger)
+        # gold_set = set(gold_trigger)
+        # pred_set = set(pred_trigger)
         gold_tri_id_num += len(gold_set)
         pred_tri_id_num += len(pred_set)
         match_tri_id_num += len(gold_set & pred_set)
     
     # tri_cls
     gold_tri_cls_num, pred_tri_cls_num, match_tri_cls_num = 0, 0, 0
-    for gold_trigger, pred_trigger in zip(gold_events, pred_events):
+    for gold_trigger, pred_trigger in zip(gold_triggers, pred_triggers):
+        
+        # print("debug")
+        # print(pred_trigger)
+        # print(gold_trigger)
+        
         gold_set = set(gold_trigger)
         pred_set = set(pred_trigger)
         gold_tri_cls_num += len(gold_set)
@@ -53,34 +79,56 @@ def cal_scores(gold_triggers, pred_triggers, gold_events, pred_events):
 
 
 exact_match = evaluate.load("exact_match")
-
 def get_trigger(examples):
     all_outputs = []
     test_gold_triggers, test_gold_events, test_pred_triggers, test_pred_events = [], [], [], []
 
+    test_gold_object, test_pred_object = [], []
 
     for example in examples:
         pred_object = []
         gt_trigger_object = []
         gt_event_object = []
         
+        my_gold_object = []
+        my_pred_object = []
+        
         for sub_example in example:
-            event_type = sub_example["Event type"][0]
+            # print(sub_example["Event type"])
+            event_type = sub_example["Event type"]
             trigger = sub_example["trigger"]
+            
             raw_output = sub_example["prediction"]
             
             if trigger != '<trigger>':
-                gt_trigger_object.extend(trigger)
-                gt_event_object.append(event_type)
+                for tri in trigger:
+                    gt_trigger_object.extend(tri)
+                    gt_event_object.append(event_type)
+                    my_gold_object.append((tri, event_type))
+
             
             try:
                 triggers = raw_output.split('Event trigger is ', 1)[1]
+                triggers = triggers.split('.')[0]
                 triggers = triggers.split(' and ')
                 for t_cnt, t in enumerate(triggers):
                     if t != '<trigger>':
-                        pred_object.append((t, event_type, {'tri counter': t_cnt})) # (text, type, kwargs)
-            except:
+                        # pred_object.append((t, event_type, {'tri counter': t_cnt})) # (text, type, kwargs)
+                        # pred_object.append(t, event_type) # (text, type, kwargs)
+                        my_pred_object.append((t, event_type))
+                        # print(t, event_type)
+                    
+                        
+            except Exception as e:
+                # print(e)
                 pass
+            
+            # if len(trigger) > 1 and trigger != '<trigger>':
+            #     print(f"subexample trigger {trigger}")
+            #     print(f"subexample event_type {event_type}")
+            #     print(f"subexample triggers {triggers}")
+            
+            
             sub_example["trigger"] = pred_object
             all_outputs.append(pred_object)
                 
@@ -91,13 +139,23 @@ def get_trigger(examples):
             pred_event_object.append(obj[1])
             pred_trigger_object.append(obj[0])
 
+        test_gold_object.append(tuple(my_gold_object))
+        test_pred_object.append(tuple(my_pred_object))
+        
+
+
+
         test_gold_triggers.append(gt_trigger_object)
         test_gold_events.append(gt_event_object)
         test_pred_triggers.append(pred_trigger_object)
         test_pred_events.append(pred_event_object)
 
+    # print("debug")
+    # print(test_pred_object[:10])
+    # print(test_gold_object[:10])
 
-    return test_gold_triggers, test_gold_events, test_pred_triggers, test_pred_events
+    return test_gold_object, test_pred_object
+    # return test_gold_object, test_pred_object, test_gold_events, test_pred_events
 
 @torch.no_grad()
 def eval_hf_model(args, model, tokenizer, examples, task_prompt, save_path=None):
