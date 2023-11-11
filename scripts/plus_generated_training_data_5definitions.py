@@ -13,9 +13,66 @@ with open('/local1/zefan/ZeroEE/data/generated_data.json', 'r') as fp:
 
 print(f"debug number of parents: {len(list(data.keys()))}")
 
-val_parent_list = list(data.keys())[:100]
-train_parent_list_100 = list(data.keys())[100:200]
-train_parent_list_400 = list(data.keys())[100:500]
+
+all_parent_list = list(data.keys())
+
+count_all_event = 0
+for parent_event in all_parent_list:
+    count_all_event += len(data[parent_event]["events"])
+
+print(f"debug count_all_event {count_all_event}")
+
+
+
+
+
+
+
+
+val_parent_list = list(data.keys())[:50]
+
+count_val_event = 0
+for parent_event in val_parent_list:
+    count_val_event += len(data[parent_event]["events"])
+
+print(f"debug count_val_event {count_val_event}")
+
+
+
+
+
+
+train_parent_list_100 = list(data.keys())[50:100]
+
+count_train_100_event = 0
+for parent_event in train_parent_list_100:
+    count_train_100_event += len(data[parent_event]["events"])
+
+print(f"debug count_train_100_event {count_train_100_event}")
+
+
+
+
+
+train_parent_list_400 = list(data.keys())[50:184]
+
+count_train_400_event = 0
+for parent_event in train_parent_list_400:
+    count_train_400_event += len(data[parent_event]["events"])
+
+print(f"debug count_train_400_event {count_train_400_event}")
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 val_event_list = []
