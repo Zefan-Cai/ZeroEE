@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # coding=utf-8
 
+
 import copy
 import argparse
 import logging
@@ -70,6 +71,9 @@ def parse_args():
     )
     parser.add_argument(
         "--test_file", type=str, default=None, help="A csv or a json file containing the testing data."
+    )
+    parser.add_argument(
+        "--metrics_file", type=str, default=None, help="A csv or a json file containing the testing data."
     )
     parser.add_argument(
         "--model_name_or_path",
@@ -294,30 +298,35 @@ def encode_with_prompt_completion_format_val(example, tokenizer, max_seq_length)
     else:
         example_text = example['prompt'] + example['completion']
         
-    print(f"debug trigger {example['trigger']}")    
     trigger = tokenizer(example['trigger'], return_tensors='pt', max_length=2, truncation=True).input_ids
-    print(f"debug trigger idx {trigger}")
-    
-    # print(f"debug labels {labels}")
-        
-    # print(f"debug trigger {trigger}")
         
     example_text = example_text + tokenizer.eos_token
+    # Cannot add the <s> token, and also need to do left padding for val
+    # Prepare
+    # tokenizer.padding_side = "left"
+    # tokenizer.add_eos_token = False
     tokenized_example = tokenizer(example_text, return_tensors='pt', max_length=max_seq_length, truncation=True)
     input_ids = tokenized_example.input_ids
+    input_ids = input_ids[:, :-1] # Remove the <s> token 
+    # Restore
+    # tokenizer.padding_side = "right"
+    # tokenizer.add_eos_token = True
+    
+    # The label here is trash, ignore it
     labels = input_ids.clone()
     tokenized_prompt = tokenizer(example['prompt'], return_tensors='pt', max_length=max_seq_length, truncation=True)
     # mask the prompt part for avoiding loss
     labels[:, :tokenized_prompt.input_ids.shape[1]] = -100
     attention_mask = torch.ones_like(input_ids)
     
-    # print(f"debug input_ids {input_ids}")
     
     return {
         'input_ids': input_ids.flatten(),
         'labels': labels.flatten(),
         'attention_mask': attention_mask.flatten(),
+        "data_id": example['data_id'],
         'trigger': trigger.flatten(),
+        "event_type": example['event_type']
     }
 
 
@@ -388,7 +397,14 @@ def main():
             else:
                 # We will add the fake val file here even if it's not specified
                 data_files["test"] = args.train_file
-        dataset_args["features"] = Features({'prompt': Value(dtype='string', id=None), 'completion': Value(dtype='string', id=None), 'trigger': Value(dtype='string', id=None)})
+        dataset_args["features"] = Features({
+            'Event definition': Value(dtype='string', id=None),
+            'Event type': Value(dtype='string', id=None),
+            'prompt': Value(dtype='string', id=None),
+            'completion': Value(dtype='string', id=None),
+            'trigger': Value(dtype='string', id=None),
+            'data_id': Value(dtype='int32', id=None),
+            'event_type': Value(dtype='int32', id=None)})
         raw_datasets = load_dataset(
             "json",
             data_files=data_files,
@@ -420,9 +436,10 @@ def main():
         
     special_tokens = ['<trigger>', '<sep>', '<Trigger>']
     tokenizer.add_tokens(special_tokens)
+    for tk, tkid in zip(special_tokens, tokenizer(special_tokens).input_ids):
+        print(f"Special Token {tk}: {tkid}")
+        print(f"Special Token decoded {tkid}: {tokenizer.decode(tkid)}")
     
-    
-    scores_metric = load_metric("/local1/zefan/ZeroEE/open_instruct/compute_score.py")
 
     if args.model_name_or_path:
         model = AutoModelForCausalLM.from_pretrained(
@@ -531,9 +548,6 @@ def main():
         )
         lm_datasets_val.set_format(type="pt")
     
-    test_data = lm_datasets_val["val"][1]
-    print(f"debug lm_datasets_val val {test_data}")
-    
     
     val_dataset = lm_datasets_val["val"]
     test_dataset = lm_datasets_val["test"]
@@ -560,6 +574,7 @@ def main():
         batch_size=args.per_device_train_batch_size
     )
     # For validation
+    
     if args.val_file is not None:
         val_dataloader = DataLoader(
             val_dataset, 
@@ -575,7 +590,7 @@ def main():
             collate_fn=DataCollatorForSeq2Seq(tokenizer=tokenizer, model=model, padding="longest"),
             batch_size=args.per_device_eval_batch_size
         )
-
+        
     # Optimizer
     # Split weights in two groups, one with weight decay and the other not.
     no_decay = ["bias", "layer_norm.weight"]
@@ -710,9 +725,13 @@ def main():
     def compute_metric(prediction, ground_truth, split = "val"):
         # TODO: Add F1 ground truth here, currently using Accuracy
         
-        print(f"debug prediction {len(prediction)}")
-        print(f"debug ground_truth {len(ground_truth)}")
-        
+        # print(f"debug prediction {len(prediction)}")
+        # print(f"debug ground_truth {len(ground_truth)}")
+        print("---------------------Pred")
+        print(prediction[:3])
+        print("---------------------GT")
+        print(ground_truth[:3])
+        exit()
         # negative_class =
         total_labels = []
         total_prelabels = []
@@ -820,36 +839,57 @@ def main():
                     if completed_steps % args.eval_steps == 0:
                         # Prepare Eval
                         model.eval()
+                        scores_metric = load_metric(args.metrics_file, num_process=accelerator.num_processes, process_id=accelerator.process_index)
                         with torch.no_grad():
                             torch.cuda.empty_cache()
-                            logger.info(f"Start doing evaluation at step: {completed_steps}")#
+                            logger.info(f"Start doing evaluation(val) at step: {completed_steps}")#
                             # Get model output for val set
                             predictions = []
+                            # For val, do left padding
+                            # Prepare 
+                            tokenizer.padding_side = "left"
                             for eval_batch in tqdm(val_dataloader):
                                 
                                 val_gt = eval_batch['trigger'][:, 1].squeeze().tolist()
+                                val_event_type = eval_batch['event_type'].squeeze().tolist()
+                                val_data_id = eval_batch['data_id'].squeeze().tolist()
                                 
                                 del eval_batch['trigger']
+                                del eval_batch['event_type']
+                                del eval_batch['data_id']
+                                
+                                input_ids = eval_batch["input_ids"][0]
+                                
+                                # print(f"debug eval_batch input_ids {input_ids}")
+                                # print(f"debug eval_batch input_ids {tokenizer.decode(input_ids)}")
+                                # print(f"debug eval_batch val_gt {val_gt[0]}")
+                                # print(f"debug eval_batch val_gt {tokenizer.decode(val_gt[0])}")
+
                                 
                                 outputs = model(**eval_batch, use_cache=False, return_dict = True)
                                 batch_predict = torch.argmax(outputs.logits[:,-1,:], dim = -1).cpu().tolist()
-                                # print(outputs.logits.size(), eval_batch.input_ids.size())
-                                # predictions += batch_predict
-                                # get the output results
-                            # scores = compute_metric(predictions, val_ground_truth, split = "val")
-                            
-                                # print(f"debug batch_predict {len(batch_predict)} {batch_predict[:10]}")
-                                # print(f"debug val_gt {len(val_gt)} {val_gt[:10]}")
-                            
-                                scores_metric.add_batch(predictions=batch_predict, references=val_gt)
+                                
+                                # print(f"debug outputs {batch_predict[0]}")
+                                # print(f"debug outputs {tokenizer.decode(batch_predict[0])}")
+
+                                scores_metric.add_batch(predictions=batch_predict, references=val_gt, event_type=val_event_type, data_id=val_data_id)
+                            # Restore
+                            tokenizer.padding_side = "right"
                             print(f"finish inference")
                             scores = scores_metric.compute()
-                            logger.info(f" [Validation] Step: {completed_steps}, Scores: {json.dumps(scores)}")
-                            if args.with_tracking:
-                                accelerator.log(
-                                    scores,
-                                    step=completed_steps,
-                                )
+                            
+                            if accelerator.process_index == 0:
+                                
+                                report_scores = {}
+                                for key in scores:
+                                    report_scores[f"val_{key}"] = scores[key]
+                                
+                                logger.info(f" [Validation] Step: {completed_steps}, Epoch: {epoch}, Scores: {json.dumps(report_scores)}")
+                                if args.with_tracking:
+                                    accelerator.log(
+                                        report_scores,
+                                        step=completed_steps,
+                                    )
                         model.train()
                 # First try to add eval here
                 if args.test_file is not None:
@@ -859,40 +899,77 @@ def main():
                     if completed_steps % args.eval_steps == 0:
                         # Prepare Eval
                         model.eval()
+                        scores_metric = load_metric(args.metrics_file, num_process=accelerator.num_processes, process_id=accelerator.process_index)
                         with torch.no_grad():
                             torch.cuda.empty_cache()
-                            logger.info(f"Start doing evaluation at step: {completed_steps}")#
+                            logger.info(f"Start doing evaluation(test) at step: {completed_steps}")#
                             # Get model output for val set
                             predictions = []
+                            # For val, do left padding
+                            # Prepare 
+                            tokenizer.padding_side = "left"
                             for eval_batch in tqdm(test_dataloader):
                                 
                                 test_gt = eval_batch['trigger'][:, 1].squeeze().tolist()
+                                test_event_type = eval_batch['event_type'].squeeze().tolist()
+                                test_data_id = eval_batch['data_id'].squeeze().tolist()
                                 
                                 del eval_batch['trigger']
+                                del eval_batch['event_type']
+                                del eval_batch['data_id']
                                 
                                 outputs = model(**eval_batch, use_cache=False, return_dict = True)
                                 batch_predict = torch.argmax(outputs.logits[:,-1,:], dim = -1).cpu().tolist()
-                                # predictions += batch_predict
-                                # get the output results
-                            # scores = compute_metric(predictions, test_ground_truth, split = "test")
-                                scores_metric.add_batch(predictions=batch_predict, references=test_gt)
+
+                                scores_metric.add_batch(predictions=batch_predict, references=test_gt, event_type=test_event_type, data_id=test_data_id)
+                            # Restore
+                            tokenizer.padding_side = "right"
                             scores = scores_metric.compute()
-                            logger.info(f" [Test] Step: {completed_steps}, Scores: {json.dumps(scores)}")
-                            if args.with_tracking:
-                                accelerator.log(
-                                    scores,
-                                    step=completed_steps,
-                                )
+                            
+                            if accelerator.process_index == 0:
+                                
+                                report_scores = {}
+                                for key in scores:
+                                    report_scores[f"test_{key}"] = scores[key]
+                                
+                                logger.info(f" [Test] Step: {completed_steps}, Epoch: {epoch}, Scores: {json.dumps(report_scores)}")
+                                if args.with_tracking:
+                                    accelerator.log(
+                                        report_scores,
+                                        step=completed_steps,
+                                    )
                         model.train()
                 # Put this to the end to enable eval after training is done
                 if completed_steps >= args.max_train_steps:
                     break
-            
+        # if args.checkpointing_steps == "epoch":
+        #     output_dir = f"epoch_{epoch}"
+        #     if args.output_dir is not None:
+        #         output_dir = os.path.join(args.output_dir, output_dir)
+        #     accelerator.save_state(output_dir)
         if args.checkpointing_steps == "epoch":
             output_dir = f"epoch_{epoch}"
             if args.output_dir is not None:
                 output_dir = os.path.join(args.output_dir, output_dir)
-            accelerator.save_state(output_dir)
+            if args.output_dir is not None:
+                accelerator.wait_for_everyone()
+                if accelerator.is_main_process:
+                    tokenizer.save_pretrained(output_dir)
+                unwrapped_model = accelerator.unwrap_model(model)
+                # When doing multi-gpu training, we need to use accelerator.get_state_dict(model) to get the state_dict.
+                # Otherwise, sometimes the model will be saved with only part of the parameters.
+                # Also, accelerator needs to use the wrapped model to get the state_dict.
+                state_dict = accelerator.get_state_dict(model)
+                if args.use_lora:
+                    # When using lora, the unwrapped model is a PeftModel, which doesn't support the is_main_process 
+                    # and has its own save_pretrained function for only saving lora modules.
+                    # We have to mannually specify the is_main_process outside the save_pretrained function.
+                    if accelerator.is_main_process:
+                        unwrapped_model.save_pretrained(output_dir, state_dict=state_dict)
+                else:
+                    unwrapped_model.save_pretrained(
+                        output_dir, is_main_process=accelerator.is_main_process, save_function=accelerator.save, state_dict=state_dict
+                    )
 
     if args.with_tracking:
         accelerator.end_training()
