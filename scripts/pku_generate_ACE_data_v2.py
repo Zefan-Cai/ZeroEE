@@ -2,23 +2,34 @@ import os
 import json
 import random
 
-output_dir = "/home/caizf/projects/ZeroEE/data/ace_v2"
 
-with open('/home/caizf/projects/ZeroEE/ZeroEE/data/ACE_ontology.json', 'r') as fp:
+output_dir = "/home/caizf/projects/ZeroEE/data/ace_v2"
+base_dir = "/home/caizf/projects/ZeroEE/"
+
+
+
+
+
+
+
+
+
+with open(os.path.join(base_dir, 'ZeroEE', "data", 'ACE_ontology.json'), 'r') as fp:
     ACE_ontology = json.load(fp)
 
 # ACE
 
 ## ACE Event Definition
 
-with open('/home/caizf/projects/ZeroEE/ZeroEE/data/ACE_event_definition.json', 'r') as fp:
+with open(os.path.join(base_dir, 'ZeroEE', 'data', 'ACE_event_definition.json'), 'r') as fp:
     event_type2definition = json.load(fp)
 
+event_list = list(event_type2definition.keys())
 ## ACE val data
 
 ACE_valid_data = []
 
-with open('/home/caizf/projects/ZeroEE/ZeroEE/oneie_ace05_en_event/val.json', 'r') as fp:
+with open(os.path.join(base_dir, 'ZeroEE', 'oneie_ace05_en_event', 'val.json'), 'r') as fp:
     for line in fp.readlines():
         ACE_valid_data.append(json.loads(line))
         
@@ -92,30 +103,11 @@ with open(os.path.join(output_dir, f'ACE_valid_GenerationStyle_clean.json'), 'w'
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ## ACE val data
 
 ACE_valid_data = []
 
-with open('/home/caizf/projects/ZeroEE/ZeroEE/oneie_ace05_en_event/val.json', 'r') as fp:
+with open(os.path.join(base_dir, 'ZeroEE', 'oneie_ace05_en_event', 'val.json'), 'r') as fp:
     for line in fp.readlines():
         ACE_valid_data.append(json.loads(line))
         
@@ -153,10 +145,12 @@ for index in range(len(ACE_valid_data)):
         
         sample = ACE_valid_data[index]["text"]
         
+        event_type_id = event_list.index(event_type)
             
         sample_data_list.append({
             # "Event definition": event_definition,
-            # "Event type": event_type,
+            "data_id": index,
+            "event_type": event_type_id,
             "prompt": f"SENTENCE: {sample} \n EVENT TYPE: {event_type}. \n DEFINITION: {event_definition} \n PARENT: {parent_event}, SON: {text_sons}. \n So what is the trigger?",
             "completion": f"Event trigger is ",
             "trigger": trigger
@@ -164,7 +158,7 @@ for index in range(len(ACE_valid_data)):
     valid_data.append(sample_data_list)
     
 
-with open(os.path.join(output_dir, f'ACE_valid_GenerationStyle_trigger.json'), 'w') as fp:
+with open(os.path.join(output_dir, f'ACE_valid_v2_trigger.json'), 'w') as fp:
     for index_i in range(len(valid_data)):
         for index_j in range(len(valid_data[index_i])):
             json.dump(valid_data[index_i][index_j], fp)
@@ -214,7 +208,7 @@ with open(os.path.join(output_dir, f'ACE_valid_GenerationStyle_trigger.json'), '
 
 ACE_test_data = []
 
-with open('/home/caizf/projects/ZeroEE/ZeroEE/oneie_ace05_en_event/test.json', 'r') as fp:
+with open(os.path.join(base_dir, 'ZeroEE', 'oneie_ace05_en_event', 'test.json'), 'r') as fp:
     for line in fp.readlines():
         ACE_test_data.append(json.loads(line))
 
@@ -251,17 +245,22 @@ for index in range(len(ACE_test_data)):
             else:
                 trigger = "<trigger>"
             
-            sample = ACE_valid_data[index]["text"]
+            sample = ACE_test_data[index]["text"]
+            
+            event_type_id = event_list.index(event_type)
             
             sample_data_list.append({
-                "Event definition": event_definition,
-                "Event type": event_type,       
+                # "Event definition": event_definition,
+                "data_id": index,
+                "event_type": event_type_id,         
                 "prompt": f"SENTENCE: {sample} \n EVENT TYPE: {event_type}. \n DEFINITION: {event_definition} \n PARENT: {parent_event}, SON: {text_sons}. \n So what is the trigger?",
+                "completion": f"Event trigger is ",
                 "trigger": trigger
                 })
         test_data.append(sample_data_list)
     
-with open(os.path.join(output_dir, f'ACE_test_GenerationStyle.json'), 'w') as fp:
-    for d in test_data:
-       json.dump(d, fp)
-       fp.write('\n')
+with open(os.path.join(output_dir, f'ACE_test_v2_trigger.json'), 'w') as fp:
+    for index_i in range(len(test_data)):
+        for index_j in range(len(test_data[index_i])):
+            json.dump(test_data[index_i][index_j], fp)
+            fp.write('\n')
