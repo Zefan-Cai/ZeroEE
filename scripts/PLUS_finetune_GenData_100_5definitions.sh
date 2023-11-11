@@ -49,4 +49,5 @@ accelerate launch \
     --report_name $OUTPUT_NAME \
     --report_tags $REPORT_TAGS \
     --checkpointing_steps epoch \
+    --eval_steps 1 \
     --logging_steps 1
