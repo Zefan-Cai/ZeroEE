@@ -236,7 +236,7 @@ for index in range(len(ACE_test_data)):
             sample_data_list.append({
                 "Event definition": event_definition,
                 "Event type": event_type,       
-                "prompt": "{} \n {} \n So what is the trigger?".format(ACE_valid_data[index]["text"], event_definition),
+                "prompt": "{} \n {} \n So what is the trigger?".format(ACE_test_data[index]["text"], event_definition),
                 "trigger": trigger
                 })
         test_data.append(sample_data_list)

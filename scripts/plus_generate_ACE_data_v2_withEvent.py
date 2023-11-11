@@ -4,7 +4,7 @@ import copy
 import random
 from tqdm import tqdm
 
-output_dir = "/local1/zefan/data/ace_v2"
+output_dir = "/local1/zefan/data/ace_v2_withEvent"
 
 
 
@@ -23,6 +23,8 @@ with open('/local1/zefan/ZeroEE/data/ACE_event_definition.json', 'r') as fp:
     event_type2definition = json.load(fp)
 
 event_list = list(event_type2definition.keys())
+
+
 ## ACE val data
 
 ACE_valid_data = []
@@ -101,6 +103,24 @@ with open(os.path.join(output_dir, f'ACE_valid_GenerationStyle_clean.json'), 'w'
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## ACE val data
 
 ACE_valid_data = []
@@ -147,7 +167,6 @@ for index in range(len(ACE_valid_data)):
             
         sample_data_list.append({
             # "Event definition": event_definition,
-            "data_id": index,
             "event_type": event_type_id,
             "prompt": f"SENTENCE: {sample} \n EVENT TYPE: {event_type}. \n DEFINITION: {event_definition} \n PARENT: {parent_event}, SON: {text_sons}. \n So what is the trigger?",
             "completion": f"Event trigger is ",
@@ -243,14 +262,13 @@ for index in range(len(ACE_test_data)):
             else:
                 trigger = "<trigger>"
             
-            sample = ACE_test_data[index]["text"]
+            sample = ACE_valid_data[index]["text"]
             
             event_type_id = event_list.index(event_type)
             
             sample_data_list.append({
                 # "Event definition": event_definition,
-                "data_id": index,
-                "event_type": event_type_id,         
+                "event_type": event_type_id,       
                 "prompt": f"SENTENCE: {sample} \n EVENT TYPE: {event_type}. \n DEFINITION: {event_definition} \n PARENT: {parent_event}, SON: {text_sons}. \n So what is the trigger?",
                 "completion": f"Event trigger is ",
                 "trigger": trigger

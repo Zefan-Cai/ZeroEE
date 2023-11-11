@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 # coding=utf-8
 
-
-import copy
 import argparse
 import logging
 import math
@@ -17,18 +15,8 @@ from accelerate.logging import get_logger
 from accelerate.utils import set_seed
 from datasets import load_dataset
 from torch.utils.data import DataLoader
-from datasets import load_dataset,Features,Value
 from tqdm.auto import tqdm
 import json
-from datasets import load_metric
-
-
-import numpy as np
-
-from sklearn.metrics import (
-    classification_report
-)
-
 
 import transformers
 from transformers import (
@@ -71,9 +59,6 @@ def parse_args():
     )
     parser.add_argument(
         "--test_file", type=str, default=None, help="A csv or a json file containing the testing data."
-    )
-    parser.add_argument(
-        "--metrics_file", type=str, default=None, help="A csv or a json file containing the testing data."
     )
     parser.add_argument(
         "--model_name_or_path",
@@ -275,8 +260,6 @@ def encode_with_prompt_completion_format(example, tokenizer, max_seq_length):
         example_text = example['prompt'] + ' ' + example['completion']
     else:
         example_text = example['prompt'] + example['completion']
-        
-        
     example_text = example_text + tokenizer.eos_token
     tokenized_example = tokenizer(example_text, return_tensors='pt', max_length=max_seq_length, truncation=True)
     input_ids = tokenized_example.input_ids
@@ -291,55 +274,74 @@ def encode_with_prompt_completion_format(example, tokenizer, max_seq_length):
         'attention_mask': attention_mask.flatten(),
     }
 
-def encode_with_prompt_completion_format_val(example, tokenizer, max_seq_length):
-    # if prompt doesn't end with space and completion doesn't start with space, add space
-    if not example['prompt'].endswith((' ', '\n', '\t')) and not example['completion'].startswith((' ', '\n', '\t')):
-        example_text = example['prompt'] + ' ' + example['completion']
-    else:
-        example_text = example['prompt'] + example['completion']
+
+def encode_with_messages_format(example, tokenizer, max_seq_length):
+    '''
+    Here we assume each example has a 'messages' field Each message is a dict with 'role' and 'content' fields.
+    We concatenate all messages with the roles as delimiters and tokenize them together.
+    '''
+    messages = example['messages']
+    if len(messages) == 0:
+        raise ValueError('messages field is empty.')
+    
+    def _concat_messages(messages):
+        message_text = ""
+        for message in messages:
+            if message["role"] == "system":
+                message_text += "<|system|>\n" + message["content"].strip() + "\n"
+            elif message["role"] == "user":
+                message_text += "<|user|>\n" + message["content"].strip() + "\n"
+            elif message["role"] == "assistant":
+                message_text += "<|assistant|>\n" + message["content"].strip() + tokenizer.eos_token + "\n"
+            else:
+                raise ValueError("Invalid role: {}".format(message["role"]))
+        return message_text
         
-    trigger = tokenizer(example['trigger'], return_tensors='pt', max_length=2, truncation=True).input_ids
-        
-    example_text = example_text + tokenizer.eos_token
-    # Cannot add the <s> token, and also need to do left padding for val
-    # Prepare
-    # tokenizer.padding_side = "left"
-    # tokenizer.add_eos_token = False
+    example_text = _concat_messages(messages).strip()
     tokenized_example = tokenizer(example_text, return_tensors='pt', max_length=max_seq_length, truncation=True)
     input_ids = tokenized_example.input_ids
-    input_ids = input_ids[:, :-1] # Remove the <s> token 
-    # Restore
-    # tokenizer.padding_side = "right"
-    # tokenizer.add_eos_token = True
-    
-    # The label here is trash, ignore it
     labels = input_ids.clone()
-    tokenized_prompt = tokenizer(example['prompt'], return_tensors='pt', max_length=max_seq_length, truncation=True)
-    # mask the prompt part for avoiding loss
-    labels[:, :tokenized_prompt.input_ids.shape[1]] = -100
+
+    # mask the non-assistant part for avoiding loss
+    for message_idx, message in enumerate(messages):
+        if message["role"] != "assistant":
+            if message_idx == 0:
+                message_start_idx = 0
+            else:
+                message_start_idx = tokenizer(
+                    _concat_messages(messages[:message_idx]), return_tensors='pt', max_length=max_seq_length, truncation=True
+                ).input_ids.shape[1]
+            if message_idx < len(messages) - 1 and messages[message_idx+1]["role"] == "assistant":
+                # here we also ignore the role of the assistant
+                messages_so_far = _concat_messages(messages[:message_idx+1]) + "<|assistant|>\n"
+            else:
+                messages_so_far = _concat_messages(messages[:message_idx+1])
+            message_end_idx = tokenizer(
+                messages_so_far,
+                return_tensors='pt', 
+                max_length=max_seq_length, 
+                truncation=True
+            ).input_ids.shape[1]
+            labels[:, message_start_idx:message_end_idx] = -100
+            
+            if message_end_idx >= max_seq_length:
+                break
+
     attention_mask = torch.ones_like(input_ids)
-    
-    
     return {
         'input_ids': input_ids.flatten(),
         'labels': labels.flatten(),
         'attention_mask': attention_mask.flatten(),
-        "data_id": example['data_id'],
-        'trigger': trigger.flatten(),
-        "event_type": example['event_type']
     }
-
-
-
         
 
 def main():
     args = parse_args()
 
     # A hacky way to make llama work with flash attention
-    # if args.use_flash_attn:
-    #     from llama_flash_attn_monkey_patch import replace_llama_attn_with_flash_attn
-    #     replace_llama_attn_with_flash_attn()
+    if args.use_flash_attn:
+        from llama_flash_attn_monkey_patch import replace_llama_attn_with_flash_attn
+        replace_llama_attn_with_flash_attn()
 
     # Initialize the accelerator. We will let the accelerator handle device placement for us in this example.
     # If we're using tracking, we also need to initialize it here and it will by default pick up all supported trackers
@@ -397,14 +399,6 @@ def main():
             else:
                 # We will add the fake val file here even if it's not specified
                 data_files["test"] = args.train_file
-        dataset_args["features"] = Features({
-            'Event definition': Value(dtype='string', id=None),
-            'Event type': Value(dtype='string', id=None),
-            'prompt': Value(dtype='string', id=None),
-            'completion': Value(dtype='string', id=None),
-            'trigger': Value(dtype='string', id=None),
-            'data_id': Value(dtype='int32', id=None),
-            'event_type': Value(dtype='int32', id=None)})
         raw_datasets = load_dataset(
             "json",
             data_files=data_files,
@@ -430,16 +424,6 @@ def main():
             "You are instantiating a new tokenizer from scratch. This is not supported by this script."
             "You can do it from another script, save it, and load it from here, using --tokenizer_name."
         )
-        
-        
-        
-        
-    special_tokens = ['<trigger>', '<sep>', '<Trigger>']
-    tokenizer.add_tokens(special_tokens)
-    for tk, tkid in zip(special_tokens, tokenizer(special_tokens).input_ids):
-        print(f"Special Token {tk}: {tkid}")
-        print(f"Special Token decoded {tkid}: {tokenizer.decode(tkid)}")
-    
 
     if args.model_name_or_path:
         model = AutoModelForCausalLM.from_pretrained(
@@ -496,8 +480,9 @@ def main():
             tokenizer=tokenizer,
             max_seq_length=args.max_seq_length,
         )
-        encode_function_val = partial(
-            encode_with_prompt_completion_format_val,
+    elif "messages" in raw_datasets["train"].column_names:
+        encode_function = partial(
+            encode_with_messages_format,
             tokenizer=tokenizer,
             max_seq_length=args.max_seq_length,
         )
@@ -505,21 +490,10 @@ def main():
         raise ValueError("You need to have either 'prompt'&'completion' or 'messages' in your column names.")
     
     # Before mapping, get the ground truth
-    val_ground_truth = []
     if args.val_file is not None:
-        for d in raw_datasets['val']:
-            # if d["trigger"] == "<trigger>":
-            #     debug_ids = tokenizer.encode(d["trigger"], add_special_tokens=False)
-            #     print(f"debug tokenizer.encode {debug_ids}")
-            val_ground_truth.append(tokenizer.encode(d["trigger"], add_special_tokens=False)[0])
-
-    # print(f"debug val_ground_truth {val_ground_truth}")
-        
-    test_ground_truth = []
+        val_ground_truth = [tokenizer.encode(d["trigger"], add_special_tokens = False)[0] for d in raw_datasets['val']]
     if args.test_file is not None:
-        for d in raw_datasets['test']:
-            test_ground_truth.append(tokenizer.encode(d["trigger"], add_special_tokens=False)[0])
-        
+        test_ground_truth = [tokenizer.encode(d["trigger"], add_special_tokens = False)[0] for d in raw_datasets['test']]
         
     
     with accelerator.main_process_first():
@@ -534,29 +508,8 @@ def main():
         lm_datasets.set_format(type="pt")
         lm_datasets = lm_datasets.filter(lambda example: (example['labels'] != -100).any())
     train_dataset = lm_datasets["train"]
-    
-    raw_datasets_copy = copy.deepcopy(raw_datasets)
-    raw_datasets_copy['train'] = raw_datasets_copy['val']
-    with accelerator.main_process_first():
-        lm_datasets_val = raw_datasets_copy.map(
-            encode_function_val,
-            batched=False,
-            num_proc=args.preprocessing_num_workers,
-            load_from_cache_file=not args.overwrite_cache,
-            remove_columns=[name for name in raw_datasets["train"].column_names if name not in ["input_ids", "labels", "attention_mask", "trigger"]],
-            desc="Tokenizing and reformatting instruction data",
-        )
-        lm_datasets_val.set_format(type="pt")
-    
-    
-    val_dataset = lm_datasets_val["val"]
-    test_dataset = lm_datasets_val["test"]
-    
-    
-    
-    
-    
-    
+    val_dataset = lm_datasets["val"]
+    test_dataset = lm_datasets["test"]
 
     # Log a few random samples from the training set:
     for index in random.sample(range(len(train_dataset)), 3):
@@ -574,7 +527,6 @@ def main():
         batch_size=args.per_device_train_batch_size
     )
     # For validation
-    
     if args.val_file is not None:
         val_dataloader = DataLoader(
             val_dataset, 
@@ -590,7 +542,7 @@ def main():
             collate_fn=DataCollatorForSeq2Seq(tokenizer=tokenizer, model=model, padding="longest"),
             batch_size=args.per_device_eval_batch_size
         )
-        
+
     # Optimizer
     # Split weights in two groups, one with weight decay and the other not.
     no_decay = ["bias", "layer_norm.weight"]
@@ -629,7 +581,7 @@ def main():
     )
 
     # Prepare everything with `accelerator`.
-    model, optimizer, train_dataloader,  lr_scheduler = accelerator.prepare(
+    model, optimizer, train_dataloader, lr_scheduler = accelerator.prepare(
         model, optimizer, train_dataloader, lr_scheduler
     )
     if args.val_file:
@@ -686,9 +638,7 @@ def main():
     if args.resume_from_checkpoint:
         if args.resume_from_checkpoint is not None or args.resume_from_checkpoint != "":
             checkpoint_path = args.resume_from_checkpoint
-            
             path = os.path.basename(args.resume_from_checkpoint)
-            
         else:
             # Get the most recent checkpoint
             dirs = [f.name for f in os.scandir(os.getcwd()) if f.is_dir()]
@@ -702,7 +652,6 @@ def main():
         accelerator.print(f"Resumed from checkpoint: {checkpoint_path}")
         accelerator.load_state(checkpoint_path)
         # Extract `epoch_{i}` or `step_{i}`
-        
         training_difference = os.path.splitext(path)[0]
 
         if "epoch" in training_difference:
@@ -710,7 +659,7 @@ def main():
             resume_step = None
             completed_steps = starting_epoch * num_update_steps_per_epoch
         else:
-            # need to multiply `gradient_accumulation_steps` to reflect real stepsp
+            # need to multiply `gradient_accumulation_steps` to reflect real steps
             resume_step = (
                 int(training_difference.replace("step_", ""))
                 * args.gradient_accumulation_steps
@@ -724,62 +673,13 @@ def main():
 
     def compute_metric(prediction, ground_truth, split = "val"):
         # TODO: Add F1 ground truth here, currently using Accuracy
-        
-        # print(f"debug prediction {len(prediction)}")
-        # print(f"debug ground_truth {len(ground_truth)}")
-        print("---------------------Pred")
-        print(prediction[:3])
-        print("---------------------GT")
-        print(ground_truth[:3])
-        exit()
-        # negative_class =
-        total_labels = []
-        total_prelabels = []
-        
         Correct = 0
         for pred, gt in zip(prediction, ground_truth):
-            if gt == 32000:
-                print(f"debug Pred: {pred}, GT: {gt}")
-            # print(f"Pred: {tokenizer.decode(pred)}, GT: {tokenizer.decode(gt)}")
-            if gt == 32000:
-                total_labels.append(0)
-                if pred == 32000:
-                    total_prelabels.append(0)
-                else:
-                    total_prelabels.append(1)
-            else:
-                total_labels.append(1)
-                if pred == gt:
-                    total_prelabels.append(1)
-                else:
-                    total_prelabels.append(0)
+            print(f"Pred: {pred}, GT: {gt}")
+            print(f"Pred: {tokenizer.decode(pred)}, GT: {tokenizer.decode(gt)}")
             if pred == gt:
                 Correct += 1
-        
-        total_prelabels = np.array(total_prelabels)
-        total_labels = np.array(total_labels)
-                
-        classifi_report = classification_report(
-            total_labels, total_prelabels, target_names=[0, 1], output_dict=True
-        )
-        positive_precision = classifi_report[1]["precision"]
-        positive_recall = classifi_report[1]["recall"]
-        positive_f1_score = classifi_report[1]["f1-score"]
-        negative_precision = classifi_report[0]["precision"]
-        negative_recall = classifi_report[0]["recall"]
-        negative_f1 = classifi_report[0]["f1-score"]
-
-                
-                
-        return {
-            f"{split}_Accuracy": Correct/len(prediction),
-            f"{split}_Positive_Precision": positive_precision,
-            f"{split}_Positive_Recall": positive_recall,
-            f"{split}_Positive_F1": positive_f1_score,
-            f"{split}_Negative_Precision": negative_precision,
-            f"{split}_Negative_Recall": negative_recall,
-            f"{split}_Negative_F1": negative_f1,
-            }
+        return {f"{split}_Accuracy": Correct/len(prediction)}
                 
     
     for epoch in range(starting_epoch, args.num_train_epochs):
@@ -839,57 +739,24 @@ def main():
                     if completed_steps % args.eval_steps == 0:
                         # Prepare Eval
                         model.eval()
-                        scores_metric = load_metric(args.metrics_file, num_process=accelerator.num_processes, process_id=accelerator.process_index)
                         with torch.no_grad():
                             torch.cuda.empty_cache()
-                            logger.info(f"Start doing evaluation(val) at step: {completed_steps}")#
+                            logger.info(f"Start doing evaluation at step: {completed_steps}")#
                             # Get model output for val set
                             predictions = []
-                            # For val, do left padding
-                            # Prepare 
-                            tokenizer.padding_side = "left"
                             for eval_batch in tqdm(val_dataloader):
-                                
-                                val_gt = eval_batch['trigger'][:, 1].squeeze().tolist()
-                                val_event_type = eval_batch['event_type'].squeeze().tolist()
-                                val_data_id = eval_batch['data_id'].squeeze().tolist()
-                                
-                                del eval_batch['trigger']
-                                del eval_batch['event_type']
-                                del eval_batch['data_id']
-                                
-                                input_ids = eval_batch["input_ids"][0]
-                                
-                                # print(f"debug eval_batch input_ids {input_ids}")
-                                # print(f"debug eval_batch input_ids {tokenizer.decode(input_ids)}")
-                                # print(f"debug eval_batch val_gt {val_gt[0]}")
-                                # print(f"debug eval_batch val_gt {tokenizer.decode(val_gt[0])}")
-
-                                
                                 outputs = model(**eval_batch, use_cache=False, return_dict = True)
                                 batch_predict = torch.argmax(outputs.logits[:,-1,:], dim = -1).cpu().tolist()
-                                
-                                # print(f"debug outputs {batch_predict[0]}")
-                                # print(f"debug outputs {tokenizer.decode(batch_predict[0])}")
-
-                                scores_metric.add_batch(predictions=batch_predict, references=val_gt, event_type=val_event_type, data_id=val_data_id)
-                            # Restore
-                            tokenizer.padding_side = "right"
-                            print(f"finish inference")
-                            scores = scores_metric.compute()
-                            
-                            if accelerator.process_index == 0:
-                                
-                                report_scores = {}
-                                for key in scores:
-                                    report_scores[f"val_{key}"] = scores[key]
-                                
-                                logger.info(f" [Validation] Step: {completed_steps}, Epoch: {epoch}, Scores: {json.dumps(report_scores)}")
-                                if args.with_tracking:
-                                    accelerator.log(
-                                        report_scores,
-                                        step=completed_steps,
-                                    )
+                                print(outputs.logits.size(), eval_batch.input_ids.size())
+                                predictions += batch_predict
+                                # get the output results
+                            scores = compute_metric(predictions, val_ground_truth, split = "val")
+                            logger.info(f" [Validation] Step: {completed_steps}, Scores: {json.dumps(scores)}")
+                            if args.with_tracking:
+                                accelerator.log(
+                                    scores,
+                                    step=completed_steps,
+                                )
                         model.train()
                 # First try to add eval here
                 if args.test_file is not None:
@@ -899,77 +766,33 @@ def main():
                     if completed_steps % args.eval_steps == 0:
                         # Prepare Eval
                         model.eval()
-                        scores_metric = load_metric(args.metrics_file, num_process=accelerator.num_processes, process_id=accelerator.process_index)
                         with torch.no_grad():
                             torch.cuda.empty_cache()
-                            logger.info(f"Start doing evaluation(test) at step: {completed_steps}")#
+                            logger.info(f"Start doing evaluation at step: {completed_steps}")#
                             # Get model output for val set
                             predictions = []
-                            # For val, do left padding
-                            # Prepare 
-                            tokenizer.padding_side = "left"
                             for eval_batch in tqdm(test_dataloader):
-                                
-                                test_gt = eval_batch['trigger'][:, 1].squeeze().tolist()
-                                test_event_type = eval_batch['event_type'].squeeze().tolist()
-                                test_data_id = eval_batch['data_id'].squeeze().tolist()
-                                
-                                del eval_batch['trigger']
-                                del eval_batch['event_type']
-                                del eval_batch['data_id']
-                                
                                 outputs = model(**eval_batch, use_cache=False, return_dict = True)
                                 batch_predict = torch.argmax(outputs.logits[:,-1,:], dim = -1).cpu().tolist()
-
-                                scores_metric.add_batch(predictions=batch_predict, references=test_gt, event_type=test_event_type, data_id=test_data_id)
-                            # Restore
-                            tokenizer.padding_side = "right"
-                            scores = scores_metric.compute()
-                            
-                            if accelerator.process_index == 0:
-                                
-                                report_scores = {}
-                                for key in scores:
-                                    report_scores[f"test_{key}"] = scores[key]
-                                
-                                logger.info(f" [Test] Step: {completed_steps}, Epoch: {epoch}, Scores: {json.dumps(report_scores)}")
-                                if args.with_tracking:
-                                    accelerator.log(
-                                        report_scores,
-                                        step=completed_steps,
-                                    )
+                                predictions += batch_predict
+                                # get the output results
+                            scores = compute_metric(predictions, test_ground_truth, split = "test")
+                            logger.info(f" [Test] Step: {completed_steps}, Scores: {json.dumps(scores)}")
+                            if args.with_tracking:
+                                accelerator.log(
+                                    scores,
+                                    step=completed_steps,
+                                )
                         model.train()
                 # Put this to the end to enable eval after training is done
                 if completed_steps >= args.max_train_steps:
                     break
-        # if args.checkpointing_steps == "epoch":
-        #     output_dir = f"epoch_{epoch}"
-        #     if args.output_dir is not None:
-        #         output_dir = os.path.join(args.output_dir, output_dir)
-        #     accelerator.save_state(output_dir)
+            
         if args.checkpointing_steps == "epoch":
             output_dir = f"epoch_{epoch}"
             if args.output_dir is not None:
                 output_dir = os.path.join(args.output_dir, output_dir)
-            if args.output_dir is not None:
-                accelerator.wait_for_everyone()
-                if accelerator.is_main_process:
-                    tokenizer.save_pretrained(output_dir)
-                unwrapped_model = accelerator.unwrap_model(model)
-                # When doing multi-gpu training, we need to use accelerator.get_state_dict(model) to get the state_dict.
-                # Otherwise, sometimes the model will be saved with only part of the parameters.
-                # Also, accelerator needs to use the wrapped model to get the state_dict.
-                state_dict = accelerator.get_state_dict(model)
-                if args.use_lora:
-                    # When using lora, the unwrapped model is a PeftModel, which doesn't support the is_main_process 
-                    # and has its own save_pretrained function for only saving lora modules.
-                    # We have to mannually specify the is_main_process outside the save_pretrained function.
-                    if accelerator.is_main_process:
-                        unwrapped_model.save_pretrained(output_dir, state_dict=state_dict)
-                else:
-                    unwrapped_model.save_pretrained(
-                        output_dir, is_main_process=accelerator.is_main_process, save_function=accelerator.save, state_dict=state_dict
-                    )
+            accelerator.save_state(output_dir)
 
     if args.with_tracking:
         accelerator.end_training()
