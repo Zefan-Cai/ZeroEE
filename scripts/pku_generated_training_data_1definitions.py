@@ -17,6 +17,7 @@ base_dir = "/home/caizf/projects/ZeroEE/"
 
 
 
+output_dir = os.path.join(base_dir, "data")
 
 output_dir = os.path.join(base_dir, "data")
 
@@ -87,6 +88,11 @@ print(f"debug count_train_400_event {count_train_400_event}")
 
 
 
+
+
+positive_train_data = []
+negative_train_data = []
+error_num = 0
 
 
 
@@ -166,6 +172,7 @@ for parent_event in train_parent_list_100:
                     # "events": events,
                     # "sons": sons,
                     "prompt": f"SENTENCE: {sentence} \n EVENT TYPE: {event}. \n DEFINITION: {event_definition} \n PARENT: {parent_event}, SON: {text_sons}. \n So what is the trigger?",
+                    "prompt": f"SENTENCE: {sentence} \n EVENT TYPE: {event}. \n DEFINITION: {event_definition} \n PARENT: {parent_event}, SON: {text_sons}. \n So what is the trigger?",
                     "completion": f"Event trigger is {trigger}."
                     })
 
@@ -196,6 +203,7 @@ for parent_event in train_parent_list_100:
                             # "events": events,
                             # "sons": sons,
                             "prompt": f"SENTENCE: {negative_sentence} \n EVENT TYPE: {event}. \n DEFINITION: {event_definition} \n PARENT: {parent_event}, SON: {text_sons}. \n So what is the trigger?",
+                            "prompt": f"SENTENCE: {negative_sentence} \n EVENT TYPE: {event}. \n DEFINITION: {event_definition} \n PARENT: {parent_event}, SON: {text_sons}. \n So what is the trigger?",
                             "completion": f"Event trigger is <trigger>."
                             })
         else:
@@ -207,6 +215,7 @@ print(f"debug error_num {str(error_num)}")
 
 train_data =  positive_train_data + negative_train_data
 
+with open(os.path.join(output_dir, 'generated_data', 'train_1definitions_100.json'), 'w') as fp:
 with open(os.path.join(output_dir, 'generated_data', 'train_1definitions_100.json'), 'w') as fp:
     for line in tqdm(train_data):
         json.dump(line, fp)
@@ -227,6 +236,18 @@ with open(os.path.join(output_dir, 'generated_data', 'train_1definitions_100.jso
 
 
 
+
+
+
+
+
+
+
+
+
+
+positive_train_data = []
+negative_train_data = []
 
 
 
@@ -284,6 +305,7 @@ for parent_event in train_parent_list_400:
                     # "events": events,
                     # "sons": sons,
                     "prompt": f"SENTENCE: {sentence} \n EVENT TYPE: {event}. \n DEFINITION: {event_definition} \n PARENT: {parent_event}, SON: {text_sons}. \n So what is the trigger?",
+                    "prompt": f"SENTENCE: {sentence} \n EVENT TYPE: {event}. \n DEFINITION: {event_definition} \n PARENT: {parent_event}, SON: {text_sons}. \n So what is the trigger?",
                     "completion": f"Event trigger is {trigger}."
                     })
 
@@ -313,6 +335,7 @@ for parent_event in train_parent_list_400:
                             # "parent": parent_event,
                             # "events": events,
                             # "sons": sons,
+                            "prompt": f"SENTENCE: {negative_sentence} \n EVENT TYPE: {event}. \n DEFINITION: {event_definition} \n PARENT: {parent_event}, SON: {text_sons}. \n So what is the trigger?",
                             "prompt": f"SENTENCE: {negative_sentence} \n EVENT TYPE: {event}. \n DEFINITION: {event_definition} \n PARENT: {parent_event}, SON: {text_sons}. \n So what is the trigger?",
                             "completion": f"Event trigger is <trigger>."
                             })
@@ -376,9 +399,44 @@ with open(os.path.join(output_dir, 'generated_data', 'train_1definitions_400.jso
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 positive_val_data = []
 negative_val_data = []
 
+data_index = 0
 data_index = 0
 
 for parent_event in val_parent_list:
@@ -397,14 +455,22 @@ for parent_event in val_parent_list:
         if "name" in data[parent_event]["data"][event].keys():
 
             # event_name = data[parent_event]["data"][event]["name"]
+
+            # event_name = data[parent_event]["data"][event]["name"]
             event_definition = data[parent_event]["data"][event]["definition"]
+            # triggers = data[parent_event]["data"][event]["triggers"]
+            # samples = data[parent_event]["data"][event]["samples"]
             # triggers = data[parent_event]["data"][event]["triggers"]
             # samples = data[parent_event]["data"][event]["samples"]
 
             # diverse_definitions = copy.deepcopy(data[parent_event]["data"][event]["rewrite_definitions"])
             # diverse_definitions = diverse_definitions[:4]
             # diverse_definitions.append(event_definition)
+            # diverse_definitions = copy.deepcopy(data[parent_event]["data"][event]["rewrite_definitions"])
+            # diverse_definitions = diverse_definitions[:4]
+            # diverse_definitions.append(event_definition)
             
+            event_id = val_event_list.index(event)
             event_id = val_event_list.index(event)
             
             # for definition in diverse_definitions:
@@ -412,7 +478,10 @@ for parent_event in val_parent_list:
                 
                 # sentence = sample["sentence"]
                 # trigger = sample["trigger"]
+                # sentence = sample["sentence"]
+                # trigger = sample["trigger"]
                 
+                # selected_trigger = random.choice(triggers)
                 # selected_trigger = random.choice(triggers)
             
                 positive_val_data.append({
@@ -429,10 +498,41 @@ for parent_event in val_parent_list:
                     "data_id": data_index,
                     "event_type": event_id,     
                     "prompt": f"SENTENCE: {sentence} \n EVENT TYPE: {event}. \n DEFINITION: {event_definition} \n PARENT: {parent_event}, SON: {text_sons}. \n So what is the trigger?",
+                    "data_id": data_index,
+                    "event_type": event_id,     
+                    "prompt": f"SENTENCE: {sentence} \n EVENT TYPE: {event}. \n DEFINITION: {event_definition} \n PARENT: {parent_event}, SON: {text_sons}. \n So what is the trigger?",
                     "completion": f"Event trigger is ",
                     "trigger": f"{trigger}"
                     })
 
+                for negative_parent_event in val_event_name_definitions.keys():
+                    
+                    # negative_parent_event_name = val_event_name_definitions[negative_parent_event][negative_parent_event]["name"]
+                    
+                    
+                    
+                    son_events = list(val_event_name_definitions[negative_parent_event].keys())
+                    son_events.remove(negative_parent_event)
+                    text_sons = ", ".join(son_events)
+                                    
+                    for negative_event in val_event_name_definitions[negative_parent_event].keys():
+                        
+                        if negative_event == event: continue
+                    
+                        # negative_event_name = data[parent_event]["data"][negative_event]["name"]
+                        negative_event_definition = val_event_name_definitions[negative_parent_event][negative_event]["definition"]
+
+                        # negative_triggers = data[parent_event]["data"][negative_event]["triggers"]
+                        # negative_samples = data[parent_event]["data"][negative_event]["samples"]
+                        
+                        # for negative_sample in negative_samples:
+                            
+                            # negative_sentence = negative_sample["sentence"]
+                            # negative_trigger = negative_sample["trigger"]
+                            
+                            # negative_selected_trigger = random.choice(negative_triggers)
+                    
+                        event_id = val_event_list.index(negative_event)
                 for negative_parent_event in val_event_name_definitions.keys():
                     
                     # negative_parent_event_name = val_event_name_definitions[negative_parent_event][negative_parent_event]["name"]
@@ -476,9 +576,14 @@ for parent_event in val_parent_list:
                             "data_id": data_index,
                             "event_type": event_id,   
                             "prompt": f"SENTENCE: {negative_event} \n EVENT TYPE: {negative_event_name}. \n DEFINITION: {negative_event_definition} \n PARENT: {negative_parent_event}, SON: {text_sons}. \n So what is the trigger?",
+                            "data_id": data_index,
+                            "event_type": event_id,   
+                            "prompt": f"SENTENCE: {negative_event} \n EVENT TYPE: {negative_event_name}. \n DEFINITION: {negative_event_definition} \n PARENT: {negative_parent_event}, SON: {text_sons}. \n So what is the trigger?",
                             "completion": f"Event trigger is ",
                             "trigger":  "<trigger>"
                             })
+                        
+                data_index += 1
                         
                 data_index += 1
         else:
@@ -491,6 +596,8 @@ print(f"debug error_num {str(error_num)}")
 val_data =  positive_val_data + negative_val_data
 
 with open(os.path.join(output_dir, 'generated_data', 'val_1definitions_100.json'), 'w') as fp:
+with open(os.path.join(output_dir, 'generated_data', 'val_1definitions_100.json'), 'w') as fp:
     for line in tqdm(val_data):
         json.dump(line, fp)
         fp.write('\n')
+

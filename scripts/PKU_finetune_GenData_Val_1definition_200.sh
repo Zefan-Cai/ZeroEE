@@ -1,7 +1,7 @@
-export CUDA_VISIBLE_DEVICES=2,3,4,5,6,7
+export CUDA_VISIBLE_DEVICES=4,5
 
 MODEL_PATH="/home/models/Llama-2-7b-hf/"
-OUTPUT_NAME=Llama2_GenData_1definitions_200/
+OUTPUT_NAME=Llama2_GenData_1definitions_v2_200/
 TRAIN_FILE="/home/caizf/projects/ZeroEE/data/generated_data/train_1definitions_200.json"
 VAL_FILE="/home/caizf/projects/ZeroEE/data/generated_data/val_1definitions.json"
 TEST_FILE="/home/caizf/projects/ZeroEE/data/ace_v2/ACE_valid_GenerationStyle_trigger.json"
@@ -33,17 +33,18 @@ accelerate launch \
     --max_seq_length 256 \
     --preprocessing_num_workers 16 \
     --per_device_train_batch_size $BATCH_SIZE_PER_GPU \
-    --per_device_eval_batch_size 64 \
+    --per_device_eval_batch_size 32 \
     --gradient_accumulation_steps $GRADIENT_ACC_STEPS \
     --learning_rate 2e-5 \
     --lr_scheduler_type linear \
     --warmup_ratio 0.03 \
     --weight_decay 0. \
-    --num_train_epochs 20 \
+    --num_train_epochs 2 \
     --output_dir /home/caizf/projects/ZeroEE/output/${OUTPUT_NAME} \
     --with_tracking \
     --report_to wandb \
     --report_name $OUTPUT_NAME \
     --report_tags $REPORT_TAGS \
+    --eval_steps 400 \
     --checkpointing_steps epoch \
     --logging_steps 1

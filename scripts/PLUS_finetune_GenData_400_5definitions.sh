@@ -1,14 +1,13 @@
 export CUDA_VISIBLE_DEVICES="0,1,2,3,4,5"
 
 MODEL_PATH="/local1/zefan/models/Llama-2-7b-hf/"
-FINETUNED_MODEL_PATH="/local1/zefan/output/Llama-2-7b-geneva-20-96-2000/epoch_29"
 
-
-OUTPUT_NAME=Llama2_Geneva_20_96_2000_GenData200/
-TRAIN_FILE="/local1/zefan/data/generated_data/train_1definitions_200.json"
-VAL_FILE="/local1/zefan/data/generated_data/val_1definitions.json"
-TEST_FILE="/local1/zefan/data/ace_v2/ACE_valid_GenerationStyle_trigger.json"
-REPORT_TAGS="CtrlGen"
+OUTPUT_NAME=GenData_400_5definition/
+TRAIN_FILE=" /local1/zefan/data/generated_data/train_5definitions_400.json"
+VAL_FILE="/local1/zefan/data/generated_data/val_1definitions_100.json"
+TEST_FILE="/local1/zefan/data/ace_v2/ACE_test_v2_trigger.json"
+METRICS_FILE="/local1/zefan/ZeroEE/open_instruct/compute_score_ee.py"
+REPORT_TAGS="ZeroEE"
 
 # ceildiv(){ echo $((($1+$2-1)/$2)); }
 # NUM_GPUS=$(ceildiv ${#CUDA_VISIBLE_DEVICES} 2)
@@ -24,15 +23,16 @@ accelerate launch \
     --num_machines 1 \
     --num_processes $NUM_GPUS \
     --use_deepspeed \
-    --deepspeed_config_file ./open_instruct/ds_configs/stage3_no_offloading_accelerate.conf \
-    ./open_instruct/open_instruct/finetune_val.py \
-    --model_name_or_path $FINETUNED_MODEL_PATH \
+    --deepspeed_config_file /local1/zefan/ZeroEE/open_instruct/ds_configs/stage3_no_offloading_accelerate.conf \
+    /local1/zefan/ZeroEE/open_instruct/open_instruct/finetune_val.py \
+    --model_name_or_path $MODEL_PATH \
     --use_flash_attn \
     --tokenizer_name $MODEL_PATH \
     --use_slow_tokenizer \
     --train_file $TRAIN_FILE \
     --val_file $VAL_FILE \
     --test_file $TEST_FILE \
+    --metrics_file ${METRICS_FILE} \
     --max_seq_length 256 \
     --preprocessing_num_workers 16 \
     --per_device_train_batch_size $BATCH_SIZE_PER_GPU \
