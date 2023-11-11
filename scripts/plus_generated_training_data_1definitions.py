@@ -4,9 +4,13 @@ import copy
 import random
 from tqdm import tqdm
 
-output_dir = "/local1/zefan/data"
 
-with open('/local1/zefan/ZeroEE/data/generated_data.json', 'r') as fp:
+base_dir = "/local1/zefan/"
+
+output_dir = os.path.join(base_dir, "data")
+
+
+with open(os.path.join(base_dir, 'ZeroEE', "data", 'ACE_ontology.json'), 'r') as fp:
     data = json.load(fp)
 
 

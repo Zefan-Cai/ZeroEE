@@ -5,21 +5,18 @@ import random
 from tqdm import tqdm
 
 output_dir = "/local1/zefan/data/ace_v2"
+base_dir = "/local1/zefan/"
 
 
 
-
-
-
-
-with open('/local1/zefan/ZeroEE/data/ACE_ontology.json', 'r') as fp:
+with open(os.path.join(base_dir, 'ZeroEE', "data", 'ACE_ontology.json'), 'r') as fp:
     ACE_ontology = json.load(fp)
 
 # ACE
 
 ## ACE Event Definition
 
-with open('/local1/zefan/ZeroEE/data/ACE_event_definition.json', 'r') as fp:
+with open(os.path.join(base_dir, 'ZeroEE', 'data', 'ACE_event_definition.json'), 'r') as fp:
     event_type2definition = json.load(fp)
 
 event_list = list(event_type2definition.keys())
@@ -27,7 +24,7 @@ event_list = list(event_type2definition.keys())
 
 ACE_valid_data = []
 
-with open('/local1/zefan/ZeroEE/oneie_ace05_en_event/val.json', 'r') as fp:
+with open(os.path.join(base_dir, 'ZeroEE', 'oneie_ace05_en_event', 'val.json'), 'r') as fp:
     for line in fp.readlines():
         ACE_valid_data.append(json.loads(line))
         
@@ -105,7 +102,7 @@ with open(os.path.join(output_dir, f'ACE_valid_GenerationStyle_clean.json'), 'w'
 
 ACE_valid_data = []
 
-with open('/local1/zefan/ZeroEE/oneie_ace05_en_event/val.json', 'r') as fp:
+with open(os.path.join(base_dir, 'ZeroEE', 'oneie_ace05_en_event', 'val.json'), 'r') as fp:
     for line in fp.readlines():
         ACE_valid_data.append(json.loads(line))
         
@@ -206,7 +203,7 @@ with open(os.path.join(output_dir, f'ACE_valid_v2_trigger.json'), 'w') as fp:
 
 ACE_test_data = []
 
-with open('/local1/zefan/ZeroEE/oneie_ace05_en_event/test.json', 'r') as fp:
+with open(os.path.join(base_dir, 'ZeroEE', 'oneie_ace05_en_event', 'test.json'), 'r') as fp:
     for line in fp.readlines():
         ACE_test_data.append(json.loads(line))
 
