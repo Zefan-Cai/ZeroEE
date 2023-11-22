@@ -1,27 +1,26 @@
 
 ###
  # @Author: JustBluce 972281745@qq.com
- # @Date: 2023-11-22 21:31:30
+ # @Date: 2023-11-22 22:59:23
  # @LastEditors: JustBluce 972281745@qq.com
- # @LastEditTime: 2023-11-22 23:29:16
- # @FilePath: /ZeroEE/ZeroEE/scripts/PLUS_generate_GenData_v2_events6700_def6.sh
+ # @LastEditTime: 2023-11-22 23:08:53
+ # @FilePath: /ZeroEE/ZeroEE/scripts/PKU_generate_GenData_v2_events200_def6.sh
  # @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 ### 
 service=pku
 template=v2
 
-base_dir="/local1/zefan/"
-# base_dir="/home/caizf/projects/ZeroEE/"
+base_dir='/home/caizf/projects/ZeroEE/'
 generate_data_dir='ZeroEE/data/generated_data_fix.json'
 output_dir='data/generated_data'
 
-output_train_filename='train_600_6definition.json'
-output_valid_filename='valid_100_1definition.json'
+output_train_filename='train_1000_6definitions.json'
+output_valid_filename='valid_100_1definitions.json'
 
 num_definitions=5
 
 train_parent_start=50
-train_parent_end=1750
+train_parent_end=220
 valid_parent_start=0
 valid_parent_end=50
 

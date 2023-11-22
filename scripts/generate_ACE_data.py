@@ -73,10 +73,12 @@ class Data():
                 else:
                     raise Exception("THe template version should be v1 or v2")
                     
+                if type(prompt) == list: prompt = prompt[0]
+                    
                 sample_data_list.append({
                     "data_id": index,
                     "event_type": event_type_id,
-                    "prompt": prompt,
+                    "prompt": prompt[0],
                     "completion": f"Event trigger is ",
                     "trigger": trigger
                     })
@@ -143,10 +145,12 @@ class Data():
                     else:
                         raise Exception("THe template version should be v1 or v2")
                         
+                    if type(prompt) == list: prompt = prompt[0]
+                        
                     sample_data_list.append({
                         "data_id": index,
                         "event_type": event_type_id,         
-                        "prompt": prompt,
+                        "prompt": prompt[0],
                         "completion": f"Event trigger is ",
                         "trigger": trigger
                         })
