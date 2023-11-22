@@ -3,6 +3,14 @@ export CUDA_VISIBLE_DEVICES="0,1,2,3,4,5"
  # @Author: JustBluce 972281745@qq.com
  # @Date: 2023-11-22 23:03:35
  # @LastEditors: JustBluce 972281745@qq.com
+ # @LastEditTime: 2023-11-23 00:06:03
+ # @FilePath: /ZeroEE/ZeroEE/scripts/PKU_finetune_GenData_1000_6definitions.sh
+ # @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+### 
+###
+ # @Author: JustBluce 972281745@qq.com
+ # @Date: 2023-11-22 23:03:35
+ # @LastEditors: JustBluce 972281745@qq.com
  # @LastEditTime: 2023-11-22 23:15:39
  # @FilePath: /ZeroEE/ZeroEE/scripts/PKU_finetune_GenData_1000_6definitions.sh
  # @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
@@ -50,7 +58,7 @@ accelerate launch \
     --lr_scheduler_type linear \
     --warmup_ratio 0.03 \
     --weight_decay 0. \
-    --num_train_epochs 20 \
+    --num_train_epochs 5 \
     --output_dir /home/caizf/projects/ZeroEE/output/${OUTPUT_NAME} \
     --with_tracking \
     --report_to wandb \
