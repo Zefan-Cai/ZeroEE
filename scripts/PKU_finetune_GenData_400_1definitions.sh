@@ -3,7 +3,7 @@ export CUDA_VISIBLE_DEVICES="0,1,2,3,4,5"
  # @Author: JustBluce 972281745@qq.com
  # @Date: 2023-11-11 17:26:07
  # @LastEditors: JustBluce 972281745@qq.com
- # @LastEditTime: 2023-11-11 17:31:45
+ # @LastEditTime: 2023-11-11 17:56:03
  # @FilePath: /ZeroEE/ZeroEE/scripts/PKU_finetune_GenData_400_1definitions.sh
  # @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 ### 
@@ -13,7 +13,7 @@ export CUDA_VISIBLE_DEVICES="0,1,2,3,4,5"
 BASE_DIR="/home/caizf/projects/ZeroEE"
 
 
-MODEL_PATH="/home/caizf/models/Llama-2-7b-hf/"
+MODEL_PATH="/home/models/Llama-2-7b-hf/"
 
 OUTPUT_NAME=GenData_400_1definition/
 TRAIN_FILE=${BASE_DIR}/"data/generated_data/train_1definitions_400.json"
@@ -49,7 +49,7 @@ accelerate launch \
     --max_seq_length 128 \
     --preprocessing_num_workers 16 \
     --per_device_train_batch_size $BATCH_SIZE_PER_GPU \
-    --per_device_eval_batch_size 256 \
+    --per_device_eval_batch_size 128 \
     --gradient_accumulation_steps $GRADIENT_ACC_STEPS \
     --learning_rate 2e-5 \
     --lr_scheduler_type linear \
@@ -62,5 +62,4 @@ accelerate launch \
     --report_name $OUTPUT_NAME \
     --report_tags $REPORT_TAGS \
     --checkpointing_steps epoch \
-    --eval_steps 1 \
     --logging_steps 1
