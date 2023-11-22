@@ -20,6 +20,14 @@ with open(os.path.join(base_dir, 'ZeroEE', 'data', 'ACE_event_definition.json'),
     event_type2definition = json.load(fp)
 
 event_list = list(event_type2definition.keys())
+
+
+
+
+
+
+
+
 ## ACE val data
 
 ACE_valid_data = []
@@ -89,6 +97,30 @@ with open(os.path.join(output_dir, f'ACE_valid_GenerationStyle_clean.json'), 'w'
     for d in selected_valid_data:
        json.dump(d, fp)
        fp.write('\n')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
