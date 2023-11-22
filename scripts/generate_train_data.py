@@ -97,7 +97,8 @@ class Data():
                 
                 # Negative Sample
                 negative_events = copy.deepcopy(events)
-                negative_events.remove(event)
+                if event in negative_events:
+                    negative_events.remove(event)
             
                 event_name = self.data[parent_event]["data"][event]["name"]
                 event_definition = self.data[parent_event]["data"][event]["definition"]
