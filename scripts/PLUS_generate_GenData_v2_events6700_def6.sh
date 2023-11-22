@@ -3,7 +3,7 @@ service=pku
 template=v2
 
 base_dir="/local1/zefan/"
-base_dir="/home/caizf/projects/ZeroEE/"
+# base_dir="/home/caizf/projects/ZeroEE/"
 generate_data_dir='ZeroEE/data/generated_data_fix.json'
 output_dir='data/generated_data'
 
