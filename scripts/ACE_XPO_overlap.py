@@ -14,19 +14,38 @@ with open('../data/generated_data.json', 'r') as fp:
     generated_data = json.load(fp)
 
 
+deep_delete_list = []
 for parent in generated_data.keys():
     delete_list = []
+    if generated_data[parent]["data"] == {}:
+        deep_delete_list.append(parent)
     for event in generated_data[parent]["data"].keys():
         # print(f"debug event {event}")
         if generated_data[parent]["data"][event] == {}:
             delete_list.append(event)
         elif generated_data[parent]["data"][event]["samples"] == []:
             delete_list.append(event)
+
     for event in delete_list:
         del generated_data[parent]["data"][event]
         if event in generated_data[parent]["sons"]:
             generated_data[parent]["sons"].remove(event)
         generated_data[parent]["events"].remove(event)
+
+for parent in generated_data.keys():
+    delete_list = []
+    if generated_data[parent]["data"] == {}:
+        deep_delete_list.append(parent)
+
+for event in deep_delete_list:
+    del generated_data[event]
+
+delete_list = list(set(delete_list))
+deep_delete_list = list(set(deep_delete_list))
+
+
+
+
 
 print(f"debug len parents {len(generated_data)}")
 
