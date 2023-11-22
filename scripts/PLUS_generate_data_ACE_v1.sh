@@ -1,15 +1,23 @@
 
+###
+ # @Author: JustBluce 972281745@qq.com
+ # @Date: 2023-11-22 18:59:18
+ # @LastEditors: JustBluce 972281745@qq.com
+ # @LastEditTime: 2023-11-22 20:49:09
+ # @FilePath: /ZeroEE/ZeroEE/scripts/PLUS_generate_data_ACE_v1.sh
+ # @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+### 
 service=plus
 template=v1
 
 base_dir="/local1/zefan/"
 data_info_dir='/ZeroEE/data/'
-output_dir='/data/ace_v2'
+output_dir='/data/ace_v1'
 
 output_valid_filename='ACE_valid_v1_trigger.json'
 output_test_filename='ACE_test_v1_trigger.json'
 
-python ./generate_train_data.py \
+python ./generate_ACE_data.py \
     --service ${service} \
     --template_version ${template} \
     --base_dir ${base_dir} \
