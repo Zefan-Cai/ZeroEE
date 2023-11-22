@@ -3,8 +3,8 @@ export CUDA_VISIBLE_DEVICES="0,1,2,3,4,5"
 MODEL_PATH="/local1/zefan/models/Llama-2-7b-hf/"
 
 OUTPUT_NAME=GenData_6700_6definition/
-TRAIN_FILE=" /local1/zefan/data/generated_data/train_6definitions_6700.json"
-VAL_FILE="/local1/zefan/data/generated_data/val_1definitions_100.json"
+TRAIN_FILE=" /local1/zefan/data/generated_data/train_6700_6definition.json"
+VAL_FILE="/local1/zefan/data/generated_data/valid_100_1definition.json"
 TEST_FILE="/local1/zefan/data/ace_v2/ACE_test_v2_trigger.json"
 METRICS_FILE="/local1/zefan/ZeroEE/open_instruct/compute_score_ee.py"
 REPORT_TAGS="ZeroEE"
