@@ -3,7 +3,7 @@ service=plus
 template=v2
 
 base_dir="/local1/zefan/"
-generate_data_dir='ZeroEE/data/generated_data.json'
+generate_data_dir='ZeroEE/data/generated_data_fix.json'
 output_dir='data/generated_data'
 
 output_train_filename='train_100_1definition.json'
