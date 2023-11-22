@@ -1,0 +1,35 @@
+
+service=plus
+template=v1
+
+base_dir="/local1/zefan/"
+data_info_dir='/ZeroEE/data/'
+output_dir='/data/ace_v2'
+
+output_valid_filename='ACE_valid_v1_trigger.json'
+output_test_filename='ACE_test_v1_trigger.json'
+
+python ./generate_train_data.py \
+    --service ${service} \
+    --template_version ${template} \
+    --base_dir ${base_dir} \
+    --data_info_dir ${data_info_dir} \
+    --output_dir ${output_dir} \
+    --output_valid_filename ${output_valid_filename} \
+    --output_test_filename ${output_test_filename}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

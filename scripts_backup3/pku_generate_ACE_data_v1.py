@@ -4,9 +4,10 @@ import copy
 import random
 from tqdm import tqdm
 
-output_dir = "/local1/zefan/data"
+output_dir = "/home/caizf/projects/ZeroEE/data/ace_v1"
+base_dir = "/home/caizf/projects/ZeroEE/ZeroEE"
 
-with open('../data/generated_data.json', 'r') as fp:
+with open(os.path.join(base_dir, 'data', 'generated_data.json'), 'r') as fp:
     data = json.load(fp)
 
 positive_train_data = []
