@@ -36,7 +36,7 @@ accelerate launch \
     --max_seq_length 256 \
     --preprocessing_num_workers 16 \
     --per_device_train_batch_size $BATCH_SIZE_PER_GPU \
-    --per_device_eval_batch_size 256 \
+    --per_device_eval_batch_size 128 \
     --gradient_accumulation_steps $GRADIENT_ACC_STEPS \
     --learning_rate 2e-5 \
     --lr_scheduler_type linear \
