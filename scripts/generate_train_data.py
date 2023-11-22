@@ -238,7 +238,11 @@ class Data():
                         
                         # For ontoligy information
                         son_events = list(self.valid_event_name_definitions[negative_parent_event].keys())
-                        son_events.remove(negative_parent_event)
+                        if negative_parent_event in son_events:
+                            son_events.remove(negative_parent_event)
+                        else:
+                            # print(f"debug negative_parent_event {negative_parent_event}")
+                            pass
                         text_sons = ", ".join(son_events)
                         
                         # Enumerate all negative event definitions
