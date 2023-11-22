@@ -13,6 +13,8 @@ for key in ace_ontology.keys():
 with open('../data/generated_data.json', 'r') as fp:
     generated_data = json.load(fp)
 
+print(f"debug len parents {len(generated_data)}")
+
 generated_data_full_list = []
 for key in generated_data.keys():
     for item in generated_data[key]['events']:
