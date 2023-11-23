@@ -3,7 +3,7 @@
  # @Author: JustBluce 972281745@qq.com
  # @Date: 2023-11-22 21:31:30
  # @LastEditors: JustBluce 972281745@qq.com
- # @LastEditTime: 2023-11-22 23:29:16
+ # @LastEditTime: 2023-11-23 14:38:47
  # @FilePath: /ZeroEE/ZeroEE/scripts/PLUS_generate_GenData_v2_events6700_def6.sh
  # @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 ### 
@@ -15,7 +15,7 @@ base_dir="/local1/zefan/"
 generate_data_dir='ZeroEE/data/generated_data_fix.json'
 output_dir='data/generated_data'
 
-output_train_filename='train_600_6definition.json'
+output_train_filename='train_5737_6definition.json'
 output_valid_filename='valid_100_1definition.json'
 
 num_definitions=5

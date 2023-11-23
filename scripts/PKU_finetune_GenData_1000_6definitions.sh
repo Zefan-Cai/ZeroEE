@@ -3,7 +3,7 @@ export CUDA_VISIBLE_DEVICES="0,1,2,3,4,5"
  # @Author: JustBluce 972281745@qq.com
  # @Date: 2023-11-22 23:03:35
  # @LastEditors: JustBluce 972281745@qq.com
- # @LastEditTime: 2023-11-23 00:06:03
+ # @LastEditTime: 2023-11-23 14:08:54
  # @FilePath: /ZeroEE/ZeroEE/scripts/PKU_finetune_GenData_1000_6definitions.sh
  # @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 ### 
@@ -52,7 +52,7 @@ accelerate launch \
     --max_seq_length 256 \
     --preprocessing_num_workers 16 \
     --per_device_train_batch_size $BATCH_SIZE_PER_GPU \
-    --per_device_eval_batch_size 256 \
+    --per_device_eval_batch_size 64 \
     --gradient_accumulation_steps $GRADIENT_ACC_STEPS \
     --learning_rate 2e-5 \
     --lr_scheduler_type linear \
