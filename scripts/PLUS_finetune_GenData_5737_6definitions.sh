@@ -1,9 +1,17 @@
 export CUDA_VISIBLE_DEVICES="0,1,2,3,4,5"
+###
+ # @Author: JustBluce 972281745@qq.com
+ # @Date: 2023-11-22 21:33:27
+ # @LastEditors: JustBluce 972281745@qq.com
+ # @LastEditTime: 2023-11-23 14:40:35
+ # @FilePath: /ZeroEE/ZeroEE/scripts/PLUS_finetune_GenData_5737_6definitions.sh
+ # @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+### 
 
 MODEL_PATH="/local1/zefan/models/Llama-2-7b-hf/"
 
-OUTPUT_NAME=GenData_6700_6definition/
-TRAIN_FILE=" /local1/zefan/data/generated_data/train_6700_6definition.json"
+OUTPUT_NAME=GenData_5737_6definition/
+TRAIN_FILE=" /local1/zefan/data/generated_data/train_5737_6definition.json"
 VAL_FILE="/local1/zefan/data/generated_data/valid_100_1definition.json"
 TEST_FILE="/local1/zefan/data/ace_v2/ACE_test_v2_trigger.json"
 METRICS_FILE="/local1/zefan/ZeroEE/open_instruct/compute_score_ee.py"
