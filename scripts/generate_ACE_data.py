@@ -86,9 +86,14 @@ class Data():
             
 
         with open(os.path.join(self.args.base_dir, self.args.output_dir, self.args.output_valid_filename), 'w') as fp:
-            for index_i in range(len(valid_data)):
-                for index_j in range(len(valid_data[index_i])):
-                    json.dump(valid_data[index_i][index_j], fp)
+            if self.args.setting == "evaluation":
+                for index_i in range(len(valid_data)):
+                    for index_j in range(len(valid_data[index_i])):
+                        json.dump(valid_data[index_i][index_j], fp)
+                        fp.write('\n')
+            elif self.args.setting == "inference":
+                for index_i in range(len(valid_data)):
+                    json.dump(valid_data[index_i], fp)
                     fp.write('\n')
 
     def get_test_data(self):
@@ -157,9 +162,14 @@ class Data():
                 test_data.append(sample_data_list)
             
         with open(os.path.join(self.args.base_dir, self.args.output_dir, self.args.output_test_filename), 'w') as fp:
-            for index_i in range(len(test_data)):
-                for index_j in range(len(test_data[index_i])):
-                    json.dump(test_data[index_i][index_j], fp)
+            if self.args.setting=="evaluation":
+                for index_i in range(len(test_data)):
+                    for index_j in range(len(test_data[index_i])):
+                        json.dump(test_data[index_i][index_j], fp)
+                        fp.write('\n')
+            elif self.args.setting=="inference":
+                for index_i in range(len(test_data)):
+                    json.dump(test_data[index_i], fp)
                     fp.write('\n')
 
 
@@ -190,6 +200,8 @@ def main():
     
     parser.add_argument('--output_test_filename', default='ACE_test_v2_trigger.json', type=str, help='train filename')
     parser.add_argument('--output_valid_filename', default='ACE_valid_v2_trigger.json', type=str, help='valid filename')
+
+    parser.add_argument('--setting', default='evaluation', type=str, help='evaluation or inference')
 
     args = parser.parse_args()
 
