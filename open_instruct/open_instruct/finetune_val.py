@@ -403,6 +403,8 @@ def main():
             'prompt': Value(dtype='string', id=None),
             'completion': Value(dtype='string', id=None),
             'trigger': Value(dtype='string', id=None),
+            'Event type': Value(dtype='string', id=None),
+            'Event definition': Value(dtype='string', id=None),
             'data_id': Value(dtype='int32', id=None),
             'event_type': Value(dtype='int32', id=None)})
         raw_datasets = load_dataset(

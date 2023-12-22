@@ -72,6 +72,7 @@ def get_trigger(examples):
 
     test_gold_object, test_pred_object = [], []
 
+
     for example in examples:
         pred_object = []
         gt_trigger_object = []
@@ -82,6 +83,7 @@ def get_trigger(examples):
         
         for sub_example in example:
             # print(sub_example["Event type"])
+            
             event_type = sub_example["Event type"]
             trigger = sub_example["trigger"]
             
@@ -98,6 +100,7 @@ def get_trigger(examples):
                 triggers = raw_output.split('Event trigger is ', 1)[1]
                 triggers = triggers.split('.')[0]
                 triggers = triggers.split(' and ')
+                
                 for t_cnt, t in enumerate(triggers):
                     if t != '<trigger>':
                         # pred_object.append((t, event_type, {'tri counter': t_cnt})) # (text, type, kwargs)
@@ -129,6 +132,8 @@ def get_trigger(examples):
         test_gold_object.append(tuple(my_gold_object))
         test_pred_object.append(tuple(my_pred_object))
         
+        print(f"debug my_gold_object {my_gold_object}")
+        print(f"debug my_pred_object {my_pred_object}")
 
 
 
@@ -144,9 +149,9 @@ def get_trigger(examples):
     return test_gold_object, test_pred_object
     # return test_gold_object, test_pred_object, test_gold_events, test_pred_events
  
-base_path = '/local1/zefan/results/Llama-2-7b-GenData-1definitions/'
+base_path = '/home/caizf/projects/ZeroEE/results/GenData_1000_6definition_ACEv2'
 
-path = base_path + '/predictions/ACE_valid-clean.jsonl'
+path = base_path + '/predictions/ACE_test_v2_inference.jsonl'
 
 
 examples = []
@@ -154,7 +159,9 @@ with open(path, 'r', encoding='utf-8') as f:
     for line in f.readlines():
         examples.append(json.loads(line))
 
-print(path)
+if len(examples) == 1:
+    examples = examples[0]
+
 
 test_gold_triggers, test_pred_triggers = get_trigger(examples)
 test_scores = cal_scores(test_gold_triggers, test_pred_triggers)

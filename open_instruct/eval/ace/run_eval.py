@@ -142,8 +142,8 @@ def eval_hf_model(args, model, tokenizer, examples, task_prompt, save_path=None)
             sub_example["prediction"] = prediction
             sub_prediction.append(prediction)
         predictions.append(sub_prediction)
-        if save_path:
-            fout.write(json.dumps(example) + "\n")
+    if save_path:
+        fout.write(json.dumps(examples) + "\n")
 
     test_gold_triggers, test_gold_events, test_pred_triggers, test_pred_events = get_trigger(examples)
     test_scores = cal_scores(test_gold_triggers, test_pred_triggers, test_gold_events, test_pred_events)

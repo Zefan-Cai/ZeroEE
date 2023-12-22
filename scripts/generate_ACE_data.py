@@ -58,7 +58,10 @@ class Data():
                 
                 if event_type in event_type2trigger.keys():
                     trigger = event_type2trigger[event_type]
-                    trigger = " and ".join(trigger)
+                    if self.args.setting == "inference":
+                        pass
+                    elif self.args.setting == "evaluation":
+                        trigger = " and ".join(trigger)
                 else:
                     trigger = "<trigger>"
                 
@@ -74,14 +77,26 @@ class Data():
                     raise Exception("THe template version should be v1 or v2")
                     
                 if type(prompt) == list: prompt = prompt[0]
-                    
-                sample_data_list.append({
-                    "data_id": index,
-                    "event_type": event_type_id,
-                    "prompt": prompt[0],
-                    "completion": f"Event trigger is ",
-                    "trigger": trigger
-                    })
+
+                if self.args.setting == "evaluation":
+                    sample_data_list.append({
+                        "data_id": index,
+                        "event_type": event_type_id,
+                        "prompt": prompt[0],
+                        "completion": f"Event trigger is ",
+                        "trigger": trigger
+                        })
+                elif self.args.setting == "inference":
+                    sample_data_list.append({
+                        "data_id": index,
+                        "event_type": event_type_id,
+                        "prompt": prompt[0],
+                        "completion": f"Event trigger is ",
+                        "trigger": trigger,
+                        "Event definition": event_definition,
+                        "Event type": event_type
+                        })
+
             valid_data.append(sample_data_list)
             
 
@@ -93,6 +108,8 @@ class Data():
                         fp.write('\n')
             elif self.args.setting == "inference":
                 for index_i in range(len(valid_data)):
+                    
+                    
                     json.dump(valid_data[index_i], fp)
                     fp.write('\n')
 
@@ -135,7 +152,10 @@ class Data():
                     event_definition = self.event_type2definition[event_type]
                     if event_type in event_type2trigger.keys():
                         trigger = event_type2trigger[event_type]
-                        trigger = " and ".join(trigger)
+                        if self.args.setting == "inference":
+                            pass
+                        elif self.args.setting == "evaluation":
+                            trigger = " and ".join(trigger)
                     else:
                         trigger = "<trigger>"
                     
@@ -151,16 +171,27 @@ class Data():
                         raise Exception("THe template version should be v1 or v2")
                         
                     if type(prompt) == list: prompt = prompt[0]
-                        
-                    sample_data_list.append({
-                        "data_id": index,
-                        "event_type": event_type_id,         
-                        "prompt": prompt[0],
-                        "completion": f"Event trigger is ",
-                        "trigger": trigger
-                        })
+
+                    if self.args.setting == "evaluation":
+                        sample_data_list.append({
+                            "data_id": index,
+                            "event_type": event_type_id,
+                            "prompt": prompt[0],
+                            "completion": f"Event trigger is ",
+                            "trigger": trigger
+                            })
+                    elif self.args.setting == "inference":
+                        sample_data_list.append({
+                            "data_id": index,
+                            "event_type": event_type_id,
+                            "prompt": prompt[0],
+                            "completion": f"Event trigger is ",
+                            "trigger": trigger,
+                            "Event definition": event_definition,
+                            "Event type": event_type
+                            })
                 test_data.append(sample_data_list)
-            
+
         with open(os.path.join(self.args.base_dir, self.args.output_dir, self.args.output_test_filename), 'w') as fp:
             if self.args.setting=="evaluation":
                 for index_i in range(len(test_data)):
