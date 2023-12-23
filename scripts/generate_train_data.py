@@ -87,7 +87,8 @@ class Data():
 
                 diverse_definitions = copy.deepcopy(self.data[parent_event]["data"][parent_event]["rewrite_definitions"])
                 event_definition = self.data[parent_event]["data"][parent_event]["definition"]
-                diverse_definitions.append(event_definition)
+                diverse_definitions.insert(0, event_definition)
+                diverse_definitions = diverse_definitions[:self.args.num_definitions]
 
                 for sample in samples:
 
@@ -114,7 +115,7 @@ class Data():
                     train_parent_list_without_parent.remove(parent_event)
                     for index in range(self.args.num_negative_sample):
                         negative_parent_event = random.choice(train_parent_list_without_parent)
-                        negative_event = random.choice(self.data[negative_parent_event]["events"])
+                        negative_event = random.choice(list(self.data[negative_parent_event]["data"].keys()))
 
                         negative_event_name = self.data[negative_parent_event]["data"][negative_event]["name"]
 
@@ -153,7 +154,8 @@ class Data():
 
                 diverse_definitions = copy.deepcopy(self.data[parent_event]["data"][event]["rewrite_definitions"])
                 event_definition = self.data[parent_event]["data"][event]["definition"]
-                diverse_definitions.append(event_definition)
+                diverse_definitions.insert(0, event_definition)
+                diverse_definitions = diverse_definitions[:self.args.num_definitions]
 
                 # for definition in diverse_definitions:
                 for sample in samples:
@@ -179,6 +181,7 @@ class Data():
                         })
 
                     # Negative Sampling for in-ontology sons
+                    if len(negative_sons) == 0: continue
                     for index in range(self.args.num_negative_inOntology):
                         negative_event = random.choice(negative_sons)
 
@@ -206,9 +209,9 @@ class Data():
 
                     train_parent_list_without_parent = copy.deepcopy(self.train_parent_list)
                     train_parent_list_without_parent.remove(parent_event)
-                    for index in range(self.args.num_negative - self.args.num_negative_inOntology):
+                    for index in range(self.args.num_negative_sample - self.args.num_negative_inOntology):
                         negative_parent_event = random.choice(train_parent_list_without_parent)
-                        negative_event = random.choice(self.data[negative_parent_event]["events"])
+                        negative_event = random.choice(list(self.data[negative_parent_event]["data"].keys()))
 
                         negative_event_name = self.data[negative_parent_event]["data"][negative_event]["name"]
 
@@ -268,9 +271,10 @@ class Data():
 
                 diverse_definitions = copy.deepcopy(self.data[parent_event]["data"][parent_event]["rewrite_definitions"])
                 event_definition = self.data[parent_event]["data"][parent_event]["definition"]
-                diverse_definitions.append(event_definition)
+                diverse_definitions.insert(0, event_definition)
+                diverse_definitions = diverse_definitions[:self.args.num_definitions]
 
-                event_id = self.valid_event_list.index(event)
+                event_id = self.valid_event_list.index(parent_event)
 
                 for sample in samples:
 
@@ -300,7 +304,7 @@ class Data():
                     valid_parent_list_without_parent.remove(parent_event)
                     for index in range(self.args.num_negative_sample):
                         negative_parent_event = random.choice(valid_parent_list_without_parent)
-                        negative_event = random.choice(self.data[negative_parent_event]["events"])
+                        negative_event = random.choice(list(self.data[negative_parent_event]["data"].keys()))
 
                         event_id = self.valid_event_list.index(negative_event)
                         negative_event_name = self.data[negative_parent_event]["data"][negative_event]["name"]
@@ -345,7 +349,8 @@ class Data():
 
                 diverse_definitions = copy.deepcopy(self.data[parent_event]["data"][event]["rewrite_definitions"])
                 event_definition = self.data[parent_event]["data"][event]["definition"]
-                diverse_definitions.append(event_definition)
+                diverse_definitions.insert(0, event_definition)
+                diverse_definitions = diverse_definitions[:self.args.num_definitions]
 
                 # for evaluation
                 event_id = self.valid_event_list.index(event)
@@ -401,10 +406,11 @@ class Data():
 
                     valid_parent_list_without_parent = copy.deepcopy(self.valid_parent_list)
                     valid_parent_list_without_parent.remove(parent_event)
-                    for index in range(self.args.num_negative - self.args.num_negative_inOntology):
+                    for index in range(self.args.num_negative_sample - self.args.num_negative_inOntology):
                         negative_parent_event = random.choice(valid_parent_list_without_parent)
-                        negative_event = random.choice(self.data[negative_parent_event]["events"])
+                        negative_event = random.choice(list(self.data[negative_parent_event]["data"].keys()))
 
+                        event_id = self.valid_event_list.index(negative_event)
                         negative_event_name = self.data[negative_parent_event]["data"][negative_event]["name"]
 
                         negative_diverse_definitions = copy.deepcopy(self.data[negative_parent_event]["data"][negative_event]["rewrite_definitions"])
@@ -488,6 +494,7 @@ def main():
     
     parser.add_argument('--num_negative_sample', default=1, type=int, help='')
     parser.add_argument('--num_negative_inOntology', default=1, type=int, help='')
+    parser.add_argument('--num_definitions', default=1, type=int, help='')
     parser.add_argument('--random_seed', default=1, type=int, help='')
 
     parser.add_argument('--train_parent_start', default=50, type=int, help='')

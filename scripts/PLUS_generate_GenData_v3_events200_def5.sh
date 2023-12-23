@@ -1,12 +1,11 @@
-
 ###
  # @Author: JustBluce 972281745@qq.com
- # @Date: 2023-11-22 18:59:18
+ # @Date: 2023-12-23 12:13:54
  # @LastEditors: JustBluce 972281745@qq.com
- # @LastEditTime: 2023-12-23 00:00:40
- # @FilePath: /ZeroEE/ZeroEE/scripts/PLUS_generate_GenData_v2_events100_def1.sh
+ # @LastEditTime: 2023-12-23 12:17:47
+ # @FilePath: /ZeroEE/ZeroEE/scripts/PLUS_generate_GenData_v3_events200_def5.sh
  # @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
-### 
+###
 service=plus
 template=v2
 
@@ -14,15 +13,19 @@ base_dir="/local1/zefan/"
 generate_data_dir='ZeroEE/data/generated_data_fix_v4.json'
 output_dir='data/generated_data'
 
-output_train_filename='train_100_1definition.json'
-output_valid_filename='valid_100_1definition.json'
+output_train_filename='train_200_5definitions_v2.json'
+output_valid_filename='valid_100_1definitions_v2.json'
 
-num_definitions=1
+num_negative_sample=15
+num_negative_inOntology=3
+num_definitions=5
 
 train_parent_start=50
-train_parent_end=100
+train_parent_end=150
 valid_parent_start=0
 valid_parent_end=50
+
+random_seed=42
 
 python ./generate_train_data.py \
     --service ${service} \
@@ -32,12 +35,15 @@ python ./generate_train_data.py \
     --output_dir ${output_dir} \
     --output_train_filename ${output_train_filename} \
     --output_valid_filename ${output_valid_filename} \
+    --num_negative_sample ${num_negative_sample} \
+    --num_negative_inOntology ${num_negative_inOntology} \
     --num_definitions ${num_definitions} \
+    --random_seed ${random_seed} \
     --train_parent_start ${train_parent_start} \
     --train_parent_end ${train_parent_end} \
     --valid_parent_start ${valid_parent_start} \
     --valid_parent_end ${valid_parent_end}
-    
+
 
 
 
