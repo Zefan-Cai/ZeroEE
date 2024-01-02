@@ -87,6 +87,8 @@ class Data():
                         "trigger": trigger
                         })
                 elif self.args.setting == "inference":
+                    # TODO: help me check
+                    prompt = f"SENTENCE: {sample} \n EVENT TYPE: {event_type}. \n DEFINITION: {event_definition} \n PARENT: {parent_event}, SON: {text_sons}. \n So what is the trigger? Event trigger is ",
                     sample_data_list.append({
                         "data_id": index,
                         "event_type": event_type_id,
@@ -186,6 +188,8 @@ class Data():
                         "trigger": trigger
                         })
                 elif self.args.setting == "inference":
+                    # TODO: help me check
+                    prompt = f"SENTENCE: {sample} \n EVENT TYPE: {event_type}. \n DEFINITION: {event_definition} \n PARENT: {parent_event}, SON: {text_sons}. \n So what is the trigger? Event trigger is ",
                     sample_data_list.append({
                         "data_id": index,
                         "event_type": event_type_id,
