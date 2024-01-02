@@ -13,7 +13,7 @@ base_dir=/home/caizf/projects/ZeroEE
 
 # cot
 python -m open_instruct.eval.ace.run_eval \
-    --data_dir ${base_dir}/data/ace_v2 \
+    --data_dir ${base_dir}/data/ace_v2 \ 
     --valid_file ACE_valid_v2_inference.json \
     --test_file ACE_test_v2_inference.json \
     --save_dir ${base_dir}/results/ACE_Geneva_15_96_40/ \
