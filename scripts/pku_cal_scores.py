@@ -41,6 +41,9 @@ def cal_scores(gold_triggers, pred_triggers):
             pred_set = set(pred_trigger)
         # gold_set = set(gold_trigger)
         # pred_set = set(pred_trigger)
+        
+        print(f"debug pred_set {pred_set}")
+        
         gold_tri_id_num += len(gold_set)
         pred_tri_id_num += len(pred_set)
         match_tri_id_num += len(gold_set & pred_set)
@@ -97,9 +100,10 @@ def get_trigger(examples):
 
             
             try:
-                triggers = raw_output.split('Event trigger is ', 1)[1]
-                triggers = triggers.split('.')[0]
-                triggers = triggers.split(' and ')
+                triggers = raw_output.split("Event trigger is ")[1].replace(".", "").strip().split(",")
+                # triggers = triggers.split('.')[0]
+                # triggers = triggers.split(' and ')
+                
                 
                 for t_cnt, t in enumerate(triggers):
                     if t != '<trigger>':
@@ -132,8 +136,8 @@ def get_trigger(examples):
         test_gold_object.append(tuple(my_gold_object))
         test_pred_object.append(tuple(my_pred_object))
         
-        print(f"debug my_gold_object {my_gold_object}")
-        print(f"debug my_pred_object {my_pred_object}")
+        # print(f"debug my_gold_object {my_gold_object}")
+        # print(f"debug my_pred_object {my_pred_object}")
 
 
 
@@ -149,9 +153,10 @@ def get_trigger(examples):
     return test_gold_object, test_pred_object
     # return test_gold_object, test_pred_object, test_gold_events, test_pred_events
  
-base_path = '/home/caizf/projects/ZeroEE/results/GenData_1000_6definition_ACEv2'
+base_path = '/home/caizf/projects/ZeroEE/'
+# base_path = '/home/caizf/projects/ZeroEE/results/GenData_1000_6definition_ACEv2'
 
-path = base_path + '/predictions/ACE_test_v2_inference.jsonl'
+path = base_path + '/ACE_test_v2_inference.jsonl'
 
 
 examples = []
