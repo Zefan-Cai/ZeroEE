@@ -28,7 +28,10 @@ class Data():
 
 
         self.train_parent_list = list(self.data.keys())[self.args.train_parent_start:self.args.train_parent_end]
-
+        # Remove parent with no event
+        for parent in self.train_parent_list:
+            if len(self.data[parent]["data"].keys()) == 0:
+                self.train_parent_list.remove(parent)
         count_train_event = 0
         for parent_event in self.train_parent_list:
             count_train_event += len(self.data[parent_event]["events"])
@@ -82,7 +85,9 @@ class Data():
             # Add data for the parent
             if parent_event in self.data[parent_event]["data"].keys():
 
-                event_name = self.data[parent_event]["data"][parent_event]["name"]
+                # Change to using the event type
+                # event_name = self.data[parent_event]["data"][parent_event]["name"]
+                event_name = parent_event
                 samples = self.data[parent_event]["data"][parent_event]["samples"]
 
                 diverse_definitions = copy.deepcopy(self.data[parent_event]["data"][parent_event]["rewrite_definitions"])
@@ -115,9 +120,15 @@ class Data():
                     train_parent_list_without_parent.remove(parent_event)
                     for index in range(self.args.num_negative_sample):
                         negative_parent_event = random.choice(train_parent_list_without_parent)
-                        negative_event = random.choice(list(self.data[negative_parent_event]["data"].keys()))
+                        try:
+                            negative_event = random.choice(list(self.data[negative_parent_event]["data"].keys()))
+                        except:
+                            print(f"ERROR event {negative_parent_event}:", list(self.data[negative_parent_event]["data"].keys()))
+                            exit(0)
 
-                        negative_event_name = self.data[negative_parent_event]["data"][negative_event]["name"]
+                        # Change to using the event type
+                        # negative_event_name = self.data[negative_parent_event]["data"][negative_event]["name"]
+                        negative_event_name = negative_event
 
                         negative_diverse_definitions = copy.deepcopy(self.data[negative_parent_event]["data"][negative_event]["rewrite_definitions"])
                         negative_event_definition = self.data[negative_parent_event]["data"][negative_event]["definition"]
@@ -147,8 +158,9 @@ class Data():
                 negative_sons = copy.deepcopy(sons)
                 if event in negative_sons:
                     negative_sons.remove(event)
-
-                event_name = self.data[parent_event]["data"][event]["name"]
+                # Change to using the event type
+                # event_name = self.data[parent_event]["data"][event]["name"]
+                event_name = event
                 # triggers = self.data[parent_event]["data"][event]["triggers"]
                 samples = self.data[parent_event]["data"][event]["samples"]
 
@@ -181,11 +193,16 @@ class Data():
                         })
 
                     # Negative Sampling for in-ontology sons
-                    if len(negative_sons) == 0: continue
-                    for index in range(self.args.num_negative_inOntology):
-                        negative_event = random.choice(negative_sons)
-
-                        negative_event_name = self.data[parent_event]["data"][negative_event]["name"]
+                    # Calculate how many in-ontology negative example to use
+                    num_negative_inOntology = min(self.args.num_negative_inOntology, len(negative_sons))
+                    # Shuffle for later use. When sampling negative sons, will follow the index
+                    if len(negative_sons) > self.args.num_negative_inOntology:
+                        random.shuffle(negative_sons)
+                    for index in range(num_negative_inOntology):
+                        negative_event = negative_sons[index]
+                        # Change to using the event type
+                        # negative_event_name = self.data[parent_event]["data"][negative_event]["name"]
+                        negative_event_name = negative_event
 
                         negative_diverse_definitions = copy.deepcopy(self.data[parent_event]["data"][negative_event]["rewrite_definitions"])
                         negative_event_definition = self.data[parent_event]["data"][negative_event]["definition"]
@@ -209,11 +226,13 @@ class Data():
 
                     train_parent_list_without_parent = copy.deepcopy(self.train_parent_list)
                     train_parent_list_without_parent.remove(parent_event)
-                    for index in range(self.args.num_negative_sample - self.args.num_negative_inOntology):
+                    for index in range(self.args.num_negative_sample - num_negative_inOntology):
                         negative_parent_event = random.choice(train_parent_list_without_parent)
                         negative_event = random.choice(list(self.data[negative_parent_event]["data"].keys()))
-
-                        negative_event_name = self.data[negative_parent_event]["data"][negative_event]["name"]
+                        # Change to using the event type
+                        # negative_event_name = self.data[negative_parent_event]["data"][negative_event]["name"]
+                        negative_event_name = negative_event
+                        
 
                         negative_diverse_definitions = copy.deepcopy(self.data[negative_parent_event]["data"][negative_event]["rewrite_definitions"])
                         negative_event_definition = self.data[negative_parent_event]["data"][negative_event]["definition"]
@@ -241,11 +260,25 @@ class Data():
         print(f"debug error_num {str(error_num)}")
 
         train_data =  positive_train_data + negative_train_data
-
-        with open(os.path.join(self.args.base_dir, self.args.output_dir, self.args.output_train_filename), 'w') as fp:
+        output_file = os.path.join(self.args.base_dir, self.args.output_dir, self.args.output_train_filename)
+        with open(output_file, 'w') as fp:
             for line in tqdm(train_data):
                 json.dump(line, fp)
                 fp.write('\n')
+        # For debug purpose
+        debug_dict = {}
+        for pos_example in positive_train_data:
+            sentence = pos_example["prompt"].split("EVENT TYPE:")[0].split("SENTENCE:")[1].strip()
+            if sentence in debug_dict:
+                print(f"Warning! Duplicate sentence occurred in training data. {debug_dict[sentence]} || {pos_example['prompt']}")
+                continue
+            debug_dict[sentence] = {"Pos": pos_example["prompt"], "Neg": []}
+        for neg_example in negative_train_data:
+            sentence = neg_example["prompt"].split("EVENT TYPE:")[0].split("SENTENCE:")[1].strip()
+            assert (sentence in debug_dict), "Error! Negative sentence not occurred in training data."
+            debug_dict[sentence]["Neg"].append(neg_example["prompt"])
+        with open("Debug.json", "w") as F:
+            json.dump(debug_dict, F, indent = 4)
 
 
     def get_valid_data(self):
@@ -265,8 +298,9 @@ class Data():
 
             # Add data for the parent
             if parent_event in self.data[parent_event]["data"].keys():
-
-                event_name = self.data[parent_event]["data"][parent_event]["name"]
+                
+                # event_name = self.data[parent_event]["data"][parent_event]["name"]
+                event_name = parent_event
                 samples = self.data[parent_event]["data"][parent_event]["samples"]
 
                 diverse_definitions = copy.deepcopy(self.data[parent_event]["data"][parent_event]["rewrite_definitions"])
@@ -307,7 +341,9 @@ class Data():
                         negative_event = random.choice(list(self.data[negative_parent_event]["data"].keys()))
 
                         event_id = self.valid_event_list.index(negative_event)
-                        negative_event_name = self.data[negative_parent_event]["data"][negative_event]["name"]
+                        
+                        # negative_event_name = self.data[negative_parent_event]["data"][negative_event]["name"]
+                        negative_event_name = negative_event
 
                         negative_diverse_definitions = copy.deepcopy(self.data[negative_parent_event]["data"][negative_event]["rewrite_definitions"])
                         negative_event_definition = self.data[negative_parent_event]["data"][negative_event]["definition"]
@@ -343,7 +379,9 @@ class Data():
                 if event in negative_sons:
                     negative_sons.remove(event)
 
-                event_name = self.data[parent_event]["data"][event]["name"]
+                # event_name = self.data[parent_event]["data"][event]["name"]
+                event_name = event
+                
                 event_definition = self.data[parent_event]["data"][event]["definition"]
                 samples = self.data[parent_event]["data"][event]["samples"]
 
@@ -377,11 +415,16 @@ class Data():
                         })
 
                     # Negative Sampling for in-ontology sons
-                    for index in range(len(negative_sons)):
+                    # Calculate how many in-ontology negative example to use
+                    num_negative_inOntology = min(self.args.num_negative_inOntology, len(negative_sons))
+                    if len(negative_sons) > self.args.num_negative_inOntology:
+                        random.shuffle(negative_sons)
+                    for index in range(num_negative_inOntology):
                         negative_event = negative_sons[index]
 
                         event_id = self.valid_event_list.index(negative_event)
-                        negative_event_name = self.data[parent_event]["data"][negative_event]["name"]
+                        # negative_event_name = self.data[parent_event]["data"][negative_event]["name"]
+                        negative_event_name = negative_event
 
                         negative_diverse_definitions = copy.deepcopy(self.data[parent_event]["data"][negative_event]["rewrite_definitions"])
                         negative_event_definition = self.data[parent_event]["data"][negative_event]["definition"]
@@ -406,12 +449,13 @@ class Data():
 
                     valid_parent_list_without_parent = copy.deepcopy(self.valid_parent_list)
                     valid_parent_list_without_parent.remove(parent_event)
-                    for index in range(self.args.num_negative_sample - self.args.num_negative_inOntology):
+                    for index in range(self.args.num_negative_sample - num_negative_inOntology):
                         negative_parent_event = random.choice(valid_parent_list_without_parent)
                         negative_event = random.choice(list(self.data[negative_parent_event]["data"].keys()))
 
                         event_id = self.valid_event_list.index(negative_event)
-                        negative_event_name = self.data[negative_parent_event]["data"][negative_event]["name"]
+                        # negative_event_name = self.data[negative_parent_event]["data"][negative_event]["name"]
+                        negative_event_name = negative_event
 
                         negative_diverse_definitions = copy.deepcopy(self.data[negative_parent_event]["data"][negative_event]["rewrite_definitions"])
                         negative_event_definition = self.data[negative_parent_event]["data"][negative_event]["definition"]

@@ -1,0 +1,2 @@
+sh scripts/PLUS_eval_ACE_GenData_5definitions_ACE_v1.sh NewGenData_200_5definition/epoch_3
+sh scripts/PLUS_eval_ACE_GenData_5definitions_ACE_v1.sh NewGenData_400_5definition/epoch_8

@@ -17,8 +17,12 @@ base_dir="/local1/zefan/"
 data_info_dir='ZeroEE/data/'
 output_dir='data/ace_v2'
 
-output_valid_filename='ACE_valid_v2_trigger.json'
-output_test_filename='ACE_test_v2_trigger.json'
+# output_valid_filename='ACE_valid_v2_trigger.json'
+# output_test_filename='ACE_test_v2_trigger.json'
+
+# If add setting inference, use this name
+output_valid_filename='ACE_valid_v2_inference.json'
+output_test_filename='ACE_test_v2_inference.json'
 
 python ./generate_ACE_data.py \
     --service ${service} \
@@ -27,7 +31,8 @@ python ./generate_ACE_data.py \
     --data_info_dir ${data_info_dir} \
     --output_dir ${output_dir} \
     --output_valid_filename ${output_valid_filename} \
-    --output_test_filename ${output_test_filename}
+    --output_test_filename ${output_test_filename} \
+    --setting inference
 
 
 
