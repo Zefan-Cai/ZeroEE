@@ -566,7 +566,7 @@ def main():
     for index in random.sample(range(len(val_dataset)), 3):
         logger.info(f"Sample {index} of the validation set: {val_dataset[index]}.")
     for index in random.sample(range(len(test_dataset)), 3):
-        logger.info(f"Sample {index} of the validation set: {test_dataset[index]}.")
+        logger.info(f"Sample {index} of the test set: {test_dataset[index]}.")
 
     # DataLoaders creation:
     train_dataloader = DataLoader(
@@ -875,6 +875,8 @@ def main():
                                 # print(f"debug outputs {tokenizer.decode(batch_predict[0])}")
 
                                 scores_metric.add_batch(predictions=batch_predict, references=val_gt, event_type=val_event_type, data_id=val_data_id)
+                            # Print the last batch
+                            print("Decode Prediction of Last Batch: ", tokenizer.decode(batch_predict[:10]))
                             # Restore
                             tokenizer.padding_side = "right"
                             print(f"finish inference")
@@ -925,6 +927,7 @@ def main():
 
                                 scores_metric.add_batch(predictions=batch_predict, references=test_gt, event_type=test_event_type, data_id=test_data_id)
                             # Restore
+                            print("Decode Prediction of Last Batch: ", tokenizer.decode(batch_predict[:10]))
                             tokenizer.padding_side = "right"
                             scores = scores_metric.compute()
                             
