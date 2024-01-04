@@ -212,8 +212,11 @@ def eval_hf_model(args, model, tokenizer, examples, task_prompt, save_path=None)
     if save_path:
         fout.write(json.dumps(examples) + "\n")
 
-    test_gold_triggers, test_gold_events, test_pred_triggers, test_pred_events = get_trigger(examples)
-    test_scores = cal_scores(test_gold_triggers, test_pred_triggers, test_gold_events, test_pred_events)
+    # test_gold_triggers, test_gold_events, test_pred_triggers, test_pred_events = get_trigger(examples)
+    # test_scores = cal_scores(test_gold_triggers, test_pred_triggers, test_gold_events, test_pred_events)
+    
+    test_gold_triggers, test_pred_triggers = get_trigger(examples)
+    test_scores = cal_scores(test_gold_triggers, test_pred_triggers)
 
     print("---------------------------------------------------------------------")
     print('Trigger I  - P: {:6.2f} ({:4d}/{:4d}), R: {:6.2f} ({:4d}/{:4d}), F: {:6.2f}'.format(
