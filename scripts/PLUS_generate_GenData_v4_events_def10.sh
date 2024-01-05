@@ -20,7 +20,7 @@ output_dir='data/generated_data'
 output_train_filename=train_${event_num}_10definitions_v2.json
 output_valid_filename='trash.json'
 
-num_negative_sample=15
+num_negative_sample=10
 num_negative_inOntology=3
 num_definitions=10
 
