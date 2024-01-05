@@ -1,6 +1,6 @@
-export CUDA_VISIBLE_DEVICES=7
+export CUDA_VISIBLE_DEVICES=$1
 
-MODEL_NAME="$1"
+MODEL_NAME="$2"
 
 # cot
 python -m open_instruct.eval.ace.run_eval \

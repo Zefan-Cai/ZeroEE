@@ -43,7 +43,7 @@ def generate_completions(model, tokenizer, prompts, batch_size=1, stop_id_sequen
         if model.device.type == "cuda":
             batch_input_ids = batch_input_ids.cuda()
             attention_mask = attention_mask.cuda()
-
+                
         # try:
         batch_outputs = model.generate(
             input_ids=batch_input_ids,
@@ -72,6 +72,15 @@ def generate_completions(model, tokenizer, prompts, batch_size=1, stop_id_sequen
         batch_generations = [
             output[len(prompt):] for prompt, output in zip(batch_prompts, batch_outputs)
         ]
+                # Print the input for debug
+        if i == 0:
+            print(f"---------------- At iter {i}, first 3 items in batch_input_ids")
+            print(batch_input_ids[:3])
+            print(tokenizer.batch_decode(batch_input_ids[:3]))
+            print(f"---------------- At iter {i}, first 3 items in batch_outputs")
+            print(batch_outputs[:3])
+            print(f"---------------- At iter {i}, first 3 items in batch_generations(final output, after removing the prompt)")
+            print(batch_generations[:3])
         # except Exception as e:
         #     print("Error when generating completions for batch:")
         #     print(batch_prompts)

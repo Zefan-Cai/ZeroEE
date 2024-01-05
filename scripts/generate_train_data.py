@@ -32,12 +32,26 @@ class Data():
         for parent in self.train_parent_list:
             if len(self.data[parent]["data"].keys()) == 0:
                 self.train_parent_list.remove(parent)
+        # # Remove sons with no event
+        for parent in self.train_parent_list:
+            for son in self.data[parent]["sons"]:
+                if not son in self.data[parent]["data"].keys():
+                    # son does not exist
+                    print(f"Warning: Remove son [{son}] from parent [{parent}] due to lack of data.")
+                    self.data[parent]["sons"].remove(son)
+                    self.data[parent]["events"].remove(son)
         count_train_event = 0
+        parent_to_use = 0
         for parent_event in self.train_parent_list:
             count_train_event += len(self.data[parent_event]["events"])
-
+            if (self.args.train_events is not None) and count_train_event > self.args.train_events:
+                # Have enough events
+                break
+            parent_to_use += 1
+        if (self.args.train_events is not None) and parent_to_use > 0:
+            self.train_parent_list = self.train_parent_list[:parent_to_use]
         print(f"debug count_train_event {count_train_event}")
-        print(f"debug count_train_parent {self.args.train_parent_end - self.args.train_parent_start}")
+        print(f"debug count_train_parent {len(self.train_parent_list)}")
 
 
         self.valid_parent_list = list(self.data.keys())[self.args.valid_parent_start:self.args.valid_parent_end]
@@ -74,7 +88,7 @@ class Data():
         negative_train_data = []
         error_num = 0
 
-        for parent_event in self.train_parent_list:
+        for parent_event in tqdm(self.train_parent_list):
 
             sons = self.data[parent_event]["sons"]
             events = self.data[parent_event]["events"]
@@ -288,7 +302,7 @@ class Data():
 
         data_index = 0
 
-        for parent_event in self.valid_parent_list:
+        for parent_event in tqdm(self.valid_parent_list):
 
             sons = self.data[parent_event]["sons"]
             events = self.data[parent_event]["events"]
@@ -545,6 +559,7 @@ def main():
     parser.add_argument('--train_parent_end', default=100, type=int, help='')
     parser.add_argument('--valid_parent_start', default=0, type=int, help='')
     parser.add_argument('--valid_parent_end', default=50, type=int, help='')
+    parser.add_argument('--train_events', default=None, type=int, help='The number of events to sample')
 
     args = parser.parse_args()
 

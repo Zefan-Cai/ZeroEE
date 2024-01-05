@@ -37,23 +37,9 @@ def cal_scores(gold_triggers, pred_triggers):
     
     # for gold_trigger, pred_trigger in zip(gold_triggers, pred_triggers):
     for gold_trigger, pred_trigger in zip(gold_triggers, pred_triggers):
-        if gold_trigger != [] and pred_trigger != []:
-            # print([t[0][0] for t in gold_trigger])
-            gold_set = set(tuple([t[0] for t in gold_trigger]))
-            pred_set = set(tuple([t[0] for t in pred_trigger]))
-            # print(gold_trigger)
-            # print(pred_trigger)
-            # print(gold_set)
-            # print(pred_set)
-            # print(gold_set & pred_set)
-        else:
-            gold_set = set(gold_trigger)
-            pred_set = set(pred_trigger)
-        # gold_set = set(gold_trigger)
-        # pred_set = set(pred_trigger)
-        
-        print(f"debug pred_set {pred_set}")
-        
+        # fix bug
+        gold_set = set(tuple([t[0] for t in gold_trigger])) if gold_trigger != [] else set([])
+        pred_set = set(tuple([t[0] for t in pred_trigger])) if pred_trigger != [] else set([])
         gold_tri_id_num += len(gold_set)
         pred_tri_id_num += len(pred_set)
         match_tri_id_num += len(gold_set & pred_set)
@@ -80,14 +66,13 @@ def cal_scores(gold_triggers, pred_triggers):
     return scores
 
 def get_trigger(examples):
-    all_outputs = []
-    test_gold_triggers, test_gold_events, test_pred_triggers, test_pred_events = [], [], [], []
+    # test_gold_triggers, test_gold_events, test_pred_triggers, test_pred_events = [], [], [], []
 
     test_gold_object, test_pred_object = [], []
 
 
     for example in examples:
-        pred_object = []
+        # pred_object = []
         gt_trigger_object = []
         gt_event_object = []
         
@@ -110,7 +95,9 @@ def get_trigger(examples):
 
             
             try:
-                triggers = raw_output.split("Event trigger is ")[1].replace(".", "").strip().split(",")
+                # triggers = raw_output.split("Event trigger is ")[1].replace(".", "").strip().split(",")
+                # Since we added the "Event trigger is" in the prompt during training, we change the parsing a bit
+                triggers = raw_output.replace("Event trigger is ", "").replace(".", "").strip().split(",")
                 # triggers = triggers.split('.')[0]
                 # triggers = triggers.split(' and ')
                 
@@ -124,7 +111,7 @@ def get_trigger(examples):
                     
                         
             except Exception as e:
-                # print(e)
+                print(e)
                 pass
             
             # if len(trigger) > 1 and trigger != '<trigger>':
@@ -132,16 +119,15 @@ def get_trigger(examples):
             #     print(f"subexample event_type {event_type}")
             #     print(f"subexample triggers {triggers}")
             
-            
-            sub_example["trigger"] = pred_object
-            all_outputs.append(pred_object)
+            # Warning: What's this line doing?
+            # sub_example["trigger"] = pred_object
                 
-        pred_trigger_object = []
-        pred_event_object = []
+        # pred_trigger_object = []
+        # pred_event_object = []
         
-        for obj in pred_object:
-            pred_event_object.append(obj[1])
-            pred_trigger_object.append(obj[0])
+        # for obj in pred_object:
+        #     pred_event_object.append(obj[1])
+        #     pred_trigger_object.append(obj[0])
 
         test_gold_object.append(tuple(my_gold_object))
         test_pred_object.append(tuple(my_pred_object))
@@ -151,10 +137,10 @@ def get_trigger(examples):
 
 
 
-        test_gold_triggers.append(gt_trigger_object)
-        test_gold_events.append(gt_event_object)
-        test_pred_triggers.append(pred_trigger_object)
-        test_pred_events.append(pred_event_object)
+        # test_gold_triggers.append(gt_trigger_object)
+        # test_gold_events.append(gt_event_object)
+        # test_pred_triggers.append(pred_trigger_object)
+        # test_pred_events.append(pred_event_object)
 
     # print("debug")
     # print(test_pred_object[:10])
@@ -225,7 +211,15 @@ def eval_hf_model(args, model, tokenizer, examples, task_prompt, save_path=None)
     print('Trigger C  - P: {:6.2f} ({:4d}/{:4d}), R: {:6.2f} ({:4d}/{:4d}), F: {:6.2f}'.format(
         test_scores['tri_cls'][3] * 100.0, test_scores['tri_cls'][2], test_scores['tri_cls'][1], 
         test_scores['tri_cls'][4] * 100.0, test_scores['tri_cls'][2], test_scores['tri_cls'][0], test_scores['tri_cls'][5] * 100.0))
-
+    if save_path:
+        save_score_path = save_path.replace(".jsonl", "_scores.txt")
+        with open(save_score_path, "w") as F:
+            F.write('Trigger I  - P: {:6.2f} ({:4d}/{:4d}), R: {:6.2f} ({:4d}/{:4d}), F: {:6.2f}\n'.format(
+                test_scores['tri_id'][3] * 100.0, test_scores['tri_id'][2], test_scores['tri_id'][1], 
+                test_scores['tri_id'][4] * 100.0, test_scores['tri_id'][2], test_scores['tri_id'][0], test_scores['tri_id'][5] * 100.0))
+            F.write('Trigger C  - P: {:6.2f} ({:4d}/{:4d}), R: {:6.2f} ({:4d}/{:4d}), F: {:6.2f}\n'.format(
+                test_scores['tri_cls'][3] * 100.0, test_scores['tri_cls'][2], test_scores['tri_cls'][1], 
+                test_scores['tri_cls'][4] * 100.0, test_scores['tri_cls'][2], test_scores['tri_cls'][0], test_scores['tri_cls'][5] * 100.0))
 # for example, output in zip(examples, outputs):
         # example["raw_output"] = output
         
