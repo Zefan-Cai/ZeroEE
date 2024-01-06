@@ -45,13 +45,7 @@ class EE(datasets.Metric):
         
         group_predictions = []
         group_references = []
-
-        
-        # print(f"debug predictions {predictions[:100]}")
-        # print(f"debug references {references[:100]}")
-        # print(f"debug event_type {event_type[:100]}")
-
-
+        # Basically sort the results by data_id here
         distinct_data_id = list(set(data_id))
         all_predictions = []
         all_references = []
@@ -60,11 +54,6 @@ class EE(datasets.Metric):
             all_predictions.append([])
             all_references.append([])
             all_event_type.append([])
-
-        # print(f"debug all_predictions {len(all_predictions)}")
-        # print(f"debug all_references {len(all_references)}")
-        # print(f"debug all_event_type {len(all_event_type)}")
-        # print(f"debug distinct_data_id {distinct_data_id}")
         
         for pred, gt, event, id in zip(predictions, references, event_type, data_id):
             if event not in all_event_type[id]:
@@ -72,29 +61,15 @@ class EE(datasets.Metric):
                 all_references[id].append(gt)
                 all_event_type[id].append(event)
 
-        # print(f"debug all_predictions {len(all_predictions)}")
-        
-        
-        # output_data = []
-        # for index in range(len(all_predictions)):
-        #     output_data.append({
-        #         "prediction": all_predictions[index],
-        #         "reference": all_references[index],
-        #         "event_type": all_event_type[index]
-        #     })
-            
-        # with open('/local1/zefan/debug_evaluation.json', 'w') as fp:
-        #     json.dump(output_data, fp)
-
-        len_events = 0
-        for item in all_predictions:
-            if len(item) > len_events:
-                len_events = len(item)
+        # get max length. Don't know what this line for...
+        len_events = max([len(item) for item in all_predictions])
+        # for item in all_predictions:
+        #     if len(item) > len_events:
+        #         len_events = len(item)
 
         count = 0
         error_count = 0
         for index_i in range(len(all_predictions)):
-            
             if len(all_predictions[index_i]) < len_events:
                 error_count += 1
                 continue
@@ -123,7 +98,7 @@ class EE(datasets.Metric):
             group_predictions.append(tuple(temp_predictions))
             group_references.append(tuple(temp_references))
 
-        # print(f"debug all_predictions with len_events events {count} error_count {error_count}")
+        print(f"debug all_predictions with len_events events {count} error_count {error_count}")
 
         # print(f"debug len(group_predictions) {group_predictions[:20]}")
         # print(f"debug len(group_references) {group_references[:20]}")
@@ -146,6 +121,7 @@ class EE(datasets.Metric):
                 pred_set = set(pred_trigger)
             # gold_set = set(gold_trigger)
             # pred_set = set(pred_trigger)
+            # print(pred_set)
             gold_tri_id_num += len(gold_set)
             pred_tri_id_num += len(pred_set)
             match_tri_id_num += len(gold_set & pred_set)

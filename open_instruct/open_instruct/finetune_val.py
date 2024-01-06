@@ -292,6 +292,7 @@ def encode_with_prompt_completion_format(example, tokenizer, max_seq_length):
     }
 
 def encode_with_prompt_completion_format_val(example, tokenizer, max_seq_length):
+    # Since ACE has longer seq length, we don't set the max_seq_length
     # if prompt doesn't end with space and completion doesn't start with space, add space
     if not example['prompt'].endswith((' ', '\n', '\t')) and not example['completion'].startswith((' ', '\n', '\t')):
         example_text = example['prompt'] + ' ' + example['completion']
@@ -305,7 +306,7 @@ def encode_with_prompt_completion_format_val(example, tokenizer, max_seq_length)
     # Prepare
     # tokenizer.padding_side = "left"
     # tokenizer.add_eos_token = False
-    tokenized_example = tokenizer(example_text, return_tensors='pt', max_length=max_seq_length, truncation=True)
+    tokenized_example = tokenizer(example_text, return_tensors='pt')
     input_ids = tokenized_example.input_ids
     input_ids = input_ids[:, :-1] # Remove the <s> token 
     # Restore
@@ -314,7 +315,7 @@ def encode_with_prompt_completion_format_val(example, tokenizer, max_seq_length)
     
     # The label here is trash, ignore it
     labels = input_ids.clone()
-    tokenized_prompt = tokenizer(example['prompt'], return_tensors='pt', max_length=max_seq_length, truncation=True)
+    tokenized_prompt = tokenizer(example['prompt'], return_tensors='pt')
     # mask the prompt part for avoiding loss
     labels[:, :tokenized_prompt.input_ids.shape[1]] = -100
     attention_mask = torch.ones_like(input_ids)
@@ -867,7 +868,9 @@ def main():
                                 # print(f"debug eval_batch val_gt {val_gt[0]}")
                                 # print(f"debug eval_batch val_gt {tokenizer.decode(val_gt[0])}")
 
-                                
+                                # print(eval_batch.input_ids[0])
+                                # print(eval_batch.attention_mask[0])
+                                # print(tokenizer.decode([32003]))
                                 outputs = model(**eval_batch, use_cache=False, return_dict = True)
                                 batch_predict = torch.argmax(outputs.logits[:,-1,:], dim = -1).cpu().tolist()
                                 
@@ -924,7 +927,6 @@ def main():
                                 
                                 outputs = model(**eval_batch, use_cache=False, return_dict = True)
                                 batch_predict = torch.argmax(outputs.logits[:,-1,:], dim = -1).cpu().tolist()
-
                                 scores_metric.add_batch(predictions=batch_predict, references=test_gt, event_type=test_event_type, data_id=test_data_id)
                             # Restore
                             print("Decode Prediction of Last Batch: ", tokenizer.decode(batch_predict[:10]))
