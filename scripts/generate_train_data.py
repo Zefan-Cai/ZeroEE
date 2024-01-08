@@ -29,17 +29,24 @@ class Data():
 
         self.train_parent_list = list(self.data.keys())[self.args.train_parent_start:self.args.train_parent_end]
         # Remove parent with no event
+        to_remove_parents = []
         for parent in self.train_parent_list:
-            if len(self.data[parent]["data"].keys()) == 0:
-                self.train_parent_list.remove(parent)
+            if not (len(self.data[parent]["data"].keys()) > 0):
+                to_remove_parents.append(parent)
+                print(f"Remove {parent}")
+        for to_remove_parent in to_remove_parents:
+            self.train_parent_list.remove(to_remove_parent)
         # # Remove sons with no event
         for parent in self.train_parent_list:
+            to_remove_sons = []
             for son in self.data[parent]["sons"]:
                 if not son in self.data[parent]["data"].keys():
                     # son does not exist
                     print(f"Warning: Remove son [{son}] from parent [{parent}] due to lack of data.")
-                    self.data[parent]["sons"].remove(son)
-                    self.data[parent]["events"].remove(son)
+                    to_remove_sons.append(son)
+            for to_remove_son in to_remove_sons:
+                self.data[parent]["sons"].remove(to_remove_son)
+                self.data[parent]["events"].remove(to_remove_son)
         count_train_event = 0
         parent_to_use = 0
         for parent_event in self.train_parent_list:

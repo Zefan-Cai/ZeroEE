@@ -11,7 +11,7 @@ export NumEvents="$2"
 
 MODEL_PATH="/local1/zefan/models/Llama-2-7b-hf/"
 
-OUTPUT_NAME=NewGenData_${NumEvents}_10definition/
+OUTPUT_NAME=NewGenDatav2_${NumEvents}_10definition/
 TRAIN_FILE=/local1/zefan/data/generated_data/train_${NumEvents}_10definitions_v2.json
 VAL_FILE="/local1/zefan/data/generated_data/valid_100_1definitions_v2.json"
 TEST_FILE="/local1/zefan/data/ace_v2/ACE_test_v2_trigger.json"

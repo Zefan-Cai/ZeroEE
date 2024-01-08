@@ -103,7 +103,7 @@ def get_trigger(examples):
                 
                 
                 for t_cnt, t in enumerate(triggers):
-                    if t != '<trigger>':
+                    if t != '<trigger>' and t != "":
                         # pred_object.append((t, event_type, {'tri counter': t_cnt})) # (text, type, kwargs)
                         # pred_object.append(t, event_type) # (text, type, kwargs)
                         my_pred_object.append((t, event_type))

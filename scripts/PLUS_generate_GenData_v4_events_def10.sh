@@ -14,11 +14,11 @@ template=v2
 event_num=$1
 
 base_dir="/local1/zefan/"
-generate_data_dir='ZeroEE/data/generated_data_fix_v4.json'
+generate_data_dir='ZeroEE/data/generated_data_fix_v5.json'
 output_dir='data/generated_data'
 
 output_train_filename=train_${event_num}_10definitions_v2.json
-output_valid_filename='trash.json'
+output_valid_filename='valid_100_1definitions_v2.json'
 
 num_negative_sample=10
 num_negative_inOntology=3
