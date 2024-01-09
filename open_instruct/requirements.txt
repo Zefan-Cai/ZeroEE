@@ -1,7 +1,7 @@
 # torch
 sentencepiece
 datasets
-deepspeed==0.9.1
+deepspeed
 accelerate
 peft
 # git+https://github.com/huggingface/accelerate.git@e06e7b35e7c49563ed70f31b78126bf70b0252b9  # this version fixes a bug about gradient accumulation in 0.18.0 
@@ -29,3 +29,4 @@ fire
 # git+https://github.com/hamishivi/alpaca_farm.git
 # for human eval web app
 flask
+scikit-learn

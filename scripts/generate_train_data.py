@@ -114,27 +114,29 @@ class Data():
                 diverse_definitions = copy.deepcopy(self.data[parent_event]["data"][parent_event]["rewrite_definitions"])
                 event_definition = self.data[parent_event]["data"][parent_event]["definition"]
                 diverse_definitions.insert(0, event_definition)
+                random.shuffle(diverse_definitions)
                 diverse_definitions = diverse_definitions[:self.args.num_definitions]
-
+                
                 for sample in samples:
 
                     sentence = sample["sentence"]
-                    definition = random.choice(diverse_definitions)
+                    # definition = random.choice(diverse_definitions)
                     trigger = sample["trigger"]
                     # selected_trigger = random.choice(triggers)
+                    # Put the for loop here, this way we won't have too many negative examples
+                    for definition in diverse_definitions:
+                        if self.args.template_version == "v1":
+                            prompt = f"{sentence} \n The event is: {event_name}. \n The event definition is: {definition} \n The parent event is {parent_event}, son events include {text_sons}. \n So what is the trigger?",
+                        elif self.args.template_version == "v2":
+                            prompt = f"SENTENCE: {sentence} \n EVENT TYPE: {event_name}. \n DEFINITION: {definition} \n PARENT: {parent_event}, SON: {text_sons}. \n So what is the trigger?",
+                        else:
+                            raise Exception("THe template version should be v1 or v2")
 
-                    if self.args.template_version == "v1":
-                        prompt = f"{sentence} \n The event is: {event_name}. \n The event definition is: {definition} \n The parent event is {parent_event}, son events include {text_sons}. \n So what is the trigger?",
-                    elif self.args.template_version == "v2":
-                        prompt = f"SENTENCE: {sentence} \n EVENT TYPE: {event_name}. \n DEFINITION: {definition} \n PARENT: {parent_event}, SON: {text_sons}. \n So what is the trigger?",
-                    else:
-                        raise Exception("THe template version should be v1 or v2")
-
-                    if type(prompt) == list: prompt = prompt[0]
-                    positive_train_data.append({
-                        "prompt": prompt[0],
-                        "completion": f"Event trigger is {trigger}."
-                        })
+                        if type(prompt) == list: prompt = prompt[0]
+                        positive_train_data.append({
+                            "prompt": prompt[0],
+                            "completion": f"Event trigger is {trigger}."
+                            })
 
                     # Negative Sampling based on negative definitions
                     train_parent_list_without_parent = copy.deepcopy(self.train_parent_list)
@@ -188,6 +190,7 @@ class Data():
                 diverse_definitions = copy.deepcopy(self.data[parent_event]["data"][event]["rewrite_definitions"])
                 event_definition = self.data[parent_event]["data"][event]["definition"]
                 diverse_definitions.insert(0, event_definition)
+                random.shuffle(diverse_definitions)
                 diverse_definitions = diverse_definitions[:self.args.num_definitions]
 
                 # for definition in diverse_definitions:
@@ -197,21 +200,20 @@ class Data():
                     trigger = sample["trigger"]
                     # selected_trigger = random.choice(triggers)
 
-                    definition = random.choice(diverse_definitions)
+                    for definition in diverse_definitions:
+                        if self.args.template_version == "v1":
+                            prompt = f"{sentence} \n The event is: {event_name}. \n The event definition is: {definition} \n The parent event is {parent_event}, son events include {text_sons}. \n So what is the trigger?",
+                        elif self.args.template_version == "v2":
+                            prompt = f"SENTENCE: {sentence} \n EVENT TYPE: {event_name}. \n DEFINITION: {definition} \n PARENT: {parent_event}, SON: {text_sons}. \n So what is the trigger?",
+                        else:
+                            raise Exception("THe template version should be v1 or v2")
 
-                    if self.args.template_version == "v1":
-                        prompt = f"{sentence} \n The event is: {event_name}. \n The event definition is: {definition} \n The parent event is {parent_event}, son events include {text_sons}. \n So what is the trigger?",
-                    elif self.args.template_version == "v2":
-                        prompt = f"SENTENCE: {sentence} \n EVENT TYPE: {event_name}. \n DEFINITION: {definition} \n PARENT: {parent_event}, SON: {text_sons}. \n So what is the trigger?",
-                    else:
-                        raise Exception("THe template version should be v1 or v2")
+                        if type(prompt) == list: prompt = prompt[0]
 
-                    if type(prompt) == list: prompt = prompt[0]
-
-                    positive_train_data.append({
-                        "prompt": prompt[0],
-                        "completion": f"Event trigger is {trigger}."
-                        })
+                        positive_train_data.append({
+                            "prompt": prompt[0],
+                            "completion": f"Event trigger is {trigger}."
+                            })
 
                     # Negative Sampling for in-ontology sons
                     # Calculate how many in-ontology negative example to use
@@ -290,9 +292,9 @@ class Data():
         debug_dict = {}
         for pos_example in positive_train_data:
             sentence = pos_example["prompt"].split("EVENT TYPE:")[0].split("SENTENCE:")[1].strip()
-            if sentence in debug_dict:
-                print(f"Warning! Duplicate sentence occurred in training data. {debug_dict[sentence]} || {pos_example['prompt']}")
-                continue
+            # if sentence in debug_dict:
+            #     print(f"Warning! Duplicate sentence occurred in training data. {debug_dict[sentence]} || {pos_example['prompt']}")
+            #     continue
             debug_dict[sentence] = {"Pos": pos_example["prompt"], "Neg": []}
         for neg_example in negative_train_data:
             sentence = neg_example["prompt"].split("EVENT TYPE:")[0].split("SENTENCE:")[1].strip()
