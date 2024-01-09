@@ -30,3 +30,4 @@ fire
 # for human eval web app
 flask
 scikit-learn
+huggingface_hub
