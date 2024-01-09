@@ -36,14 +36,12 @@ def generate_completions(model, tokenizer, prompts, batch_size=1, stop_id_sequen
     num_return_sequences = generation_kwargs.get("num_return_sequences", 1)
     for i in range(0, len(prompts), batch_size):
         batch_prompts = prompts[i:i+batch_size]
-        tokenized_prompts = tokenizer(batch_prompts, padding="longest", return_tensors="pt", add_special_tokens=False)
+        tokenized_prompts = tokenizer(batch_prompts, padding="longest", return_tensors="pt")
         batch_input_ids = tokenized_prompts.input_ids
         attention_mask = tokenized_prompts.attention_mask
-
         if model.device.type == "cuda":
             batch_input_ids = batch_input_ids.cuda()
             attention_mask = attention_mask.cuda()
-                
         # try:
         batch_outputs = model.generate(
             input_ids=batch_input_ids,

@@ -179,7 +179,7 @@ def eval_hf_model(args, model, tokenizer, examples, task_prompt, save_path=None)
         model=model,
         tokenizer=tokenizer,
         prompts=prompts,
-        max_new_tokens=256,
+        max_new_tokens=12,
         batch_size=args.eval_batch_size if args.eval_batch_size else 1,
         # stop_id_sequences=[[stop_sequnce]] 
     )
@@ -343,6 +343,7 @@ def main(args):
             model_name_or_path=args.model_name_or_path, 
             tokenizer_name_or_path=args.tokenizer_name_or_path, 
             load_in_8bit=args.load_in_8bit, 
+            # Sometimes it will make model predict unknown
             load_in_half=True,
             gptq_model=args.gptq
         )
