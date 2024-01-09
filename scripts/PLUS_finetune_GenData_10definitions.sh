@@ -9,13 +9,14 @@ export NumEvents="$2"
  # @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 ### 
 
+base_dir='/local1/zefan/'
 MODEL_PATH="/local1/zefan/models/Llama-2-7b-hf/"
 
 OUTPUT_NAME=NewGenDatav2_${NumEvents}_10definition/
-TRAIN_FILE=/local1/zefan/data/generated_data/train_${NumEvents}_10definitions_v2.json
-VAL_FILE="/local1/zefan/data/generated_data/valid_100_1definitions_v2.json"
-TEST_FILE="/local1/zefan/data/ace_v2/ACE_test_v2_trigger.json"
-METRICS_FILE="/local1/zefan/ZeroEE/open_instruct/compute_score_ee.py"
+TRAIN_FILE=${base_dir}data/generated_data/train_${NumEvents}_10definitions_v2.json
+VAL_FILE="${base_dir}data/generated_data/valid_100_1definitions_v2.json"
+TEST_FILE="${base_dir}data/ace_v2/ACE_test_v2_trigger.json"
+METRICS_FILE=${base_dir}"ZeroEE/open_instruct/compute_score_ee.py"
 REPORT_TAGS="ZeroEE"
 
 ceildiv(){ echo $((($1+$2-1)/$2)); }
@@ -31,8 +32,8 @@ accelerate launch \
     --num_machines 1 \
     --num_processes $NUM_GPUS \
     --use_deepspeed \
-    --deepspeed_config_file /local1/zefan/ZeroEE/open_instruct/ds_configs/stage3_no_offloading_accelerate.conf \
-    /local1/zefan/ZeroEE/open_instruct/open_instruct/finetune_val.py \
+    --deepspeed_config_file ${base_dir}ZeroEE/open_instruct/ds_configs/stage3_no_offloading_accelerate.conf \
+    ${base_dir}ZeroEE/open_instruct/open_instruct/finetune_val.py \
     --model_name_or_path $MODEL_PATH \
     --use_flash_attn \
     --tokenizer_name $MODEL_PATH \
