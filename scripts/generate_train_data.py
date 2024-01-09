@@ -128,7 +128,9 @@ class Data():
                         if self.args.template_version == "v1":
                             prompt = f"{sentence} \n The event is: {event_name}. \n The event definition is: {definition} \n The parent event is {parent_event}, son events include {text_sons}. \n So what is the trigger?",
                         elif self.args.template_version == "v2":
-                            prompt = f"SENTENCE: {sentence} \n EVENT TYPE: {event_name}. \n DEFINITION: {definition} \n PARENT: {parent_event}, SON: {text_sons}. \n So what is the trigger?",
+                            prompt = f"SENTENCE: {sentence} \n EVENT TYPE: {event_name}. \n DEFINITION: {definition} \n So what is the trigger?",
+                            if self.args.OntologyAblation:
+                                prompt = f"SENTENCE: {sentence} \n EVENT TYPE: {event_name}. \n DEFINITION: {definition} \n PARENT: {parent_event}, SON: {text_sons}. \n So what is the trigger?",
                         else:
                             raise Exception("THe template version should be v1 or v2")
 
@@ -163,7 +165,9 @@ class Data():
                         if self.args.template_version == "v1":
                             prompt = f"{sentence} \n The event is: {negative_event_name}. \n The event definition is: {definition} \n The parent event is {negative_parent_event}, son events include {negative_text_sons}. \n So what is the trigger?",
                         elif self.args.template_version == "v2":
-                            prompt = f"SENTENCE: {sentence} \n EVENT TYPE: {negative_event_name}. \n DEFINITION: {definition} \n PARENT: {negative_parent_event}, SON: {negative_text_sons}. \n So what is the trigger?",
+                            prompt = f"SENTENCE: {sentence} \n EVENT TYPE: {negative_event_name}. \n DEFINITION: {definition} \n So what is the trigger?",
+                            if self.args.OntologyAblation:
+                                prompt = f"SENTENCE: {sentence} \n EVENT TYPE: {negative_event_name}. \n DEFINITION: {definition} \n PARENT: {negative_parent_event}, SON: {negative_text_sons}. \n So what is the trigger?",
                         else:
                             raise Exception("THe template version should be v1 or v2")
 
@@ -204,7 +208,9 @@ class Data():
                         if self.args.template_version == "v1":
                             prompt = f"{sentence} \n The event is: {event_name}. \n The event definition is: {definition} \n The parent event is {parent_event}, son events include {text_sons}. \n So what is the trigger?",
                         elif self.args.template_version == "v2":
-                            prompt = f"SENTENCE: {sentence} \n EVENT TYPE: {event_name}. \n DEFINITION: {definition} \n PARENT: {parent_event}, SON: {text_sons}. \n So what is the trigger?",
+                            prompt = f"SENTENCE: {sentence} \n EVENT TYPE: {event_name}. \n DEFINITION: {definition} \n So what is the trigger?",
+                            if self.args.OntologyAblation:
+                                prompt = f"SENTENCE: {sentence} \n EVENT TYPE: {event_name}. \n DEFINITION: {definition} \n PARENT: {parent_event}, SON: {text_sons}. \n So what is the trigger?",
                         else:
                             raise Exception("THe template version should be v1 or v2")
 
@@ -235,7 +241,9 @@ class Data():
                         if self.args.template_version == "v1":
                             prompt = f"{sentence} \n The event is: {negative_event_name}. \n The event definition is: {definition} \n The parent event is {parent_event}, son events include {text_sons}. \n So what is the trigger?",
                         elif self.args.template_version == "v2":
-                            prompt = f"SENTENCE: {sentence} \n EVENT TYPE: {negative_event_name}. \n DEFINITION: {definition} \n PARENT: {parent_event}, SON: {text_sons}. \n So what is the trigger?",
+                            prompt = f"SENTENCE: {sentence} \n EVENT TYPE: {negative_event_name}. \n DEFINITION: {definition} \n So what is the trigger?",
+                            if self.args.OntologyAblation:
+                                prompt = f"SENTENCE: {sentence} \n EVENT TYPE: {negative_event_name}. \n DEFINITION: {definition} \n PARENT: {parent_event}, SON: {text_sons}. \n So what is the trigger?",
                         else:
                             raise Exception("THe template version should be v1 or v2")
 
@@ -267,7 +275,9 @@ class Data():
                         if self.args.template_version == "v1":
                             prompt = f"{sentence} \n The event is: {negative_event_name}. \n The event definition is: {definition} \n The parent event is {negative_parent_event}, son events include {negative_text_sons}. \n So what is the trigger?",
                         elif self.args.template_version == "v2":
-                            prompt = f"SENTENCE: {sentence} \n EVENT TYPE: {negative_event_name}. \n DEFINITION: {definition} \n PARENT: {negative_parent_event}, SON: {negative_text_sons}. \n So what is the trigger?",
+                            prompt = f"SENTENCE: {sentence} \n EVENT TYPE: {negative_event_name}. \n DEFINITION: {definition} \n So what is the trigger?",
+                            if self.args.OntologyAblation:
+                                prompt = f"SENTENCE: {sentence} \n EVENT TYPE: {negative_event_name}. \n DEFINITION: {definition} \n PARENT: {negative_parent_event}, SON: {negative_text_sons}. \n So what is the trigger?",
                         else:
                             raise Exception("THe template version should be v1 or v2")
 
@@ -343,7 +353,9 @@ class Data():
                     if self.args.template_version == "v1":
                         prompt = f"{sentence} \n The event is: {event_name}. \n The event definition is: {definition} \n The parent event is {parent_event}, son events include {text_sons}. \n So what is the trigger?",
                     elif self.args.template_version == "v2":
-                        prompt = f"SENTENCE: {sentence} \n EVENT TYPE: {event_name}. \n DEFINITION: {definition} \n PARENT: {parent_event}, SON: {text_sons}. \n So what is the trigger?",
+                        prompt = f"SENTENCE: {sentence} \n EVENT TYPE: {event_name}. \n DEFINITION: {definition} \n So what is the trigger?",
+                        if self.args.OntologyAblation:
+                            prompt = f"SENTENCE: {sentence} \n EVENT TYPE: {event_name}. \n DEFINITION: {definition} \n PARENT: {parent_event}, SON: {text_sons}. \n So what is the trigger?",
                     else:
                         raise Exception("THe template version should be v1 or v2")
 
@@ -378,7 +390,9 @@ class Data():
                         if self.args.template_version == "v1":
                             prompt = f"{sentence} \n The event is: {negative_event_name}. \n The event definition is: {definition} \n The parent event is {negative_parent_event}, son events include {negative_text_sons}. \n So what is the trigger?",
                         elif self.args.template_version == "v2":
-                            prompt = f"SENTENCE: {sentence} \n EVENT TYPE: {negative_event_name}. \n DEFINITION: {definition} \n PARENT: {negative_parent_event}, SON: {negative_text_sons}. \n So what is the trigger?",
+                            prompt = f"SENTENCE: {sentence} \n EVENT TYPE: {negative_event_name}. \n DEFINITION: {definition} \n So what is the trigger?",
+                            if self.args.OntologyAblation:
+                                prompt = f"SENTENCE: {sentence} \n EVENT TYPE: {negative_event_name}. \n DEFINITION: {definition} \n PARENT: {negative_parent_event}, SON: {negative_text_sons}. \n So what is the trigger?",
                         else:
                             raise Exception("THe template version should be v1 or v2")
 
@@ -423,7 +437,9 @@ class Data():
                     if self.args.template_version == "v1":
                         prompt = f"{sentence} \n The event is: {event_name}. \n The event definition is: {definition} \n The parent event is {parent_event}, son events include {text_sons}. \n So what is the trigger?",
                     elif self.args.template_version == "v2":
-                        prompt = f"SENTENCE: {sentence} \n EVENT TYPE: {event_name}. \n DEFINITION: {definition} \n PARENT: {parent_event}, SON: {text_sons}. \n So what is the trigger?",
+                        prompt = f"SENTENCE: {sentence} \n EVENT TYPE: {event_name}. \n DEFINITION: {definition} \n So what is the trigger?",
+                        if self.args.OntologyAblation:
+                            prompt = f"SENTENCE: {sentence} \n EVENT TYPE: {event_name}. \n DEFINITION: {definition} \n PARENT: {parent_event}, SON: {text_sons}. \n So what is the trigger?",
                     else:
                         raise Exception("THe template version should be v1 or v2")
 
@@ -457,7 +473,9 @@ class Data():
                         if self.args.template_version == "v1":
                             prompt = f"{sentence} \n The event is: {negative_event_name}. \n The event definition is: {definition} \n The parent event is {parent_event}, son events include {text_sons}. \n So what is the trigger?",
                         elif self.args.template_version == "v2":
-                            prompt = f"SENTENCE: {sentence} \n EVENT TYPE: {negative_event_name}. \n DEFINITION: {definition} \n PARENT: {parent_event}, SON: {text_sons}. \n So what is the trigger?",
+                            prompt = f"SENTENCE: {sentence} \n EVENT TYPE: {negative_event_name}. \n DEFINITION: {definition} \n So what is the trigger?",
+                            if self.args.OntologyAblation:
+                                prompt = f"SENTENCE: {sentence} \n EVENT TYPE: {negative_event_name}. \n DEFINITION: {definition} \n PARENT: {parent_event}, SON: {text_sons}. \n So what is the trigger?",
                         else:
                             raise Exception("THe template version should be v1 or v2")
 
@@ -490,7 +508,9 @@ class Data():
                         if self.args.template_version == "v1":
                             prompt = f"{sentence} \n The event is: {negative_event_name}. \n The event definition is: {definition} \n The parent event is {negative_parent_event}, son events include {negative_text_sons}. \n So what is the trigger?",
                         elif self.args.template_version == "v2":
-                            prompt = f"SENTENCE: {sentence} \n EVENT TYPE: {negative_event_name}. \n DEFINITION: {definition} \n PARENT: {negative_parent_event}, SON: {negative_text_sons}. \n So what is the trigger?",
+                            prompt = f"SENTENCE: {sentence} \n EVENT TYPE: {negative_event_name}. \n DEFINITION: {definition} \n So what is the trigger?",
+                            if self.args.OntologyAblation:
+                                prompt = f"SENTENCE: {sentence} \n EVENT TYPE: {negative_event_name}. \n DEFINITION: {definition} \n PARENT: {negative_parent_event}, SON: {negative_text_sons}. \n So what is the trigger?",
                         else:
                             raise Exception("THe template version should be v1 or v2")
 
@@ -569,6 +589,8 @@ def main():
     parser.add_argument('--valid_parent_start', default=0, type=int, help='')
     parser.add_argument('--valid_parent_end', default=50, type=int, help='')
     parser.add_argument('--train_events', default=None, type=int, help='The number of events to sample')
+    
+    parser.add_argument('--OntologyAblation', action='store_false', help='if used, then OntologyAblation is set to False, else is set to True')
 
     args = parser.parse_args()
 

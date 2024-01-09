@@ -8,7 +8,7 @@
 ###
 
 # The updated scripts, will use the specific amount of events
-service=pku
+service=ms
 template=v2
 
 event_num=$1
