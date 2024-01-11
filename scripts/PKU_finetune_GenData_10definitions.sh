@@ -4,7 +4,7 @@ export NumEvents="$2"
  # @Author: JustBluce 972281745@qq.com
  # @Date: 2023-11-22 18:59:18
  # @LastEditors: JustBluce 972281745@qq.com
- # @LastEditTime: 2024-01-08 16:18:35
+ # @LastEditTime: 2024-01-10 21:17:43
  # @FilePath: /ZeroEE/ZeroEE/scripts/PLUS_finetune_GenData_200_5definitions.sh
  # @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 ### 
@@ -22,7 +22,7 @@ REPORT_TAGS="ZeroEE"
 ceildiv(){ echo $((($1+$2-1)/$2)); }
 NUM_GPUS=$(ceildiv ${#CUDA_VISIBLE_DEVICES} 2)
 BATCH_SIZE_PER_GPU=8
-TOTAL_BATCH_SIZE=96
+TOTAL_BATCH_SIZE=128
 GRADIENT_ACC_STEPS=$(($TOTAL_BATCH_SIZE/$NUM_GPUS/$BATCH_SIZE_PER_GPU))
 echo "Training model ${MODEL_PATH} using $NUM_GPUS GPUs, $BATCH_SIZE_PER_GPU batch size per GPU, $GRADIENT_ACC_STEPS gradient accumulation steps"
 

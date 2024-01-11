@@ -14,7 +14,7 @@ class Data():
             self.ACE_ontology = json.load(fp)
 
         ## ACE Event Definition
-        with open(os.path.join(self.args.base_dir, self.args.data_info_dir, 'ACE_event_definition.json'), 'r') as fp:
+        with open(os.path.join(self.args.base_dir, self.args.data_info_dir, self.args.definition_file), 'r') as fp:
             self.event_type2definition = json.load(fp)
         self.event_list = list(self.event_type2definition.keys())
 
@@ -70,29 +70,33 @@ class Data():
                 event_type_id = self.event_list.index(event_type)
                     
                 if self.args.template_version == "v1":
-                    prompt = f"{sample} \n The event is: {event_type}. \n The event definition is: {event_definition} \n The parent event is {parent_event}, son events include {text_sons}. \n So what is the trigger?",
+                    prompt = f"{sample} \n The event is: {event_type}. \n The event definition is: {event_definition} \n The parent event is {parent_event}, son events include {text_sons}. \n So what is the trigger? Event trigger is "
+                    if self.args.setting == "inference":
+                        prompt = f"{sample} \n The event is: {event_type}. \n The event definition is: {event_definition} \n The parent event is {parent_event}, son events include {text_sons}. \n So what is the trigger? Event trigger is "
                 elif self.args.template_version == "v2":
-                    prompt = f"SENTENCE: {sample} \n EVENT TYPE: {event_type}. \n DEFINITION: {event_definition} \n PARENT: {parent_event}, SON: {text_sons}. \n So what is the trigger?",
+                    prompt = f"SENTENCE: {sample} \n EVENT TYPE: {event_type}. \n DEFINITION: {event_definition} \n PARENT: {parent_event}, SON: {text_sons}. \n So what is the trigger? Event trigger is "
+                    if self.args.setting == "inference":
+                        prompt = f"SENTENCE: {sample} \n EVENT TYPE: {event_type}. \n DEFINITION: {event_definition} \n PARENT: {parent_event}, SON: {text_sons}. \n So what is the trigger? Event trigger is "
+                elif self.args.template_version == "v3":
+                    prompt = f"{sample} \n {event_type} event \n {event_definition} \n So what is the trigger? Event trigger is "
+                    if self.args.setting == "inference":
+                        prompt = f"{sample} \n {event_type} event \n {event_definition} \n So what is the trigger? Event trigger is "
                 else:
                     raise Exception("THe template version should be v1 or v2")
-                    
-                if type(prompt) == list: prompt = prompt[0]
 
                 if self.args.setting == "evaluation":
                     sample_data_list.append({
                         "data_id": index,
                         "event_type": event_type_id,
-                        "prompt": prompt[0],
+                        "prompt": prompt,
                         "completion": f"Event trigger is ",
                         "trigger": trigger
                         })
                 elif self.args.setting == "inference":
-                    # TODO: help me check
-                    prompt = f"SENTENCE: {sample} \n EVENT TYPE: {event_type}. \n DEFINITION: {event_definition} \n PARENT: {parent_event}, SON: {text_sons}. \n So what is the trigger? Event trigger is ",
                     sample_data_list.append({
                         "data_id": index,
                         "event_type": event_type_id,
-                        "prompt": prompt[0],
+                        "prompt": prompt,
                         "completion": f"Event trigger is ",
                         "trigger": trigger,
                         "Event definition": event_definition,
@@ -171,29 +175,33 @@ class Data():
                 event_type_id = self.event_list.index(event_type)
                 
                 if self.args.template_version == "v1":
-                    prompt = f"{sample} \n The event is: {event_type}. \n The event definition is: {event_definition} \n The parent event is {parent_event}, son events include {text_sons}. \n So what is the trigger?",
+                    prompt = f"{sample} \n The event is: {event_type}. \n The event definition is: {event_definition} \n The parent event is {parent_event}, son events include {text_sons}. \n So what is the trigger? Event trigger is "
+                    if self.args.setting == "inference":
+                        prompt = f"{sample} \n The event is: {event_type}. \n The event definition is: {event_definition} \n The parent event is {parent_event}, son events include {text_sons}. \n So what is the trigger? Event trigger is "
                 elif self.args.template_version == "v2":
-                    prompt = f"SENTENCE: {sample} \n EVENT TYPE: {event_type}. \n DEFINITION: {event_definition} \n PARENT: {parent_event}, SON: {text_sons}. \n So what is the trigger?",
+                    prompt = f"SENTENCE: {sample} \n EVENT TYPE: {event_type}. \n DEFINITION: {event_definition} \n PARENT: {parent_event}, SON: {text_sons}. \n So what is the trigger? Event trigger is "
+                    if self.args.setting == "inference":
+                        prompt = f"SENTENCE: {sample} \n EVENT TYPE: {event_type}. \n DEFINITION: {event_definition} \n PARENT: {parent_event}, SON: {text_sons}. \n So what is the trigger? Event trigger is "
+                elif self.args.template_version == "v3":
+                    prompt = f"{sample} \n {event_type} event \n {event_definition} \n So what is the trigger? Event trigger is "
+                    if self.args.setting == "inference":
+                        prompt = f"{sample} \n {event_type} event \n {event_definition} \n So what is the trigger? Event trigger is "
                 else:
                     raise Exception("THe template version should be v1 or v2")
-                    
-                if type(prompt) == list: prompt = prompt[0]
 
                 if self.args.setting == "evaluation":
                     sample_data_list.append({
                         "data_id": index,
                         "event_type": event_type_id,
-                        "prompt": prompt[0],
+                        "prompt": prompt,
                         "completion": f"Event trigger is ",
                         "trigger": trigger
                         })
                 elif self.args.setting == "inference":
-                    # TODO: help me check
-                    prompt = f"SENTENCE: {sample} \n EVENT TYPE: {event_type}. \n DEFINITION: {event_definition} \n PARENT: {parent_event}, SON: {text_sons}. \n So what is the trigger? Event trigger is ",
                     sample_data_list.append({
                         "data_id": index,
                         "event_type": event_type_id,
-                        "prompt": prompt[0],
+                        "prompt": prompt,
                         "completion": f"Event trigger is ",
                         "trigger": trigger,
                         "Event definition": event_definition,
@@ -238,6 +246,7 @@ def main():
     parser.add_argument('--output_dir', default='/data/ace_v2', type=str, help='dir to generated data')
     parser.add_argument('--output_test_filename', default='ACE_test_v2_trigger.json', type=str, help='train filename')
     parser.add_argument('--output_valid_filename', default='ACE_valid_v2_trigger.json', type=str, help='valid filename')
+    parser.add_argument('--definition_file', default='ACE_event_definition.json', type=str, help='definition filename')
 
     parser.add_argument('--setting', default='evaluation', type=str, help='evaluation or inference')
 
