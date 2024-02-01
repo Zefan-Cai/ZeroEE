@@ -12,32 +12,32 @@ import json
 if not os.path.exists(output_dir):
     os.makedirs(output_dir)
 
-event_type2definition = {}
 
+# 获得event type到event dēfinition的映射
+event_type2definition = {}
 with open('GENEVA-main/meta_data/event_ontology.json', 'r') as fp:
     raw_event_ontology= json.load(fp)
-
-
 for key in raw_event_ontology.keys():
     event_type2definition[key] = raw_event_ontology[key]['description']
-
 with open('./data/GENEVA_event_definition.json', 'w') as fp:
     json.dump(event_type2definition, fp)
 
+# 获得event type的列表，列表的key是event sample的数量，列表的value是event type的列表
 with open('./data/times2events.json', 'r') as fp:
     times2events = json.load(fp)
-    
+
+
+# 和ACE overlap的event的list
 overlap_events = ['Telling', 'Arrest', 'Social_event', 'Come_together', 'Supply', 'Getting', 'Commerce_sell', 'Giving', 'Commerce_buy', 'Earnings_and_losses', 'Receiving', 'Exchange', 'Commerce_pay', 'Death', 'Bodily_harm', 'Protest', 'Communication', 'Traveling', 'Attack']
 
 # event_list = list(event_type2definition.keys())
 
-for num_sample in [10, 20, 40]:
-    
+for num_sample in [1, 5, 10, 20, 40]:
+
     event_list = times2events[str(0)]
-    
-    
+
     number_of_events = len(event_list)
-    
+
     available_events = event_list
     avalibale_event_type2definition = {}
     for key, item in event_type2definition.items():
@@ -53,7 +53,7 @@ for num_sample in [10, 20, 40]:
             GENEVA_training_data.append(json.loads(line))
 
     for n_negative in [15]:
-        
+
         if n_negative > number_of_events: continue
 
         positive_train_data = []

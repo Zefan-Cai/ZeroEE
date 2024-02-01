@@ -1,4 +1,12 @@
 ###
+###
+ # @Author: JustBluce 972281745@qq.com
+ # @Date: 2024-01-08 19:15:21
+ # @LastEditors: JustBluce 972281745@qq.com
+ # @LastEditTime: 2024-01-21 16:59:26
+ # @FilePath: /ZeroEE/ZeroEE/scripts/PKU_generate_GenData_v4_events_def10.sh
+ # @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+### 
  # @Author: JustBluce 972281745@qq.com
  # @Date: 2023-12-23 12:13:54
  # @LastEditors: JustBluce 972281745@qq.com

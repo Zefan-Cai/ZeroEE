@@ -1,0 +1,7 @@
+{
+    "Attack:Databreach": "an attacker compromises a system and removes data, e.g., to sell or publish it. The specific roles for the Attack.Databreach are Compromised-Data and Number-Of-Data.",
+    "Attack:Phishing": "an attacker imitates another entity, in an attempt to get a victim to access malicious materials, such as a website or attachments. The additional role for the Attack.Phishing is Trusted-Entity.",
+    "Attack:Ransom": "an attacker breaks into a system and encrypts data, and will only decrypt the data for a ransom payment. The specific role for the Attack.Ransom are Ransom-Price and Payment-Method.",
+    "Discover:Vulnerability": "a security expert or other entity, like a company, finds a software vulnerability. The additional roles of Discover.Vunerability consist of Discoverer, Capabilities, and VS-Owner.",
+    "Patch:Vulnerability": "a software company addresses a known vulnerability by releasing or describing an appropriate update. The extra roles of Patch.Vulnerability are Releaser, Issue-Addressed, Patch, Patch-Number, and Supported-Platform."
+}

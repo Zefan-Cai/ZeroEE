@@ -1,0 +1,10 @@
+{
+    "Conflict": ["Conflict_Attack"],
+    "Movement": ["Movement_Transport"],
+    "Life": ["Life_Die", "Life_Be-Born", "Life_Marry", "Life_Injure", "Life_Divorce"],
+    "Personnel": ["Personnel_End-Position", "Personnel_Start-Position"],
+    "Transaction": ["Transaction_Transfer-Ownership", "Transaction_Transfer-Money"],
+    "Justice": ["Justice_Arrest-Jail"],
+    "Contact": ["Contact_Phone-Write", "Contact_Meet", "Conflict_Demonstrate"],
+    "Business": ["Business_START-ORG"]
+}

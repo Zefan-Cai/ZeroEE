@@ -1,0 +1,9 @@
+{
+    "life": ["be born", "marry", "divorce", "injure", "die"],
+    "movement": ["transport"],
+    "transaction": ["transfer ownership", "transfer money"],
+    "business": ["start org", "merge org", "declare bankruptcy", "end org"],
+    "conflict": ["meet", "phone write"],
+    "personnel": ["start position", "end position", "nominate", "elect"],
+    "justice": ["arrest-jail", "release-parole", "trial-hearing", "charge-indict", "sue", "convict", "sentence", "fine", "execute", "extradite", "acquit", "pardon", "appeal"]
+}

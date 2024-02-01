@@ -1,0 +1,8 @@
+{
+    "life": ["Life:Die"],
+    "Movement": ["Movement:Transport"],
+    "Transaction": ["Transaction:TransferMoney"],
+    "Conflict": ["Conflict:Attack", "Conflict:Demonstrate"],
+    "Contact": ["Contact:Meet", "Contact:Phone-Write"],
+    "Justice": ["Justice:ArrestJail"]
+}

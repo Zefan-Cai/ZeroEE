@@ -594,9 +594,8 @@ def main():
 
     args = parser.parse_args()
 
-
-    data = Data(args)
     random.seed(args.random_seed)
+    data = Data(args)
 
 
 

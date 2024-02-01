@@ -1,0 +1,10 @@
+{
+    "Life:Die": "It occurs when the life of a person entity ends.",
+    "Movement:Transport": "It occurs when an artifact or a person is moved from one place to another.",
+    "Transaction:TransferMoney": "It refers to the giving, receiving, borrowing, or lending money.",
+    "Conflict:Attack": "A violent physical act causing harm or damage.",
+    "Conflict:Demonstrate": "It occurs when a large number of people come together in a public area to protest or demand some sort of official action.",
+    "Contact:Meet": "It occurs when two or more people interact with one another face-to-face at a single location.",
+    "Contact:Phone-Write": "It occurs when two or more people directly engage in discussion but not face-to-face.",
+    "Justice:ArrestJail": "It occurs when the movement of a person is constrained by a state actor."
+}

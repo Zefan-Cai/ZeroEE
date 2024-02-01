@@ -1,0 +1,5 @@
+{
+    "Attack": ["Attack:Databreach", "Attack:Phishing", "Attack:Ransom"],
+    "Discover": ["Discover:Vulnerability"],
+    "Patch": ["Patch:Vulnerability"]
+}
