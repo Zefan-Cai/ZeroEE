@@ -1,0 +1,28 @@
+2024-02-02 15:10:04,423 INFO    MainThread:2229 [wandb_setup.py:_flush():76] Current SDK version is 0.15.10
+2024-02-02 15:10:04,423 INFO    MainThread:2229 [wandb_setup.py:_flush():76] Configure stats pid to 2229
+2024-02-02 15:10:04,423 INFO    MainThread:2229 [wandb_setup.py:_flush():76] Loading settings from /home/caizf/.config/wandb/settings
+2024-02-02 15:10:04,423 INFO    MainThread:2229 [wandb_setup.py:_flush():76] Loading settings from /home/caizf/projects/ZeroEE/ZeroEE/wandb/settings
+2024-02-02 15:10:04,423 INFO    MainThread:2229 [wandb_setup.py:_flush():76] Loading settings from environment variables: {}
+2024-02-02 15:10:04,423 INFO    MainThread:2229 [wandb_setup.py:_flush():76] Applying setup settings: {'_disable_service': False}
+2024-02-02 15:10:04,423 INFO    MainThread:2229 [wandb_setup.py:_flush():76] Inferring run settings from compute environment: {'program_relpath': 'open_instruct/open_instruct/finetune_val.py', 'program': '/home/caizf/projects/ZeroEE/ZeroEE/open_instruct/open_instruct/finetune_val.py'}
+2024-02-02 15:10:04,424 INFO    MainThread:2229 [wandb_init.py:_log_setup():524] Logging user logs to /home/caizf/projects/ZeroEE/ZeroEE/wandb/run-20240202_151004-o9li0ugl/logs/debug.log
+2024-02-02 15:10:04,424 INFO    MainThread:2229 [wandb_init.py:_log_setup():525] Logging internal logs to /home/caizf/projects/ZeroEE/ZeroEE/wandb/run-20240202_151004-o9li0ugl/logs/debug-internal.log
+2024-02-02 15:10:04,424 INFO    MainThread:2229 [wandb_init.py:init():564] calling init triggers
+2024-02-02 15:10:04,424 INFO    MainThread:2229 [wandb_init.py:init():571] wandb.init called with sweep_config: {}
+config: {}
+2024-02-02 15:10:04,424 INFO    MainThread:2229 [wandb_init.py:init():614] starting backend
+2024-02-02 15:10:04,424 INFO    MainThread:2229 [wandb_init.py:init():618] setting up manager
+2024-02-02 15:10:04,428 INFO    MainThread:2229 [backend.py:_multiprocessing_setup():105] multiprocessing start_methods=fork,spawn,forkserver, using: spawn
+2024-02-02 15:10:04,430 INFO    MainThread:2229 [wandb_init.py:init():624] backend started and connected
+2024-02-02 15:10:04,433 INFO    MainThread:2229 [wandb_init.py:init():715] updated telemetry
+2024-02-02 15:10:04,491 INFO    MainThread:2229 [wandb_init.py:init():748] communicating run to backend with 90.0 second timeout
+2024-02-02 15:10:05,651 INFO    MainThread:2229 [wandb_run.py:_on_init():2220] communicating current version
+2024-02-02 15:10:06,231 INFO    MainThread:2229 [wandb_run.py:_on_init():2229] got version response upgrade_message: "wandb version 0.16.2 is available!  To upgrade, please run:\n $ pip install wandb --upgrade"
+
+2024-02-02 15:10:06,231 INFO    MainThread:2229 [wandb_init.py:init():799] starting run threads in backend
+2024-02-02 15:10:10,310 INFO    MainThread:2229 [wandb_run.py:_console_start():2199] atexit reg
+2024-02-02 15:10:10,310 INFO    MainThread:2229 [wandb_run.py:_redirect():2054] redirect: wrap_raw
+2024-02-02 15:10:10,310 INFO    MainThread:2229 [wandb_run.py:_redirect():2119] Wrapping output streams.
+2024-02-02 15:10:10,311 INFO    MainThread:2229 [wandb_run.py:_redirect():2144] Redirects installed.
+2024-02-02 15:10:10,312 INFO    MainThread:2229 [wandb_init.py:init():840] run started, returning control to user process
+2024-02-02 15:10:10,314 INFO    MainThread:2229 [wandb_run.py:_config_callback():1324] config_cb None None {'dataset_name': None, 'dataset_config_name': None, 'train_file': '/home/caizf/projects/ZeroEE/data/mix_v2/GENEVA_n10_s2000_e96_6d_v2_GenData_e200_10d_5s_v2.json', 'val_file': '/home/caizf/projects/ZeroEE/data/generated_data/valid_100_1definitions_v2.json', 'test_file': '/home/caizf/projects/ZeroEE/data/ace_v2/ACE_test_v2_trigger.json', 'metrics_file': '/home/caizf/projects/ZeroEE/ZeroEE/open_instruct/compute_score_ee.py', 'model_name_or_path': '/home/models/Llama-2-7b-hf/', 'config_name': None, 'use_lora': False, 'lora_rank': 64, 'lora_alpha': 16, 'lora_dropout': 0.1, 'save_merged_lora_model': False, 'use_flash_attn': True, 'tokenizer_name': '/home/models/Llama-2-7b-hf/', 'use_slow_tokenizer': True, 'max_seq_length': 256, 'per_device_train_batch_size': 8, 'per_device_eval_batch_size': 64, 'learning_rate': 2e-05, 'weight_decay': 0.0, 'num_train_epochs': 20, 'max_train_steps': 25540, 'gradient_accumulation_steps': 2, 'lr_scheduler_type': 'linear', 'warmup_ratio': 0.03, 'output_dir': 'output/GENEVA_n10_s2000_e96_6d_v2_GenData_e200_10d_5s_v2/', 'seed': None, 'preprocessing_num_workers': 16, 'overwrite_cache': False, 'checkpointing_steps': 'epoch', 'eval_steps': None, 'logging_steps': 1, 'resume_from_checkpoint': None, 'with_tracking': True, 'report_to': 'wandb', 'report_name': 'GENEVA_n10_s2000_e96_6d_v2_GenData_e200_10d_5s_v2/', 'report_tags': ['ZeroEE'], 'low_cpu_mem_usage': False}

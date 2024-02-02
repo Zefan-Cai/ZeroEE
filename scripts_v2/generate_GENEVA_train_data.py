@@ -2,7 +2,7 @@
 Author: JustBluce 972281745@qq.com
 Date: 2024-02-01 14:48:47
 LastEditors: JustBluce 972281745@qq.com
-LastEditTime: 2024-02-01 15:00:50
+LastEditTime: 2024-02-02 14:59:45
 FilePath: /ZeroEE/ZeroEE/scripts_v2/generate_GENEVA_train_data.py
 Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 '''
@@ -39,7 +39,11 @@ class Data():
 
         self.event_list = times2events[self.args.least_sampleNum_perEvent] # 拿到完整96个evemt的list
         # 和ACE overlap的event的list
-        self.overlap_events = ['Telling', 'Arrest', 'Social_event', 'Come_together', 'Supply', 'Getting', 'Commerce_sell', 'Giving', 'Commerce_buy', 'Earnings_and_losses', 'Receiving', 'Exchange', 'Commerce_pay', 'Death', 'Bodily_harm', 'Protest', 'Communication', 'Traveling', 'Attack']
+
+        self.ACE_overlap_events = ["Commerce_money-transfer", "Arrest", "Attack"]
+        self.M2E2_overlap_events = ["Commerce_money-transfer", "Arrest", "Attack"]
+        self.MEE_overlap_events = ["Commerce_money-transfer", "Arrest", "Attack"]
+        self.overlap_events = self.ACE_overlap_events + self.M2E2_overlap_events + self.MEE_overlap_events
 
         self.number_of_events = len(self.event_list)
         self.available_events = self.event_list
@@ -59,7 +63,7 @@ class Data():
 
     def get_train_data(self):
 
-        for num_sample in [1, 5, 10, 20, 40, 2000]:
+        for num_sample in [2000]:
 
 
             for n_negative in [self.args.num_negative_sample]:
@@ -155,7 +159,7 @@ class Data():
 
                 train_data = positive_train_data + negative_train_data
 
-                output_file_name = f'GENEVA_train_negatives{str(n_negative)}_samples{str(num_sample)}_events{str(self.number_of_events)}'
+                output_file_name = f'GENEVA_train_negatives{str(n_negative)}_samples{str(num_sample)}_events{str(self.number_of_events)}_{self.args.template_version}'
                 if self.args.add_definition:
                     output_file_name+= f"_{str(self.args.num_definitions)}definition"
                 else:
