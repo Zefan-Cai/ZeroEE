@@ -20,3 +20,4 @@ python -m open_instruct.eval.ace.run_eval \
     --model ${base_dir}/output/GENEVA_n10_s2000_e96_6d_v2_GenData_e200_10d_5s_v2/epoch_${Epoch} \
     --tokenizer /local1/zefan/models/Llama-2-7b-hf/ \
     --eval_batch_size 64
+

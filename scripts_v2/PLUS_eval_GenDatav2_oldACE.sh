@@ -10,16 +10,15 @@ export CUDA_VISIBLE_DEVICES="$1"
 export NumEvent="$2"
 export NumDefinition="$3"
 export Epoch="$4"
-export Dataset="$5"
 
 base_dir=/local1/zefan
 
 python -m open_instruct.eval.ace.run_eval \
-    --data_dir ${base_dir}/data/${Dataset}_v2_textEE \
-    --valid_file ${Dataset}_valid_v2_inference.json \
-    --test_file ${Dataset}_test_v2_inference.json \
-    --save_dir ${base_dir}/results/GenevaDatav2_Samples2000_events${NumEvent}_${NumDefinition}definition_epoch${Epoch}_${Dataset}/ \
-    --model ${base_dir}/output/GenevaDatav2_Samples2000_events${NumEvent}_${NumDefinition}definition/epoch_${Epoch} \
+    --data_dir ${base_dir}/data/ace_v2 \
+    --valid_file ACE_valid_v2_inference.json \
+    --test_file ACE_test_v2_inference.json \
+    --save_dir ${base_dir}/results/NewGenDatav2_${NumEvent}_${NumDefinition}definition_epoch${Epoch}_oldACE/ \
+    --model ${base_dir}/output/NewGenDatav2_${NumEvent}_${NumDefinition}definition/epoch_${Epoch} \
     --tokenizer /local1/zefan/models/Llama-2-7b-hf/ \
     --eval_batch_size 64
 
