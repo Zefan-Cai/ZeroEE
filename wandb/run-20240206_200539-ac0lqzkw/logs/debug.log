@@ -1,0 +1,35 @@
+2024-02-06 20:05:39,562 INFO    MainThread:399963 [wandb_setup.py:_flush():76] Current SDK version is 0.15.8
+2024-02-06 20:05:39,562 INFO    MainThread:399963 [wandb_setup.py:_flush():76] Configure stats pid to 399963
+2024-02-06 20:05:39,562 INFO    MainThread:399963 [wandb_setup.py:_flush():76] Loading settings from /home/ponienkung/.config/wandb/settings
+2024-02-06 20:05:39,562 INFO    MainThread:399963 [wandb_setup.py:_flush():76] Loading settings from /local1/zefan/ZeroEE/wandb/settings
+2024-02-06 20:05:39,562 INFO    MainThread:399963 [wandb_setup.py:_flush():76] Loading settings from environment variables: {}
+2024-02-06 20:05:39,562 INFO    MainThread:399963 [wandb_setup.py:_flush():76] Applying setup settings: {'_disable_service': False}
+2024-02-06 20:05:39,562 INFO    MainThread:399963 [wandb_setup.py:_flush():76] Inferring run settings from compute environment: {'program_relpath': 'open_instruct/open_instruct/finetune_val.py', 'program': '/local1/zefan/ZeroEE/open_instruct/open_instruct/finetune_val.py'}
+2024-02-06 20:05:39,562 INFO    MainThread:399963 [wandb_init.py:_log_setup():507] Logging user logs to /local1/zefan/ZeroEE/wandb/run-20240206_200539-ac0lqzkw/logs/debug.log
+2024-02-06 20:05:39,562 INFO    MainThread:399963 [wandb_init.py:_log_setup():508] Logging internal logs to /local1/zefan/ZeroEE/wandb/run-20240206_200539-ac0lqzkw/logs/debug-internal.log
+2024-02-06 20:05:39,562 INFO    MainThread:399963 [wandb_init.py:init():547] calling init triggers
+2024-02-06 20:05:39,562 INFO    MainThread:399963 [wandb_init.py:init():554] wandb.init called with sweep_config: {}
+config: {}
+2024-02-06 20:05:39,562 INFO    MainThread:399963 [wandb_init.py:init():596] starting backend
+2024-02-06 20:05:39,562 INFO    MainThread:399963 [wandb_init.py:init():600] setting up manager
+2024-02-06 20:05:39,563 INFO    MainThread:399963 [backend.py:_multiprocessing_setup():106] multiprocessing start_methods=fork,spawn,forkserver, using: spawn
+2024-02-06 20:05:39,564 INFO    MainThread:399963 [wandb_init.py:init():606] backend started and connected
+2024-02-06 20:05:39,566 INFO    MainThread:399963 [wandb_init.py:init():697] updated telemetry
+2024-02-06 20:05:39,599 INFO    MainThread:399963 [wandb_init.py:init():730] communicating run to backend with 60.0 second timeout
+2024-02-06 20:05:39,845 INFO    MainThread:399963 [wandb_run.py:_on_init():2180] communicating current version
+2024-02-06 20:05:39,886 INFO    MainThread:399963 [wandb_run.py:_on_init():2189] got version response upgrade_message: "wandb version 0.16.3 is available!  To upgrade, please run:\n $ pip install wandb --upgrade"
+
+2024-02-06 20:05:39,886 INFO    MainThread:399963 [wandb_init.py:init():781] starting run threads in backend
+2024-02-06 20:05:42,227 INFO    MainThread:399963 [wandb_run.py:_console_start():2159] atexit reg
+2024-02-06 20:05:42,227 INFO    MainThread:399963 [wandb_run.py:_redirect():2014] redirect: wrap_raw
+2024-02-06 20:05:42,228 INFO    MainThread:399963 [wandb_run.py:_redirect():2079] Wrapping output streams.
+2024-02-06 20:05:42,228 INFO    MainThread:399963 [wandb_run.py:_redirect():2104] Redirects installed.
+2024-02-06 20:05:42,229 INFO    MainThread:399963 [wandb_init.py:init():822] run started, returning control to user process
+2024-02-06 20:05:42,230 INFO    MainThread:399963 [wandb_run.py:_config_callback():1282] config_cb None None {'dataset_name': None, 'dataset_config_name': None, 'train_file': '/local1/zefan/data/geneva_train_v2_data/GENEVA_train_negatives10_samples2000_events96_v2_1definition.jsonl', 'val_file': '/local1/zefan/data/ace_v2/ACE_valid_v2_trigger.json', 'test_file': '/local1/zefan/data/ace_v2/ACE_test_v2_trigger.json', 'metrics_file': '/local1/zefan/ZeroEE/open_instruct/compute_score_ee.py', 'model_name_or_path': '/local1/zefan/models/Llama-2-7b-hf/', 'config_name': None, 'use_lora': False, 'lora_rank': 64, 'lora_alpha': 16, 'lora_dropout': 0.1, 'save_merged_lora_model': False, 'use_flash_attn': True, 'tokenizer_name': '/local1/zefan/models/Llama-2-7b-hf/', 'use_slow_tokenizer': True, 'max_seq_length': 256, 'per_device_train_batch_size': 16, 'per_device_eval_batch_size': 64, 'learning_rate': 2e-05, 'weight_decay': 0.0, 'num_train_epochs': 10, 'max_train_steps': 2160, 'gradient_accumulation_steps': 1, 'lr_scheduler_type': 'linear', 'warmup_ratio': 0.03, 'output_dir': 'output/GenevaDatav2_Samples2000_events96_1definition/', 'seed': None, 'preprocessing_num_workers': 16, 'overwrite_cache': False, 'checkpointing_steps': 'epoch', 'eval_steps': None, 'logging_steps': 1, 'resume_from_checkpoint': None, 'with_tracking': True, 'report_to': 'wandb', 'report_name': 'GenevaDatav2_Samples2000_events96_1definition/', 'report_tags': ['ZeroEE'], 'low_cpu_mem_usage': False}
+2024-02-06 23:34:22,675 INFO    MainThread:399963 [wandb_run.py:_finish():1894] finishing run zeroee/open_instruct/ac0lqzkw
+2024-02-06 23:34:22,675 INFO    MainThread:399963 [wandb_run.py:_atexit_cleanup():2128] got exitcode: 0
+2024-02-06 23:34:22,675 INFO    MainThread:399963 [wandb_run.py:_restore():2111] restore
+2024-02-06 23:34:22,675 INFO    MainThread:399963 [wandb_run.py:_restore():2117] restore done
+2024-02-06 23:34:30,558 INFO    MainThread:399963 [wandb_run.py:_footer_history_summary_info():3481] rendering history
+2024-02-06 23:34:30,559 INFO    MainThread:399963 [wandb_run.py:_footer_history_summary_info():3513] rendering summary
+2024-02-06 23:34:30,564 INFO    MainThread:399963 [wandb_run.py:_footer_sync_info():3440] logging synced files

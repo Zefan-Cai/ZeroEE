@@ -21,7 +21,7 @@ REPORT_TAGS="ZeroEE"
 
 ceildiv(){ echo $((($1+$2-1)/$2)); }
 NUM_GPUS=$(ceildiv ${#CUDA_VISIBLE_DEVICES} 2)
-BATCH_SIZE_PER_GPU=4
+BATCH_SIZE_PER_GPU=8
 TOTAL_BATCH_SIZE=96
 GRADIENT_ACC_STEPS=$(($TOTAL_BATCH_SIZE/$NUM_GPUS/$BATCH_SIZE_PER_GPU))
 echo "Training model ${MODEL_PATH} using $NUM_GPUS GPUs, $BATCH_SIZE_PER_GPU batch size per GPU, $GRADIENT_ACC_STEPS gradient accumulation steps"
@@ -45,7 +45,7 @@ accelerate launch \
     --max_seq_length 256 \
     --preprocessing_num_workers 16 \
     --per_device_train_batch_size $BATCH_SIZE_PER_GPU \
-    --per_device_eval_batch_size 32 \
+    --per_device_eval_batch_size 64 \
     --gradient_accumulation_steps $GRADIENT_ACC_STEPS \
     --learning_rate 2e-5 \
     --lr_scheduler_type linear \

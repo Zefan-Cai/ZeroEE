@@ -17,6 +17,7 @@ def instruct(instruction):
     with torch.inference_mode():
         input_text = instruction
         input_ids = tokenizer.encode(input_text, return_tensors='pt').cuda()
+        print(input_ids)
         output_ids = model.generate(input_ids, max_length=1024)[0]
         output_str = tokenizer.decode(output_ids[input_ids.shape[-1]:])
         return output_str.strip()

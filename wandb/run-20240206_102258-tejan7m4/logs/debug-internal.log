@@ -1,0 +1,419 @@
+2024-02-06 10:22:58,112 INFO    StreamThr :271070 [internal.py:wandb_internal():86] W&B internal server running at pid: 271070, started at: 2024-02-06 10:22:58.111913
+2024-02-06 10:22:58,114 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: status
+2024-02-06 10:22:58,115 INFO    WriterThread:271070 [datastore.py:open_for_write():85] open: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/run-tejan7m4.wandb
+2024-02-06 10:22:58,116 DEBUG   SenderThread:271070 [sender.py:send():379] send: header
+2024-02-06 10:22:58,143 DEBUG   SenderThread:271070 [sender.py:send():379] send: run
+2024-02-06 10:22:58,401 INFO    SenderThread:271070 [dir_watcher.py:__init__():211] watching files in: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files
+2024-02-06 10:22:58,401 INFO    SenderThread:271070 [sender.py:_start_run_threads():1121] run started: tejan7m4 with start time 1707243778.111389
+2024-02-06 10:22:58,402 DEBUG   SenderThread:271070 [sender.py:send_request():406] send_request: summary_record
+2024-02-06 10:22:58,402 INFO    SenderThread:271070 [sender.py:_save_file():1375] saving file wandb-summary.json with policy end
+2024-02-06 10:22:58,407 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: check_version
+2024-02-06 10:22:58,408 DEBUG   SenderThread:271070 [sender.py:send_request():406] send_request: check_version
+2024-02-06 10:22:58,452 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: run_start
+2024-02-06 10:22:59,403 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_created():271] file/dir created: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/wandb-summary.json
+2024-02-06 10:22:59,426 DEBUG   HandlerThread:271070 [system_info.py:__init__():31] System info init
+2024-02-06 10:22:59,426 DEBUG   HandlerThread:271070 [system_info.py:__init__():46] System info init done
+2024-02-06 10:22:59,426 INFO    HandlerThread:271070 [system_monitor.py:start():181] Starting system monitor
+2024-02-06 10:22:59,426 INFO    SystemMonitor:271070 [system_monitor.py:_start():145] Starting system asset monitoring threads
+2024-02-06 10:22:59,427 INFO    HandlerThread:271070 [system_monitor.py:probe():201] Collecting system info
+2024-02-06 10:22:59,428 INFO    SystemMonitor:271070 [interfaces.py:start():190] Started cpu monitoring
+2024-02-06 10:22:59,428 INFO    SystemMonitor:271070 [interfaces.py:start():190] Started disk monitoring
+2024-02-06 10:22:59,430 INFO    SystemMonitor:271070 [interfaces.py:start():190] Started gpu monitoring
+2024-02-06 10:22:59,430 INFO    SystemMonitor:271070 [interfaces.py:start():190] Started memory monitoring
+2024-02-06 10:22:59,430 INFO    SystemMonitor:271070 [interfaces.py:start():190] Started network monitoring
+2024-02-06 10:22:59,497 DEBUG   HandlerThread:271070 [system_info.py:probe():195] Probing system
+2024-02-06 10:22:59,506 DEBUG   HandlerThread:271070 [system_info.py:_probe_git():180] Probing git
+2024-02-06 10:22:59,519 DEBUG   HandlerThread:271070 [system_info.py:_probe_git():188] Probing git done
+2024-02-06 10:22:59,519 DEBUG   HandlerThread:271070 [system_info.py:probe():240] Probing system done
+2024-02-06 10:22:59,520 DEBUG   HandlerThread:271070 [system_monitor.py:probe():210] {'os': 'Linux-5.15.0-73-generic-x86_64-with-glibc2.17', 'python': '3.8.17', 'heartbeatAt': '2024-02-06T18:22:59.497419', 'startedAt': '2024-02-06T18:22:58.108021', 'docker': None, 'cuda': None, 'args': ('--model_name_or_path', '/local1/zefan/models/Llama-2-7b-hf/', '--use_flash_attn', '--tokenizer_name', '/local1/zefan/models/Llama-2-7b-hf/', '--use_slow_tokenizer', '--train_file', '/local1/zefan/data/mix_v2/GENEVA_n10_s2000_e96_6d_v2_GenData_e200_10d_5s_v2.json', '--val_file', '/local1/zefan/data/generated_data/valid_100_1definitions_v2.json', '--test_file', '/local1/zefan/data/ace_v2/ACE_test_v2_trigger.json', '--metrics_file', '/local1/zefan/ZeroEE/open_instruct/compute_score_ee.py', '--max_seq_length', '256', '--preprocessing_num_workers', '16', '--per_device_train_batch_size', '16', '--per_device_eval_batch_size', '64', '--gradient_accumulation_steps', '1', '--learning_rate', '2e-5', '--lr_scheduler_type', 'linear', '--warmup_ratio', '0.03', '--weight_decay', '0.', '--num_train_epochs', '10', '--output_dir', 'output/GENEVA_n10_s2000_e96_6d_v2_GenData_e200_10d_5s_v2/', '--with_tracking', '--report_to', 'wandb', '--report_name', 'GENEVA_n10_s2000_e96_6d_v2_GenData_e200_10d_5s_v2/', '--report_tags', 'ZeroEE', '--checkpointing_steps', 'epoch', '--logging_steps', '1'), 'state': 'running', 'program': '/local1/zefan/ZeroEE/open_instruct/open_instruct/finetune_val.py', 'codePath': 'open_instruct/open_instruct/finetune_val.py', 'git': {'remote': 'https://github.com/Zefan-Cai/ZeroEE', 'commit': 'c044125116ce90c91a8174f8cdc753f6dbe37916'}, 'email': 'billkunghappy.happy@gmail.com', 'root': '/local1/zefan/ZeroEE', 'host': 'pluslab01-a100.cs.ucla.edu', 'username': 'ponienkung', 'executable': '/local1/ponienkung/miniconda3/envs/tulu/bin/python', 'cpu_count': 32, 'cpu_count_logical': 64, 'cpu_freq': {'current': 1954.4334062499997, 'min': 1500.0, 'max': 3000.0}, 'cpu_freq_per_core': [{'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 2200.0, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 3700.093, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 3700.09, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 3687.37, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 3000.0, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 3700.092, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 3000.0, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 3000.0, 'min': 1500.0, 'max': 3000.0}, {'current': 2918.503, 'min': 1500.0, 'max': 3000.0}, {'current': 3000.0, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 3000.0, 'min': 1500.0, 'max': 3000.0}, {'current': 3700.09, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 3616.864, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 3700.093, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 1500.0, 'min': 1500.0, 'max': 3000.0}, {'current': 3700.093, 'min': 1500.0, 'max': 3000.0}], 'disk': {'total': 19.990234375, 'used': 14.024539947509766}, 'gpu': 'NVIDIA A100 80GB PCIe', 'gpu_count': 8, 'gpu_devices': [{'name': 'NVIDIA A100 80GB PCIe', 'memory_total': 85899345920}, {'name': 'NVIDIA A100 80GB PCIe', 'memory_total': 85899345920}, {'name': 'NVIDIA A100 80GB PCIe', 'memory_total': 85899345920}, {'name': 'NVIDIA A100 80GB PCIe', 'memory_total': 85899345920}, {'name': 'NVIDIA A100 80GB PCIe', 'memory_total': 85899345920}, {'name': 'NVIDIA A100 80GB PCIe', 'memory_total': 85899345920}, {'name': 'NVIDIA A100 80GB PCIe', 'memory_total': 85899345920}, {'name': 'NVIDIA A100 80GB PCIe', 'memory_total': 85899345920}], 'memory': {'total': 755.5313835144043}}
+2024-02-06 10:22:59,520 INFO    HandlerThread:271070 [system_monitor.py:probe():211] Finished collecting system info
+2024-02-06 10:22:59,520 INFO    HandlerThread:271070 [system_monitor.py:probe():214] Publishing system info
+2024-02-06 10:22:59,520 DEBUG   HandlerThread:271070 [system_info.py:_save_pip():51] Saving list of pip packages installed into the current environment
+2024-02-06 10:22:59,520 DEBUG   HandlerThread:271070 [system_info.py:_save_pip():67] Saving pip packages done
+2024-02-06 10:22:59,520 DEBUG   HandlerThread:271070 [system_info.py:_save_conda():74] Saving list of conda packages installed into the current environment
+2024-02-06 10:23:00,404 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_created():271] file/dir created: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/requirements.txt
+2024-02-06 10:23:00,405 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_created():271] file/dir created: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/conda-environment.yaml
+2024-02-06 10:23:01,705 DEBUG   HandlerThread:271070 [system_info.py:_save_conda():86] Saving conda packages done
+2024-02-06 10:23:01,707 INFO    HandlerThread:271070 [system_monitor.py:probe():216] Finished publishing system info
+2024-02-06 10:23:01,710 DEBUG   SenderThread:271070 [sender.py:send():379] send: files
+2024-02-06 10:23:01,711 INFO    SenderThread:271070 [sender.py:_save_file():1375] saving file wandb-metadata.json with policy now
+2024-02-06 10:23:01,716 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: stop_status
+2024-02-06 10:23:01,717 DEBUG   SenderThread:271070 [sender.py:send_request():406] send_request: stop_status
+2024-02-06 10:23:02,048 INFO    wandb-upload_0:271070 [upload_job.py:push():131] Uploaded file /tmp/tmpxpswypb7wandb/aar2ctps-wandb-metadata.json
+2024-02-06 10:23:02,405 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/conda-environment.yaml
+2024-02-06 10:23:02,405 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_created():271] file/dir created: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/wandb-metadata.json
+2024-02-06 10:23:05,169 DEBUG   SenderThread:271070 [sender.py:send():379] send: telemetry
+2024-02-06 10:23:05,170 DEBUG   SenderThread:271070 [sender.py:send():379] send: config
+2024-02-06 10:23:05,171 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: status_report
+2024-02-06 10:23:05,406 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_created():271] file/dir created: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/output.log
+2024-02-06 10:23:07,407 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/output.log
+2024-02-06 10:23:10,173 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: status_report
+2024-02-06 10:23:11,207 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: partial_history
+2024-02-06 10:23:13,410 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/output.log
+2024-02-06 10:23:15,209 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: status_report
+2024-02-06 10:23:15,688 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: partial_history
+2024-02-06 10:23:15,690 DEBUG   SenderThread:271070 [sender.py:send():379] send: history
+2024-02-06 10:23:15,691 DEBUG   SenderThread:271070 [sender.py:send_request():406] send_request: summary_record
+2024-02-06 10:23:15,694 INFO    SenderThread:271070 [sender.py:_save_file():1375] saving file wandb-summary.json with policy end
+2024-02-06 10:23:16,411 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/wandb-summary.json
+2024-02-06 10:23:16,716 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: stop_status
+2024-02-06 10:23:16,718 DEBUG   SenderThread:271070 [sender.py:send_request():406] send_request: stop_status
+2024-02-06 10:23:17,411 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/output.log
+2024-02-06 10:23:19,952 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: partial_history
+2024-02-06 10:23:19,954 DEBUG   SenderThread:271070 [sender.py:send():379] send: history
+2024-02-06 10:23:19,954 DEBUG   SenderThread:271070 [sender.py:send_request():406] send_request: summary_record
+2024-02-06 10:23:19,955 INFO    SenderThread:271070 [sender.py:_save_file():1375] saving file wandb-summary.json with policy end
+2024-02-06 10:23:20,413 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/wandb-summary.json
+2024-02-06 10:23:20,955 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: status_report
+2024-02-06 10:23:21,413 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/output.log
+2024-02-06 10:23:23,906 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: partial_history
+2024-02-06 10:23:23,908 DEBUG   SenderThread:271070 [sender.py:send():379] send: history
+2024-02-06 10:23:23,908 DEBUG   SenderThread:271070 [sender.py:send_request():406] send_request: summary_record
+2024-02-06 10:23:23,910 INFO    SenderThread:271070 [sender.py:_save_file():1375] saving file wandb-summary.json with policy end
+2024-02-06 10:23:24,415 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/wandb-summary.json
+2024-02-06 10:23:25,415 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/output.log
+2024-02-06 10:23:26,912 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: status_report
+2024-02-06 10:23:27,721 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: partial_history
+2024-02-06 10:23:27,722 DEBUG   SenderThread:271070 [sender.py:send():379] send: history
+2024-02-06 10:23:27,723 DEBUG   SenderThread:271070 [sender.py:send_request():406] send_request: summary_record
+2024-02-06 10:23:27,723 INFO    SenderThread:271070 [sender.py:_save_file():1375] saving file wandb-summary.json with policy end
+2024-02-06 10:23:28,417 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/wandb-summary.json
+2024-02-06 10:23:29,417 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/output.log
+2024-02-06 10:23:31,717 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: stop_status
+2024-02-06 10:23:31,718 DEBUG   SenderThread:271070 [sender.py:send_request():406] send_request: stop_status
+2024-02-06 10:23:32,429 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: status_report
+2024-02-06 10:23:32,429 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: partial_history
+2024-02-06 10:23:32,520 DEBUG   SenderThread:271070 [sender.py:send():379] send: history
+2024-02-06 10:23:32,521 DEBUG   SenderThread:271070 [sender.py:send_request():406] send_request: summary_record
+2024-02-06 10:23:32,522 INFO    SenderThread:271070 [sender.py:_save_file():1375] saving file wandb-summary.json with policy end
+2024-02-06 10:23:33,419 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/wandb-summary.json
+2024-02-06 10:23:33,419 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/config.yaml
+2024-02-06 10:23:33,419 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/output.log
+2024-02-06 10:23:36,256 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: partial_history
+2024-02-06 10:23:36,258 DEBUG   SenderThread:271070 [sender.py:send():379] send: history
+2024-02-06 10:23:36,258 DEBUG   SenderThread:271070 [sender.py:send_request():406] send_request: summary_record
+2024-02-06 10:23:36,259 INFO    SenderThread:271070 [sender.py:_save_file():1375] saving file wandb-summary.json with policy end
+2024-02-06 10:23:36,420 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/wandb-summary.json
+2024-02-06 10:23:37,420 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/output.log
+2024-02-06 10:23:38,260 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: status_report
+2024-02-06 10:23:40,063 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: partial_history
+2024-02-06 10:23:40,064 DEBUG   SenderThread:271070 [sender.py:send():379] send: history
+2024-02-06 10:23:40,065 DEBUG   SenderThread:271070 [sender.py:send_request():406] send_request: summary_record
+2024-02-06 10:23:40,067 INFO    SenderThread:271070 [sender.py:_save_file():1375] saving file wandb-summary.json with policy end
+2024-02-06 10:23:40,422 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/wandb-summary.json
+2024-02-06 10:23:41,422 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/output.log
+2024-02-06 10:23:43,876 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: partial_history
+2024-02-06 10:23:43,877 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: status_report
+2024-02-06 10:23:43,877 DEBUG   SenderThread:271070 [sender.py:send():379] send: history
+2024-02-06 10:23:43,877 DEBUG   SenderThread:271070 [sender.py:send_request():406] send_request: summary_record
+2024-02-06 10:23:43,878 INFO    SenderThread:271070 [sender.py:_save_file():1375] saving file wandb-summary.json with policy end
+2024-02-06 10:23:44,423 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/wandb-summary.json
+2024-02-06 10:23:45,424 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/output.log
+2024-02-06 10:23:46,716 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: stop_status
+2024-02-06 10:23:46,717 DEBUG   SenderThread:271070 [sender.py:send_request():406] send_request: stop_status
+2024-02-06 10:23:47,792 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: partial_history
+2024-02-06 10:23:47,793 DEBUG   SenderThread:271070 [sender.py:send():379] send: history
+2024-02-06 10:23:47,793 DEBUG   SenderThread:271070 [sender.py:send_request():406] send_request: summary_record
+2024-02-06 10:23:47,795 INFO    SenderThread:271070 [sender.py:_save_file():1375] saving file wandb-summary.json with policy end
+2024-02-06 10:23:48,425 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/wandb-summary.json
+2024-02-06 10:23:49,426 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/output.log
+2024-02-06 10:23:49,796 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: status_report
+2024-02-06 10:23:51,610 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: partial_history
+2024-02-06 10:23:51,611 DEBUG   SenderThread:271070 [sender.py:send():379] send: history
+2024-02-06 10:23:51,612 DEBUG   SenderThread:271070 [sender.py:send_request():406] send_request: summary_record
+2024-02-06 10:23:51,612 INFO    SenderThread:271070 [sender.py:_save_file():1375] saving file wandb-summary.json with policy end
+2024-02-06 10:23:52,427 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/wandb-summary.json
+2024-02-06 10:23:53,427 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/output.log
+2024-02-06 10:23:55,424 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: partial_history
+2024-02-06 10:23:55,425 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: status_report
+2024-02-06 10:23:55,425 DEBUG   SenderThread:271070 [sender.py:send():379] send: history
+2024-02-06 10:23:55,425 DEBUG   SenderThread:271070 [sender.py:send_request():406] send_request: summary_record
+2024-02-06 10:23:55,427 INFO    SenderThread:271070 [sender.py:_save_file():1375] saving file wandb-summary.json with policy end
+2024-02-06 10:23:55,428 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/wandb-summary.json
+2024-02-06 10:23:57,429 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/output.log
+2024-02-06 10:23:59,255 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: partial_history
+2024-02-06 10:23:59,256 DEBUG   SenderThread:271070 [sender.py:send():379] send: history
+2024-02-06 10:23:59,256 DEBUG   SenderThread:271070 [sender.py:send_request():406] send_request: summary_record
+2024-02-06 10:23:59,257 INFO    SenderThread:271070 [sender.py:_save_file():1375] saving file wandb-summary.json with policy end
+2024-02-06 10:23:59,429 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/wandb-summary.json
+2024-02-06 10:23:59,430 DEBUG   SystemMonitor:271070 [system_monitor.py:_start():159] Starting system metrics aggregation loop
+2024-02-06 10:23:59,433 DEBUG   SenderThread:271070 [sender.py:send():379] send: stats
+2024-02-06 10:24:00,434 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: status_report
+2024-02-06 10:24:01,430 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/output.log
+2024-02-06 10:24:01,717 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: stop_status
+2024-02-06 10:24:01,717 DEBUG   SenderThread:271070 [sender.py:send_request():406] send_request: stop_status
+2024-02-06 10:24:03,066 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: partial_history
+2024-02-06 10:24:03,067 DEBUG   SenderThread:271070 [sender.py:send():379] send: history
+2024-02-06 10:24:03,067 DEBUG   SenderThread:271070 [sender.py:send_request():406] send_request: summary_record
+2024-02-06 10:24:03,068 INFO    SenderThread:271070 [sender.py:_save_file():1375] saving file wandb-summary.json with policy end
+2024-02-06 10:24:03,431 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/wandb-summary.json
+2024-02-06 10:24:05,432 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/output.log
+2024-02-06 10:24:06,069 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: status_report
+2024-02-06 10:24:06,987 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: partial_history
+2024-02-06 10:24:06,989 DEBUG   SenderThread:271070 [sender.py:send():379] send: history
+2024-02-06 10:24:06,989 DEBUG   SenderThread:271070 [sender.py:send_request():406] send_request: summary_record
+2024-02-06 10:24:06,993 INFO    SenderThread:271070 [sender.py:_save_file():1375] saving file wandb-summary.json with policy end
+2024-02-06 10:24:07,433 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/wandb-summary.json
+2024-02-06 10:24:09,434 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/output.log
+2024-02-06 10:24:10,806 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: partial_history
+2024-02-06 10:24:10,807 DEBUG   SenderThread:271070 [sender.py:send():379] send: history
+2024-02-06 10:24:10,807 DEBUG   SenderThread:271070 [sender.py:send_request():406] send_request: summary_record
+2024-02-06 10:24:10,807 INFO    SenderThread:271070 [sender.py:_save_file():1375] saving file wandb-summary.json with policy end
+2024-02-06 10:24:11,434 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/wandb-summary.json
+2024-02-06 10:24:11,808 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: status_report
+2024-02-06 10:24:13,435 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/output.log
+2024-02-06 10:24:14,629 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: partial_history
+2024-02-06 10:24:14,630 DEBUG   SenderThread:271070 [sender.py:send():379] send: history
+2024-02-06 10:24:14,630 DEBUG   SenderThread:271070 [sender.py:send_request():406] send_request: summary_record
+2024-02-06 10:24:14,631 INFO    SenderThread:271070 [sender.py:_save_file():1375] saving file wandb-summary.json with policy end
+2024-02-06 10:24:15,436 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/wandb-summary.json
+2024-02-06 10:24:15,437 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/output.log
+2024-02-06 10:24:16,717 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: stop_status
+2024-02-06 10:24:16,718 DEBUG   SenderThread:271070 [sender.py:send_request():406] send_request: stop_status
+2024-02-06 10:24:16,814 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: status_report
+2024-02-06 10:24:18,457 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: partial_history
+2024-02-06 10:24:18,458 DEBUG   SenderThread:271070 [sender.py:send():379] send: history
+2024-02-06 10:24:18,458 DEBUG   SenderThread:271070 [sender.py:send_request():406] send_request: summary_record
+2024-02-06 10:24:18,461 INFO    SenderThread:271070 [sender.py:_save_file():1375] saving file wandb-summary.json with policy end
+2024-02-06 10:24:19,438 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/wandb-summary.json
+2024-02-06 10:24:19,439 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/output.log
+2024-02-06 10:24:22,462 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: status_report
+2024-02-06 10:24:23,233 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: partial_history
+2024-02-06 10:24:23,234 DEBUG   SenderThread:271070 [sender.py:send():379] send: history
+2024-02-06 10:24:23,235 DEBUG   SenderThread:271070 [sender.py:send_request():406] send_request: summary_record
+2024-02-06 10:24:23,235 INFO    SenderThread:271070 [sender.py:_save_file():1375] saving file wandb-summary.json with policy end
+2024-02-06 10:24:23,440 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/wandb-summary.json
+2024-02-06 10:24:25,441 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/output.log
+2024-02-06 10:24:27,044 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: partial_history
+2024-02-06 10:24:27,045 DEBUG   SenderThread:271070 [sender.py:send():379] send: history
+2024-02-06 10:24:27,046 DEBUG   SenderThread:271070 [sender.py:send_request():406] send_request: summary_record
+2024-02-06 10:24:27,046 INFO    SenderThread:271070 [sender.py:_save_file():1375] saving file wandb-summary.json with policy end
+2024-02-06 10:24:27,442 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/wandb-summary.json
+2024-02-06 10:24:28,047 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: status_report
+2024-02-06 10:24:29,435 DEBUG   SenderThread:271070 [sender.py:send():379] send: stats
+2024-02-06 10:24:29,442 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/output.log
+2024-02-06 10:24:30,854 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: partial_history
+2024-02-06 10:24:30,855 DEBUG   SenderThread:271070 [sender.py:send():379] send: history
+2024-02-06 10:24:30,856 DEBUG   SenderThread:271070 [sender.py:send_request():406] send_request: summary_record
+2024-02-06 10:24:30,856 INFO    SenderThread:271070 [sender.py:_save_file():1375] saving file wandb-summary.json with policy end
+2024-02-06 10:24:31,443 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/wandb-summary.json
+2024-02-06 10:24:31,444 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/output.log
+2024-02-06 10:24:31,717 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: stop_status
+2024-02-06 10:24:31,718 DEBUG   SenderThread:271070 [sender.py:send_request():406] send_request: stop_status
+2024-02-06 10:24:33,842 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: status_report
+2024-02-06 10:24:34,681 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: partial_history
+2024-02-06 10:24:34,682 DEBUG   SenderThread:271070 [sender.py:send():379] send: history
+2024-02-06 10:24:34,682 DEBUG   SenderThread:271070 [sender.py:send_request():406] send_request: summary_record
+2024-02-06 10:24:34,682 INFO    SenderThread:271070 [sender.py:_save_file():1375] saving file wandb-summary.json with policy end
+2024-02-06 10:24:35,445 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/wandb-summary.json
+2024-02-06 10:24:35,445 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/output.log
+2024-02-06 10:24:38,494 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: partial_history
+2024-02-06 10:24:38,495 DEBUG   SenderThread:271070 [sender.py:send():379] send: history
+2024-02-06 10:24:38,495 DEBUG   SenderThread:271070 [sender.py:send_request():406] send_request: summary_record
+2024-02-06 10:24:38,495 INFO    SenderThread:271070 [sender.py:_save_file():1375] saving file wandb-summary.json with policy end
+2024-02-06 10:24:39,447 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/wandb-summary.json
+2024-02-06 10:24:39,447 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/output.log
+2024-02-06 10:24:39,496 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: status_report
+2024-02-06 10:24:42,319 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: partial_history
+2024-02-06 10:24:42,320 DEBUG   SenderThread:271070 [sender.py:send():379] send: history
+2024-02-06 10:24:42,321 DEBUG   SenderThread:271070 [sender.py:send_request():406] send_request: summary_record
+2024-02-06 10:24:42,321 INFO    SenderThread:271070 [sender.py:_save_file():1375] saving file wandb-summary.json with policy end
+2024-02-06 10:24:42,448 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/wandb-summary.json
+2024-02-06 10:24:43,448 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/output.log
+2024-02-06 10:24:45,322 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: status_report
+2024-02-06 10:24:46,133 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: partial_history
+2024-02-06 10:24:46,134 DEBUG   SenderThread:271070 [sender.py:send():379] send: history
+2024-02-06 10:24:46,134 DEBUG   SenderThread:271070 [sender.py:send_request():406] send_request: summary_record
+2024-02-06 10:24:46,135 INFO    SenderThread:271070 [sender.py:_save_file():1375] saving file wandb-summary.json with policy end
+2024-02-06 10:24:46,449 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/wandb-summary.json
+2024-02-06 10:24:46,717 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: stop_status
+2024-02-06 10:24:46,718 DEBUG   SenderThread:271070 [sender.py:send_request():406] send_request: stop_status
+2024-02-06 10:24:47,450 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/output.log
+2024-02-06 10:24:49,954 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: partial_history
+2024-02-06 10:24:49,955 DEBUG   SenderThread:271070 [sender.py:send():379] send: history
+2024-02-06 10:24:49,956 DEBUG   SenderThread:271070 [sender.py:send_request():406] send_request: summary_record
+2024-02-06 10:24:49,957 INFO    SenderThread:271070 [sender.py:_save_file():1375] saving file wandb-summary.json with policy end
+2024-02-06 10:24:50,451 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/wandb-summary.json
+2024-02-06 10:24:50,958 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: status_report
+2024-02-06 10:24:51,452 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/output.log
+2024-02-06 10:24:53,970 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: partial_history
+2024-02-06 10:24:53,971 DEBUG   SenderThread:271070 [sender.py:send():379] send: history
+2024-02-06 10:24:53,972 DEBUG   SenderThread:271070 [sender.py:send_request():406] send_request: summary_record
+2024-02-06 10:24:53,972 INFO    SenderThread:271070 [sender.py:_save_file():1375] saving file wandb-summary.json with policy end
+2024-02-06 10:24:54,453 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/wandb-summary.json
+2024-02-06 10:24:55,453 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/output.log
+2024-02-06 10:24:55,973 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: status_report
+2024-02-06 10:24:57,782 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: partial_history
+2024-02-06 10:24:57,784 DEBUG   SenderThread:271070 [sender.py:send():379] send: history
+2024-02-06 10:24:57,784 DEBUG   SenderThread:271070 [sender.py:send_request():406] send_request: summary_record
+2024-02-06 10:24:57,784 INFO    SenderThread:271070 [sender.py:_save_file():1375] saving file wandb-summary.json with policy end
+2024-02-06 10:24:58,454 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/wandb-summary.json
+2024-02-06 10:24:59,436 DEBUG   SenderThread:271070 [sender.py:send():379] send: stats
+2024-02-06 10:24:59,455 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/output.log
+2024-02-06 10:25:01,438 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: status_report
+2024-02-06 10:25:01,612 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: partial_history
+2024-02-06 10:25:01,613 DEBUG   SenderThread:271070 [sender.py:send():379] send: history
+2024-02-06 10:25:01,613 DEBUG   SenderThread:271070 [sender.py:send_request():406] send_request: summary_record
+2024-02-06 10:25:01,616 INFO    SenderThread:271070 [sender.py:_save_file():1375] saving file wandb-summary.json with policy end
+2024-02-06 10:25:01,717 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: stop_status
+2024-02-06 10:25:01,718 DEBUG   SenderThread:271070 [sender.py:send_request():406] send_request: stop_status
+2024-02-06 10:25:02,456 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/wandb-summary.json
+2024-02-06 10:25:03,456 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/output.log
+2024-02-06 10:25:05,431 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: partial_history
+2024-02-06 10:25:05,432 DEBUG   SenderThread:271070 [sender.py:send():379] send: history
+2024-02-06 10:25:05,432 DEBUG   SenderThread:271070 [sender.py:send_request():406] send_request: summary_record
+2024-02-06 10:25:05,432 INFO    SenderThread:271070 [sender.py:_save_file():1375] saving file wandb-summary.json with policy end
+2024-02-06 10:25:05,457 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/wandb-summary.json
+2024-02-06 10:25:07,433 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: status_report
+2024-02-06 10:25:07,458 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/output.log
+2024-02-06 10:25:09,241 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: partial_history
+2024-02-06 10:25:09,242 DEBUG   SenderThread:271070 [sender.py:send():379] send: history
+2024-02-06 10:25:09,242 DEBUG   SenderThread:271070 [sender.py:send_request():406] send_request: summary_record
+2024-02-06 10:25:09,242 INFO    SenderThread:271070 [sender.py:_save_file():1375] saving file wandb-summary.json with policy end
+2024-02-06 10:25:09,459 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/wandb-summary.json
+2024-02-06 10:25:11,460 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/output.log
+2024-02-06 10:25:13,101 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: status_report
+2024-02-06 10:25:13,101 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: partial_history
+2024-02-06 10:25:13,102 DEBUG   SenderThread:271070 [sender.py:send():379] send: history
+2024-02-06 10:25:13,102 DEBUG   SenderThread:271070 [sender.py:send_request():406] send_request: summary_record
+2024-02-06 10:25:13,103 INFO    SenderThread:271070 [sender.py:_save_file():1375] saving file wandb-summary.json with policy end
+2024-02-06 10:25:13,461 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/wandb-summary.json
+2024-02-06 10:25:15,462 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/output.log
+2024-02-06 10:25:16,717 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: stop_status
+2024-02-06 10:25:16,718 DEBUG   SenderThread:271070 [sender.py:send_request():406] send_request: stop_status
+2024-02-06 10:25:16,910 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: partial_history
+2024-02-06 10:25:16,910 DEBUG   SenderThread:271070 [sender.py:send():379] send: history
+2024-02-06 10:25:16,911 DEBUG   SenderThread:271070 [sender.py:send_request():406] send_request: summary_record
+2024-02-06 10:25:16,911 INFO    SenderThread:271070 [sender.py:_save_file():1375] saving file wandb-summary.json with policy end
+2024-02-06 10:25:17,462 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/wandb-summary.json
+2024-02-06 10:25:18,912 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: status_report
+2024-02-06 10:25:19,464 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/output.log
+2024-02-06 10:25:20,729 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: partial_history
+2024-02-06 10:25:20,731 DEBUG   SenderThread:271070 [sender.py:send():379] send: history
+2024-02-06 10:25:20,731 DEBUG   SenderThread:271070 [sender.py:send_request():406] send_request: summary_record
+2024-02-06 10:25:20,731 INFO    SenderThread:271070 [sender.py:_save_file():1375] saving file wandb-summary.json with policy end
+2024-02-06 10:25:21,465 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/wandb-summary.json
+2024-02-06 10:25:21,465 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/output.log
+2024-02-06 10:25:24,535 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: status_report
+2024-02-06 10:25:24,535 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: partial_history
+2024-02-06 10:25:24,536 DEBUG   SenderThread:271070 [sender.py:send():379] send: history
+2024-02-06 10:25:24,537 DEBUG   SenderThread:271070 [sender.py:send_request():406] send_request: summary_record
+2024-02-06 10:25:24,539 INFO    SenderThread:271070 [sender.py:_save_file():1375] saving file wandb-summary.json with policy end
+2024-02-06 10:25:25,466 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/wandb-summary.json
+2024-02-06 10:25:25,467 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/output.log
+2024-02-06 10:25:28,350 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: partial_history
+2024-02-06 10:25:28,350 DEBUG   SenderThread:271070 [sender.py:send():379] send: history
+2024-02-06 10:25:28,351 DEBUG   SenderThread:271070 [sender.py:send_request():406] send_request: summary_record
+2024-02-06 10:25:28,351 INFO    SenderThread:271070 [sender.py:_save_file():1375] saving file wandb-summary.json with policy end
+2024-02-06 10:25:28,468 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/wandb-summary.json
+2024-02-06 10:25:29,438 DEBUG   SenderThread:271070 [sender.py:send():379] send: stats
+2024-02-06 10:25:29,468 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/output.log
+2024-02-06 10:25:30,440 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: status_report
+2024-02-06 10:25:31,718 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: stop_status
+2024-02-06 10:25:31,718 DEBUG   SenderThread:271070 [sender.py:send_request():406] send_request: stop_status
+2024-02-06 10:25:32,287 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: partial_history
+2024-02-06 10:25:32,288 DEBUG   SenderThread:271070 [sender.py:send():379] send: history
+2024-02-06 10:25:32,288 DEBUG   SenderThread:271070 [sender.py:send_request():406] send_request: summary_record
+2024-02-06 10:25:32,288 INFO    SenderThread:271070 [sender.py:_save_file():1375] saving file wandb-summary.json with policy end
+2024-02-06 10:25:32,469 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/wandb-summary.json
+2024-02-06 10:25:33,470 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/output.log
+2024-02-06 10:25:36,105 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: status_report
+2024-02-06 10:25:36,106 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: partial_history
+2024-02-06 10:25:36,107 DEBUG   SenderThread:271070 [sender.py:send():379] send: history
+2024-02-06 10:25:36,107 DEBUG   SenderThread:271070 [sender.py:send_request():406] send_request: summary_record
+2024-02-06 10:25:36,109 INFO    SenderThread:271070 [sender.py:_save_file():1375] saving file wandb-summary.json with policy end
+2024-02-06 10:25:36,471 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/wandb-summary.json
+2024-02-06 10:25:37,472 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/output.log
+2024-02-06 10:25:39,931 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: partial_history
+2024-02-06 10:25:39,932 DEBUG   SenderThread:271070 [sender.py:send():379] send: history
+2024-02-06 10:25:39,932 DEBUG   SenderThread:271070 [sender.py:send_request():406] send_request: summary_record
+2024-02-06 10:25:39,933 INFO    SenderThread:271070 [sender.py:_save_file():1375] saving file wandb-summary.json with policy end
+2024-02-06 10:25:40,473 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/wandb-summary.json
+2024-02-06 10:25:41,473 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/output.log
+2024-02-06 10:25:41,933 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: status_report
+2024-02-06 10:25:43,741 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: partial_history
+2024-02-06 10:25:43,742 DEBUG   SenderThread:271070 [sender.py:send():379] send: history
+2024-02-06 10:25:43,742 DEBUG   SenderThread:271070 [sender.py:send_request():406] send_request: summary_record
+2024-02-06 10:25:43,743 INFO    SenderThread:271070 [sender.py:_save_file():1375] saving file wandb-summary.json with policy end
+2024-02-06 10:25:44,474 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/wandb-summary.json
+2024-02-06 10:25:45,474 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/output.log
+2024-02-06 10:25:46,718 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: stop_status
+2024-02-06 10:25:46,719 DEBUG   SenderThread:271070 [sender.py:send_request():406] send_request: stop_status
+2024-02-06 10:25:47,567 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: partial_history
+2024-02-06 10:25:47,567 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: status_report
+2024-02-06 10:25:47,568 DEBUG   SenderThread:271070 [sender.py:send():379] send: history
+2024-02-06 10:25:47,568 DEBUG   SenderThread:271070 [sender.py:send_request():406] send_request: summary_record
+2024-02-06 10:25:47,570 INFO    SenderThread:271070 [sender.py:_save_file():1375] saving file wandb-summary.json with policy end
+2024-02-06 10:25:48,476 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/wandb-summary.json
+2024-02-06 10:25:49,476 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/output.log
+2024-02-06 10:25:51,407 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: partial_history
+2024-02-06 10:25:51,408 DEBUG   SenderThread:271070 [sender.py:send():379] send: history
+2024-02-06 10:25:51,409 DEBUG   SenderThread:271070 [sender.py:send_request():406] send_request: summary_record
+2024-02-06 10:25:51,409 INFO    SenderThread:271070 [sender.py:_save_file():1375] saving file wandb-summary.json with policy end
+2024-02-06 10:25:51,477 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/wandb-summary.json
+2024-02-06 10:25:53,410 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: status_report
+2024-02-06 10:25:53,478 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/output.log
+2024-02-06 10:25:55,253 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: partial_history
+2024-02-06 10:25:55,254 DEBUG   SenderThread:271070 [sender.py:send():379] send: history
+2024-02-06 10:25:55,254 DEBUG   SenderThread:271070 [sender.py:send_request():406] send_request: summary_record
+2024-02-06 10:25:55,254 INFO    SenderThread:271070 [sender.py:_save_file():1375] saving file wandb-summary.json with policy end
+2024-02-06 10:25:55,478 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/wandb-summary.json
+2024-02-06 10:25:57,479 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/output.log
+2024-02-06 10:25:59,246 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: partial_history
+2024-02-06 10:25:59,246 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: status_report
+2024-02-06 10:25:59,247 DEBUG   SenderThread:271070 [sender.py:send():379] send: history
+2024-02-06 10:25:59,247 DEBUG   SenderThread:271070 [sender.py:send_request():406] send_request: summary_record
+2024-02-06 10:25:59,249 INFO    SenderThread:271070 [sender.py:_save_file():1375] saving file wandb-summary.json with policy end
+2024-02-06 10:25:59,440 DEBUG   SenderThread:271070 [sender.py:send():379] send: stats
+2024-02-06 10:25:59,480 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/wandb-summary.json
+2024-02-06 10:26:01,480 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/output.log
+2024-02-06 10:26:01,718 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: stop_status
+2024-02-06 10:26:01,719 DEBUG   SenderThread:271070 [sender.py:send_request():406] send_request: stop_status
+2024-02-06 10:26:03,065 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: partial_history
+2024-02-06 10:26:03,066 DEBUG   SenderThread:271070 [sender.py:send():379] send: history
+2024-02-06 10:26:03,067 DEBUG   SenderThread:271070 [sender.py:send_request():406] send_request: summary_record
+2024-02-06 10:26:03,067 INFO    SenderThread:271070 [sender.py:_save_file():1375] saving file wandb-summary.json with policy end
+2024-02-06 10:26:03,481 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/wandb-summary.json
+2024-02-06 10:26:05,068 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: status_report
+2024-02-06 10:26:05,482 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/output.log
+2024-02-06 10:26:06,880 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: partial_history
+2024-02-06 10:26:06,882 DEBUG   SenderThread:271070 [sender.py:send():379] send: history
+2024-02-06 10:26:06,882 DEBUG   SenderThread:271070 [sender.py:send_request():406] send_request: summary_record
+2024-02-06 10:26:06,883 INFO    SenderThread:271070 [sender.py:_save_file():1375] saving file wandb-summary.json with policy end
+2024-02-06 10:26:07,483 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/wandb-summary.json
+2024-02-06 10:26:07,483 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/output.log
+2024-02-06 10:26:10,702 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: status_report
+2024-02-06 10:26:10,702 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: partial_history
+2024-02-06 10:26:10,704 DEBUG   SenderThread:271070 [sender.py:send():379] send: history
+2024-02-06 10:26:10,704 DEBUG   SenderThread:271070 [sender.py:send_request():406] send_request: summary_record
+2024-02-06 10:26:10,706 INFO    SenderThread:271070 [sender.py:_save_file():1375] saving file wandb-summary.json with policy end
+2024-02-06 10:26:11,485 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/wandb-summary.json
+2024-02-06 10:26:11,485 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/output.log
+2024-02-06 10:26:14,523 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: partial_history
+2024-02-06 10:26:14,524 DEBUG   SenderThread:271070 [sender.py:send():379] send: history
+2024-02-06 10:26:14,524 DEBUG   SenderThread:271070 [sender.py:send_request():406] send_request: summary_record
+2024-02-06 10:26:14,525 INFO    SenderThread:271070 [sender.py:_save_file():1375] saving file wandb-summary.json with policy end
+2024-02-06 10:26:15,486 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/wandb-summary.json
+2024-02-06 10:26:15,487 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/output.log
+2024-02-06 10:26:16,526 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: status_report
+2024-02-06 10:26:16,718 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: stop_status
+2024-02-06 10:26:16,719 DEBUG   SenderThread:271070 [sender.py:send_request():406] send_request: stop_status
+2024-02-06 10:26:18,340 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: partial_history
+2024-02-06 10:26:18,342 DEBUG   SenderThread:271070 [sender.py:send():379] send: history
+2024-02-06 10:26:18,342 DEBUG   SenderThread:271070 [sender.py:send_request():406] send_request: summary_record
+2024-02-06 10:26:18,342 INFO    SenderThread:271070 [sender.py:_save_file():1375] saving file wandb-summary.json with policy end
+2024-02-06 10:26:18,487 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/wandb-summary.json
+2024-02-06 10:26:19,488 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/output.log
+2024-02-06 10:26:22,153 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: status_report
+2024-02-06 10:26:22,153 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: partial_history
+2024-02-06 10:26:22,154 DEBUG   SenderThread:271070 [sender.py:send():379] send: history
+2024-02-06 10:26:22,154 DEBUG   SenderThread:271070 [sender.py:send_request():406] send_request: summary_record
+2024-02-06 10:26:22,156 INFO    SenderThread:271070 [sender.py:_save_file():1375] saving file wandb-summary.json with policy end
+2024-02-06 10:26:22,489 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/wandb-summary.json
+2024-02-06 10:26:23,490 INFO    Thread-12 :271070 [dir_watcher.py:_on_file_modified():288] file/dir modified: /local1/zefan/ZeroEE/wandb/run-20240206_102258-tejan7m4/files/output.log
+2024-02-06 10:26:27,158 DEBUG   HandlerThread:271070 [handler.py:handle_request():144] handle_request: status_report
+2024-02-06 10:26:27,598 INFO    cpu       :271070 [interfaces.py:monitor():140] Process cpu has exited.
+2024-02-06 10:26:27,599 DEBUG   SystemMonitor:271070 [system_monitor.py:_start():166] Finished system metrics aggregation loop
+2024-02-06 10:26:27,599 DEBUG   SystemMonitor:271070 [system_monitor.py:_start():170] Publishing last batch of metrics
+2024-02-06 10:26:27,601 DEBUG   SenderThread:271070 [sender.py:send():379] send: stats
+2024-02-06 10:26:29,502 INFO    MainThread:271070 [internal.py:handle_exit():76] Internal process exited

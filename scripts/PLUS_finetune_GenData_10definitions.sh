@@ -51,7 +51,7 @@ accelerate launch \
     --lr_scheduler_type linear \
     --warmup_ratio 0.03 \
     --weight_decay 0. \
-    --num_train_epochs 20 \
+    --num_train_epochs 5 \
     --output_dir output/${OUTPUT_NAME} \
     --with_tracking \
     --report_to wandb \
