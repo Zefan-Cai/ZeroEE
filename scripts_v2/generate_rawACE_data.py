@@ -75,7 +75,7 @@ class Data():
                     if self.args.setting == "inference":
                         prompt = f"{sample} \n The event is: {event_type}. \n The event definition is: {event_definition} \n The parent event is {parent_event}, son events include {text_sons}. \n So what is the trigger? Event trigger is "
                 elif self.args.template_version == "v2":
-                    prompt = f"SENTENCE: {sample} \n EVENT TYPE: {event_type}. \n DEFINITION: {event_definition} \n PARENT: {parent_event}, SON: {text_sons}. \n So what is the trigger? Event trigger is "
+                    prompt = f"SENTENCE: {sample} \n EVENT TYPE: {event_type}. \n DEFINITION: {event_definition} \n PARENT: {parent_event}, SON: {text_sons}. \n So what is the trigger?"
                     if self.args.setting == "inference":
                         prompt = f"SENTENCE: {sample} \n EVENT TYPE: {event_type}. \n DEFINITION: {event_definition} \n PARENT: {parent_event}, SON: {text_sons}. \n So what is the trigger? Event trigger is "
                 elif self.args.template_version == "v3":
@@ -180,7 +180,7 @@ class Data():
                     if self.args.setting == "inference":
                         prompt = f"{sample} \n The event is: {event_type}. \n The event definition is: {event_definition} \n The parent event is {parent_event}, son events include {text_sons}. \n So what is the trigger? Event trigger is "
                 elif self.args.template_version == "v2":
-                    prompt = f"SENTENCE: {sample} \n EVENT TYPE: {event_type}. \n DEFINITION: {event_definition} \n PARENT: {parent_event}, SON: {text_sons}. \n So what is the trigger? Event trigger is "
+                    prompt = f"SENTENCE: {sample} \n EVENT TYPE: {event_type}. \n DEFINITION: {event_definition} \n PARENT: {parent_event}, SON: {text_sons}. \n So what is the trigger?"
                     if self.args.setting == "inference":
                         prompt = f"SENTENCE: {sample} \n EVENT TYPE: {event_type}. \n DEFINITION: {event_definition} \n PARENT: {parent_event}, SON: {text_sons}. \n So what is the trigger? Event trigger is "
                 elif self.args.template_version == "v3":
