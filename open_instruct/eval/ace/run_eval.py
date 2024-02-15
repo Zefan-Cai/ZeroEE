@@ -295,8 +295,8 @@ def main(args):
     all_tasks = {}
     # task_files = glob.glob(os.path.join(args.data_dir, "bbh", "*.json"))
     task_files = [
-        os.path.join(args.data_dir, args.valid_file),
         os.path.join(args.data_dir, args.test_file),
+        os.path.join(args.data_dir, args.valid_file),
     ]
     for task_file in tqdm.tqdm(task_files, desc="Loading tasks"):
         data = []

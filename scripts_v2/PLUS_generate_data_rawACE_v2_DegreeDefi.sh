@@ -9,6 +9,7 @@
 ### 
 service=plus
 template=v2
+setting="$1"
 
 base_dir="/local1/zefan/"
 
@@ -23,8 +24,8 @@ ontology_file='ACE_ontology_v0.json'
 # output_test_filename='ACE_test_v2_trigger.json'
 
 # If add setting inference, use this name
-output_valid_filename='ACE_valid_v2_Degree_inference.json'
-output_test_filename='ACE_test_v2_Degree_inference.json'
+output_valid_filename=ACE_valid_v2_Degree_${setting}.json
+output_test_filename=ACE_test_v2_Degree_${setting}.json
 
 python ./generate_rawACE_data.py \
     --service ${service} \
@@ -36,7 +37,7 @@ python ./generate_rawACE_data.py \
     --output_test_filename ${output_test_filename} \
     --definition_file ${definition_file} \
     --ontology_file ${ontology_file} \
-    --setting inference
+    --setting ${setting}
 
 
 

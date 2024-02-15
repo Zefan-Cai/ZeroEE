@@ -21,7 +21,7 @@ GRADIENT_ACC_STEPS=$(($TOTAL_BATCH_SIZE/$NUM_GPUS/$BATCH_SIZE_PER_GPU))
 echo "Training model ${MODEL_PATH} using $NUM_GPUS GPUs, $BATCH_SIZE_PER_GPU batch size per GPU, $GRADIENT_ACC_STEPS gradient accumulation steps"
 
 accelerate launch \
-    --main_process_port 22453 \
+    --main_process_port 22454 \
     --mixed_precision bf16 \
     --num_machines 1 \
     --num_processes $NUM_GPUS \
