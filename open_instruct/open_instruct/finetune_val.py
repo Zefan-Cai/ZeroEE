@@ -852,7 +852,7 @@ def main():
                             # Prepare 
                             tokenizer.padding_side = "left"
                             for eval_batch in tqdm(val_dataloader):
-                                
+                                # print(f"debug eval_batch['trigger'] {eval_batch['trigger']}")
                                 val_gt = eval_batch['trigger'][:, 1].squeeze().tolist()
                                 val_event_type = eval_batch['event_type'].squeeze().tolist()
                                 val_data_id = eval_batch['data_id'].squeeze().tolist()
@@ -875,6 +875,7 @@ def main():
                                 batch_predict = torch.argmax(outputs.logits[:,-1,:], dim = -1).cpu().tolist()
                                 
                                 # print(f"debug outputs {batch_predict[0]}")
+                                # print(f"debug outputs {batch_predict}")
                                 # print(f"debug outputs {tokenizer.decode(batch_predict[0])}")
 
                                 scores_metric.add_batch(predictions=batch_predict, references=val_gt, event_type=val_event_type, data_id=val_data_id)
