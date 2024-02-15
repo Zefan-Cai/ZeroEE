@@ -8,15 +8,15 @@ MODEL_PATH="/local1/zefan/models/Llama-2-7b-hf/"
 
 OUTPUT_NAME=GenevaDatav2_Samples${NumSample}_events96_${NumDefinition}definition/
 TRAIN_FILE=${base_dir}data/geneva_train_v2_data/GENEVA_train_negatives10_samples${NumSample}_events96_v2_${NumDefinition}definition.jsonl
-VAL_FILE="${base_dir}data/ace_v2/ACE_valid_v2_trigger.json"
-TEST_FILE="${base_dir}data/ace_v2/ACE_test_v2_trigger.json"
+VAL_FILE="${base_dir}data/ace_v2/ACE_valid_v2_evaluation.json"
+TEST_FILE="${base_dir}data/ace_v2/ACE_test_v2_evaluation.json"
 METRICS_FILE=${base_dir}"ZeroEE/open_instruct/compute_score_ee.py"
 REPORT_TAGS="ZeroEE"
 
 ceildiv(){ echo $((($1+$2-1)/$2)); }
 NUM_GPUS=$(ceildiv ${#CUDA_VISIBLE_DEVICES} 2)
-BATCH_SIZE_PER_GPU=16
-TOTAL_BATCH_SIZE=128
+BATCH_SIZE_PER_GPU=4
+TOTAL_BATCH_SIZE=96
 GRADIENT_ACC_STEPS=$(($TOTAL_BATCH_SIZE/$NUM_GPUS/$BATCH_SIZE_PER_GPU))
 echo "Training model ${MODEL_PATH} using $NUM_GPUS GPUs, $BATCH_SIZE_PER_GPU batch size per GPU, $GRADIENT_ACC_STEPS gradient accumulation steps"
 

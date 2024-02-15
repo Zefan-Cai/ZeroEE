@@ -9,7 +9,6 @@
 ### 
 service=plus
 template=v2
-setting="$1"
 
 base_dir="/local1/zefan/"
 
@@ -17,17 +16,15 @@ base_dir="/local1/zefan/"
 
 data_info_dir='ZeroEE/data/'
 output_dir='data/ace_v2'
-definition_file='ACE_event_definition_v0.json'
-ontology_file='ACE_ontology_v0.json'
 
 # output_valid_filename='ACE_valid_v2_trigger.json'
 # output_test_filename='ACE_test_v2_trigger.json'
 
 # If add setting inference, use this name
-output_valid_filename=ACE_valid_v2_${setting}.json
-output_test_filename=ACE_test_v2_${setting}.json
+output_valid_filename='ACE_valid_v2_inference.json'
+output_test_filename='ACE_test_v2_inference.json'
 
-python ./generate_rawACE_data.py \
+python ./generate_ACE_data_v0.py \
     --service ${service} \
     --template_version ${template} \
     --base_dir ${base_dir} \
@@ -35,9 +32,7 @@ python ./generate_rawACE_data.py \
     --output_dir ${output_dir} \
     --output_valid_filename ${output_valid_filename} \
     --output_test_filename ${output_test_filename} \
-    --definition_file ${definition_file} \
-    --ontology_file ${ontology_file} \
-    --setting ${setting}
+    --setting inference
 
 
 

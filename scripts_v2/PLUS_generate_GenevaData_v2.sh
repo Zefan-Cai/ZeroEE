@@ -10,7 +10,7 @@ output_dir='geneva_train_v2_data'
 least_sampleNum_perEvent='0'
 
 num_negative_sample=10
-num_definitions=6
+num_definitions=1
 random_seed=42
 
 
