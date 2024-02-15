@@ -10,7 +10,8 @@ class Data():
     def __init__(self, args):
         self.args = args
         
-        with open(os.path.join(self.args.base_dir, self.args.data_info_dir, 'ACE_ontology.json'), 'r') as fp:
+        
+        with open(os.path.join(self.args.base_dir, self.args.data_info_dir, self.args.ontology_file), 'r') as fp:
             self.ACE_ontology = json.load(fp)
 
         ## ACE Event Definition
@@ -247,6 +248,7 @@ def main():
     parser.add_argument('--output_test_filename', default='ACE_test_v2_trigger.json', type=str, help='train filename')
     parser.add_argument('--output_valid_filename', default='ACE_valid_v2_trigger.json', type=str, help='valid filename')
     parser.add_argument('--definition_file', default='ACE_event_definition.json', type=str, help='definition filename')
+    parser.add_argument('--ontology_file', default='ACE_ontology.json', type=str, help='ontology filename')
 
     parser.add_argument('--setting', default='evaluation', type=str, help='evaluation or inference')
 

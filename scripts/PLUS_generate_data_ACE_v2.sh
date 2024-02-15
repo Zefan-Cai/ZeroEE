@@ -17,6 +17,7 @@ base_dir="/local1/zefan/"
 data_info_dir='ZeroEE/data/'
 output_dir='data/ace_v2'
 definition_file='ACE_event_definition_v0.json'
+ontology_file='ACE_ontology_v0.json'
 
 # output_valid_filename='ACE_valid_v2_trigger.json'
 # output_test_filename='ACE_test_v2_trigger.json'
@@ -34,6 +35,7 @@ python ./generate_ACE_data.py \
     --output_valid_filename ${output_valid_filename} \
     --output_test_filename ${output_test_filename} \
     --definition_file ${definition_file} \
+    --ontology_file ${ontology_file} \
     --setting inference
 
 
